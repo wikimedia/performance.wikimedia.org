@@ -1,3 +1,23 @@
+/**
+ * Dashboard for Coal metrics.
+ *
+ * See <https://wikitech.wikimedia.org/wiki/performance.wikimedia.org>.
+ *
+ * Copyright 2015 Ori Livneh <ori@wikimedia.org>
+ * Copyright 2015 Timo Tijhof <krinklemail@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /*global d3, MG */
 ( function () {
 	'use strict';
@@ -7,7 +27,7 @@
 	}
 
 	function drawCharts( period ) {
-		d3.json( '/coal/v1/metrics?period=' + period, function ( data ) {
+		d3.json( 'https://performance.wikimedia.org/coal/v1/metrics?period=' + period, function ( data ) {
 			var charts = d3.select( '#metrics' )
 			.selectAll( 'div' )
 			.data( d3.keys( data.points ) );
