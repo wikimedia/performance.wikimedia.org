@@ -71,8 +71,8 @@
 				$output = $( '#output' ),
 				$surface = $( '<div>' );
 
-			function renderSurface() {
-				if ( history.replaceState ) {
+			function renderSurface( mode ) {
+				if ( mode !== 'initial' && history.replaceState ) {
 					// Provide permalink
 					history.replaceState( null, document.title, './?' + $.param( state ) + location.hash );
 				}
@@ -91,7 +91,7 @@
 			} );
 
 			// Create drodown menus
-			$select = ui.createSelect( conf.metric )
+			$select = ui.createSelect( conf.metric, location.hash.slice( 3 ) )
 				.on( 'change', function () {
 					var node;
 					if ( history.replaceState ) {
@@ -126,7 +126,7 @@
 			$output.append( $( '<label>Moving median: </label>' ).append( $select ) );
 
 			// Initial rendering
-			renderSurface();
+			renderSurface( 'initial' );
 			$output.append( $surface );
 		},
 
