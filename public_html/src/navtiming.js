@@ -219,7 +219,7 @@
 					state.platform = this.value;
 					renderSurface();
 				} );
-			$output.append( $( '<label>Platform: </label>' ).append( inputs.platform ) );
+			$output.append( $( '<label class="pull-right">Platform: </label>' ).append( inputs.platform ) );
 
 			inputs.range = ui.createSelect( conf.range, state.range )
 				.on( 'change', function () {
@@ -230,14 +230,14 @@
 					}
 					renderSurface();
 				} );
-			$output.append( $( '<label>Range: </label>' ).append( inputs.range ) );
+			$output.append( $( '<label class="checkbox">Range: </label>' ).append( inputs.range ) );
 
 			inputs.step = ui.createSelect( conf.step, state.step )
 				.on( 'change', function () {
 					state.step = this.value;
 					renderSurface();
 				} );
-			$output.append( $( '<label>Moving median: </label>' ).append( inputs.step ) );
+			$output.append( $( '<label class="checkbox">Moving median: </label>' ).append( inputs.step ) );
 
 			inputs.user = $( '<input type="checkbox" />' )
 				.prop( 'checked', state.user )
@@ -247,15 +247,16 @@
 					state.user = Number( this.checked );
 					renderSurface();
 				} );
-			$output.append( $( '<label>Display user groups: </label>' ).append( inputs.user ) );
-
 			inputs.deploys = $( '<input type="checkbox" />' )
 				.prop( 'checked', state.deploys )
 				.on( 'change', function () {
 					state.deploys = Number( this.checked );
 					renderSurface();
 				} );
-			$output.append( $( '<label>Show deployments: </label>' ).append( inputs.deploys ) );
+			$output.append( $( '<div class="checkbox"></div>' ).append(
+				$( '<label class="checkbox-inline"> Show user groups</label>' ).prepend( inputs.user ),
+				$( '<label class="checkbox-inline"> Show deploys</label>' ).prepend( inputs.deploys )
+			) );
 
 			// Initial rendering
 			renderSurface( 'initial' );
