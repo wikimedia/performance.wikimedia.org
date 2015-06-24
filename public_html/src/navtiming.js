@@ -20,6 +20,53 @@
 /*global $ */
 ( function () {
 	var conf, state, ui;
+
+	/**
+	 * @param {string...} Target property
+	 */
+	function GraphiteTarget() {
+		var target = [].join.call( arguments, '.' );
+
+		function quote( str ) {
+			return '"' + str + '"';
+		}
+
+		function apply( funcName, args ) {
+			args = args.length ? ',' + [].join.call( args, ',' ) : '';
+			target = funcName + '(' + target + args + ')';
+		}
+
+		function call( funcName ) {
+			apply( funcName, [].slice.call( arguments, 1 ) );
+		}
+
+		function factory( funcName ) {
+			return function () {
+				apply( funcName, arguments );
+				return this;
+			};
+		}
+
+		this.aliasByNode = factory( 'aliasByNode' );
+		this.dashed = factory( 'dashed' );
+		this.lineWidth = factory( 'lineWidth' );
+
+		this.movingMedian = function ( windowSize ) {
+			windowSize = $.isNumeric( windowSize ) ? windowSize : quote( windowSize );
+			call( 'movingMedian', windowSize );
+			return this;
+		};
+
+		this.color = function ( theColor ) {
+			call( 'color', quote( theColor ) );
+			return this;
+		};
+
+		this.toString = function () {
+			return target;
+		};
+	}
+
 	conf = {
 		// Input variables
 		range: {
@@ -161,26 +208,25 @@
 		buildSurface: function () {
 			var fragment = document.createDocumentFragment();
 			$.each( conf.metric, function ( metric, label ) {
-				var target, graph;
+				var targets, graph;
 				fragment.appendChild(
 					$( '<h3>' ).attr( 'id', 'm-' + metric ).text( label ).get( 0 )
 				);
-				target = $.map( conf.prop, function ( color, prop ) {
-					var step = $.isNumeric( state.step ) ? state.step : ( '"' + state.step + '"' );
-					return $.param( {
-						target: 'aliasByNode(color(movingMedian(frontend.navtiming.' +
-							metric + '.' + state.platform + '.' + prop + ',' + step +
-							'),"' + color + '"),-2,-1)'
-					} );
+				targets = $.map( conf.prop, function ( color, prop ) {
+					var gtarget = new GraphiteTarget( 'frontend.navtiming', metric, state.platform, prop )
+						.movingMedian( state.step )
+						.color( color )
+						.aliasByNode( -2, -1 );
+					return $.param( { target: gtarget.toString() } );
 				} );
 				graph = $( '<img>' ).prop( {
-					src: 'https://graphite.wikimedia.org/render/?' + target.join( '&' ) + '&' + $.param( {
+					src: 'https://graphite.wikimedia.org/render/?' + $.param( {
 						title: metric + ' on ' + state.platform + ', last ' + state.range,
 						from: '-' + state.range,
 						width: 1024,
 						height: 400,
 						hideLegend: 'false'
-					} ),
+					} ) + '&' + targets.join( '&' ),
 					width: 1024,
 					height: 400
 				} ).get( 0 );
