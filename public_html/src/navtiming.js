@@ -51,6 +51,11 @@
 		this.dashed = factory( 'dashed' );
 		this.lineWidth = factory( 'lineWidth' );
 
+		this.alias = function ( newName ) {
+			call( 'alias', quote( newName ) );
+			return this;
+		};
+
 		this.movingMedian = function ( windowSize ) {
 			windowSize = $.isNumeric( windowSize ) ? windowSize : quote( windowSize );
 			call( 'movingMedian', windowSize );
@@ -100,12 +105,30 @@
 		],
 		prop: {
 			// Dark colors for p95, bright colors for median
-			'overall.p95': 'brown',
-			'overall.median': 'orange',
-			'anonymous.p95': 'blue',
-			'anonymous.median': 'cyan',
-			'authenticated.p95': 'red',
-			'authenticated.median': 'magenta'
+			'overall.p95': {
+				color: 'brown',
+				alias: 'All users (95th percentile)'
+			},
+			'overall.median': {
+				color: 'orange',
+				alias: 'All users (median)'
+			},
+			'anonymous.p95': {
+				color: 'blue',
+				alias: 'Anonymous (95th precentile)'
+			},
+			'anonymous.median': {
+				color: 'cyan',
+				alias: 'Anonymous (median)'
+			},
+			'authenticated.p95': {
+				color: 'red',
+				alias: 'Logged-in (95th precentile)'
+			},
+			'authenticated.median': {
+				color: 'magenta',
+				alias: 'Logged-in (median)'
+			}
 			// Note: In Graphite, "green" is dark, and "darkgreen" is bright
 		}
 	};
@@ -240,10 +263,14 @@
 				fragment.appendChild(
 					$( '<h3>' ).attr( 'id', 'm-' + metric ).text( label ).get( 0 )
 				);
-				targets = $.map( conf.prop, function ( color, prop ) {
+				targets = $.map( conf.prop, function ( meta, prop ) {
 					var gtarget = new GraphiteTarget( 'frontend.navtiming', metric, state.platform, prop )
-						.movingMedian( state.step )
-						.color( color );
+						.movingMedian( state.step );
+
+					if ( meta.color ) {
+						gtarget.color( meta.color );
+					}
+
 					if ( prop.indexOf( 'overall' ) > -1 ) {
 						if ( state.user ) {
 							gtarget.lineWidth( 3 );
@@ -253,12 +280,17 @@
 						return;
 					}
 
-					gtarget.aliasByNode( -2, -1 );
+					if ( meta.alias ) {
+						gtarget.alias( meta.alias );
+					} else {
+						gtarget.aliasByNode( -2, -1 );
+					}
+
 					return $.param( { target: gtarget.toString() } );
 				} );
 				graph = $( '<img>' ).prop( {
 					src: 'https://graphite.wikimedia.org/render/?' + $.param( {
-						title: metric + ' on ' + state.platform + ', last ' + state.range,
+						title: label + ' on ' + state.platform + ', ' + conf.range[state.range],
 						from: '-' + state.range,
 						width: 1024,
 						height: 400,
