@@ -94,6 +94,10 @@
 			'desktop',
 			'mobile'
 		],
+		user: [
+			1,
+			0
+		],
 		prop: {
 			// Dark colors for p95, bright colors for median
 			'overall.p95': 'brown',
@@ -110,7 +114,8 @@
 	state = {
 		platform: conf.platform[0],
 		range: '1month',
-		step: '12h'
+		step: '12h',
+		user: 1
 	};
 
 	ui = {
@@ -134,6 +139,8 @@
 					key = parts[0],
 					value = decodeURIComponent( parts[1] );
 				if ( key in state && conf[key] ) {
+					// Cast values to appropiate type (string, number)
+					value = state[key].constructor( value );
 					if (
 						// Validate as array value or object key
 						( $.isArray( conf[key] ) && $.inArray( value, conf[key] ) > -1 ) ||
@@ -179,6 +186,16 @@
 				} );
 			$output.append( $( '<label>Moving median: </label>' ).append( $select ) );
 
+			$select = $( '<input type="checkbox" />' )
+				.prop( 'checked', state.user )
+				.on( 'change', function () {
+					// Use number instead of boolean because boolean doesn't roundtrip
+					// in string form as query parameter ('false' => Boolean => true)
+					state.user = Number( this.checked );
+					renderSurface();
+				} );
+			$output.append( $( '<label>Display user groups: </label>' ).append( $select ) );
+
 			// Initial rendering
 			renderSurface( 'initial' );
 			$output.append( $surface );
@@ -223,7 +240,12 @@
 						.movingMedian( state.step )
 						.color( color );
 					if ( prop.indexOf( 'overall' ) > -1 ) {
-						gtarget.lineWidth( 3 );
+						if ( state.user ) {
+							gtarget.lineWidth( 3 );
+						}
+					} else if ( !state.user ) {
+						// Omit anonymous/authenticated properties
+						return;
 					}
 
 					gtarget.aliasByNode( -2, -1 );
