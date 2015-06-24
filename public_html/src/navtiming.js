@@ -113,14 +113,15 @@
 	// Current state
 	state = {
 		platform: conf.platform[0],
-		range: '1month',
-		step: '12h',
-		user: 1
+		range: '1h',
+		step: '1',
+		user: 0
 	};
 
 	ui = {
 		init: function () {
-			var params, $select,
+			var params,
+				inputs = {},
 				$output = $( '#output' ),
 				$surface = $( '<div>' );
 
@@ -152,7 +153,7 @@
 			} );
 
 			// Create drodown menus
-			$select = ui.createSelect( conf.metric, location.hash.slice( 3 ) )
+			inputs.metric = ui.createSelect( conf.metric, location.hash.slice( 3 ) )
 				.on( 'change', function () {
 					var node;
 					if ( history.replaceState ) {
@@ -163,30 +164,34 @@
 						node.scrollIntoView( { block: 'start', behavior: 'smooth' } );
 					}
 				} );
-			$output.append( $( '<label class="pull-right">Metrics: </label>' ).append( $select ) );
+			$output.append( $( '<label class="pull-right">Metrics: </label>' ).append( inputs.metric ) );
 
-			$select = ui.createSelect( conf.platform, state.platform )
+			inputs.platform = ui.createSelect( conf.platform, state.platform )
 				.on( 'change', function () {
 					state.platform = this.value;
 					renderSurface();
 				} );
-			$output.append( $( '<label>Platform: </label>' ).append( $select ) );
+			$output.append( $( '<label>Platform: </label>' ).append( inputs.platform ) );
 
-			$select = ui.createSelect( conf.range, state.range )
+			inputs.range = ui.createSelect( conf.range, state.range )
 				.on( 'change', function () {
 					state.range = this.value;
+					if ( state.range === '1month' || state.range === '1year' ) {
+						state.step = '24h';
+						inputs.step.val( '24h' );
+					}
 					renderSurface();
 				} );
-			$output.append( $( '<label>Range: </label>' ).append( $select ) );
+			$output.append( $( '<label>Range: </label>' ).append( inputs.range ) );
 
-			$select = ui.createSelect( conf.step, state.step )
+			inputs.step = ui.createSelect( conf.step, state.step )
 				.on( 'change', function () {
 					state.step = this.value;
 					renderSurface();
 				} );
-			$output.append( $( '<label>Moving median: </label>' ).append( $select ) );
+			$output.append( $( '<label>Moving median: </label>' ).append( inputs.step ) );
 
-			$select = $( '<input type="checkbox" />' )
+			inputs.user = $( '<input type="checkbox" />' )
 				.prop( 'checked', state.user )
 				.on( 'change', function () {
 					// Use number instead of boolean because boolean doesn't roundtrip
@@ -194,7 +199,7 @@
 					state.user = Number( this.checked );
 					renderSurface();
 				} );
-			$output.append( $( '<label>Display user groups: </label>' ).append( $select ) );
+			$output.append( $( '<label>Display user groups: </label>' ).append( inputs.user ) );
 
 			// Initial rendering
 			renderSurface( 'initial' );
