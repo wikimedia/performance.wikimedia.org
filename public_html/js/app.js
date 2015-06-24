@@ -61,12 +61,12 @@
 		if ( d3.select( tab ).classed( 'active' ) ) {
 			return;
 		}
-		d3.select( 'li.active' ).classed( 'active', false );
+		d3.select( '.perf-nav li.active' ).classed( 'active', false );
 		tab.className = 'active';
 		drawCharts( tab.id );
 	}
 
-	d3.selectAll( '.nav li' ).on( 'click', function () {
+	d3.selectAll( '.perf-nav li' ).on( 'click', function () {
 		selectTab( this );
 	} );
 
