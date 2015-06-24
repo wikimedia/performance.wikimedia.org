@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
   <meta charset=utf-8>
-  <title>Wikimedia Performance Metrics</title>
+  <title>Metrics — Wikimedia Performance</title>
   <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel=stylesheet>
   <link href=lib/bootstrap-3.3.5/css/bootstrap.min.css rel=stylesheet>
   <link href=lib/metrics-graphics-2.4.0/metricsgraphics.css rel=stylesheet>
@@ -25,7 +25,7 @@
     }
     .perf-container {
       margin-top: 40px;
-      /* Save reflow from footer being pushed down; 4+ graphs x 200px */
+      /* Save reflow from pushing down footer; 4+ graphs x 200px */
       min-height: 800px;
     }
   </style>
@@ -38,8 +38,9 @@
         <div class="navbar-header"><a class="navbar-brand" href="./" title="Performance">Performance</a></div>
         <nav class="navbar-collapse collapse">
           <ul class="navbar-nav nav">
-            <li class="active"><a href="./">Metrics</a></li>
+            <li class="active"><a>Metrics</a></li>
             <li><a href="xenon/">Flame Graphs</a></li>
+            <li><a href="navtiming/">Navigation Timing</a></li>
           </ul>
         </nav>
       </div>
@@ -61,4 +62,4 @@
         <p class="pull-right"><a href="https://www.wikimedia.org"><img src="https://www.wikimedia.org/static/images/wikimedia-button.png" srcset="https://www.wikimedia.org/static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"></a></p>
       </div>
     </div>
-    <script src=js/app.js></script>
+    <script src="src/coal.js"></script>
