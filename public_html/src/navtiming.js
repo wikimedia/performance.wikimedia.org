@@ -23,6 +23,7 @@
 	conf = {
 		// Input variables
 		range: {
+			'1h': 'last hour',
 			'24h': 'last day',
 			'1week': 'last week',
 			'1month': 'last month',
