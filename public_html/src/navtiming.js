@@ -50,6 +50,7 @@
 		this.aliasByNode = factory( 'aliasByNode' );
 		this.dashed = factory( 'dashed' );
 		this.lineWidth = factory( 'lineWidth' );
+		this.drawAsInfinite = factory( 'drawAsInfinite' );
 
 		this.alias = function ( newName ) {
 			call( 'alias', quote( newName ) );
@@ -70,6 +71,25 @@
 		this.toString = function () {
 			return target;
 		};
+	}
+
+	function getDeployTargets() {
+		return [
+			new GraphiteTarget( 'deploy.sync-file.count' )
+				.drawAsInfinite()
+				.color( 'gold' )
+				.dashed()
+				.aliasByNode( -2 ),
+			new GraphiteTarget( 'deploy.sync-dir.count' )
+				.drawAsInfinite()
+				.color( 'rose' )
+				.dashed()
+				.aliasByNode( -2 ),
+			new GraphiteTarget( 'deploy.scap.count' )
+				.drawAsInfinite()
+				.color( 'black' )
+				.aliasByNode( -2 )
+		];
 	}
 
 	conf = {
@@ -100,6 +120,10 @@
 			'mobile'
 		],
 		user: [
+			1,
+			0
+		],
+		deploys: [
 			1,
 			0
 		],
@@ -138,7 +162,8 @@
 		platform: conf.platform[0],
 		range: '1h',
 		step: '1',
-		user: 0
+		user: 0,
+		deploys: 0
 	};
 
 	ui = {
@@ -224,6 +249,14 @@
 				} );
 			$output.append( $( '<label>Display user groups: </label>' ).append( inputs.user ) );
 
+			inputs.deploys = $( '<input type="checkbox" />' )
+				.prop( 'checked', state.deploys )
+				.on( 'change', function () {
+					state.deploys = Number( this.checked );
+					renderSurface();
+				} );
+			$output.append( $( '<label>Show deployments: </label>' ).append( inputs.deploys ) );
+
 			// Initial rendering
 			renderSurface( 'initial' );
 			$output.append( $surface );
@@ -264,16 +297,16 @@
 					$( '<h3>' ).attr( 'id', 'm-' + metric ).text( label ).get( 0 )
 				);
 				targets = $.map( conf.prop, function ( meta, prop ) {
-					var gtarget = new GraphiteTarget( 'frontend.navtiming', metric, state.platform, prop )
+					var target = new GraphiteTarget( 'frontend.navtiming', metric, state.platform, prop )
 						.movingMedian( state.step );
 
 					if ( meta.color ) {
-						gtarget.color( meta.color );
+						target.color( meta.color );
 					}
 
 					if ( prop.indexOf( 'overall' ) > -1 ) {
 						if ( state.user ) {
-							gtarget.lineWidth( 3 );
+							target.lineWidth( 3 );
 						}
 					} else if ( !state.user ) {
 						// Omit anonymous/authenticated properties
@@ -281,12 +314,23 @@
 					}
 
 					if ( meta.alias ) {
-						gtarget.alias( meta.alias );
+						target.alias( meta.alias );
 					} else {
-						gtarget.aliasByNode( -2, -1 );
+						target.aliasByNode( -2, -1 );
 					}
 
-					return $.param( { target: gtarget.toString() } );
+					return target;
+				} );
+				if ( state.deploys ) {
+					// Prepend instead of append so that deploys render behind other metrics.
+					// This way both remain legible (one vertical, the other horizontal).
+					// FIXME: This is still quite messy. A frontend like Grafana would allow
+					// this data to be displayed in a more intuitive mannner.
+					targets.unshift.apply( targets, getDeployTargets() );
+				}
+				// Convert to query strings
+				targets = $.map( targets, function ( target ) {
+					return $.param( { target: target.toString() } );
 				} );
 				graph = $( '<img>' ).prop( {
 					src: 'https://graphite.wikimedia.org/render/?' + $.param( {
