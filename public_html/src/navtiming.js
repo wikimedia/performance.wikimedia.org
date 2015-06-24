@@ -133,8 +133,14 @@
 				var parts = param.split( '=' ),
 					key = parts[0],
 					value = decodeURIComponent( parts[1] );
-				if ( key in state && value in conf[key] ) {
-					state[key] = value;
+				if ( key in state && conf[key] ) {
+					if (
+						// Validate as array value or object key
+						( $.isArray( conf[key] ) && $.inArray( value, conf[key] ) > -1 ) ||
+						value in conf[key]
+					) {
+						state[key] = value;
+					}
 				}
 			} );
 
