@@ -95,14 +95,14 @@
 			'mobile'
 		],
 		prop: {
-			// colors: p95=dark, median=bright
-			// (Note, in Graphite "green" is dark, and "darkgreen" is bright)
-			'overall.p95': 'green',
-			'overall.median': 'yellow',
+			// Dark colors for p95, bright colors for median
+			'overall.p95': 'brown',
+			'overall.median': 'orange',
 			'anonymous.p95': 'blue',
 			'anonymous.median': 'cyan',
 			'authenticated.p95': 'red',
 			'authenticated.median': 'magenta'
+			// Note: In Graphite, "green" is dark, and "darkgreen" is bright
 		}
 	};
 
@@ -221,8 +221,12 @@
 				targets = $.map( conf.prop, function ( color, prop ) {
 					var gtarget = new GraphiteTarget( 'frontend.navtiming', metric, state.platform, prop )
 						.movingMedian( state.step )
-						.color( color )
-						.aliasByNode( -2, -1 );
+						.color( color );
+					if ( prop.indexOf( 'overall' ) > -1 ) {
+						gtarget.lineWidth( 3 );
+					}
+
+					gtarget.aliasByNode( -2, -1 );
 					return $.param( { target: gtarget.toString() } );
 				} );
 				graph = $( '<img>' ).prop( {
@@ -231,7 +235,9 @@
 						from: '-' + state.range,
 						width: 1024,
 						height: 400,
-						hideLegend: 'false'
+						hideLegend: 'false',
+						vtitle: 'milliseconds',
+						lineMode: 'connected'
 					} ) + '&' + targets.join( '&' ),
 					width: 1024,
 					height: 400
