@@ -1,0 +1,3 @@
+User-Agent: *
+Disallow: /xenon/logs/
+Disallow: /xenon/svgs/
