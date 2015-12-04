@@ -22,7 +22,7 @@
 ( function () {
 	'use strict';
 
-	var defaultPeriod = 'hour';
+	var defaultPeriod = 'day';
 
 	function identity( x ) {
 		return x;
