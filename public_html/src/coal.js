@@ -52,6 +52,7 @@
 					width: 680,
 					height: 200,
 					left: 60,
+					min_y_from_data: true,
 					show_tooltips: false,
 					show_rollover_text: true
 				} );
