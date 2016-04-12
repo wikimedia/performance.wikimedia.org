@@ -48,6 +48,7 @@
 				MG.data_graphic( {
 					title: metric,
 					target: this,
+					area: false,
 					data: points,
 					width: 680,
 					height: 200,
