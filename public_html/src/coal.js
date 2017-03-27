@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*global d3, MG */
+/* global d3, MG */
 ( function () {
 	'use strict';
 
@@ -40,7 +40,7 @@
 			.attr( 'id', identity );
 
 			charts.each( function ( metric ) {
-				var points = d3.values( data.points[metric] ).map( function ( value, idx ) {
+				var points = d3.values( data.points[ metric ] ).map( function ( value, idx ) {
 					var epochSeconds = data.start + idx * data.step;
 					return { date: new Date( 1000 * epochSeconds ), value: value };
 				} );
@@ -53,9 +53,11 @@
 					width: 680,
 					height: 200,
 					left: 60,
+					/* eslint-disable camelcase */
 					min_y_from_data: true,
 					show_tooltips: false,
 					show_rollover_text: true
+					/* eslint-enable camelcase */
 				} );
 			} );
 		} );

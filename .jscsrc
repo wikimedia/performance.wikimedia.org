@@ -1,9 +1,0 @@
-{
-	"preset": "wikimedia",
-	"requireCamelCaseOrUpperCaseIdentifiers": null,
-	"excludeFiles": [
-		"lib/**",
-		"node_modules/**",
-		"public_html/lib/**"
-	]
-}
