@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html lang=en>
-  <meta charset=utf-8>
-  <title>Metrics — Wikimedia Performance</title>
-  <link href=lib/bootstrap-3.3.5/css/bootstrap.min.css rel=stylesheet>
-  <link href=lib/metrics-graphics-2.4.0/metricsgraphics.css rel=stylesheet>
-  <style>
-    html {
-      background-color: #f5f5f5;
-      font-size: 12px;
-    }
-    h2 {
-      font-weight: 400;
-    }
-    .footer {
-      margin-top: 40px;
-      background-color: #f5f5f5;
-      padding: 20px 0;
-    }
-    .perf-container {
-      width: 700px;
-      margin-top: 40px;
-      /* Save reflow from pushing down footer; 4+ graphs x 200px */
-      min-height: 800px;
-    }
-  </style>
-  <script src=lib/d3/d3.v3.min.js></script>
-  <script src=lib/metrics-graphics-2.4.0/metricsgraphics.min.js></script>
-  <link rel="shortcut icon" href="https://www.wikimedia.org/static/favicon/wmf.ico">
+  <head>
+    <meta charset=utf-8>
+    <title>Metrics — Wikimedia Performance</title>
+    <link href=lib/bootstrap-3.3.5/css/bootstrap.min.css rel=stylesheet>
+    <link href=lib/metrics-graphics-2.11.0/metricsgraphics.css rel=stylesheet>
+    <style>
+      html {
+        background-color: #f5f5f5;
+        font-size: 12px;
+      }
+      h2 {
+        font-weight: 400;
+      }
+      .footer {
+        margin-top: 40px;
+        background-color: #f5f5f5;
+        padding: 20px 0;
+      }
+      .perf-container {
+        width: 700px;
+        margin-top: 40px;
+        /* Save reflow from pushing down footer; 4+ graphs x 200px */
+        min-height: 800px;
+      }
+      .metric {
+        margin-top: 28px;
+      }
+      .mg-chart-title {
+          cursor: default;
+          font-size: 1.8rem;
+          text-align: center;
+          font-weight: 400;
+      }
+    </style>
+    <link rel="shortcut icon" href="https://www.wikimedia.org/static/favicon/wmf.ico">
+    <script src=lib/d3-4.7.4/d3.min.js defer></script>
+    <script src=lib/metrics-graphics-2.11.0/metricsgraphics.min.js defer></script>
+    <script src=src/coal.js defer></script>
+  </head>
   <body>
     <header class="navbar navbar-default navbar-static-top" role="banner">
       <div class="container">
@@ -53,7 +65,13 @@
           <li role=presentation id=month><a href="#!/month">Past Month</a></li>
           <li role=presentation id=year><a href="#!/year">Past Year</a></li>
         </ul>
-        <div id=metrics></div>
+        <div id=metrics>
+          <div class="metric" id="domInteractive"></div>
+          <div class="metric" id="firstPaint"></div>
+          <div class="metric" id="loadEventEnd"></div>
+          <div class="metric" id="responseStart"></div>
+          <div class="metric" id="saveTiming"></div>
+        </div>
       </div>
     </div>
     <div class="footer">
@@ -62,4 +80,3 @@
         <p class="pull-right"><a href="https://www.wikimedia.org"><img src="https://www.wikimedia.org/static/images/wikimedia-button.png" srcset="https://www.wikimedia.org/static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"></a></p>
       </div>
     </div>
-    <script src="src/coal.js"></script>

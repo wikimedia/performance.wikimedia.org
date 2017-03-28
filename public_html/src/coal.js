@@ -51,7 +51,7 @@
 					area: false,
 					data: points,
 					width: 680,
-					height: 200,
+					height: 280,
 					left: 60,
 					/* eslint-disable camelcase */
 					min_y_from_data: true,
