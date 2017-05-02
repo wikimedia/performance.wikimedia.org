@@ -1,6 +1,8 @@
 {
     "extends": "wikimedia",
-    "ecmaVersion": 5,
+    "parserOptions": {
+        "ecmaVersion": 5
+    },
     "env": {
         "browser": true
     }
