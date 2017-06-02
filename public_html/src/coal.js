@@ -22,7 +22,14 @@
 ( function () {
 	'use strict';
 
-	var defaultPeriod = 'day';
+	var defaultPeriod = 'day',
+		descriptions = {
+			domInteractive: 'When the browser has parsed the main HTML document.',
+			loadEventEnd: 'When the load event fired in the browser and the current document is complete.',
+			responseStart: 'The time it takes for the client to receive a response from the server. (TTFB)',
+			saveTiming: 'The time it takes to submit and save an edit on an article.',
+			firstPaint: 'The moment something is first painted on the screen. (Currently only collected in Chrome and IE/Edge)'
+		};
 
 	function identity( x ) {
 		return x;
@@ -61,6 +68,7 @@
 
 				MG.data_graphic( {
 					title: metric + ' – ' + median( values ) + ' ms',
+					description: descriptions[ metric ],
 					target: this,
 					area: false,
 					data: points,
@@ -72,7 +80,7 @@
 					left: 60,
 					/* eslint-disable camelcase */
 					min_y_from_data: true,
-					show_tooltips: false,
+					show_tooltips: true,
 					show_rollover_text: true
 					/* eslint-enable camelcase */
 				} );
