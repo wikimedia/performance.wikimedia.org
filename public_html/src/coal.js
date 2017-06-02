@@ -28,6 +28,18 @@
 		return x;
 	}
 
+	function median( values ) {
+		var middle;
+		values.sort( function ( a, b ) { return a - b; } );
+		middle = Math.floor( values.length / 2 );
+
+		if ( values.length % 2 ) {
+			return values[ middle ];
+		} else {
+			return Math.round( ( values[ middle - 1 ] + values[ middle ] ) / 2 );
+		}
+	}
+
 	function drawCharts( period ) {
 		d3.json( 'https://performance.wikimedia.org/coal/v1/metrics?period=' + period, function ( data ) {
 			var charts = d3.select( '#metrics' )
@@ -40,13 +52,15 @@
 			.attr( 'id', identity );
 
 			charts.each( function ( metric ) {
-				var points = d3.values( data.points[ metric ] ).map( function ( value, idx ) {
-					var epochSeconds = data.start + idx * data.step;
-					return { date: new Date( 1000 * epochSeconds ), value: value };
-				} );
+
+				var values = [], points = d3.values( data.points[ metric ] ).map( function ( value, idx ) {
+						var epochSeconds = data.start + idx * data.step;
+						values.push( value );
+						return { date: new Date( 1000 * epochSeconds ), value: value };
+					} );
 
 				MG.data_graphic( {
-					title: metric,
+					title: metric + ' – ' + median( values ) + ' ms',
 					target: this,
 					area: false,
 					data: points,
