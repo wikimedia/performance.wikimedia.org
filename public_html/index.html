@@ -2,6 +2,7 @@
 <html lang=en>
   <head>
     <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metrics — Wikimedia Performance</title>
     <link href=lib/bootstrap-3.3.5/css/bootstrap.min.css rel=stylesheet>
     <link href=lib/metrics-graphics-2.11.0/metricsgraphics.css rel=stylesheet>
@@ -19,22 +20,26 @@
         padding: 20px 0;
       }
       .perf-container {
-        width: 700px;
+        width: 100%;
+        max-width: 700px;
         margin-top: 40px;
         /* Save reflow from pushing down footer; 4+ graphs x 200px */
         min-height: 800px;
+        padding: 0;
       }
       .metric {
         margin-top: 28px;
+        margin-right: 20px;
       }
       .mg-chart-title {
-          cursor: default;
-          font-size: 1.8rem;
-          text-align: center;
-          font-weight: 400;
+        cursor: default;
+        font-size: 1.8rem;
+        text-align: center;
+        font-weight: 400;
       }
       .perf-info-box {
-        width: 700px;
+        width: 100%;
+        max-width: 700px;
       }
     </style>
     <link rel="shortcut icon" href="https://www.wikimedia.org/static/favicon/wmf.ico">

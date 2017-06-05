@@ -64,7 +64,10 @@
 					target: this,
 					area: false,
 					data: points,
-					width: 680,
+					/* eslint-disable camelcase */
+					full_width: true,
+					full_height: false,
+					/* eslint-enable camelcase */
 					height: 280,
 					left: 60,
 					/* eslint-disable camelcase */
