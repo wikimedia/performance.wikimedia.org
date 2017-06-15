@@ -46,56 +46,59 @@
     <script src=lib/d3-4.7.4/d3.min.js defer></script>
     <script src=lib/jquery-3.2.1.slim.min.js defer></script>
     <script src=lib/metrics-graphics-2.11.0/metricsgraphics.min.js defer></script>
-    <script src=src/coal.js defer></script>
+    <script src=coal.js defer></script>
   </head>
   <body>
     <header class="navbar navbar-default navbar-static-top hidden-xs" role="banner">
-      <div class="container">
-        <div class="navbar-header"><a class="navbar-brand" href="./" title="Performance">Performance</a></div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a>Metrics</a></li>
-          <li><a href="xenon/">Flame Graphs</a></li>
-          <li><a href="xhgui/">XHGui</a></li>
-          <li><a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Navigation Timing</a></li>
-          <li><a href="https://grafana.wikimedia.org/dashboard/db/resourceloader">ResourceLoader</a></li>
-          <li><a href="https://grafana.wikimedia.org/dashboard/db/media">Media</a></li>
-          <li><a href="https://grafana.wikimedia.org/dashboard/db/webpagetest">WebPageTest</a></li>
-          <li><a href="https://phabricator.wikimedia.org/u/performanceblog">Blog</a></li>
-          <li><a href="https://grafana.wikimedia.org/"><small>More…</small></a></li>
-        </ul>
-      </div>
-    </header>
-    <div class="container text-center perf-info-box">
-      <h4>Wikimedia Performance</h4>
-      <hr/>
-      <p>
-        We monitor the performance of <a href="https://www.wikipedia.org/">Wikipedia</a> continuously. These graphs are sampled measurements from 1 of 1000 requests. If you want to dig deeper into our metrics, you should check out our <a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Grafana graphs</a>.
-      </p>
-      <p>
-        <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">– Wikimedia Performance Team</a>
-      </p>
+  <div class="container">
+    <div class="navbar-header"><a class="navbar-brand" href="./" title="Performance">Performance</a></div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a>Metrics</a></li>
+      <li><a href="xenon/">Flame Graphs</a></li>
+      <li><a href="xhgui/">XHGui</a></li>
+      <li><a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Navigation Timing</a></li>
+      <li><a href="https://grafana.wikimedia.org/dashboard/db/resourceloader">ResourceLoader</a></li>
+      <li><a href="https://grafana.wikimedia.org/dashboard/db/media">Media</a></li>
+      <li><a href="https://grafana.wikimedia.org/dashboard/db/webpagetest">WebPageTest</a></li>
+      <li><a href="https://phabricator.wikimedia.org/u/performanceblog">Blog</a></li>
+      <li><a href="https://grafana.wikimedia.org/"><small>More…</small></a></li>
+    </ul>
+  </div>
+</header>
+
+      <div class="container text-center perf-info-box">
+  <h4>Wikimedia Performance</h4>
+  <hr/>
+  <p>
+    We monitor the performance of <a href="https://www.wikipedia.org/">Wikipedia</a> continuously. These graphs are sampled measurements from 1 of 1000 requests. If you want to dig deeper into our metrics, you should check out our <a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Grafana graphs</a>.
+  </p>
+  <p>
+    <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">– Wikimedia Performance Team</a>
+  </p>
+</div>
+<div id=container class="container perf-container">
+  <div id=content-body>
+    <ul class="nav nav-tabs perf-nav">
+      <li role=presentation id=hour><a href="#!/hour">Past Hour</a></li>
+      <li role=presentation id=day class="active"><a href="#!/day">Past Day</a></li>
+      <li role=presentation id=week><a href="#!/week">Past Week</a></li>
+      <li role=presentation id=month><a href="#!/month">Past Month</a></li>
+      <li role=presentation id=year><a href="#!/year">Past Year</a></li>
+    </ul>
+    <div id=metrics>
+      <div class="metric" id="domInteractive"></div>
+      <div class="metric" id="firstPaint"></div>
+      <div class="metric" id="loadEventEnd"></div>
+      <div class="metric" id="responseStart"></div>
+      <div class="metric" id="saveTiming"></div>
     </div>
-    <div id=container class="container perf-container">
-      <div id=content-body>
-        <ul class="nav nav-tabs perf-nav">
-          <li role=presentation id=hour><a href="#!/hour">Past Hour</a></li>
-          <li role=presentation id=day class="active"><a href="#!/day">Past Day</a></li>
-          <li role=presentation id=week><a href="#!/week">Past Week</a></li>
-          <li role=presentation id=month><a href="#!/month">Past Month</a></li>
-          <li role=presentation id=year><a href="#!/year">Past Year</a></li>
-        </ul>
-        <div id=metrics>
-          <div class="metric" id="domInteractive"></div>
-          <div class="metric" id="firstPaint"></div>
-          <div class="metric" id="loadEventEnd"></div>
-          <div class="metric" id="responseStart"></div>
-          <div class="metric" id="saveTiming"></div>
-        </div>
-      </div>
-    </div>
+  </div>
+</div>
+
     <div class="footer">
-      <div class="container">
-        <p class="pull-left">More information at <a href="https://wikitech.wikimedia.org/wiki/Performance">https://wikitech.wikimedia.org/wiki/Performance</a>.</p>
-        <p class="pull-right"><a href="https://www.wikimedia.org"><img src="https://www.wikimedia.org/static/images/wikimedia-button.png" srcset="https://www.wikimedia.org/static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"></a></p>
-      </div>
-    </div>
+  <div class="container">
+    <p class="pull-left">More information at <a href="https://wikitech.wikimedia.org/wiki/Performance">https://wikitech.wikimedia.org/wiki/Performance</a>.</p>
+    <p class="pull-right"><a href="https://www.wikimedia.org"><img src="https://www.wikimedia.org/static/images/wikimedia-button.png" srcset="https://www.wikimedia.org/static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"></a></p>
+  </div>
+</div>
+

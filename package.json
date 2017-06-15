@@ -1,10 +1,17 @@
 {
   "private": true,
   "scripts": {
-    "test": "eslint ."
+    "test": "eslint .",
+    "generate": "jekyll build --source src --destination public_html",
+    "jekyll": "jekyll serve --source src --destination public_html",
+    "verify": "test -z '$(git status --porcelain public_html/)'"
   },
+  "pre-commit": [
+    "generate"
+  ],
   "devDependencies": {
     "eslint": "^3.18.0",
-    "eslint-config-wikimedia": "0.4.0"
+    "eslint-config-wikimedia": "0.4.0",
+    "pre-commit": "^1.2.2"
   }
 }

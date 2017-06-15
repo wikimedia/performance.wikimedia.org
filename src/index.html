@@ -1,0 +1,33 @@
+---
+layout: default
+title: Metrics — Wikimedia Performance
+---
+
+<div class="container text-center perf-info-box">
+  <h4>Wikimedia Performance</h4>
+  <hr/>
+  <p>
+    We monitor the performance of <a href="https://www.wikipedia.org/">Wikipedia</a> continuously. These graphs are sampled measurements from 1 of 1000 requests. If you want to dig deeper into our metrics, you should check out our <a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Grafana graphs</a>.
+  </p>
+  <p>
+    <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">– Wikimedia Performance Team</a>
+  </p>
+</div>
+<div id=container class="container perf-container">
+  <div id=content-body>
+    <ul class="nav nav-tabs perf-nav">
+      <li role=presentation id=hour><a href="#!/hour">Past Hour</a></li>
+      <li role=presentation id=day class="active"><a href="#!/day">Past Day</a></li>
+      <li role=presentation id=week><a href="#!/week">Past Week</a></li>
+      <li role=presentation id=month><a href="#!/month">Past Month</a></li>
+      <li role=presentation id=year><a href="#!/year">Past Year</a></li>
+    </ul>
+    <div id=metrics>
+      <div class="metric" id="domInteractive"></div>
+      <div class="metric" id="firstPaint"></div>
+      <div class="metric" id="loadEventEnd"></div>
+      <div class="metric" id="responseStart"></div>
+      <div class="metric" id="saveTiming"></div>
+    </div>
+  </div>
+</div>
