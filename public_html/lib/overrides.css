@@ -32,3 +32,8 @@ h2 {
   width: 100%;
   max-width: 700px;
 }
+
+.mg-x-axis .label {
+  font-size: 1.0rem;
+  text-transform: none;
+}
