@@ -36,4 +36,10 @@ h2 {
 .mg-x-axis .label {
   font-size: 1.0rem;
   text-transform: none;
+  font-weight: 400;
+}
+
+.perf-metrics-desc {
+  padding-right: 15px;
+  padding-left: 15px;
 }

@@ -22,12 +22,18 @@ title: Metrics — Wikimedia Performance
       <li role=presentation id=month><a href="#!/month">Past Month</a></li>
       <li role=presentation id=year><a href="#!/year">Past Year</a></li>
     </ul>
+
     <div id=metrics>
       <div class="metric" id="domInteractive"></div>
+      <p class="text-center perf-metrics-desc"><b>domInteractive:</b> When the browser has parsed the main HTML document.</p>
       <div class="metric" id="firstPaint"></div>
+      <p class="text-center perf-metrics-desc"><b>firstPaint:</b> The moment something is first painted on the screen (currently only collected in Chrome and IE/Edge).</p>
       <div class="metric" id="loadEventEnd"></div>
+      <p class="text-center perf-metrics-desc"><b>loadEventEnd:</b> When the load event fired in the browser and the current document is complete.</p>
       <div class="metric" id="responseStart"></div>
+      <p class="text-center perf-metrics-desc"><b>responseStart:</b> The time it takes for the client to receive a response from the server (TTFB).</p>
       <div class="metric" id="saveTiming"></div>
+      <p class="text-center perf-metrics-desc"><b>saveTiming:</b> The time it takes to submit and save an edit on an article.</p>
     </div>
   </div>
 </div>
