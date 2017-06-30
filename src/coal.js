@@ -22,7 +22,16 @@
 ( function () {
 	'use strict';
 
-	var defaultPeriod = 'day';
+	var defaultPeriod = 'day',
+		importantEvents = {
+			firstPaint: [
+				{ date: new Date( '2016-11-17' ),
+					label: 'Don\'t report stats when page visibility changes during page load',
+					click: function () {
+						window.open( 'https://phabricator.wikimedia.org/T146510#2804827', '_blank' );
+					} }
+			]
+		};
 
 	function identity( x ) {
 		return x;
@@ -61,6 +70,7 @@
 
 				MG.data_graphic( {
 					title: metric + ' – ' + median( values ) + ' ms',
+					markers: importantEvents[ metric ],
 					target: this,
 					area: false,
 					data: points,

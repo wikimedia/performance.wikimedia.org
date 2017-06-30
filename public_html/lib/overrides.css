@@ -34,9 +34,9 @@ h2 {
 }
 
 .mg-x-axis .label {
-    font-size: 1.0rem;
-    text-transform: none;
-    font-weight: 400;
+  font-size: 1.0rem;
+  text-transform: none;
+  font-weight: 400;
 }
 
 .perf-metrics-desc {
