@@ -1,0 +1,32 @@
+---
+layout: php-profiling
+title: Flame Graphs for PHP — Wikimedia Performance
+---
+
+<div class="container text-center perf-info-box">
+  <h4>Profiling for PHP</h4>
+  <hr/>
+  <p>
+    HHVM's <a href="https://github.com/facebook/hhvm/wiki/Profiling#xenon">Xenon profiler</a> is used to collect stack traces from CPU usage frames. The aggregated logs are published here, as well as interactive SVGs (generated with <a href="https://github.com/brendangregg/FlameGraph">FlameGraph</a>).
+  </p>
+</div>
+<div class="container">
+  <h4>Flame graphs</h4>
+  <div class="pull-left media-left">
+    <img src="lib/flamegraph.png" width="250" height="160" alt="" title="Flame graph">
+  </div>
+  <p>
+    <a href="https://performance.wikimedia.org/xenon/svgs/daily/">Browse daily graphs</a>
+    • <a href="https://performance.wikimedia.org/xenon/svgs/hourly/">Browse hourly graphs</a>
+  </p>
+  <p>
+    <span id=flamegraph-current></span>
+  </p>
+  <span class=clearfix></span>
+  <h4>Tracing logs</h4>
+  <p>
+      <a href="https://performance.wikimedia.org/xenon/logs/daily/">Browse daily logs</a>
+      • <a href="https://performance.wikimedia.org/xenon/logs/hourly/">Browse hourly logs</a>
+    </p>
+</div>
+<script src=profiling.js defer></script>

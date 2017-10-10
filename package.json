@@ -5,7 +5,7 @@
     "generate": "npm run uncss && jekyll build --source src --destination public_html",
     "jekyll": "npm run generate && jekyll serve --source src --destination public_html",
     "verify": "test -z '$(git status --porcelain public_html/)'",
-    "uncss": "uncss public_html/index.html --ignore /\\.popover/, --ignoreSheet public_html/lib/bootstrap-3.3.5/css/bootstrap.uncss.css --stylesheets lib/bootstrap-3.3.5/css/bootstrap.min.css > src/lib/bootstrap-3.3.5/css/bootstrap.uncss.css"
+    "uncss": "uncss public_html/index.html public_html/php-profiling.html --ignore /\\.popover/, --ignoreSheet public_html/lib/bootstrap-3.3.5/css/bootstrap.uncss.css --stylesheets lib/bootstrap-3.3.5/css/bootstrap.min.css > src/lib/bootstrap-3.3.5/css/bootstrap.uncss.css"
   },
   "pre-commit": [
     "generate"
