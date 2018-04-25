@@ -2,7 +2,14 @@
 
 * NodeJS (and npm)
 * Ruby/RubyGems
-* Jekyll - gem install Jekyll](https://jekyllrb.com/docs/installation/)
+
+### Gems
+* [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll`
+
+### NPM packages
+* uncss: `npm install uncss`
+* xml2json: `npm install xml2json`
+
 
 # How to run
 

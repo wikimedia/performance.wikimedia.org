@@ -12,10 +12,10 @@
     "generate"
   ],
   "devDependencies": {
-    "eslint": "^3.18.0",
+    "eslint": "^3.19.0",
     "eslint-config-wikimedia": "0.4.0",
     "pre-commit": "^1.2.2",
-    "uncss": "0.14.1",
+    "uncss": "^0.14.1",
     "xml2json-cli": "^1.1.1"
   }
 }
