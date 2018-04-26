@@ -22,7 +22,7 @@
 ( function () {
 	'use strict';
 
-	var defaultPeriod = '1d',
+	var defaultPeriod = 'day',
 		importantEvents = {
 			firstPaint: [
 				{ date: new Date( '2016-11-17' ),
@@ -31,29 +31,11 @@
 						window.open( 'https://phabricator.wikimedia.org/T146510#2804827', '_blank' );
 					} }
 			]
-		},
-		periodOptions = {
-			'1h': {
-				summarize: '1min',
-				medianPeriods: 1
-			},
-			'1d': {
-				summarize: '15min',
-				medianPeriods: 15
-			},
-			'1w': {
-				summarize: '1h',
-				medianPeriods: 60
-			},
-			'1mon': {
-				summarize: '4h',
-				medianPeriods: 240
-			},
-			'1y': {
-				summarize: '1d',
-				medianPeriods: 1440
-			}
 		};
+
+	function identity( x ) {
+		return x;
+	}
 
 	function median( values ) {
 		var middle;
@@ -68,42 +50,42 @@
 	}
 
 	function drawCharts( period ) {
-		var charts = d3.select( '#metrics' ).selectAll( 'div' );
+		d3.json( 'https://performance.wikimedia.org/coal/v1/metrics?period=' + period, function ( data ) {
+			var charts = d3.select( '#metrics' )
+			.selectAll( 'div' )
+			.data( d3.keys( data.points ) );
 
-		charts.each( function () {
-			var metricDiv = this;
-			// https://graphite.wikimedia.org/render?target=summarize(movingMedian(coal.domInteractive, 15), "15min", "avg")&from=-1d&format=json
-			d3.json( 'https://graphite.wikimedia.org/render?target=summarize(movingMedian(coal.' + metricDiv.id + ', ' +
-								periodOptions[ period ].medianPeriods + '), "' + periodOptions[ period ].summarize +
-								'", "avg")&from=-' + period + '&format=json',
-				function ( error, data ) {
-					var points, values = [];
-					if ( !error ) {
-						points = d3.values( data[ 0 ].datapoints.map( function ( point ) {
-							// point is an array in the form [value, timestamp]
-							values.push( point[ 0 ] );
-							return {
-								date: new Date( 1000 * point[ 1 ] ),
-								value: point[ 0 ]
-							};
-						} ) );
-						MG.data_graphic( {
-							/* eslint-disable camelcase */
-							title: metricDiv.id + ' - ' + Math.round( median( values ) ) + ' ms',
-							markers: importantEvents[ metricDiv.id ],
-							target: metricDiv,
-							area: false,
-							data: points,
-							full_width: true,
-							full_height: false,
-							height: 280,
-							left: 60,
-							min_y_from_data: true,
-							show_rollover_text: true
-							/* eslint-enable camelcase */
-						} );
-					}
+			charts.enter()
+			.append( 'div' )
+			.attr( 'class', 'metric' )
+			.attr( 'id', identity );
+
+			charts.each( function ( metric ) {
+
+				var values = [], points = d3.values( data.points[ metric ] ).map( function ( value, idx ) {
+						var epochSeconds = data.start + idx * data.step;
+						values.push( value );
+						return { date: new Date( 1000 * epochSeconds ), value: value };
+					} );
+
+				MG.data_graphic( {
+					title: metric + ' – ' + median( values ) + ' ms',
+					markers: importantEvents[ metric ],
+					target: this,
+					area: false,
+					data: points,
+					/* eslint-disable camelcase */
+					full_width: true,
+					full_height: false,
+					/* eslint-enable camelcase */
+					height: 280,
+					left: 60,
+					/* eslint-disable camelcase */
+					min_y_from_data: true,
+					show_rollover_text: true
+					/* eslint-enable camelcase */
 				} );
+			} );
 		} );
 	}
 
