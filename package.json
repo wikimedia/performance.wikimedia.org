@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "test": "eslint .",
-    "generate": "npm run uncss && npm run blog && jekyll build --source src --destination public_html",
+    "generate": "npm run uncss && npm run blog && COAL_WEB_SERVER=/coal jekyll build --source src --destination public_html",
     "blog": "curl -s https://phabricator.wikimedia.org/phame/blog/feed/7/ -o src/_data/blog.xml && xml2json src/_data/blog.xml src/_data/blog.json && rm src/_data/blog.xml",
     "jekyll": "npm run generate && jekyll serve --source src --destination public_html",
     "verify": "test -z '$(git status --porcelain public_html/)'",

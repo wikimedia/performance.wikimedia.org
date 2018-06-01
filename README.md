@@ -1,14 +1,32 @@
-# Prerequisites
+# performance.wikimedia.org
+
+## Prerequisites
 
 * NodeJS (and npm)
 * Ruby/RubyGems
-* Jekyll - gem install Jekyll](https://jekyllrb.com/docs/installation/)
+* Jekyll - [gem install jekyll](https://jekyllrb.com/docs/installation/)
 
-# How to run
+## Development
 
-## Start Jekyll, publish src/ to public_html/ and watch for changes in src/ and access the site on http://127.0.0.1:4000/
+The following starts Jekyll, re-generates `public_html/`, and watches `src/` for changes to automatically regenerate. This makes the site available at <http://127.0.0.1:4000/>.
 
-*npm run jekyll*
+<pre>
+npm run jekyll
+</pre>
 
-## Generate src/ into public_html/
-*npm run generate*
+Options:
+* `COAL_WEB_SERVER`: Set this environment to the address of a `coal-web` server.
+  For example, set `COAL_WEB_SERVER=http://127.0.0.1:5000` for address that
+  Flask would use when running coal-web locally.
+
+## Build
+
+Re-generate `public_html/` from `src/`.
+
+<pre>
+npm run generate
+</pre>
+
+## See also
+
+* [coal](https://gerrit.wikimedia.org/g/performance/coal/)
