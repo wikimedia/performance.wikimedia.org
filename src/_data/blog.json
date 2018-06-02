@@ -477,6 +477,9 @@
 										"rel": "noreferrer",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
+											"span": {
+												"class": "phui-tag-dot phui-tag-color-orange"
+											},
 											"$t": "@fgiunchedi"
 										}
 									},

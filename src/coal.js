@@ -52,21 +52,21 @@
 	function drawCharts( period ) {
 		d3.json( WMPERF.coalUrl + '/v1/metrics?period=' + period, function ( data ) {
 			var charts = d3.select( '#metrics' )
-			.selectAll( 'div' )
-			.data( d3.keys( data.points ) );
+				.selectAll( 'div' )
+				.data( d3.keys( data.points ) );
 
 			charts.enter()
-			.append( 'div' )
-			.attr( 'class', 'metric' )
-			.attr( 'id', identity );
+				.append( 'div' )
+				.attr( 'class', 'metric' )
+				.attr( 'id', identity );
 
 			charts.each( function ( metric ) {
 
 				var values = [], points = d3.values( data.points[ metric ] ).map( function ( value, idx ) {
-						var epochSeconds = data.start + idx * data.step;
-						values.push( value );
-						return { date: new Date( 1000 * epochSeconds ), value: value };
-					} );
+					var epochSeconds = data.start + idx * data.step;
+					values.push( value );
+					return { date: new Date( 1000 * epochSeconds ), value: value };
+				} );
 
 				MG.data_graphic( {
 					title: metric + ' – ' + median( values ) + ' ms',
