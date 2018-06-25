@@ -24,7 +24,7 @@
 	}
 
 	function createUrl( file ) {
-		return 'https://performance.wikimedia.org/xenon/svgs/daily/' + file;
+		return '/xenon/svgs/daily/' + file;
 	}
 
 	function appendLinks( parent, date, endpoint, label ) {
