@@ -8,9 +8,974 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2018-04-08T13:13:16+00:00",
+		"updated": "2018-10-03T09:43:53+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
+			{
+				"title": "Best friends forever",
+				"link": {
+					"href": "/phame/live/7/post/122/best_friends_forever/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/122/",
+				"author": {
+					"name": "Peter (Peter Hedenskog)"
+				},
+				"published": "2018-10-03T09:43:53+00:00",
+				"updated": "2018-10-03T09:43:53+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							{
+								"a": [
+									{
+										"href": "https://phabricator.wikimedia.org/phame/post/view/117/performance_testing_in_a_controlled_lab_environment_-_the_metrics/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "synthetic"
+									},
+									{
+										"href": "https://phabricator.wikimedia.org/phame/post/view/83/measuring_wikipedia_page_load_times/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "RUM"
+									}
+								]
+							},
+							"In our synthetic lab environment, we update the browser version in a controlled way. When there’s a new browser release, we wait for a new Docker container with the latest version. We stop the current tests, update the Docker container and restart the tests and look at the metrics that we graph in Grafana. That way, we can check whether a new browser version introduced a regression.",
+							"Our users’ browsers usually upgrade slowly. The browser vendors usually push the browser to a percentage of users first, and then give the green light to update all of them. When we collect performance metrics, we also collect browser names and versions. That way we can see when users pick up a new browser version and if that version has any impact on our metrics. The adoption of new versions by real users takes time, and when we see a regression in our synthetic testing, it can take a couple of weeks until we see the same effect in our user metrics.",
+							{
+								"a": {
+									"href": "https://phabricator.wikimedia.org/T196242",
+									"class": "phui-tag-view phui-tag-type-object ",
+									"data-sigil": "hovercard",
+									"data-meta": "0_15",
+									"span": {
+										"class": "phui-tag-core phui-tag-color-object",
+										"$t": "T196242"
+									}
+								}
+							},
+							{
+								"a": {
+									"href": "https://en.wikipedia.org/wiki/Facebook",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "https://en.wikipedia.org/wiki/Facebook"
+								}
+							},
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_0",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							"Most of the pages we test were affected, but not all of them.  For our tests of the \"Barack Obama\" English Wikipedia article, it was hard to spot any change at all.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_1",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							{
+								"a": [
+									{
+										"href": "https://wikitech.wikimedia.org/wiki/Performance/WebPageTest",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "WebPageTest"
+									},
+									{
+										"href": "https://wikitech.wikimedia.org/wiki/Performance/WebPageReplay",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Browsertime/WebPageReplay"
+									}
+								]
+							},
+							{
+								"a": {
+									"href": "https://en.wikipedia.org/wiki/Law_of_Jante",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "to do with a change we have done"
+								}
+							},
+							{
+								"a": {
+									"href": "https://bugs.chromium.org/p/chromium/issues/detail?id=849108",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "issue 849108"
+								}
+							},
+							"The next step is to see if we can find the same change in the metrics that we collect directly from users. The firstPaint metric in Chrome is similar to the first visual change metric we use in our synthetic testing. Which means that when we have enough traffic coming from Chrome 67, we should be able to see the change on first paint.",
+							"The conversion rate from Chrome 66 to 67 looked like this:",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_2",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							"If you look real closely, you can see that around the 15th of June we started getting enough traffic for Chrome 67 to see the effect on our metrics.",
+							"To see the change in Chrome, we look at the metrics we collect from all versions of Chrome and check the median and 75th percentile of first paint.",
+							"In the following graph, we take the average over one day to try to minimize spikes. If you look at the right side (Chrome 67) of the graphs you can see that it has a slightly higher first paint than to the left (Chrome 66).",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_3",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_4",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							"To verify the metrics, we also looked at first paint on mobile. There’s no regression there, it rather looks like there could be a small win in first paint.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_5",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							"To be 100% sure that there’s nothing we introduced, we take another look at synthetic testing at that time when the increase in first paint was seen for real users (15th of June).",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_6",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							"There’s no increase in the metrics from synthetic tests at that time. This confirms it was a (small) regression in Chrome 67.",
+							"Some time ago, our performance alerts in Grafana fired about first paint in Chrome having increased for our users. We looked at it, and couldn’t find an exact issue that could have caused it. It looked like the metric had slowly increased over time. That type of regression are always the hardest to deal with because it’s hard to see exactly what’s causing the regression.",
+							"We could see the regression both on desktop and mobile. It was most obvious when we checked the first paint on mobile. You can see the weekly pattern we have but the highs are getting higher and higher.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_7",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							"But we actually had the answer: When we updated to Chrome 69 in our synthetic testing a couple of weeks ago, we again saw an increase in first visual change. This time, we could see the regression on some wikis but not all of them. We’ve switched back and forth between Chrome 68 and 69 and first visual change for the Japanese wiki looked like this:",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_8",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							{
+								"a": [
+									{
+										"href": "https://phabricator.wikimedia.org/T203543",
+										"class": "phui-tag-view phui-tag-type-object ",
+										"data-sigil": "hovercard",
+										"data-meta": "0_16",
+										"span": {
+											"class": "phui-tag-core phui-tag-color-object",
+											"$t": "T203543"
+										}
+									},
+									{
+										"href": "https://bugs.chromium.org/p/chromium/issues/detail?id=887205",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "an upstream bug"
+									}
+								]
+							},
+							"Is this the same regression as we see in RUM?  Let us look again at when the majority of Chrome users switched from 68 to 69.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_9",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							"And then let’s go back to first paint metric. First, we look at our metric for desktop only. Around September 22nd almost all traffic was from 69, but you can also see that it was introduced in early September.",
+							{
+								"div": [
+									{
+										"class": "phabricator-remarkup-embed-layout-center",
+										"a": {
+											"href": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
+											"class": "phabricator-remarkup-embed-image",
+											"data-sigil": "lightboxable",
+											"data-meta": "0_10",
+											"img": {
+												"src": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
+												"width": "600"
+											}
+										}
+									},
+									{
+										"class": "phabricator-remarkup-embed-layout-center",
+										"a": {
+											"href": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
+											"class": "phabricator-remarkup-embed-image",
+											"data-sigil": "lightboxable",
+											"data-meta": "0_11",
+											"img": {
+												"src": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
+												"width": "600"
+											}
+										}
+									}
+								],
+								"br": {}
+							},
+							"It looks like when Chrome 69 was introduced, first paint slowly rose and then when all our metrics were collected from 69, both median and 75th percentile were higher than with 68.",
+							"What does it look like for mobile?",
+							{
+								"div": [
+									{
+										"class": "phabricator-remarkup-embed-layout-center",
+										"a": {
+											"href": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
+											"class": "phabricator-remarkup-embed-image",
+											"data-sigil": "lightboxable",
+											"data-meta": "0_12",
+											"img": {
+												"src": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
+												"width": "600"
+											}
+										}
+									},
+									{
+										"class": "phabricator-remarkup-embed-layout-center",
+										"a": {
+											"href": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
+											"class": "phabricator-remarkup-embed-image",
+											"data-sigil": "lightboxable",
+											"data-meta": "0_13",
+											"img": {
+												"src": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
+												"width": "600"
+											}
+										}
+									}
+								],
+								"br": {}
+							},
+							"We see the same pattern here. Let us check our synthetic testing at the same time, to see if we could have introduced a code change that affected first visual change. Our metrics on mobile are even more stable than desktop. We look at Swedish Wikipedia, because we didn’t deploy any change on that test server during this period.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_14",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
+											"width": "600"
+										}
+									}
+								}
+							},
+							"No regression there. It looks like this also could be a performance regression in Chrome.",
+							"Working with both synthetic metrics and metrics from real users, helps us to confirm issues. In this case, it helped us to find two browser regressions that impact our users. We hope that we can get help from the Chromium team to resolve these issues."
+						],
+						"h3": [
+							{
+								"class": "remarkup-header",
+								"$t": "Chrome 67"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Chrome 69"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Summary"
+							}
+						],
+						"h4": {
+							"class": "remarkup-header",
+							"$t": "Next step"
+						}
+					}
+				}
+			},
+			{
+				"title": "Performance testing in a controlled lab environment - the metrics",
+				"link": {
+					"href": "/phame/live/7/post/117/performance_testing_in_a_controlled_lab_environment_-_the_metrics/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/117/",
+				"author": {
+					"name": "Peter (Peter Hedenskog)"
+				},
+				"published": "2018-09-21T07:49:33+00:00",
+				"updated": "2018-09-21T07:52:42+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							{
+								"a": {
+									"href": "/tag/performance-team/",
+									"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
+									"data-sigil": "hovercard",
+									"data-meta": "0_23",
+									"span": {
+										"class": "phui-tag-core ",
+										"span": {
+											"class": "visual-only phui-icon-view phui-font-fa fa-users",
+											"data-meta": "0_22",
+											"aria-hidden": "true"
+										},
+										"$t": "Performance-Team"
+									}
+								}
+							},
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_17",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
+											"width": "400"
+										}
+									}
+								}
+							},
+							"If we are slow, we waste users time. And we don’t want to do that. That's why we are really serious about the performance of Wikipedia.",
+							{
+								"a": {
+									"href": "https://phabricator.wikimedia.org/phame/live/7/post/83/measuring_wikipedia_page_load_times/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "told us"
+								}
+							},
+							"Getting metrics from real users is good because they are close to what people really experience. The problem is that:",
+							"That’s why we also test in a lab environment.",
+							"Testing in a lab means that we are running a desktop computer (or mobile) in an isolated environment where we try to have the environment as stable as possible. That way we hope that we are able to pick up small performance regressions and know why we have that regression.",
+							"In a lab environment we have more control and we love control when we want to measure things! We want to make the conditions between tests to be as similar as possible. If we can control the environment, we can find regressions introduced by our code changes.",
+							"Testing in a lab environment helps us with:",
+							"But everything isn’t perfect when testing in a lab: We are only testing a small usage group (a specific browser version, specific connection type, one operating system, a couple of URLs). We will miss out on a lot of users scenarios. That’s the big disadvantage of testing in a lab. That’s why it is also important to collect metrics from real users.",
+							"One of the things I like with testing in a lab is that we can get more user centered metrics than we can get directly from the browser. We mostly focus on visual metrics.",
+							"Visual metrics are when things that happens within the viewport of the browser that the user can see. We collect these metrics by recording a video of the browser screen and then analyzing the video and calculating the metrics.",
+							"What’s good with visual metrics is that it is easy to see and understand and easy to relate. They are the best metrics we have today to know what the user is experiencing.",
+							{
+								"a": {
+									"href": "https://github.com/WPO-Foundation/webpagetest/blob/master/docs/Metrics/TimeToInteractive.md#time-to-interactive-tti",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "Time To Interaction"
+								}
+							},
+							"First visual change is when something is first painted within the viewport of the browser screen. For Wikipedia on desktop this mostly means going from a complete blank screen to something like this:",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_18",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
+											"width": "400"
+										}
+									}
+								}
+							},
+							{
+								"a": {
+									"href": "https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Performance-Team",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "issue in Phabricator"
+								}
+							},
+							"On mobile the first visual change looks something like this:",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_19",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
+											"width": "400"
+										}
+									}
+								}
+							},
+							"Showing content (text/images) early is important, since the earlier you can see the text as a reader, the sooner you can start to read and get the information you want.",
+							"First visual change also correlates to the RUM metric first paint. We can see that the first visual change and first paint happen at almost the same time. That means that if we see a change in first paint in RUM, we will also see the change in first visual change in synthetic testing.",
+							{
+								"a": {
+									"href": "https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "Speed Index"
+								}
+							},
+							"The idea with Speed Index is to measure when the entire content within the browser viewport is ready. Speed Index will be lower if the entire page renders more quickly, but it will also be lower if partial content renders sooner.  If two pages finish rendering at the same time, the page that started to render first will have the lowest Speed Index.",
+							"We use Speed Index to know when when the page looks ready for the user. However the page can still download assets and run JavaScript, so it could be that the page looks ready but doesn’t feel ready (it’s not responsive if you to click on a link).",
+							"Last visual change is when everything within the viewport is ready on the screen. It could be images coming in late or JavaScript in one extension changing the layout of the already painted screen.",
+							"Here’s an example video. Look to the right of the screen and you will see the map, the sound player and that small coordinates image coming in really late.",
+							{
+								"div": {
+									"class": "embedded-commons-video",
+									"iframe": {
+										"width": "650",
+										"height": "400",
+										"style": "margin: 1em auto; border: 0px;",
+										"src": "https://commons.wikimedia.org/wiki/File:Sweden_article_on_enwiki_loaded_in_Chrome_using_Browsertime,_recorded_using_FFMpeg.webm?embedplayer=yes",
+										"frameborder": "0"
+									}
+								}
+							},
+							"We don't act on last visual change today because it is really dependent on what page we test, what browser we use to test the page, and other factors. But it is an important metric: if the page starts to change when you want to interact with it, you will not know if the page is ready to use or not.",
+							"We also collect metrics when the page is 85, 95 and 99% complete.  The intent of these metrics is to account for content-related factors that result in changes to overall page load times. For example, when Wikipedia is running fundraising campaigns, there is a donation banner that appears on most pages on the site.  These donation banners are intentionally loaded after most of the content has loaded, but they do result in the last visual change being pushed back quite a bit.  By measuring the time that it takes for the page to be 85% complete instead, we avoid the variation that this introduces.",
+							"The last one of our visual metrics are the ability to measure when specific elements is painted on the screen. We can get metrics like when is the largest image painted? When is the logo? We have started to collect these metrics in our tools but haven't yet started to act on them.",
+							"Another type of metric that we use in the lab is CPU time spent in the browser. Today we can only get that from Chrome. We configure and collect the event trace log from Chrome and categorise the events on a high level.",
+							"We can then see time spent on painting, rendering, scripting and loading. If we get a regression, we can then go down to a lower event level and use that to better understand what is actually happening.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_20",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
+											"width": "400"
+										}
+									}
+								}
+							},
+							"One important meta metric that we also collect is the standard deviation of each metric that we collect. That helps us know how stable the metrics we have are and if we need to tune anything in our setup. It also helps us understand if we have certain pages that are extra hard to measure (that have a lot of variation).  This is something that I’ll talk about more in my next post, when we discuss the ways that we control our synthetic testing environment.",
+							"Our synthetic testing also helps us with knowing how our pages were constructed at a given time. We collect number of requests, the size of each response, the response type and how the browser downloaded all responses every time we measure a page. That helps us when we find a regression. We can compare the before and after (what did the page look like before the regression?).",
+							"We also collect screenshots and videos of what the page looked like at the time we measured the page.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_21",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
+											"width": "400"
+										}
+									}
+								}
+							},
+							"We focus on visual metrics and CPU time spent metrics in our synthetic testing. The visual metrics give us a better feel for what the user is experiencing than most of the metrics we collect from real users. Our synthetic testing also gives us a snapshot of what the page looked like at the moment we measured it. The problem with synthetic measuring is that we try out only a small portion of users’ different setups.",
+							"In the next blog post I will talk about our technical setup, problems we have had, and strategies we are using to get stable metrics."
+						],
+						"h3": [
+							{
+								"class": "remarkup-header",
+								"$t": "Performance metrics"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Performance testing in a lab"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Metrics in our lab"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Summary"
+							}
+						],
+						"ul": [
+							{
+								"class": "remarkup-list",
+								"li": {
+									"class": "remarkup-list-item",
+									"$t": "Today's browsers have limited ways of giving us metrics that tell us what the user is experiencing. A couple of browsers have a metric called First Paint (when something is first painted on the screen). But the rest of the metrics are more technical. They tell us how the browser is doing, not what the user is experiencing. Browser vendors are working on this but, at the moment, most performance APIs are focused on technical metrics. And we’re more interested in what our users are experiencing."
+								}
+							},
+							{
+								"class": "remarkup-list",
+								"li": {
+									"class": "remarkup-list-item",
+									"$t": "Metrics from real users have a lot of variation because the users have different conditions: network latency, operating system, browser version, CPU and more. If something changes, how do we know the main reason? Is it our code? Is it something else?"
+								}
+							},
+							{
+								"class": "remarkup-list",
+								"li": {
+									"class": "remarkup-list-item",
+									"$t": "There is a lot of noise in the data we collect from real users. To catch a performance regression, it needs to be big enough and affect many users to be visible."
+								}
+							},
+							{
+								"class": "remarkup-list",
+								"li": {
+									"class": "remarkup-list-item",
+									"$t": "Collecting metrics that are more related to user experience than the technical metrics the browsers provide. In this post we will focus on the specific metrics we get from the lab environment."
+								}
+							},
+							{
+								"class": "remarkup-list",
+								"li": {
+									"class": "remarkup-list-item",
+									"$t": "In a controlled environment that typically provides consistent test results, it is easier to detect regressions. It’s easier to spot smaller regressions than with RUM."
+								}
+							},
+							{
+								"class": "remarkup-list",
+								"li": {
+									"class": "remarkup-list-item",
+									"$t": "Lab testing and RUM are best friends: our synthetic testing improves our confidence in RUM and vice versa. If we see a regression in both types of measurements, we know for sure that it's a real regression."
+								}
+							},
+							{
+								"class": "remarkup-list",
+								"li": {
+									"class": "remarkup-list-item",
+									"$t": "We can see changes very quickly when testing in a lab setting, because the only variable that is changing is the code. Being confident in RUM usually takes more time: you need to have more data to see the change."
+								}
+							},
+							{
+								"class": "remarkup-list",
+								"li": {
+									"class": "remarkup-list-item",
+									"$t": "In a lab setting, we are also able to control when browser versions are updated to new versions, allowing us to detect when browser releases impact user experience. Our users’ browsers auto updates. A new browser version can affect the performance."
+								}
+							}
+						],
+						"h4": [
+							{
+								"class": "remarkup-header",
+								"$t": "Visual metrics"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "CPU time spent metrics"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Deviation"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Page snapshots"
+							}
+						],
+						"h5": [
+							{
+								"class": "remarkup-header",
+								"$t": "First Visual Change"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Speed Index"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Last Visual Change"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Visual Complete 85/95/99"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Visual Elements"
+							}
+						],
+						"blockquote": {
+							"p": "“The Speed Index is the average time at which visible parts of the page are displayed. It is expressed in milliseconds and dependent on size of the viewport.”"
+						}
+					}
+				}
+			},
+			{
+				"title": "Mobile web performance: the importance of the device",
+				"link": {
+					"href": "/phame/live/7/post/109/mobile_web_performance_the_importance_of_the_device/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/109/",
+				"author": {
+					"name": "Gilles (Gilles Dubuc)"
+				},
+				"published": "2018-06-22T14:19:10+00:00",
+				"updated": "2018-06-27T03:06:52+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							{
+								"a": [
+									{
+										"href": "https://en.wikipedia.org/wiki/User_agent#User_agent_identification",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "User Agent"
+									},
+									{
+										"href": "https://wikitech.wikimedia.org/wiki/Analytics/Systems/EventLogging/Data_retention_and_auto-purging",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "As per our data retention guidelines, we only keep user agent information for 90 days"
+									}
+								]
+							},
+							{
+								"a": [
+									{
+										"href": "https://en.wikipedia.org/wiki/Samsung_Galaxy_J2_(2017)",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Samsung Galaxy J2"
+									},
+									{
+										"href": "https://en.wikipedia.org/wiki/Samsung_Galaxy_J7_Prime",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Samsung Galaxy J7 Prime"
+									}
+								]
+							},
+							{
+								"a": {
+									"href": "https://en.wikipedia.org/wiki/Real_user_monitoring",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "Real User Monitoring"
+								}
+							},
+							{
+								"tt": [
+									{
+										"class": "remarkup-monospaced",
+										"$t": "J7 Prime"
+									},
+									{
+										"class": "remarkup-monospaced",
+										"$t": "J2"
+									}
+								]
+							},
+							{
+								"a": [
+									{
+										"href": "https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation/effectiveType",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Network Information API"
+									},
+									{
+										"href": "https://phabricator.wikimedia.org/T182361",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "recently added to the performance data we collect"
+									}
+								]
+							},
+							"Looking at Chrome Mobile only, for the sake of having a consistent definition of the effectiveType buckets, we get:",
+							"These breakdowns are extremely similar, which strongly suggests that users of these two phone models in India actually experience the same internet connectivity quality. This is very interesting, because it gives us the ability to compare the performance of these two devices from different hardware generations, in the real world, with connectivity quality as a whole that looks almost identical. And similar latency, since they're connecting to our data centers from the same country.",
+							{
+								"a": {
+									"href": "https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "firstPaint"
+								}
+							},
+							{
+								"a": {
+									"href": "https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/loadEventEnd",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "loadEventEnd"
+								}
+							},
+							{
+								"tt": {
+									"class": "remarkup-monospaced",
+									"$t": "J2"
+								}
+							},
+							"These results show that device generation has a huge impact on the real performance experienced by users. Across the globe, users are upgrading their devices over time. This phenomenon means that the performance metrics we measure directly on sampled users with RUM should improve over time, by virtue of people getting more powerful devices on average. This is an important factor to keep in mind when measuring the effect of our own performance optimizations. And when the median of the RUM metrics stay stable over a long period of time, it might be that our performance is actually worsening, and that degradation is being masked by device and network improvements across the board.",
+							"Given the eye-opening results of this small study, getting a better grasp on the pace of improvement of the environment (device generations, network) looks like a necessity to understand and validate our impact on the evolution of RUM metrics."
+						],
+						"div": [
+							{
+								"class": "remarkup-table-wrap",
+								"table": {
+									"class": "remarkup-table",
+									"tr": [
+										{
+											"th": [
+												"effectiveType",
+												{
+													"tt": {
+														"class": "remarkup-monospaced",
+														"$t": "J2"
+													}
+												},
+												{
+													"tt": {
+														"class": "remarkup-monospaced",
+														"$t": "J7 Prime"
+													}
+												}
+											]
+										},
+										{
+											"td": [
+												"slow-2g",
+												"0.5%",
+												"1.1%"
+											]
+										},
+										{
+											"td": [
+												"2g",
+												"0.8%",
+												"0.7%"
+											]
+										},
+										{
+											"td": [
+												"3g",
+												"27%",
+												"28%"
+											]
+										},
+										{
+											"td": [
+												"4g",
+												"71.5%",
+												"70.2%"
+											]
+										},
+										{}
+									]
+								}
+							},
+							{
+								"class": "remarkup-table-wrap",
+								"table": {
+									"class": "remarkup-table",
+									"tr": [
+										{
+											"th": [
+												"Device",
+												"Sample size",
+												"Median",
+												"p90",
+												"p95",
+												"p99"
+											]
+										},
+										{
+											"td": [
+												{
+													"tt": {
+														"class": "remarkup-monospaced",
+														"$t": "J2"
+													}
+												},
+												"1226",
+												"1842",
+												"4769",
+												"7704",
+												"15957"
+											]
+										},
+										{
+											"td": [
+												{
+													"tt": {
+														"class": "remarkup-monospaced",
+														"$t": "J7 Prime"
+													}
+												},
+												"1798",
+												"1082",
+												"2811",
+												"5076",
+												"12136"
+											]
+										},
+										{
+											"td": [
+												"difference",
+												{},
+												"-41.3%",
+												"-41.1%",
+												"-34.2%",
+												"-24%"
+											]
+										},
+										{}
+									]
+								}
+							},
+							{
+								"class": "remarkup-table-wrap",
+								"table": {
+									"class": "remarkup-table",
+									"tr": [
+										{
+											"th": [
+												"Device",
+												"Sample size",
+												"Median",
+												"p90",
+												"p95",
+												"p99"
+											]
+										},
+										{
+											"td": [
+												{
+													"tt": {
+														"class": "remarkup-monospaced",
+														"$t": "J2"
+													}
+												},
+												"1226",
+												"3078",
+												"9813",
+												"14072",
+												"29240"
+											]
+										},
+										{
+											"td": [
+												{
+													"tt": {
+														"class": "remarkup-monospaced",
+														"$t": "J7 Prime"
+													}
+												},
+												"1798",
+												"1821",
+												"5635",
+												"9847",
+												"28949"
+											]
+										},
+										{
+											"td": [
+												"difference",
+												{},
+												"-40.9%",
+												"-42.6%",
+												"-30.1%",
+												"-1.1%"
+											]
+										},
+										{}
+									]
+								}
+							}
+						]
+					}
+				}
+			},
 			{
 				"title": "Thumbor support for private wikis deployed",
 				"link": {
@@ -84,8 +1049,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_0",
-										"rel": "noreferrer",
+										"data-meta": "0_24",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 											"height": "100",
@@ -140,8 +1104,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_3",
-										"rel": "noreferrer",
+										"data-meta": "0_27",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 											"height": "512",
@@ -169,8 +1132,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_4",
-											"rel": "noreferrer",
+											"data-meta": "0_28",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 												"height": "463",
@@ -184,8 +1146,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_5",
-											"rel": "noreferrer",
+											"data-meta": "0_29",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 												"height": "90",
@@ -208,8 +1169,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_6",
-										"rel": "noreferrer",
+										"data-meta": "0_30",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 											"height": "159",
@@ -385,8 +1345,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_1",
-														"rel": "noreferrer",
+														"data-meta": "0_25",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 															"height": "154",
@@ -402,8 +1361,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_2",
-														"rel": "noreferrer",
+														"data-meta": "0_26",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 															"height": "156",
@@ -457,8 +1415,7 @@
 										"href": "https://phabricator.wikimedia.org/p/bd808/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_8",
-										"rel": "noreferrer",
+										"data-meta": "0_32",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@bd808"
@@ -473,13 +1430,9 @@
 										"href": "https://phabricator.wikimedia.org/p/fgiunchedi/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_7",
-										"rel": "noreferrer",
+										"data-meta": "0_31",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
-											"span": {
-												"class": "phui-tag-dot phui-tag-color-orange"
-											},
 											"$t": "@fgiunchedi"
 										}
 									},
@@ -905,8 +1858,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_9",
-										"rel": "noreferrer",
+										"data-meta": "0_33",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 											"height": "573",
@@ -926,8 +1878,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_10",
-										"rel": "noreferrer",
+										"data-meta": "0_34",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 											"height": "576",
@@ -944,8 +1895,7 @@
 									"href": "https://phabricator.wikimedia.org/p/aaron/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_11",
-									"rel": "noreferrer",
+									"data-meta": "0_35",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@aaron"
@@ -1101,8 +2051,7 @@
 										"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_24",
-										"rel": "noreferrer",
+										"data-meta": "0_48",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@Jdlrobson"
@@ -1129,8 +2078,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_12",
-										"rel": "noreferrer",
+										"data-meta": "0_36",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 											"height": "463",
@@ -1166,8 +2114,7 @@
 									"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_23",
-									"rel": "noreferrer",
+									"data-meta": "0_47",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@Jdlrobson"
@@ -1180,12 +2127,12 @@
 										"href": "/tag/performance-team/",
 										"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_22",
+										"data-meta": "0_46",
 										"span": {
 											"class": "phui-tag-core ",
 											"span": {
 												"class": "visual-only phui-icon-view phui-font-fa fa-users",
-												"data-meta": "0_21",
+												"data-meta": "0_45",
 												"aria-hidden": "true"
 											},
 											"$t": "Performance-Team"
@@ -1195,7 +2142,7 @@
 										"href": "/T166373",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_17",
+										"data-meta": "0_41",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -1235,8 +2182,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_13",
-										"rel": "noreferrer",
+										"data-meta": "0_37",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 											"height": "265",
@@ -1255,8 +2201,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_14",
-										"rel": "noreferrer",
+										"data-meta": "0_38",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 											"height": "471",
@@ -1282,8 +2227,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_15",
-										"rel": "noreferrer",
+										"data-meta": "0_39",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 											"height": "354",
@@ -1307,8 +2251,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_16",
-										"rel": "noreferrer",
+										"data-meta": "0_40",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 											"height": "354",
@@ -1333,7 +2276,7 @@
 										"href": "/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_19",
+										"data-meta": "0_43",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -1352,8 +2295,7 @@
 										"href": "https://phabricator.wikimedia.org/p/phuedx/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_20",
-										"rel": "noreferrer",
+										"data-meta": "0_44",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@phuedx"
@@ -1372,8 +2314,7 @@
 										"href": "https://phabricator.wikimedia.org/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_18",
-										"rel": "noreferrer",
+										"data-meta": "0_42",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
