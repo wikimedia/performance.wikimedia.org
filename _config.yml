@@ -1,0 +1,9 @@
+# Jekyll's site settings
+# https://jekyllrb.com/docs/configuration/
+
+# Plugins
+plugins:
+  # https://help.github.com/articles/redirects-on-github-pages/
+  - jekyll-redirect-from
+
+source: src/

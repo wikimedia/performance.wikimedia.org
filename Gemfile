@@ -10,3 +10,8 @@ ruby RUBY_VERSION
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
 gem "jekyll", "3.8.3"
+
+# To use plugins, put them here!
+group :jekyll_plugins do
+   gem "jekyll-redirect-from", "0.13.0"
+end
