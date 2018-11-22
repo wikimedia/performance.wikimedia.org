@@ -3,10 +3,17 @@
 ## Prerequisites
 
 * NodeJS (and npm)
-* Ruby/RubyGems
-* Jekyll - [gem install jekyll](https://jekyllrb.com/docs/installation/)
+* Ruby (and Bundler)
+
+To install Bundler, run `gem install bundler`.
 
 ## Development
+
+To install or update Jekyll and any plugins:
+
+<pre>
+bundle install
+</pre>
 
 The following starts Jekyll, re-generates `public_html/`, and watches `src/` for changes to automatically regenerate. This makes the site available at <http://127.0.0.1:4000/>.
 
