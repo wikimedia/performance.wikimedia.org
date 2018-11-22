@@ -8,9 +8,594 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2018-10-03T09:43:53+00:00",
+		"updated": "2018-11-07T10:47:40+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
+			{
+				"title": "Machine learning: how to undersample the wrong way",
+				"link": {
+					"href": "/phame/live/7/post/123/machine_learning_how_to_undersample_the_wrong_way/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/123/",
+				"author": {
+					"name": "Gilles (Gilles Dubuc)"
+				},
+				"published": "2018-10-15T13:37:07+00:00",
+				"updated": "2018-11-07T10:47:40+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							{
+								"a": [
+									{
+										"href": "https://meta.wikimedia.org/wiki/Research:Study_of_performance_perception_on_Wikimedia_projects",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "in collaboration with researchers"
+									},
+									{
+										"href": "https://en.wikipedia.org/wiki/Real_user_monitoring",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "RUM"
+									},
+									{
+										"href": "https://commons.wikimedia.org/wiki/File:Wikimedia_performance_perception_survey_screenshot_in_English.png",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "microsurvey"
+									}
+								]
+							},
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-left",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/o2wt32xdvip2omdva2pn/PHID-FILE-d6gjnnuwpmwhq7u7tivx/Sans_titre.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_0",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/fq4bnxkssnxhjauoqfdy/PHID-FILE-6jsaqxbsex5dlircqpfg/preview-Sans_titre.png",
+											"width": "220",
+											"height": "142.00668896321"
+										}
+									}
+								}
+							},
+							"Having never done any machine learning before, I did a few rookie mistakes. In this post I'll explain the biggest one, which led us to believe for some time that we had built a very well-performing model.",
+							{
+								"a": [
+									{
+										"href": "http://www.chioka.in/class-imbalance-problem/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "class imbalance"
+									},
+									{
+										"href": "https://en.wikipedia.org/wiki/Oversampling_and_undersampling_in_data_analysis",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "undersampling"
+									}
+								]
+							},
+							"Sounds simple, right? in Python/pandas it looks something like this:",
+							"Essentially we sort by value, with the ones we have the least values for at the top, then we used head() to get the first N records, where N is twice the amount of negative survey responses. With this, we should end up with exactly the same amount of rows for each value (negative and positive response). So far so good.",
+							"Then we apply our machine learning algorithm to the dataset (for example, for a binary classification of this kind, random forest is a good choice). At first the results were poor, and then we added a basic feature we forgot to include: time. Time of day, day of the week, day of the year, etc. When adding these, things started to work incredibly well! Surely we discovered something groundbreaking about seasonality/time-dependence in this data. Or...",
+							"A critical mistake was made in the above code snippet. The original dataset has chronological records. When we sort by \"response\" value, this chronological order remains, within the context of each sorted section of the dataset.",
+							{
+								"strong": [
+									"all",
+									"over the full timespan",
+									"a much shorter timespan"
+								]
+							},
+							"The reason why the model started giving excellent results when we introduced time as a feature, is that it basically detected the date discrepancy in our dataset! It's pretty easy to guess that a response is likely positive if you look at its date. If the date is later than June 15th, everything in our dataset is negative responses... Our machine learning model just started excelling at detecting our mistake :)",
+							"The workaround for this issue is simply to pick N positive responses at random over the whole timespan when undersampling, to make sure that the dataset is consistent:",
+							"This way we ensure that we're not introducing a time imbalance when working around our class imbalance."
+						],
+						"h2": [
+							{
+								"class": "remarkup-header",
+								"$t": "Class imbalance"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "I've made a huge mistake"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "A simple solution"
+							}
+						],
+						"div": [
+							{
+								"class": "remarkup-code-block",
+								"data-code-lang": "python",
+								"data-sigil": "remarkup-code-block",
+								"pre": {
+									"class": "remarkup-code",
+									"span": [
+										{
+											"class": "n",
+											"$t": "dataset"
+										},
+										{
+											"class": "o",
+											"$t": "."
+										},
+										{
+											"class": "n",
+											"$t": "sort_values"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "by"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "p",
+											"$t": "["
+										},
+										{
+											"class": "n",
+											"$t": "column_prefix"
+										},
+										{
+											"class": "o",
+											"$t": "+"
+										},
+										{
+											"class": "s",
+											"$t": "'response'"
+										},
+										{
+											"class": "p",
+											"$t": "],"
+										},
+										{
+											"class": "n",
+											"$t": "inplace"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "bp",
+											"$t": "True"
+										},
+										{
+											"class": "p",
+											"$t": ")"
+										},
+										{
+											"class": "n",
+											"$t": "negative_responses_count"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "n",
+											"$t": "dataset"
+										},
+										{
+											"class": "p",
+											"$t": "["
+										},
+										{
+											"class": "n",
+											"$t": "column_prefix"
+										},
+										{
+											"class": "o",
+											"$t": "+"
+										},
+										{
+											"class": "s",
+											"$t": "'response'"
+										},
+										{
+											"class": "p",
+											"$t": "]"
+										},
+										{
+											"class": "o",
+											"$t": "."
+										},
+										{
+											"class": "n",
+											"$t": "value_counts"
+										},
+										{
+											"class": "p",
+											"$t": "()["
+										},
+										{
+											"class": "o",
+											"$t": "-"
+										},
+										{
+											"class": "mi",
+											"$t": "1"
+										},
+										{
+											"class": "p",
+											"$t": "]"
+										},
+										{
+											"class": "n",
+											"$t": "dataset"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "n",
+											"$t": "dataset"
+										},
+										{
+											"class": "o",
+											"$t": "."
+										},
+										{
+											"class": "n",
+											"$t": "head"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "n"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "nb",
+											"$t": "int"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "negative_responses_count"
+										},
+										{
+											"class": "p",
+											"$t": ")"
+										},
+										{
+											"class": "o",
+											"$t": "*"
+										},
+										{
+											"class": "mi",
+											"$t": "2"
+										},
+										{
+											"class": "p",
+											"$t": ")"
+										}
+									]
+								}
+							},
+							{
+								"class": "remarkup-code-block",
+								"data-code-lang": "python",
+								"data-sigil": "remarkup-code-block",
+								"pre": {
+									"class": "remarkup-code",
+									"span": [
+										{
+											"class": "n",
+											"$t": "dataset"
+										},
+										{
+											"class": "o",
+											"$t": "."
+										},
+										{
+											"class": "n",
+											"$t": "sort_values"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "by"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "p",
+											"$t": "["
+										},
+										{
+											"class": "n",
+											"$t": "column_prefix"
+										},
+										{
+											"class": "o",
+											"$t": "+"
+										},
+										{
+											"class": "s",
+											"$t": "'response'"
+										},
+										{
+											"class": "p",
+											"$t": "],"
+										},
+										{
+											"class": "n",
+											"$t": "inplace"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "bp",
+											"$t": "True"
+										},
+										{
+											"class": "p",
+											"$t": ")"
+										},
+										{
+											"class": "n",
+											"$t": "negative_responses"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "n",
+											"$t": "dataset"
+										},
+										{
+											"class": "o",
+											"$t": "."
+										},
+										{
+											"class": "n",
+											"$t": "head"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "n"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "nb",
+											"$t": "int"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "negative_responses_count"
+										},
+										{
+											"class": "p",
+											"$t": "))"
+										},
+										{
+											"class": "n",
+											"$t": "positive_responses"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "n",
+											"$t": "dataset"
+										},
+										{
+											"class": "o",
+											"$t": "."
+										},
+										{
+											"class": "n",
+											"$t": "tail"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "n"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "nb",
+											"$t": "int"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "dataset"
+										},
+										{
+											"class": "o",
+											"$t": "."
+										},
+										{
+											"class": "n",
+											"$t": "shape"
+										},
+										{
+											"class": "p",
+											"$t": "["
+										},
+										{
+											"class": "mi",
+											"$t": "0"
+										},
+										{
+											"class": "p",
+											"$t": "]"
+										},
+										{
+											"class": "o",
+											"$t": "-"
+										},
+										{
+											"class": "n",
+											"$t": "negative_responses_count"
+										},
+										{
+											"class": "p",
+											"$t": "))"
+										},
+										{
+											"class": "n",
+											"$t": "positive_responses"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "n",
+											"$t": "shuffle"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "positive_responses"
+										},
+										{
+											"class": "p",
+											"$t": ")"
+										},
+										{
+											"class": "o",
+											"$t": "."
+										},
+										{
+											"class": "n",
+											"$t": "head"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "n"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "nb",
+											"$t": "int"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "n",
+											"$t": "negative_responses_count"
+										},
+										{
+											"class": "p",
+											"$t": "))"
+										},
+										{
+											"class": "n",
+											"$t": "dataset"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "n",
+											"$t": "pandas"
+										},
+										{
+											"class": "o",
+											"$t": "."
+										},
+										{
+											"class": "n",
+											"$t": "concat"
+										},
+										{
+											"class": "p",
+											"$t": "(["
+										},
+										{
+											"class": "n",
+											"$t": "negative_responses"
+										},
+										{
+											"class": "p",
+											"$t": ","
+										},
+										{
+											"class": "n",
+											"$t": "positive_responses"
+										},
+										{
+											"class": "p",
+											"$t": "])"
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			},
 			{
 				"title": "Best friends forever",
 				"link": {
@@ -21,7 +606,7 @@
 					"name": "Peter (Peter Hedenskog)"
 				},
 				"published": "2018-10-03T09:43:53+00:00",
-				"updated": "2018-10-03T09:43:53+00:00",
+				"updated": "2018-11-04T13:38:57+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
@@ -50,7 +635,7 @@
 									"href": "https://phabricator.wikimedia.org/T196242",
 									"class": "phui-tag-view phui-tag-type-object ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_15",
+									"data-meta": "0_16",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-object",
 										"$t": "T196242"
@@ -72,7 +657,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_0",
+										"data-meta": "0_1",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 											"width": "600"
@@ -88,7 +673,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_1",
+										"data-meta": "0_2",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 											"width": "600"
@@ -137,7 +722,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_2",
+										"data-meta": "0_3",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 											"width": "600"
@@ -155,7 +740,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_3",
+										"data-meta": "0_4",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 											"width": "600"
@@ -170,7 +755,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_4",
+										"data-meta": "0_5",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 											"width": "600"
@@ -186,7 +771,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_5",
+										"data-meta": "0_6",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 											"width": "600"
@@ -202,7 +787,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_6",
+										"data-meta": "0_7",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 											"width": "600"
@@ -220,7 +805,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_7",
+										"data-meta": "0_8",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 											"width": "600"
@@ -236,7 +821,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_8",
+										"data-meta": "0_9",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 											"width": "600"
@@ -250,7 +835,7 @@
 										"href": "https://phabricator.wikimedia.org/T203543",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_16",
+										"data-meta": "0_17",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-object",
 											"$t": "T203543"
@@ -272,7 +857,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_9",
+										"data-meta": "0_10",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 											"width": "600"
@@ -289,7 +874,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_10",
+											"data-meta": "0_11",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 												"width": "600"
@@ -302,7 +887,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_11",
+											"data-meta": "0_12",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 												"width": "600"
@@ -322,7 +907,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_12",
+											"data-meta": "0_13",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 												"width": "600"
@@ -335,7 +920,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_13",
+											"data-meta": "0_14",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 												"width": "600"
@@ -353,7 +938,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_14",
+										"data-meta": "0_15",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 											"width": "600"
@@ -406,12 +991,12 @@
 									"href": "/tag/performance-team/",
 									"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_23",
+									"data-meta": "0_24",
 									"span": {
 										"class": "phui-tag-core ",
 										"span": {
 											"class": "visual-only phui-icon-view phui-font-fa fa-users",
-											"data-meta": "0_22",
+											"data-meta": "0_23",
 											"aria-hidden": "true"
 										},
 										"$t": "Performance-Team"
@@ -425,7 +1010,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_17",
+										"data-meta": "0_18",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 											"width": "400"
@@ -467,7 +1052,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_18",
+										"data-meta": "0_19",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 											"width": "400"
@@ -491,7 +1076,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_19",
+										"data-meta": "0_20",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 											"width": "400"
@@ -537,7 +1122,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_20",
+										"data-meta": "0_21",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 											"width": "400"
@@ -555,7 +1140,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_21",
+										"data-meta": "0_22",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 											"width": "400"
@@ -698,7 +1283,7 @@
 					"name": "Gilles (Gilles Dubuc)"
 				},
 				"published": "2018-06-22T14:19:10+00:00",
-				"updated": "2018-06-27T03:06:52+00:00",
+				"updated": "2018-11-05T23:16:35+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
@@ -1049,7 +1634,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_24",
+										"data-meta": "0_25",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 											"height": "100",
@@ -1104,7 +1689,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_27",
+										"data-meta": "0_28",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 											"height": "512",
@@ -1132,7 +1717,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_28",
+											"data-meta": "0_29",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 												"height": "463",
@@ -1146,7 +1731,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_29",
+											"data-meta": "0_30",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 												"height": "90",
@@ -1169,7 +1754,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_30",
+										"data-meta": "0_31",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 											"height": "159",
@@ -1345,7 +1930,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_25",
+														"data-meta": "0_26",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 															"height": "154",
@@ -1361,7 +1946,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_26",
+														"data-meta": "0_27",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 															"height": "156",
@@ -1415,7 +2000,7 @@
 										"href": "https://phabricator.wikimedia.org/p/bd808/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_32",
+										"data-meta": "0_33",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@bd808"
@@ -1430,7 +2015,7 @@
 										"href": "https://phabricator.wikimedia.org/p/fgiunchedi/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_31",
+										"data-meta": "0_32",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@fgiunchedi"
@@ -1858,7 +2443,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_33",
+										"data-meta": "0_34",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 											"height": "573",
@@ -1878,7 +2463,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_34",
+										"data-meta": "0_35",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 											"height": "576",
@@ -1895,7 +2480,7 @@
 									"href": "https://phabricator.wikimedia.org/p/aaron/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_35",
+									"data-meta": "0_36",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@aaron"
@@ -2051,7 +2636,7 @@
 										"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_48",
+										"data-meta": "0_49",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@Jdlrobson"
@@ -2078,7 +2663,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_36",
+										"data-meta": "0_37",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 											"height": "463",
@@ -2114,7 +2699,7 @@
 									"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_47",
+									"data-meta": "0_48",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@Jdlrobson"
@@ -2127,12 +2712,12 @@
 										"href": "/tag/performance-team/",
 										"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_46",
+										"data-meta": "0_47",
 										"span": {
 											"class": "phui-tag-core ",
 											"span": {
 												"class": "visual-only phui-icon-view phui-font-fa fa-users",
-												"data-meta": "0_45",
+												"data-meta": "0_46",
 												"aria-hidden": "true"
 											},
 											"$t": "Performance-Team"
@@ -2142,7 +2727,7 @@
 										"href": "/T166373",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_41",
+										"data-meta": "0_42",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -2182,7 +2767,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_37",
+										"data-meta": "0_38",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 											"height": "265",
@@ -2201,7 +2786,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_38",
+										"data-meta": "0_39",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 											"height": "471",
@@ -2227,7 +2812,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_39",
+										"data-meta": "0_40",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 											"height": "354",
@@ -2251,7 +2836,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_40",
+										"data-meta": "0_41",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 											"height": "354",
@@ -2276,7 +2861,7 @@
 										"href": "/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_43",
+										"data-meta": "0_44",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -2295,7 +2880,7 @@
 										"href": "https://phabricator.wikimedia.org/p/phuedx/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_44",
+										"data-meta": "0_45",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@phuedx"
@@ -2314,7 +2899,7 @@
 										"href": "https://phabricator.wikimedia.org/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_42",
+										"data-meta": "0_43",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
