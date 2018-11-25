@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-* NodeJS (and npm)
+* Node.js (and npm)
 * Ruby (and Bundler)
 
 To install Bundler, run `gem install bundler`.
@@ -35,8 +35,8 @@ npm run generate
 </pre>
 
 ## Commit/publish
-When you commit a change, there's a commit hook that will automatically run `npm run generate` that will setup the correct config for running the code on performance.wikimedia.org.
 
+When you commit a change, there's a commit hook that will automatically run `npm run generate` that will setup the correct config for running the code on performance.wikimedia.org.
 
 ## See also
 

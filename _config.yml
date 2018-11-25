@@ -6,4 +6,6 @@ plugins:
   # https://help.github.com/articles/redirects-on-github-pages/
   - jekyll-redirect-from
 
+# Location
 source: src/
+destination: public_html/

@@ -2,12 +2,12 @@
   "private": true,
   "scripts": {
     "test": "eslint .",
-    "generate": "npm run uncss && npm run blog && COAL_WEB_SERVER=/coal bundle exec jekyll build --source src --destination public_html",
     "blog": "curl -s https://phabricator.wikimedia.org/phame/blog/feed/7/ -o src/_data/blog.xml && xml2json src/_data/blog.xml src/_data/blog.json && rm src/_data/blog.xml",
-    "jekyll": "npm run generate && bundle exec jekyll serve --source src --destination public_html",
-    "verify": "test -z '$(git status --porcelain public_html/)'",
-    "preuncss": "bundle exec jekyll build --source src --destination public_html",
-    "uncss": "uncss public_html/index.html public_html/php-profiling.html --ignore '/\\.popover/' --ignoreSheet public_html/lib/bootstrap-3.3.5/css/bootstrap.uncss.css --stylesheets lib/bootstrap-3.3.5/css/bootstrap.min.css --htmlroot mock > src/lib/bootstrap-3.3.5/css/bootstrap.uncss.css"
+    "preuncss": "bundle exec jekyll build",
+    "uncss": "uncss public_html/index.html public_html/php-profiling.html --ignore '/\\.popover/' --ignoreSheet public_html/lib/bootstrap-3.3.5/css/bootstrap.uncss.css --stylesheets lib/bootstrap-3.3.5/css/bootstrap.min.css --htmlroot mock > src/lib/bootstrap-3.3.5/css/bootstrap.uncss.css",
+    "generate": "npm run uncss && npm run blog && COAL_WEB_SERVER=/coal bundle exec jekyll build",
+    "jekyll": "npm run generate && bundle exec jekyll serve",
+    "verify": "test -z '$(git status --porcelain public_html/)'"
   },
   "pre-commit": [
     "generate"
