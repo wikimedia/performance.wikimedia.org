@@ -1,15 +1,15 @@
 <header class="navbar navbar-default navbar-static-top hidden-xs" role="banner">
   <div class="container">
-    <div class="navbar-header"><a class="navbar-brand" href="./" title="Performance">Performance</a></div>
+    <div class="navbar-header"><a class="navbar-brand" href="{{ site.baseurl }}/" title="Performance">Performance</a></div>
     <ul class="nav navbar-nav">
-      <li{% if page.url == '/' %} class="active"{% endif %}><a href="./">Metrics</a></li>
-      <li{% if page.url == '/php-profiling.html' %} class="active"{% endif %}><a href="php-profiling.html">Flame Graphs</a></li>
-      <li><a href="xhgui/">XHGui</a></li>
+      <li{% if page.url == '/' %} class="active"{% endif %}><a href="{{ site.baseurl }}/">Metrics</a></li>
+      <li{% if page.url == '/php-profiling/' %} class="active"{% endif %}><a href="{{ site.baseurl }}/php-profiling/">Flame Graphs</a></li>
+      <li><a href="/xhgui/">XHGui</a></li>
       <li><a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Navigation Timing</a></li>
       <li><a href="https://grafana.wikimedia.org/dashboard/db/resourceloader">ResourceLoader</a></li>
       <li><a href="https://grafana.wikimedia.org/dashboard/db/media">Media</a></li>
       <li><a href="https://grafana.wikimedia.org/dashboard/db/webpagetest">WebPageTest</a></li>
-      <li><a href="https://phabricator.wikimedia.org/u/performanceblog">Blog</a></li>
+      <li><a href="{{ site.baseurl }}/blog/">Blog</a></li>
       <li><a href="https://grafana.wikimedia.org/"><small>More…</small></a></li>
     </ul>
   </div>

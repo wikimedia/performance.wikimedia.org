@@ -4,7 +4,7 @@
     "test": "eslint .",
     "blog": "curl -s https://phabricator.wikimedia.org/phame/blog/feed/7/ -o src/_data/blog.xml && xml2json src/_data/blog.xml src/_data/blog.json && rm src/_data/blog.xml",
     "preuncss": "bundle exec jekyll build",
-    "uncss": "uncss public_html/index.html public_html/php-profiling.html --ignore '/\\.popover/' --ignoreSheet public_html/lib/bootstrap-3.3.5/css/bootstrap.uncss.css --stylesheets lib/bootstrap-3.3.5/css/bootstrap.min.css --htmlroot mock > src/lib/bootstrap-3.3.5/css/bootstrap.uncss.css",
+    "uncss": "uncss public_html/index.html public_html/php-profiling/index.html --ignore '/\\.popover/' --ignoreSheet public_html/lib/bootstrap-3.3.5/css/bootstrap.uncss.css --stylesheets lib/bootstrap-3.3.5/css/bootstrap.min.css --htmlroot public_html > src/lib/bootstrap-3.3.5/css/bootstrap.uncss.css",
     "generate": "npm run uncss && npm run blog && COAL_WEB_SERVER=/coal bundle exec jekyll build",
     "jekyll": "npm run generate && bundle exec jekyll serve",
     "verify": "test -z '$(git status --porcelain public_html/)'"

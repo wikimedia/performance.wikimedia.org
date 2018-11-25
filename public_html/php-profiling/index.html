@@ -3,421 +3,14 @@
   <head>
     <meta charset=utf-8>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metrics — Wikimedia Performance</title>
-    <script>
-    WMPERF = {
-      coalUrl: "/coal"
-    };
-    </script>
-     <style>
+    <title>Flame Graphs for PHP — Wikimedia Performance</title>
+    <style>
 /*** uncss> filename: public_html/lib/bootstrap-3.3.5/css/bootstrap.min.css ***/
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}body{margin:0}header{display:block}a{background-color:transparent}a:active,a:hover{outline:0}b{font-weight:700}h1{margin:.67em 0;font-size:2em}small{font-size:80%}img{border:0}hr{height:0;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */@media print{*,:after,:before{color:#000!important;text-shadow:none!important;background:0 0!important;-webkit-box-shadow:none!important;box-shadow:none!important}a,a:visited{text-decoration:underline}a[href]:after{content:" (" attr(href) ")"}a[href^="#"]:after{content:""}img{page-break-inside:avoid}img{max-width:100%!important}h2,p{orphans:3;widows:3}h2{page-break-after:avoid}.navbar{display:none}}@font-face{font-family:'Glyphicons Halflings';src:url(../fonts/glyphicons-halflings-regular.eot);src:url(../fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(../fonts/glyphicons-halflings-regular.woff2) format('woff2'),url(../fonts/glyphicons-halflings-regular.woff) format('woff'),url(../fonts/glyphicons-halflings-regular.ttf) format('truetype'),url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')}*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html{font-size:10px;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.42857143;color:#333;background-color:#fff}a{color:#337ab7;text-decoration:none}a:focus,a:hover{color:#23527c;text-decoration:underline}a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}img{vertical-align:middle}hr{margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee}h1,h2,h4{font-family:inherit;font-weight:500;line-height:1.1;color:inherit}h1,h2{margin-top:20px;margin-bottom:10px}h4{margin-top:10px;margin-bottom:10px}h1{font-size:36px}h2{font-size:30px}h4{font-size:18px}p{margin:0 0 10px}small{font-size:85%}.text-center{text-align:center}ul{margin-top:0;margin-bottom:10px}.container{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}.nav{padding-left:0;margin-bottom:0;list-style:none}.nav>li{position:relative;display:block}.nav>li>a{position:relative;display:block;padding:10px 15px}.nav>li>a:focus,.nav>li>a:hover{text-decoration:none;background-color:#eee}.nav-tabs{border-bottom:1px solid #ddd}.nav-tabs>li{float:left;margin-bottom:-1px}.nav-tabs>li>a{margin-right:2px;line-height:1.42857143;border:1px solid transparent;border-radius:4px 4px 0 0}.nav-tabs>li>a:hover{border-color:#eee #eee #ddd}.nav-tabs>li.active>a,.nav-tabs>li.active>a:focus,.nav-tabs>li.active>a:hover{color:#555;cursor:default;background-color:#fff;border:1px solid #ddd;border-bottom-color:transparent}.navbar{position:relative;min-height:50px;margin-bottom:20px;border:1px solid transparent}@media (min-width:768px){.navbar{border-radius:4px}}@media (min-width:768px){.navbar-header{float:left}}.container>.navbar-header{margin-right:-15px;margin-left:-15px}@media (min-width:768px){.container>.navbar-header{margin-right:0;margin-left:0}}.navbar-static-top{z-index:1000;border-width:0 0 1px}@media (min-width:768px){.navbar-static-top{border-radius:0}}.navbar-brand{float:left;height:50px;padding:15px 15px;font-size:18px;line-height:20px}.navbar-brand:focus,.navbar-brand:hover{text-decoration:none}@media (min-width:768px){.navbar>.container .navbar-brand{margin-left:-15px}}.navbar-nav{margin:7.5px -15px}.navbar-nav>li>a{padding-top:10px;padding-bottom:10px;line-height:20px}@media (min-width:768px){.navbar-nav{float:left;margin:0}.navbar-nav>li{float:left}.navbar-nav>li>a{padding-top:15px;padding-bottom:15px}}.navbar-default{background-color:#f8f8f8;border-color:#e7e7e7}.navbar-default .navbar-brand{color:#777}.navbar-default .navbar-brand:focus,.navbar-default .navbar-brand:hover{color:#5e5e5e;background-color:transparent}.navbar-default .navbar-nav>li>a{color:#777}.navbar-default .navbar-nav>li>a:focus,.navbar-default .navbar-nav>li>a:hover{color:#333;background-color:transparent}.navbar-default .navbar-nav>.active>a,.navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>.active>a:hover{color:#555;background-color:#e7e7e7}.media-left{padding-right:10px}.media-left{display:table-cell;vertical-align:top}.popover{position:absolute;top:0;left:0;z-index:1060;display:none;max-width:276px;padding:1px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;font-style:normal;font-weight:400;line-height:1.42857143;text-align:left;text-align:start;text-decoration:none;text-shadow:none;text-transform:none;letter-spacing:normal;word-break:normal;word-spacing:normal;word-wrap:normal;white-space:normal;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;border:1px solid #ccc;border:1px solid rgba(0,0,0,.2);border-radius:6px;-webkit-box-shadow:0 5px 10px rgba(0,0,0,.2);box-shadow:0 5px 10px rgba(0,0,0,.2);line-break:auto}.popover.top{margin-top:-10px}.popover.right{margin-left:10px}.popover.bottom{margin-top:10px}.popover.left{margin-left:-10px}.popover-title{padding:8px 14px;margin:0;font-size:14px;background-color:#f7f7f7;border-bottom:1px solid #ebebeb;border-radius:5px 5px 0 0}.popover-content{padding:9px 14px}.popover>.arrow,.popover>.arrow:after{position:absolute;display:block;width:0;height:0;border-color:transparent;border-style:solid}.popover>.arrow{border-width:11px}.popover>.arrow:after{content:"";border-width:10px}.popover.top>.arrow{bottom:-11px;left:50%;margin-left:-11px;border-top-color:#999;border-top-color:rgba(0,0,0,.25);border-bottom-width:0}.popover.top>.arrow:after{bottom:1px;margin-left:-10px;content:" ";border-top-color:#fff;border-bottom-width:0}.popover.right>.arrow{top:50%;left:-11px;margin-top:-11px;border-right-color:#999;border-right-color:rgba(0,0,0,.25);border-left-width:0}.popover.right>.arrow:after{bottom:-10px;left:1px;content:" ";border-right-color:#fff;border-left-width:0}.popover.bottom>.arrow{top:-11px;left:50%;margin-left:-11px;border-top-width:0;border-bottom-color:#999;border-bottom-color:rgba(0,0,0,.25)}.popover.bottom>.arrow:after{top:1px;margin-left:-10px;content:" ";border-top-width:0;border-bottom-color:#fff}.popover.left>.arrow{top:50%;right:-11px;margin-top:-11px;border-right-width:0;border-left-color:#999;border-left-color:rgba(0,0,0,.25)}.popover.left>.arrow:after{right:1px;bottom:-10px;content:" ";border-right-width:0;border-left-color:#fff}.clearfix:after,.clearfix:before,.container:after,.container:before,.nav:after,.nav:before,.navbar-header:after,.navbar-header:before,.navbar:after,.navbar:before{display:table;content:" "}.clearfix:after,.container:after,.nav:after,.navbar-header:after,.navbar:after{clear:both}.pull-right{float:right!important}.pull-left{float:left!important}@-ms-viewport{width:device-width}@media (max-width:767px){.hidden-xs{display:none!important}}
-
-.mg-active-datapoint {
-    fill: black;
-    font-size: 0.9rem;
-    font-weight: 400;
-    opacity: 0.8;
-}
-
-.mg-area1-color {
-    fill: #0000ff;
-}
-
-.mg-area2-color {
-    fill: #05b378;
-}
-
-.mg-area3-color {
-    fill: #db4437;
-}
-
-.mg-area4-color {
-    fill: #f8b128;
-}
-
-.mg-area5-color {
-    fill: #5c5c5c;
-}
-
-text.mg-barplot-group-label {
-    font-weight:900;
-}
-
-.mg-barplot rect.mg-bar {
-    shape-rendering: auto;
-}
-
-.mg-barplot rect.mg-bar.default-bar {
-    fill: #b6b6fc;
-}
-
-.mg-barplot rect.mg-bar.default-active {
-    fill: #9e9efc;
-}
-
-.mg-barplot .mg-bar-prediction {
-    fill: #5b5b5b;
-}
-
-.mg-barplot .mg-bar-baseline {
-    stroke: #5b5b5b;
-    stroke-width: 2;
-}
-
-.mg-bar-target-element {
-    font-size:11px;
-    padding-left:5px;
-    padding-right:5px;
-    font-weight:300;
-}
-
-.mg-baselines line {
-    opacity: 1;
-    shape-rendering: auto;
-    stroke: #b3b2b2;
-    stroke-width: 1px;
-}
-
-.mg-baselines text {
-    fill: black;
-    font-size: 0.9rem;
-    opacity: 0.6;
-    stroke: none;
-}
-
-.mg-baselines-small text {
-    font-size: 0.6rem;
-}
-
-.mg-category-guides line {
-    stroke: #b3b2b2;
-}
-
-.mg-header {
-    cursor: default;
-    font-size: 1.2rem;
-}
-
-.mg-header .mg-chart-description {
-    fill: #ccc;
-    font-family: FontAwesome;
-    font-size: 1.2rem;
-}
-
-.mg-header .mg-warning {
-    fill: #ccc;
-    font-family: FontAwesome;
-    font-size: 1.2rem;
-}
-
-.mg-points circle {
-    opacity: 0.65;
-}
-
-.mg-popover {
-    font-size: 0.95rem;
-}
-
-.mg-popover-content {
-    cursor: auto;
-    line-height: 17px;
-}
-
-.mg-data-table {
-    margin-top: 30px;
-}
-
-.mg-data-table thead tr th {
-    border-bottom: 1px solid darkgray;
-    cursor: default;
-    font-size: 1.1rem;
-    font-weight: normal;
-    padding: 5px 5px 8px 5px;
-    text-align: right;
-}
-
-.mg-data-table thead tr th .fa {
-    color: #ccc;
-    padding-left: 4px;
-}
-
-.mg-data-table thead tr th .popover {
-    font-size: 1rem;
-    font-weight: normal;
-}
-
-.mg-data-table .secondary-title {
-    color: darkgray;
-}
-
-.mg-data-table tbody tr td {
-    margin: 2px;
-    padding: 5px;
-    vertical-align: top;
-}
-
-.mg-data-table  tbody tr td.table-text {
-    opacity: 0.8;
-    padding-left: 30px;
-}
-
-.mg-y-axis line.mg-extended-yax-ticks {
-    opacity: 0.4;
-}
-
-.mg-x-axis line.mg-extended-xax-ticks {
-    opacity: 0.4;
-}
-
-.mg-histogram .axis path,
-.mg-histogram .axis line {
-    fill: none;
-    opacity: 0.7;
-    shape-rendering: auto;
-    stroke: #ccc;
-}
-
-tspan.hist-symbol {
-    fill: #9e9efc;
-}
-
-.mg-histogram .mg-bar rect {
-    fill: #b6b6fc;
-    shape-rendering: auto;
-}
-
-.mg-histogram .mg-bar rect.active {
-    fill: #9e9efc;
-}
-
-.mg-least-squares-line {
-    stroke: red;
-    stroke-width: 1px;
-}
-
-.mg-lowess-line {
-    fill: none;
-    stroke: red;
-}
-
-.mg-line1-color {
-    stroke: #4040e8;
-}
-
-.mg-hover-line1-color {
-    fill: #4040e8;
-}
-
-.mg-line2-color {
-    stroke: #05b378;
-}
-
-.mg-hover-line2-color {
-    fill: #05b378;
-}
-
-.mg-line3-color {
-    stroke: #db4437;
-}
-
-.mg-hover-line3-color {
-    fill: #db4437;
-}
-
-.mg-line4-color {
-    stroke: #f8b128;
-}
-
-.mg-hover-line4-color {
-    fill: #f8b128;
-}
-
-.mg-line5-color {
-    stroke: #5c5c5c;
-}
-
-.mg-hover-line5-color {
-    fill: #5c5c5c;
-}
-
-.mg-line-legend text {
-    font-size: 0.9rem;
-    font-weight: 300;
-    stroke: none;
-}
-
-.mg-line1-legend-color {
-    color: #4040e8;
-    fill: #4040e8;
-}
-
-.mg-line2-legend-color {
-    color: #05b378;
-    fill: #05b378;
-}
-
-.mg-line3-legend-color {
-    color: #db4437;
-    fill: #db4437;
-}
-
-.mg-line4-legend-color {
-    color: #f8b128;
-    fill: #f8b128;
-}
-
-.mg-line5-legend-color {
-    color: #5c5c5c;
-    fill: #5c5c5c;
-}
-
-.mg-main-area-solid svg .mg-main-area {
-    fill: #ccccff;
-    opacity: 1;
-}
-
-.mg-markers line {
-    opacity: 1;
-    shape-rendering: auto;
-    stroke: #b3b2b2;
-    stroke-width: 1px;
-}
-
-.mg-markers text {
-    fill: black;
-    font-size: 0.8rem;
-    opacity: 0.6;
-}
-
-.mg-missing-text {
-    opacity: 0.9;
-}
-
-.mg-missing-background {
-    stroke: blue;
-    fill: none;
-    stroke-dasharray: 10,5;
-    stroke-opacity: 0.05;
-    stroke-width: 2;
-}
-
-.mg-missing .mg-main-line {
-    opacity: 0.1;
-}
-
-.mg-missing .mg-main-area {
-    opacity: 0.03;
-}
-
-path.mg-main-area {
-    opacity: 0.2;
-    stroke: none;
-}
-
-path.mg-confidence-band {
-    fill: #ccc;
-    opacity: 0.4;
-    stroke: none;
-}
-
-path.mg-main-line {
-    fill: none;
-    opacity: 0.8;
-    stroke-width: 1.1px;
-}
-
-.mg-points circle {
-    fill-opacity: 0.4;
-    stroke-opacity: 1;
-}
-
-circle.mg-points-mono {
-    fill: #0000ff;
-    stroke: #0000ff;
-}
-
-tspan.mg-points-mono {
-    fill: #0000ff;
-    stroke: #0000ff;
-}
-
-/* a selected point in a scatterplot */
-.mg-points circle.selected {
-    fill-opacity: 1;
-    stroke-opacity: 1;
-}
-
-.mg-voronoi path {
-    fill: none;
-    pointer-events: all;
-    stroke: none;
-    stroke-opacity: 0.1;
-}
-
-.mg-x-rug-mono,
-.mg-y-rug-mono {
-    stroke: black;
-}
-
-.mg-x-axis line,
-.mg-y-axis line {
-    opacity: 1;
-    shape-rendering: auto;
-    stroke: #b3b2b2;
-    stroke-width: 1px;
-}
-
-.mg-x-axis text,
-.mg-y-axis text,
-.mg-histogram .axis text {
-    fill: black;
-    font-size: 0.9rem;
-    opacity: 0.6;
-}
-
-.mg-x-axis .label,
-.mg-y-axis .label,
-.mg-axis .label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    font-weight: 400;
-}
-
-.mg-x-axis-small text,
-.mg-y-axis-small text,
-.mg-active-datapoint-small {
-    font-size: 0.6rem;
-}
-
-.mg-x-axis-small .label,
-.mg-y-axis-small .label {
-    font-size: 0.65rem;
-}
-
-.mg-european-hours {
-}
-
-.mg-year-marker text {
-    fill: black;
-    font-size: 0.7rem;
-    opacity: 0.6;
-}
-
-.mg-year-marker line {
-    opacity: 1;
-    shape-rendering: auto;
-    stroke: #b3b2b2;
-    stroke-width: 1px;
-}
-
-.mg-year-marker-small text {
-    font-size: 0.6rem;
-}
 
 html {
   background-color: #f5f5f5;
@@ -465,20 +58,16 @@ h2 {
   padding-left: 15px;
 }
 
- </style>
-
+    </style>
     <link rel="shortcut icon" href="https://www.wikimedia.org/static/favicon/wmf.ico">
-    <script src=/lib/d3-4.7.4/d3.min.js defer></script>
-    <script src=/lib/metrics-graphics-2.11.0/metricsgraphics.min.js defer></script>
-    <script src=/coal.js defer></script>
   </head>
   <body>
-    <header class="navbar navbar-default navbar-static-top hidden-xs" role="banner">
+<header class="navbar navbar-default navbar-static-top hidden-xs" role="banner">
   <div class="container">
     <div class="navbar-header"><a class="navbar-brand" href="/" title="Performance">Performance</a></div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/">Metrics</a></li>
-      <li><a href="/php-profiling/">Flame Graphs</a></li>
+      <li><a href="/">Metrics</a></li>
+      <li class="active"><a href="/php-profiling/">Flame Graphs</a></li>
       <li><a href="/xhgui/">XHGui</a></li>
       <li><a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Navigation Timing</a></li>
       <li><a href="https://grafana.wikimedia.org/dashboard/db/resourceloader">ResourceLoader</a></li>
@@ -490,56 +79,35 @@ h2 {
   </div>
 </header>
 
-      <div class="container text-center perf-info-box">
-  <h1>Wikimedia Performance</h1>
+<div class="container text-center perf-info-box">
+  <h4>Profiling for PHP</h4>
   <hr/>
   <p>
-    We monitor the performance of <a href="https://www.wikipedia.org/">Wikipedia</a> continuously. These graphs are sampled measurements from 1 of 1000 requests. If you want to dig deeper into our metrics, you should check out our <a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Grafana graphs</a>.
-  </p>
-  <p>
-    <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">– Wikimedia Performance Team</a>
+    HHVM's <a href="https://github.com/facebook/hhvm/wiki/Profiling#xenon">Xenon profiler</a> is used to collect stack traces from CPU usage frames. The aggregated logs are published here, as well as interactive SVGs (generated with <a href="https://github.com/brendangregg/FlameGraph">FlameGraph</a>).
   </p>
 </div>
-<div class="container text-center perf-info-box">
-  <p>
-    <h2>Latest blog posts</h2>
-    <div>
-      <a href="https://phabricator.wikimedia.org/phame/post/view/123/">Machine learning: how to undersample the wrong way</a>
-    </div>
-    <div>
-      <a href="https://phabricator.wikimedia.org/phame/post/view/122/">Best friends forever</a>
-    </div>
-    <div>
-      <a href="https://phabricator.wikimedia.org/phame/post/view/117/">Performance testing in a controlled lab environment - the metrics</a>
-    </div>
-  <p>
-</div>
-<div id=container class="container perf-container">
-  <div id=content-body>
-    <ul class="nav nav-tabs perf-nav">
-      <li role=presentation id=hour><a href="#!/hour">Past Hour</a></li>
-      <li role=presentation id=day class="active"><a href="#!/day">Past Day</a></li>
-      <li role=presentation id=week><a href="#!/week">Past Week</a></li>
-      <li role=presentation id=month><a href="#!/month">Past Month</a></li>
-      <li role=presentation id=year><a href="#!/year">Past Year</a></li>
-    </ul>
-
-    <div id=metrics>
-      <div class="metric" id="domInteractive"></div>
-      <p class="text-center perf-metrics-desc"><b>domInteractive:</b> When the browser has parsed the main HTML document.</p>
-      <div class="metric" id="firstPaint"></div>
-      <p class="text-center perf-metrics-desc"><b>firstPaint:</b> The moment something is first painted on the screen (currently only collected in Chrome and IE/Edge).</p>
-      <div class="metric" id="loadEventEnd"></div>
-      <p class="text-center perf-metrics-desc"><b>loadEventEnd:</b> When the load event fired in the browser and the current document is complete.</p>
-      <div class="metric" id="responseStart"></div>
-      <p class="text-center perf-metrics-desc"><b>responseStart:</b> The time it takes for the client to receive a response from the server (TTFB).</p>
-      <div class="metric" id="saveTiming"></div>
-      <p class="text-center perf-metrics-desc"><b>saveTiming:</b> The time it takes to submit and save an edit on an article.</p>
-    </div>
+<div class="container">
+  <h4>Flame graphs</h4>
+  <div class="pull-left media-left">
+    <img src="/lib/flamegraph.png" width="250" height="160" alt="" title="Flame graph">
   </div>
+  <p>
+    <a href="/xenon/svgs/daily/">Browse daily graphs</a>
+    • <a href="/xenon/svgs/hourly/">Browse hourly graphs</a>
+  </p>
+  <p>
+    <span id=flamegraph-current></span>
+  </p>
+  <span class=clearfix></span>
+  <h4>Tracing logs</h4>
+  <p>
+      <a href="/xenon/logs/daily/">Browse daily logs</a>
+      • <a href="/xenon/logs/hourly/">Browse hourly logs</a>
+    </p>
 </div>
+<script src=/profiling.js defer></script>
 
-    <div class="footer">
+<div class="footer">
   <div class="container">
     <p class="pull-left">More information at <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">https://www.mediawiki.org/wiki/Wikimedia_Performance_Team</a>.</p>
     <p class="pull-right"><a href="https://www.wikimedia.org"><img src="https://www.wikimedia.org/static/images/wikimedia-button.png" srcset="https://www.wikimedia.org/static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"></a></p>

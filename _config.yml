@@ -9,3 +9,6 @@ plugins:
 # Location
 source: src/
 destination: public_html/
+
+# Output
+permalink: pretty

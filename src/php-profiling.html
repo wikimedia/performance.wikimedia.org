@@ -1,6 +1,8 @@
 ---
 layout: php-profiling
 title: Flame Graphs for PHP — Wikimedia Performance
+redirect_from:
+ - /php-profiling.html
 ---
 
 <div class="container text-center perf-info-box">
@@ -13,7 +15,7 @@ title: Flame Graphs for PHP — Wikimedia Performance
 <div class="container">
   <h4>Flame graphs</h4>
   <div class="pull-left media-left">
-    <img src="lib/flamegraph.png" width="250" height="160" alt="" title="Flame graph">
+    <img src="{{ site.baseurl }}/lib/flamegraph.png" width="250" height="160" alt="" title="Flame graph">
   </div>
   <p>
     <a href="/xenon/svgs/daily/">Browse daily graphs</a>
@@ -29,4 +31,4 @@ title: Flame Graphs for PHP — Wikimedia Performance
       • <a href="/xenon/logs/hourly/">Browse hourly logs</a>
     </p>
 </div>
-<script src=profiling.js defer></script>
+<script src={{ site.baseurl }}/profiling.js defer></script>
