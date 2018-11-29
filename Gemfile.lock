@@ -14,7 +14,7 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-    jekyll (3.8.3)
+    jekyll (3.8.4)
       addressable (~> 2.4)
       colorator (~> 1.0)
       em-websocket (~> 0.5)
@@ -59,11 +59,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  jekyll (= 3.8.3)
+  jekyll (= 3.8.4)
   jekyll-redirect-from (= 0.13.0)
 
 RUBY VERSION
    ruby 2.5.0p0
 
 BUNDLED WITH
-   1.16.1
+   1.17.1

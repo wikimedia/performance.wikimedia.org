@@ -12,7 +12,7 @@ To install Bundler, run `gem install bundler`.
 To install or update Jekyll and any plugins:
 
 <pre>
-bundle install
+bundle update
 </pre>
 
 The following starts Jekyll, re-generates `public_html/`, and watches `src/` for changes to automatically regenerate. This makes the site available at <http://127.0.0.1:4000/>.
