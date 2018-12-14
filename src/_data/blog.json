@@ -8,9 +8,133 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2018-11-07T10:47:40+00:00",
+		"updated": "2018-12-12T16:21:17+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
+			{
+				"title": "Why performance matters",
+				"link": {
+					"href": "/phame/live/7/post/131/why_performance_matters/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/131/",
+				"author": {
+					"name": "Imarlier (Ian Marlier)"
+				},
+				"published": "2018-12-12T16:21:17+00:00",
+				"updated": "2018-12-12T16:21:17+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							"There are practical reasons that web performance matters.  From a user perspective, a site that’s slow results in frustration, annoyance, and ultimately a preference for alternatives.  From the perspective of a site operator, frustrated users are users who aren’t going to return, and that makes it more difficult to accomplish your mission (be it commercial or public service).  Optimizations keep people happy, keep them coming back, and keep them engaged[1].",
+							"But, there’s a far more important reason to care about performance, especially for an organization like Wikimedia: improving performance is an essential step toward equity of access.",
+							"There are a multitude of factors that influence how quickly a web site loads.  Many of these are universal to every user: the software itself, the operational environment in which that software runs, the network that carries the bits from the server.  Improvement in any of these areas benefits every consumer of the site.",
+							"This doesn’t account for the large number of factors that are user specific.  Among the factors that can significantly influence how quickly a web page loads for a given user are geography (a user who lives further away from the servers that host a web site will typically have slower access than a user who is closer); the network between the server and the user (a network that is less developed may be slower, or more susceptible to congestion); the user’s connection (mobile data is slower than wired broadband in most cases); and the user’s actual device (an old computer will load pages more slowly than a new one).",
+							"The common thread between these factors is that they correlate to socioeconomic and social factors, rather than technical ones.  Wealthier people, in more developed countries, have a significantly easier time accessing the vast resources of the Internet than others.  If an increasingly networked world is going to result in a more equal human society, we need to make thoughtful interventions, including interventions focused on performance.",
+							{
+								"strong": "Geography",
+								"br": {}
+							},
+							{
+								"strong": "Backbone Networks",
+								"br": {},
+								"a": [
+									{
+										"href": "https://en.wikipedia.org/wiki/Internet_backbone",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Backbone networks"
+									},
+									{
+										"href": "https://blogs.voanews.com/all-about-america/2015/09/30/detailed-map-reveals-hidden-backbone-of-us-internet/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "connect cities like San Francisco, Seattle, and New York"
+									},
+									{
+										"href": "https://www.submarinecablemap.com/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "traverse the North Atlantic and North Pacific"
+									}
+								]
+							},
+							{
+								"strong": "Last-mile connectivity",
+								"br": {}
+							},
+							{
+								"a": {
+									"href": "https://en.wikipedia.org/wiki/List_of_countries_by_number_of_broadband_Internet_subscriptions",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "In many countries, only a tiny fraction of the population has any access to high-speed internet"
+								},
+								"em": {
+									"strong": "2"
+								}
+							},
+							{
+								"strong": "Device quality",
+								"br": {},
+								"a": {
+									"href": "https://phabricator.wikimedia.org/phame/live/7/post/109/mobile_web_performance_the_importance_of_the_device/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "the performance difference for a site when run on a high-end versus a low-end device can be quite significant"
+								}
+							},
+							"Though there is no single change that we can make that will address all of these factors, addressing each of them is core to serving the mission of the Wikimedia Foundation, and of the Wikimedia movement as a whole.",
+							"One ongoing element of this work is research to understand the actual factors that influence user perception of performance, and the way that user satisfaction is impacted when a page loads slowly.  This allows us to make data-driven decisions about where to spend our time and our energy.",
+							{
+								"a": {
+									"href": "https://blog.wikimedia.org/2018/04/24/new-data-center-singapore/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "expanding our cache footprint can help to minimize the effects of geography"
+								}
+							},
+							"We’re not in a position to address inequality of backbone or last-mile network infrastructure -- that’s something best left to telecom companies, governments, or non-profit organizations that have chosen that as their work.  What we can do is to minimize the effects of these disparities by reducing the number of bytes that need to go down the wire in order to display a page, by exploring technologies like peer-to-peer distribution to eliminate them altogether, or by increasing usage of offline content that can be downloaded in bulk using public high-speed connections.",
+							"Finally, we can aggressively work to lower the compute cost of each page that we serve, so that the cost or the age of a user’s device doesn’t impact their ability to read, learn, and contribute to the world of free knowledge.",
+							"Performance engineering matters, in other words, because it gives us a way to eliminate technological divides that are otherwise difficult, expensive, or even impossible to address at a systemic level.",
+							{
+								"a": [
+									{
+										"href": "http://engineroom.ft.com/2016/04/04/a-faster-ft-com/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "http://engineroom.ft.com/2016/04/04/a-faster-ft-com/"
+									},
+									{
+										"href": "https://medium.com/@vikigreen/impact-of-slow-page-load-time-on-website-performance-40d5c9ce568a",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "https://medium.com/@vikigreen/impact-of-slow-page-load-time-on-website-performance-40d5c9ce568a"
+									}
+								]
+							},
+							{
+								"a": {
+									"href": "http://blog.chriszacharias.com/page-weight-matters",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "an anecdote about the creation of a very lightweight video display page"
+								},
+								"em": "got worse"
+							}
+						],
+						"hr": [
+							{
+								"class": "remarkup-hr"
+							},
+							{
+								"class": "remarkup-hr"
+							}
+						]
+					}
+				}
+			},
 			{
 				"title": "Machine learning: how to undersample the wrong way",
 				"link": {
