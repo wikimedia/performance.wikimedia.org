@@ -1,0 +1,58 @@
+---
+title: Wikimedia Autonomous Systems performance report
+layout: default
+---
+
+<style>
+
+table {
+	border: 1px solid black;
+	width: 100%;
+}
+th {
+	text-align: left;
+	color: var(--wmui-color-base20);
+}
+#firstcol {
+	width: 40%;
+}
+</style>
+
+<div class="container">
+	<h1>Autonomous Systems performance report</h1>
+
+	This report is generated using data collected directly from visitors of Wikimedia websites, as reported by their web browsers.<br><br>
+	<h2>Methodology</h2>
+	Performance metrics are collected using the 
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigation_timing_API">Navigation Timing API</a>. A <a href="https://github.com/wikimedia/mediawiki-extensions-NavigationTiming/blob/40f56745bd766769329844f8a03c84b5f4f0b8e4/modules/ext.navigationTiming.js#L255-L274">CPU benchmark</a> is run on a separate thread to assess the overall performance of the device. Using this
+	information, we only keep the user performance metrics for a range of devices. We then compile
+	performance metrics medians for that device performance range for each <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">autonomous system</a>, based on the visitors' IP addresses.<br><br>Only autonomous systems for which we have sufficient data are retained. We separate mobile and fixed networks based on data collected with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API">Network Information API</a>. Reports are per country, as internet services tend to be sold to consumers on a national basis, and networks in the same country face the same infrastructural challenges. Finally, only countries where we have sufficient data are reported (only a portion of visitors are measured).
+	<h2>Results</h2>
+	Report generated on {{ site.time | date: '%Y-%m-%d' }}. Data available in <a href="https://analytics.wikimedia.org/datasets/performance/autonomoussystems/">TSV format</a>.<br>
+	<br>
+	<i>TTFB stands for "Time to first byte", defined as responseStart - connectStart.</i><br>
+	<i>PLT stands for "Page load time", defined as loadEventStart - responseStart.</i><br>
+
+	{% assign last_country = false %}
+	{% assign last_type = false %}
+	{% for row in site.data.asreport %}
+		{% if row['Type'] != last_type %}
+			{% if last_type != false %}
+				</table>
+				<br>
+			{% endif %}
+		{% endif %}
+		{% if row['Country'] != last_country %}
+			{% assign last_country = row['Country'] %}
+			<h3>{{ row['Country'] }}</h3>
+		{% endif %}
+		{% if row['Type'] != last_type %}
+		{% assign last_type = row['Type'] %}
+			{{ row['Type'] }} networks<br>
+			<table>
+				<tr><th id="firstcol">Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		{% endif %}
+		<tr><td>{{ row['ASO'] }}</td><td>{{ row['TTFB'] }}</td><td>{{ row['PLT'] }}</td><td>{{ row['Sample size'] }}</td></tr>
+	{% endfor %}
+	</table>
+</div>

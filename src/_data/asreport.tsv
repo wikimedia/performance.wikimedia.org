@@ -1,0 +1,30 @@
+Country	Country code	Type	ASO	TTFB	PLT	CPU	Transfer size	Sample size
+United States	US	Fixed	Cablevision Systems Corp.	0	0	0	0	0
+United States	US	Fixed	Comcast Cable Communications, LLC	0	0	0	0	0
+United States	US	Fixed	Charter Communications Inc	0	0	0	0	0
+United States	US	Fixed	MCI Communications Services, Inc. d/b/a Verizon Business	0	0	0	0	0
+United States	US	Fixed	Charter Communications	0	0	0	0	0
+United States	US	Fixed	AT&T Services, Inc.	0	0	0	0	0
+United States	US	Fixed	Cox Communications Inc.	0	0	0	0	0
+United States	US	Mobile	T-Mobile USA, Inc.	0	0	0	0	0
+United States	US	Mobile	Cellco Partnership DBA Verizon Wireless	0	0	0	0	0
+United States	US	Mobile	Sprint Personal Communications Systems	0	0	0	0	0
+United States	US	Mobile	AT&T Mobility LLC	0	0	0	0	0
+Germany	DE	Fixed	0&0 Versatel Deutschland GmbH	0	0	0	0	0
+Germany	DE	Fixed	Liberty Global B.V.	0	0	0	0	0
+Germany	DE	Fixed	Deutsche Telekom AG	0	0	0	0	0
+Germany	DE	Fixed	Telefonica Germany	0	0	0	0	0
+Germany	DE	Fixed	Vodafone Kabel Deutschland GmbH	0	0	0	0	0
+Germany	DE	Fixed	Vodafone GmbH	0	0	0	0	0
+Germany	DE	Fixed	Unitymedia BW GmbH	0	0	0	0	0
+Germany	DE	Mobile	Telefonica Germany	0	0	0	0	0
+Germany	DE	Mobile	Vodafone GmbH	0	0	0	0	0
+France	FR	Fixed	SFR SA	0	0	0	0	0
+France	FR	Fixed	Orange	0	0	0	0	0
+France	FR	Fixed	Free SAS	0	0	0	0	0
+France	FR	Fixed	Bouygues Telecom SA	0	0	0	0	0
+France	FR	Mobile	Bouygues Telecom SA	0	0	0	0	0
+France	FR	Mobile	Free Mobile SAS	0	0	0	0	0
+France	FR	Mobile	Orange	0	0	0	0	0
+France	FR	Mobile	Euro-Information-Europeenne de Traitement de l'Information SAS	0	0	0	0	0
+France	FR	Mobile	SFR SA	0	0	0	0	0

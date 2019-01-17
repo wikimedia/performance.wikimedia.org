@@ -3,7 +3,7 @@
   <head>
     <meta charset=utf-8>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metrics — Wikimedia Performance</title>
+    <title>Wikimedia Autonomous Systems performance report</title>
     <script>
     WMPERF = {
       coalUrl: "/coal"
@@ -477,7 +477,7 @@ h2 {
   <div class="container">
     <div class="navbar-header"><a class="navbar-brand" href="/" title="Performance">Performance</a></div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/">Metrics</a></li>
+      <li><a href="/">Metrics</a></li>
       <li><a href="/php-profiling/">Flame Graphs</a></li>
       <li><a href="/xhgui/">XHGui</a></li>
       <li><a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Navigation Timing</a></li>
@@ -485,61 +485,258 @@ h2 {
       <li><a href="https://grafana.wikimedia.org/dashboard/db/media">Media</a></li>
       <li><a href="https://grafana.wikimedia.org/dashboard/db/webpagetest">WebPageTest</a></li>
       <li><a href="/blog/">Blog</a></li>
-      <li><a href="/asreport/">Autonomous Systems</a></li>
+      <li class="active"><a href="/asreport/">Autonomous Systems</a></li>
       <li><a href="https://grafana.wikimedia.org/"><small>More…</small></a></li>
     </ul>
   </div>
 </header>
 
-      <div class="container text-center perf-info-box">
-  <h1>Wikimedia Performance</h1>
-  <hr/>
-  <p>
-    We monitor the performance of <a href="https://www.wikipedia.org/">Wikipedia</a> continuously. These graphs are sampled measurements from 1 of 1000 requests. If you want to dig deeper into our metrics, you should check out our <a href="https://grafana.wikimedia.org/dashboard/db/performance-metrics">Grafana graphs</a>.
-  </p>
-  <p>
-    <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">– Wikimedia Performance Team</a>
-  </p>
-</div>
-<div class="container text-center perf-info-box">
-  <p>
-    <h2>Latest blog posts</h2>
-    <div>
-      <a href="https://phabricator.wikimedia.org/phame/post/view/131/">Why performance matters</a>
-    </div>
-    <div>
-      <a href="https://phabricator.wikimedia.org/phame/post/view/123/">Machine learning: how to undersample the wrong way</a>
-    </div>
-    <div>
-      <a href="https://phabricator.wikimedia.org/phame/post/view/122/">Best friends forever</a>
-    </div>
-  <p>
-</div>
-<div id=container class="container perf-container">
-  <div id=content-body>
-    <ul class="nav nav-tabs perf-nav">
-      <li role=presentation id=hour><a href="#!/hour">Past Hour</a></li>
-      <li role=presentation id=day class="active"><a href="#!/day">Past Day</a></li>
-      <li role=presentation id=week><a href="#!/week">Past Week</a></li>
-      <li role=presentation id=month><a href="#!/month">Past Month</a></li>
-      <li role=presentation id=year><a href="#!/year">Past Year</a></li>
-    </ul>
+      <style>
 
-    <div id=metrics>
-      <div class="metric" id="domInteractive"></div>
-      <p class="text-center perf-metrics-desc"><b>domInteractive:</b> When the browser has parsed the main HTML document.</p>
-      <div class="metric" id="firstPaint"></div>
-      <p class="text-center perf-metrics-desc"><b>firstPaint:</b> The moment something is first painted on the screen (currently only collected in Chrome and IE/Edge).</p>
-      <div class="metric" id="loadEventEnd"></div>
-      <p class="text-center perf-metrics-desc"><b>loadEventEnd:</b> When the load event fired in the browser and the current document is complete.</p>
-      <div class="metric" id="responseStart"></div>
-      <p class="text-center perf-metrics-desc"><b>responseStart:</b> The time it takes for the client to receive a response from the server (TTFB).</p>
-      <div class="metric" id="saveTiming"></div>
-      <p class="text-center perf-metrics-desc"><b>saveTiming:</b> The time it takes to submit and save an edit on an article.</p>
-    </div>
-  </div>
-</div>
+table {
+	border: 1px solid black;
+	width: 100%;
+}
+th {
+	text-align: left;
+	color: var(--wmui-color-base20);
+}
+#firstcol {
+	width: 40%;
+}
+</style>
 
+<div class="container">
+	<h1>Autonomous Systems performance report</h1>
+
+	This report is generated using data collected directly from visitors of Wikimedia websites, as reported by their web browsers.<br><br>
+	<h2>Methodology</h2>
+	Performance metrics are collected using the 
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigation_timing_API">Navigation Timing API</a>. A <a href="https://github.com/wikimedia/mediawiki-extensions-NavigationTiming/blob/40f56745bd766769329844f8a03c84b5f4f0b8e4/modules/ext.navigationTiming.js#L255-L274">CPU benchmark</a> is run on a separate thread to assess the overall performance of the device. Using this
+	information, we only keep the user performance metrics for a range of devices. We then compile
+	performance metrics medians for that device performance range for each <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">autonomous system</a>, based on the visitors' IP addresses.<br><br>Only autonomous systems for which we have sufficient data are retained. We separate mobile and fixed networks based on data collected with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API">Network Information API</a>. Reports are per country, as internet services tend to be sold to consumers on a national basis, and networks in the same country face the same infrastructural challenges. Finally, only countries where we have sufficient data are reported (only a portion of visitors are measured).
+	<h2>Results</h2>
+	Report generated on 2019-01-18. Data available in <a href="https://analytics.wikimedia.org/datasets/performance/autonomoussystems/">TSV format</a>.<br>
+	<br>
+	<i>TTFB stands for "Time to first byte", defined as responseStart - connectStart.</i><br>
+	<i>PLT stands for "Page load time", defined as loadEventStart - responseStart.</i><br>
+
+	
+	
+	
+		
+			
+		
+		
+			
+			<h3>United States</h3>
+		
+		
+		
+			Fixed networks<br>
+			<table>
+				<tr><th id="firstcol">Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		
+		<tr><td>Cablevision Systems Corp.</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Comcast Cable Communications, LLC</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Charter Communications Inc</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>MCI Communications Services, Inc. d/b/a Verizon Business</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Charter Communications</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>AT&T Services, Inc.</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Cox Communications Inc.</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+			
+				</table>
+				<br>
+			
+		
+		
+		
+		
+			Mobile networks<br>
+			<table>
+				<tr><th id="firstcol">Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		
+		<tr><td>T-Mobile USA, Inc.</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Cellco Partnership DBA Verizon Wireless</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Sprint Personal Communications Systems</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>AT&T Mobility LLC</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+			
+				</table>
+				<br>
+			
+		
+		
+			
+			<h3>Germany</h3>
+		
+		
+		
+			Fixed networks<br>
+			<table>
+				<tr><th id="firstcol">Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		
+		<tr><td>0&0 Versatel Deutschland GmbH</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Liberty Global B.V.</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Deutsche Telekom AG</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Telefonica Germany</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Vodafone Kabel Deutschland GmbH</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Vodafone GmbH</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Unitymedia BW GmbH</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+			
+				</table>
+				<br>
+			
+		
+		
+		
+		
+			Mobile networks<br>
+			<table>
+				<tr><th id="firstcol">Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		
+		<tr><td>Telefonica Germany</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Vodafone GmbH</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+			
+				</table>
+				<br>
+			
+		
+		
+			
+			<h3>France</h3>
+		
+		
+		
+			Fixed networks<br>
+			<table>
+				<tr><th id="firstcol">Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		
+		<tr><td>SFR SA</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Orange</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Free SAS</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Bouygues Telecom SA</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+			
+				</table>
+				<br>
+			
+		
+		
+		
+		
+			Mobile networks<br>
+			<table>
+				<tr><th id="firstcol">Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		
+		<tr><td>Bouygues Telecom SA</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Free Mobile SAS</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Orange</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>Euro-Information-Europeenne de Traitement de l'Information SAS</td><td>0</td><td>0</td><td>0</td></tr>
+	
+		
+		
+		
+		<tr><td>SFR SA</td><td>0</td><td>0</td><td>0</td></tr>
+	
+	</table>
+</div>
     <div class="footer">
   <div class="container">
     <p class="pull-left">More information at <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">https://www.mediawiki.org/wiki/Wikimedia_Performance_Team</a>.</p>
