@@ -1,3 +1,0 @@
-[submodule "src/http2priorities"]
-	path = src/http2priorities
-	url = https://github.com/pmeenan/http2priorities
