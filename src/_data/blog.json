@@ -8,9 +8,265 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2019-01-13T01:19:13+00:00",
+		"updated": "2019-01-24T10:40:32+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
+			{
+				"title": "Magic Numbers",
+				"link": {
+					"href": "/phame/live/7/post/142/magic_numbers/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/142/",
+				"author": {
+					"name": "Gilles (Gilles Dubuc)"
+				},
+				"published": "2019-01-24T10:40:32+00:00",
+				"updated": "2019-01-24T10:40:32+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							{
+								"em": {
+									"a": [
+										{
+											"href": "https://calendar.perfplanet.com/2018/magic-numbers/",
+											"class": "remarkup-link",
+											"rel": "noreferrer",
+											"$t": "Previously posted"
+										},
+										{
+											"href": "https://calendar.perfplanet.com/2018/",
+											"class": "remarkup-link",
+											"rel": "noreferrer",
+											"$t": "2018 Performance Calendar"
+										}
+									]
+								}
+							},
+							{
+								"a": {
+									"href": "https://developers.google.com/web/fundamentals/performance/rail#ux",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "RAIL"
+								}
+							},
+							{
+								"a": {
+									"href": "https://youtu.be/XvZ7-Uh0R4Q?t=1350",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "there's a lot of science behind those numbers"
+								}
+							},
+							{
+								"a": {
+									"href": "https://www.mediawiki.org/wiki/Wikimedia_Performance_Team/Perceived_Performance",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "an extensive literature\nreview of web performance perception academic research"
+								}
+							},
+							{
+								"br": {}
+							},
+							{
+								"a": [
+									{
+										"href": "http://yusufarslan.net/sites/yusufarslan.net/files/upload/content/Miller1968.pdf",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Response Time in Man-Computer Conversational Transactions"
+									},
+									{
+										"href": "https://www.nngroup.com/articles/response-times-3-important-limits/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Response Times: The 3 Important Limits"
+									}
+								]
+							},
+							{
+								"em": "science"
+							},
+							{
+								"a": {
+									"href": "http://yusufarslan.net/sites/yusufarslan.net/files/upload/content/Miller1968.pdf",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "read the Miller paper"
+								}
+							},
+							"Miller advocates to intentionally delay errors by a whole 2 seconds, in order to avoid disturbing the user's train of thought. If it sounds silly and dated, it's because it is, just like the rest of Miller's paper. Like Nielsen's, it means well, but pulls magic numbers out of thin air. Not a single experiment was conducted, not a single human being studied or surveyed in the making of these magic numbers. No research data to verify the claims.",
+							{
+								"em": "Are 100 ms Fast Enough? Characterizing Latency Perception Thresholds in Mouse-Based Interaction"
+							},
+							"This is quite different than the 100ms universal treshold we keep hearing about. The study goes on to show that subjects with a habit of playing action video games tend to have a lower threshold than others. Showing that cultural difference can affect that limit.",
+							"When you think about it, it does make sense that the real threshold is a range that depends on demographics, and that there's no reason there should be a universal threshold that happens to be a round number. It would be all too magical, wouldn't it?",
+							"A major weakness in a lot of papers doing real science I've reviewed, however, is that when actual research on people is done, it's usually on a group that lacks diversity. It's often whoever scientists have easy access to. Typically students from the same university. They're subjects that are educated, proficient with technology use and often with a monetary incentive to participate, which obviously skews the results. And yet, after performing a study on a dozen paid students, these research papers will often claim to have proven a universal truth about all human beings.This is actually true of the study I quoted earlier about the 100ms threshold, with the minor difference of students earning credits rather than money. Here's their description of study participants:",
+							"Another very common weakness of studies I've found is that they're often performed in labs using fake browsers, predetermined browsing scenarios, or by having people watch videos of page loads. All of which are very disconnected from the real experience of browsing the web.Overall we should remain skeptical of studies' results when their experimental setup was questionable in those ways. While the 100ms study disproved the 100ms universality myth with just 20 people, it remains insufficient to prove that the different numbers that emerged were any more universal.",
+							{
+								"a": {
+									"href": "https://www.mediawiki.org/wiki/Wikimedia_Performance_Team/Perceived_Performance",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "my literature review"
+								}
+							},
+							{
+								"a": {
+									"href": "https://wpostats.com/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "WPO stats"
+								}
+							},
+							{
+								"a": {
+									"href": "https://www.mediawiki.org/wiki/Wikimedia_Performance_Team",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "Wikimedia Performance Team"
+								}
+							},
+							{
+								"em": "Photo credit: Doc Searls, Tulane Public Relations CC-BY-SA 2.0"
+							}
+						],
+						"h2": [
+							{
+								"class": "remarkup-header",
+								"$t": "Following the citation trail"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "What happens when you do real science"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Proving universal facts about mankind based on students down the hall"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Everything sucks, now what?"
+							}
+						],
+						"div": [
+							{
+								"class": "remarkup-table-wrap",
+								"table": {
+									"class": "remarkup-table",
+									"tr": [
+										{
+											"td": {
+												"div": {
+													"class": "phabricator-remarkup-embed-layout-left",
+													"a": {
+														"href": "https://phab.wmfusercontent.org/file/data/xcdaaw7hhktmg6snovig/PHID-FILE-44alr6dd3ujcprc44p7w/640px-Jakob_Nielsen_1.jpg",
+														"class": "phabricator-remarkup-embed-image-full",
+														"data-sigil": "lightboxable",
+														"data-meta": "0_0",
+														"img": {
+															"src": "https://phab.wmfusercontent.org/file/data/xcdaaw7hhktmg6snovig/PHID-FILE-44alr6dd3ujcprc44p7w/640px-Jakob_Nielsen_1.jpg",
+															"height": "480",
+															"width": "640"
+														}
+													}
+												}
+											}
+										},
+										{
+											"td": {
+												"strong": "Trust me, I know things!"
+											}
+										},
+										{}
+									]
+								}
+							},
+							{
+								"class": "remarkup-table-wrap",
+								"table": {
+									"class": "remarkup-table",
+									"tr": [
+										{
+											"td": {
+												"div": {
+													"class": "phabricator-remarkup-embed-layout-left",
+													"a": {
+														"href": "https://phab.wmfusercontent.org/file/data/vgr2frve4n6o6s7cz2ya/PHID-FILE-kgk4c2fbfq6zomyl73yo/402px-Zan_Zig_performing_with_rabbit_and_roses%2C_magician_poster%2C_1899.jpg",
+														"class": "phabricator-remarkup-embed-image-full",
+														"data-sigil": "lightboxable",
+														"data-meta": "0_1",
+														"img": {
+															"src": "https://phab.wmfusercontent.org/file/data/vgr2frve4n6o6s7cz2ya/PHID-FILE-kgk4c2fbfq6zomyl73yo/402px-Zan_Zig_performing_with_rabbit_and_roses%2C_magician_poster%2C_1899.jpg",
+															"height": "600",
+															"width": "402"
+														}
+													}
+												}
+											}
+										},
+										{
+											"td": {
+												"strong": "Googler revealing the next iteration of RAIL guidelines"
+											}
+										},
+										{}
+									]
+								}
+							},
+							{
+								"class": "remarkup-table-wrap",
+								"table": {
+									"class": "remarkup-table",
+									"tr": [
+										{
+											"td": {
+												"div": {
+													"class": "phabricator-remarkup-embed-layout-left",
+													"a": {
+														"href": "https://phab.wmfusercontent.org/file/data/lzs3s6vcro7phkgtaci4/PHID-FILE-ls4nwkge4hfjsdfl6dk2/Student_in_Class_%283618969705%29.jpg",
+														"class": "phabricator-remarkup-embed-image-full",
+														"data-sigil": "lightboxable",
+														"data-meta": "0_2",
+														"img": {
+															"src": "https://phab.wmfusercontent.org/file/data/lzs3s6vcro7phkgtaci4/PHID-FILE-ls4nwkge4hfjsdfl6dk2/Student_in_Class_%283618969705%29.jpg",
+															"height": "417",
+															"width": "640"
+														}
+													}
+												}
+											}
+										},
+										{
+											"td": {
+												"strong": "Can you spot the person younger than 19 or older than 36?"
+											}
+										},
+										{}
+									]
+								}
+							}
+						],
+						"blockquote": [
+							{
+								"p": {
+									"br": {}
+								}
+							},
+							{
+								"p": "The latency perception thresholds’ range was 34–137 ms with a mean of 65 ms (Median = 54 ms) and a standard deviation of 30 ms."
+							},
+							{
+								"p": "Twenty students (10 female, age 19–36 years, M = 23.45, SD = 3.32) which were recruited via the local psychology student mailing list took part in the experiment. All participants had normal or corrected-to-normal vision and normally used their right hand for handling computer mice. Participants signed an informed consent sheet at the beginning of the experiment and received partial course credit for participation."
+							}
+						]
+					}
+				}
+			},
 			{
 				"title": "Why performance matters",
 				"link": {
@@ -180,7 +436,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/o2wt32xdvip2omdva2pn/PHID-FILE-d6gjnnuwpmwhq7u7tivx/Sans_titre.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_0",
+										"data-meta": "0_3",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/fq4bnxkssnxhjauoqfdy/PHID-FILE-6jsaqxbsex5dlircqpfg/preview-Sans_titre.png",
 											"width": "220",
@@ -759,7 +1015,7 @@
 									"href": "https://phabricator.wikimedia.org/T196242",
 									"class": "phui-tag-view phui-tag-type-object ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_16",
+									"data-meta": "0_19",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-object",
 										"$t": "T196242"
@@ -781,7 +1037,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_1",
+										"data-meta": "0_4",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 											"width": "600"
@@ -797,7 +1053,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_2",
+										"data-meta": "0_5",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 											"width": "600"
@@ -846,7 +1102,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_3",
+										"data-meta": "0_6",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 											"width": "600"
@@ -864,7 +1120,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_4",
+										"data-meta": "0_7",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 											"width": "600"
@@ -879,7 +1135,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_5",
+										"data-meta": "0_8",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 											"width": "600"
@@ -895,7 +1151,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_6",
+										"data-meta": "0_9",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 											"width": "600"
@@ -911,7 +1167,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_7",
+										"data-meta": "0_10",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 											"width": "600"
@@ -929,7 +1185,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_8",
+										"data-meta": "0_11",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 											"width": "600"
@@ -945,7 +1201,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_9",
+										"data-meta": "0_12",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 											"width": "600"
@@ -959,7 +1215,7 @@
 										"href": "https://phabricator.wikimedia.org/T203543",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_17",
+										"data-meta": "0_20",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-object",
 											"$t": "T203543"
@@ -981,7 +1237,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_10",
+										"data-meta": "0_13",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 											"width": "600"
@@ -998,7 +1254,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_11",
+											"data-meta": "0_14",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 												"width": "600"
@@ -1011,7 +1267,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_12",
+											"data-meta": "0_15",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 												"width": "600"
@@ -1031,7 +1287,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_13",
+											"data-meta": "0_16",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 												"width": "600"
@@ -1044,7 +1300,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_14",
+											"data-meta": "0_17",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 												"width": "600"
@@ -1062,7 +1318,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_15",
+										"data-meta": "0_18",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 											"width": "600"
@@ -1115,12 +1371,12 @@
 									"href": "/tag/performance-team/",
 									"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_24",
+									"data-meta": "0_27",
 									"span": {
 										"class": "phui-tag-core ",
 										"span": {
 											"class": "visual-only phui-icon-view phui-font-fa fa-users",
-											"data-meta": "0_23",
+											"data-meta": "0_26",
 											"aria-hidden": "true"
 										},
 										"$t": "Performance-Team"
@@ -1134,7 +1390,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_18",
+										"data-meta": "0_21",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 											"width": "400"
@@ -1176,7 +1432,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_19",
+										"data-meta": "0_22",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 											"width": "400"
@@ -1200,7 +1456,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_20",
+										"data-meta": "0_23",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 											"width": "400"
@@ -1246,7 +1502,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_21",
+										"data-meta": "0_24",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 											"width": "400"
@@ -1264,7 +1520,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_22",
+										"data-meta": "0_25",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 											"width": "400"
@@ -1758,7 +2014,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_25",
+										"data-meta": "0_28",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 											"height": "100",
@@ -1813,7 +2069,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_28",
+										"data-meta": "0_31",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 											"height": "512",
@@ -1841,7 +2097,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_29",
+											"data-meta": "0_32",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 												"height": "463",
@@ -1855,7 +2111,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_30",
+											"data-meta": "0_33",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 												"height": "90",
@@ -1878,7 +2134,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_31",
+										"data-meta": "0_34",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 											"height": "159",
@@ -2054,7 +2310,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_26",
+														"data-meta": "0_29",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 															"height": "154",
@@ -2070,7 +2326,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_27",
+														"data-meta": "0_30",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 															"height": "156",
@@ -2124,7 +2380,7 @@
 										"href": "https://phabricator.wikimedia.org/p/bd808/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_33",
+										"data-meta": "0_36",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@bd808"
@@ -2139,7 +2395,7 @@
 										"href": "https://phabricator.wikimedia.org/p/fgiunchedi/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_32",
+										"data-meta": "0_35",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@fgiunchedi"
@@ -2567,7 +2823,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_34",
+										"data-meta": "0_37",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 											"height": "573",
@@ -2587,7 +2843,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_35",
+										"data-meta": "0_38",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 											"height": "576",
@@ -2604,7 +2860,7 @@
 									"href": "https://phabricator.wikimedia.org/p/aaron/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_36",
+									"data-meta": "0_39",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@aaron"
@@ -2760,7 +3016,7 @@
 										"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_49",
+										"data-meta": "0_52",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@Jdlrobson"
@@ -2787,7 +3043,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_37",
+										"data-meta": "0_40",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 											"height": "463",
@@ -2823,7 +3079,7 @@
 									"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_48",
+									"data-meta": "0_51",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@Jdlrobson"
@@ -2836,12 +3092,12 @@
 										"href": "/tag/performance-team/",
 										"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_47",
+										"data-meta": "0_50",
 										"span": {
 											"class": "phui-tag-core ",
 											"span": {
 												"class": "visual-only phui-icon-view phui-font-fa fa-users",
-												"data-meta": "0_46",
+												"data-meta": "0_49",
 												"aria-hidden": "true"
 											},
 											"$t": "Performance-Team"
@@ -2851,7 +3107,7 @@
 										"href": "/T166373",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_42",
+										"data-meta": "0_45",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -2891,7 +3147,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_38",
+										"data-meta": "0_41",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 											"height": "265",
@@ -2910,7 +3166,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_39",
+										"data-meta": "0_42",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 											"height": "471",
@@ -2936,7 +3192,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_40",
+										"data-meta": "0_43",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 											"height": "354",
@@ -2960,7 +3216,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_41",
+										"data-meta": "0_44",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 											"height": "354",
@@ -2985,7 +3241,7 @@
 										"href": "/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_44",
+										"data-meta": "0_47",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -3004,7 +3260,7 @@
 										"href": "https://phabricator.wikimedia.org/p/phuedx/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_45",
+										"data-meta": "0_48",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@phuedx"
@@ -3023,7 +3279,7 @@
 										"href": "https://phabricator.wikimedia.org/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_43",
+										"data-meta": "0_46",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
