@@ -24,7 +24,7 @@
 	}
 
 	function createUrl( file ) {
-		return '/xenon/svgs/daily/' + file;
+		return '/arclamp/svgs/daily/' + file;
 	}
 
 	function appendLinks( parent, date, endpoint, label ) {
