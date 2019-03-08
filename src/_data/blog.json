@@ -8,9 +8,429 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2019-01-24T10:40:32+00:00",
+		"updated": "2019-03-01T03:29:34+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
+			{
+				"title": "Debugging production with X-Wikimedia-Debug",
+				"link": {
+					"href": "/phame/live/7/post/143/debugging_production_with_x-wikimedia-debug/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/143/",
+				"author": {
+					"name": "kostajh (Kosta Harlan)"
+				},
+				"published": "2019-02-20T16:15:05+00:00",
+				"updated": "2019-03-01T03:29:34+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							{
+								"a": {
+									"href": "https://phabricator.wikimedia.org/T187861",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "some topics created by users on Flow discussion boards were not appearing in the Recent Changes feeds"
+								}
+							},
+							"When approaching a bug like this, there are typically three things I do:",
+							{
+								"a": [
+									{
+										"href": "https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Flow/+/460928",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "we merged some diagnostic code"
+									},
+									{
+										"href": "https://phabricator.wikimedia.org/p/SBisson/",
+										"class": "phui-tag-view phui-tag-type-person ",
+										"data-sigil": "hovercard",
+										"data-meta": "0_2",
+										"span": {
+											"class": "phui-tag-core phui-tag-color-person",
+											"$t": "@SBisson"
+										}
+									},
+									{
+										"href": "https://phabricator.wikimedia.org/T187861#4135959",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "suggested a hypothesis"
+									}
+								]
+							},
+							"But we could not reproduce this, nor could we identify exactly where this might occur since the code paths for this functionality had many points where execution could stop silently.",
+							{
+								"a": [
+									{
+										"href": "https://wikitech.wikimedia.org/wiki/X-Wikimedia-Debug",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "X-Wikimedia-Debug header"
+									},
+									{
+										"href": "https://wikitech.wikimedia.org/wiki/X-Wikimedia-Debug#Browser_extensions",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "browser extensions"
+									},
+									{
+										"href": "https://wikitech.wikimedia.org/wiki/SWAT_deploys",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "SWAT'ed into production"
+									}
+								]
+							},
+							{
+								"a": [
+									{
+										"href": "https://wikitech.wikimedia.org/wiki/X-Wikimedia-Debug#Request_profiling",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "profile a request"
+									},
+									{
+										"href": "https://performance.wikimedia.org/xhgui/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "XHGui"
+									}
+								]
+							},
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/eg4kieypr7tyyjag36fc/PHID-FILE-m3p7wqwuuf4vemmdxx3u/profile-log.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_0",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/eg4kieypr7tyyjag36fc/PHID-FILE-m3p7wqwuuf4vemmdxx3u/profile-log.png",
+											"height": "174"
+										}
+									}
+								}
+							},
+							"Typically you do this to understand performance bottlenecks in your code, as get a complete list of all functions executed during the request, along with the time and memory usage associated with each function.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/hnrrgafhjfewmrlk4wms/PHID-FILE-c4vgueq2eh5dnhl4edpy/func-list.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_1",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/hnrrgafhjfewmrlk4wms/PHID-FILE-c4vgueq2eh5dnhl4edpy/func-list.png",
+											"height": "200"
+										}
+									}
+								}
+							},
+							"I followed the steps to reproduce and then switched on the \"Profile\" option before posting a new topic on an empty Flow board. Now, I had a profiled request which provided me with information on all the methods called, including which method called another (click on a method call to see its parent and children method calls). From here I could follow the path traversed by Flow's event emitting code, and see exactly where the code execution halted.",
+							{
+								"a": {
+									"href": "https://www.mediawiki.org/wiki/MediaWiki-Docker-Dev",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "MediaWiki-Docker-Dev"
+								}
+							},
+							{
+								"tt": [
+									{
+										"class": "remarkup-monospaced",
+										"$t": "$permissions"
+									},
+									{
+										"class": "remarkup-monospaced",
+										"$t": "deletedtext"
+									},
+									{
+										"class": "remarkup-monospaced",
+										"$t": "!$workflow->isDeleted();"
+									}
+								]
+							},
+							{
+								"a": {
+									"href": "https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Flow/+/469623",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "submitted solution"
+								},
+								"tt": {
+									"class": "remarkup-monospaced",
+									"$t": "isDeleted()"
+								}
+							},
+							"A few of my conclusions from this experience:",
+							{
+								"br": [
+									{},
+									{}
+								],
+								"a": {
+									"href": "https://www.mediawiki.org/wiki/Growth",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "Growth Team"
+								}
+							},
+							{
+								"em": {
+									"a": [
+										{
+											"href": "https://wikitech.wikimedia.org/wiki/X-Wikimedia-Debug",
+											"class": "remarkup-link",
+											"rel": "noreferrer",
+											"$t": "X-Wikimedia-Debug header"
+										},
+										{
+											"href": "https://wikitech.wikimedia.org/wiki/X-Wikimedia-Debug#Browser_extensions",
+											"class": "remarkup-link",
+											"rel": "noreferrer",
+											"$t": "browser extension"
+										}
+									]
+								}
+							}
+						],
+						"ol": {
+							"class": "remarkup-list",
+							"li": [
+								{
+									"class": "remarkup-list-item",
+									"a": [
+										{
+											"href": "https://phabricator.wikimedia.org/p/Rxy/",
+											"class": "phui-tag-view phui-tag-type-person ",
+											"data-sigil": "hovercard",
+											"data-meta": "0_5",
+											"span": {
+												"class": "phui-tag-core phui-tag-color-person",
+												"$t": "@Rxy"
+											}
+										},
+										{
+											"href": "https://phabricator.wikimedia.org/p/Krinkle/",
+											"class": "phui-tag-view phui-tag-type-person ",
+											"data-sigil": "hovercard",
+											"data-meta": "0_4",
+											"span": {
+												"class": "phui-tag-core phui-tag-color-person",
+												"$t": "@Krinkle"
+											}
+										},
+										{
+											"href": "https://phabricator.wikimedia.org/p/Etonkovidova/",
+											"class": "phui-tag-view phui-tag-type-person ",
+											"data-sigil": "hovercard",
+											"data-meta": "0_3",
+											"span": {
+												"class": "phui-tag-core phui-tag-color-person",
+												"$t": "@Etonkovidova"
+											}
+										}
+									]
+								},
+								{
+									"class": "remarkup-list-item",
+									"$t": "Attempt to reproduce the issue locally and set breakpoints in code to understand why the problem occurs"
+								},
+								{
+									"class": "remarkup-list-item",
+									"$t": "Check the production logs to look for any messages related to the bug report"
+								}
+							]
+						},
+						"div": [
+							{
+								"class": "remarkup-code-block",
+								"data-code-lang": "text",
+								"data-sigil": "remarkup-code-block",
+								"pre": {
+									"class": "remarkup-code",
+									"$t": "if ( user is trusted ) \n  return true\nelse\n  let's load the revision from replica, return true based on the the status of the revision\n  oh it doesn't exist (yet), return false"
+								}
+							},
+							{
+								"class": "remarkup-code-block",
+								"data-code-lang": "php",
+								"data-sigil": "remarkup-code-block",
+								"pre": {
+									"class": "remarkup-code",
+									"span": [
+										{
+											"class": "nv",
+											"$t": "$allowed"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "nv",
+											"$t": "$this"
+										},
+										{
+											"class": "o",
+											"$t": "->"
+										},
+										{
+											"class": "na",
+											"data-symbol-name": "user",
+											"$t": "user"
+										},
+										{
+											"class": "o",
+											"$t": "->"
+										},
+										{
+											"class": "na",
+											"data-symbol-name": "isAllowedAny",
+											"$t": "isAllowedAny"
+										},
+										{
+											"class": "o",
+											"$t": "("
+										},
+										{
+											"class": "o",
+											"$t": "...("
+										},
+										{
+											"class": "k",
+											"$t": "array"
+										},
+										{
+											"class": "o",
+											"$t": ")"
+										},
+										{
+											"class": "nv",
+											"$t": "$permissions"
+										},
+										{
+											"class": "o",
+											"$t": ");"
+										},
+										{
+											"class": "k",
+											"$t": "if"
+										},
+										{
+											"class": "o",
+											"$t": "("
+										},
+										{
+											"class": "nv",
+											"$t": "$allowed"
+										},
+										{
+											"class": "o",
+											"$t": ")"
+										},
+										{
+											"class": "o",
+											"$t": "{"
+										},
+										{
+											"class": "no",
+											"$t": ""
+										},
+										{
+											"class": "no",
+											"$t": "return"
+										},
+										{
+											"class": "kc",
+											"$t": "true"
+										},
+										{
+											"class": "o",
+											"$t": ";"
+										},
+										{
+											"class": "o",
+											"$t": "}"
+										},
+										{
+											"class": "k",
+											"$t": "return"
+										},
+										{
+											"class": "o",
+											"$t": "!"
+										},
+										{
+											"class": "nv",
+											"$t": "$workflow"
+										},
+										{
+											"class": "o",
+											"$t": "->"
+										},
+										{
+											"class": "na",
+											"data-symbol-name": "isDeleted",
+											"$t": "isDeleted"
+										},
+										{
+											"class": "o",
+											"$t": "();"
+										}
+									]
+								}
+							}
+						],
+						"h4": [
+							{
+								"class": "remarkup-header",
+								"$t": "Enter X-Wikimedia-Debug"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Reproducing the bug locally"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Conclusion"
+							}
+						],
+						"ul": {
+							"class": "remarkup-list",
+							"li": [
+								{
+									"class": "remarkup-list-item",
+									"$t": "If you're having difficulty tracking down the code path, consider using the profiler in the X-Wikimedia-Debug browser extension"
+								},
+								{
+									"class": "remarkup-list-item",
+									"$t": "Diagnostic code is helpful (even if it didn't pinpoint the problem here) and debug level logging should be considered instead of silent returns"
+								},
+								{
+									"class": "remarkup-list-item",
+									"a": {
+										"href": "https://www.mediawiki.org/wiki/MediaWiki-Docker-Dev",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "how to adjust its database replication lag"
+									}
+								}
+							]
+						},
+						"hr": {
+							"class": "remarkup-hr"
+						}
+					}
+				}
+			},
 			{
 				"title": "Magic Numbers",
 				"link": {
@@ -21,7 +441,7 @@
 					"name": "Gilles (Gilles Dubuc)"
 				},
 				"published": "2019-01-24T10:40:32+00:00",
-				"updated": "2019-01-24T10:40:32+00:00",
+				"updated": "2019-02-06T22:11:20+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
@@ -167,7 +587,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/xcdaaw7hhktmg6snovig/PHID-FILE-44alr6dd3ujcprc44p7w/640px-Jakob_Nielsen_1.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_0",
+														"data-meta": "0_6",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/xcdaaw7hhktmg6snovig/PHID-FILE-44alr6dd3ujcprc44p7w/640px-Jakob_Nielsen_1.jpg",
 															"height": "480",
@@ -199,7 +619,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/vgr2frve4n6o6s7cz2ya/PHID-FILE-kgk4c2fbfq6zomyl73yo/402px-Zan_Zig_performing_with_rabbit_and_roses%2C_magician_poster%2C_1899.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_1",
+														"data-meta": "0_7",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/vgr2frve4n6o6s7cz2ya/PHID-FILE-kgk4c2fbfq6zomyl73yo/402px-Zan_Zig_performing_with_rabbit_and_roses%2C_magician_poster%2C_1899.jpg",
 															"height": "600",
@@ -231,7 +651,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/lzs3s6vcro7phkgtaci4/PHID-FILE-ls4nwkge4hfjsdfl6dk2/Student_in_Class_%283618969705%29.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_2",
+														"data-meta": "0_8",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/lzs3s6vcro7phkgtaci4/PHID-FILE-ls4nwkge4hfjsdfl6dk2/Student_in_Class_%283618969705%29.jpg",
 															"height": "417",
@@ -392,6 +812,380 @@
 				}
 			},
 			{
+				"title": "Perf Matters at Wikipedia 2015",
+				"link": {
+					"href": "/phame/live/7/post/124/perf_matters_at_wikipedia_2015/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/124/",
+				"author": {
+					"name": "Krinkle (Timo Tijhof)"
+				},
+				"published": "2019-02-14T16:05:00+00:00",
+				"updated": "2019-02-21T14:43:50+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"h3": [
+							{
+								"class": "remarkup-header",
+								"$t": "Hello, WANObjectCache"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "First paint time now under 900ms"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Hello, WebPageTest"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "The journey to Thumbor begins"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Save timing reduced by 50%"
+							}
+						],
+						"p": [
+							{
+								"a": {
+									"href": "https://www.mediawiki.org/wiki/Requests_for_comment/Master-slave_datacenter_strategy_for_MediaWiki",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "multiple data centres"
+								}
+							},
+							"The MediaWiki application that powers Wikipedia relies heavily on object caching. We use Memcached as horizontally scaled key-value store, and we’d like to keep the cache local to each data centre. This minimises dependencies between data centres, and makes better use of storage capacity (based on local needs).",
+							{
+								"a": {
+									"href": "https://github.com/wikimedia/mediawiki/blob/1.32.0/includes/libs/objectcache/WANObjectCache.php#L583-L614",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "broadcasts “purge” events"
+								}
+							},
+							{
+								"a": {
+									"href": "https://doc.wikimedia.org/mediawiki-core/1.30.0/php/classWANObjectCache.html#details",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "WANObjectCache’s design"
+								}
+							},
+							"In July we set out a goal: improve page load performance so our median first paint time would go down from approximately 1.5 seconds to under a second – and stay under it!",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-right phabricator-remarkup-embed-float-right",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/aubuhmyuf36jr5feucds/PHID-FILE-3grypqxwgck7qxhia5fx/firstpaint_graphite.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_9",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/aubuhmyuf36jr5feucds/PHID-FILE-3grypqxwgck7qxhia5fx/firstpaint_graphite.png",
+											"height": "180"
+										}
+									}
+								},
+								"a": {
+									"href": "https://phabricator.wikimedia.org/T107399",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "converting these last two scripts"
+								}
+							},
+							{
+								"a": [
+									{
+										"href": "https://phabricator.wikimedia.org/T107399",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "several blockers"
+									},
+									{
+										"href": "https://github.com/wikimedia/mediawiki/blob/1.31.0/includes/resourceloader/ResourceLoader.php#L1494-L1514",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "wrap their code"
+									},
+									{
+										"href": "https://github.com/wikimedia/mediawiki/blob/1.31.0/resources/src/startup.js#L136-L144",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "process the closures"
+									}
+								]
+							},
+							"Another major blocker was the subset of community-developed gadgets that didn’t yet use the module loader (introduced in 2011). These legacy scripts assumed a global scope for variables, and depended on browser behaviour specific to serially loaded, synchronous, scripts. Between July 2015 and August 2015, I worked with the community to develop a migration guide. And, after a short deprecation period, the legacy loader was removed.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/m6hllri46kc7s52hh4t2/PHID-FILE-by3iiutxbxn3k3jca522/firstpaint_coalweb.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_10",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/m6hllri46kc7s52hh4t2/PHID-FILE-by3iiutxbxn3k3jca522/firstpaint_coalweb.png",
+											"height": "211",
+											"alt": "Line graph that plots the firstPaint metric for August 2015. The line drops from approximately one and a half seconds to 890 milliseconds."
+										}
+									}
+								}
+							},
+							"Previously, we only collected performance metrics for Wikipedia from sampled real-user page loads. This is super and helps detect trends, regressions, and other changes at large. But, to truly understand the characteristics of what made a page load a certain way, we need synthetic testing as well.",
+							{
+								"a": {
+									"href": "https://phabricator.wikimedia.org/T109666",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "understand the performance"
+								}
+							},
+							{
+								"a": {
+									"href": "https://grafana.wikimedia.org/d/000000210/webpagetest?orgId=1",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "visualise the data"
+								}
+							},
+							{
+								"a": {
+									"href": "https://wikitech.wikimedia.org/wiki/Performance/WebPageTest",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "check Wikitech"
+								}
+							},
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/x4afkxbbf27r3xrtwt6a/PHID-FILE-nsod5j3be2d2hupk3esu/webpagetest.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_11",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/x4afkxbbf27r3xrtwt6a/PHID-FILE-nsod5j3be2d2hupk3esu/webpagetest.png",
+											"height": "269"
+										}
+									}
+								}
+							},
+							{
+								"a": {
+									"href": "https://phabricator.wikimedia.org/T110858",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "evaluated various thumbnailing services"
+								}
+							},
+							"Gilles implemented support for Thumbor in the MediaWiki-Vagrant development environment.",
+							{
+								"a": {
+									"href": "https://phabricator.wikimedia.org/phame/live/7/post/55/the_journey_to_thumbor_part_1_rationale/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "The Journey to Thumbor (part 1)"
+								}
+							},
+							"Save timing is one of the key performance metrics for Wikipedia. It measures the time from when a user presses “Publish changes” when editing – until the user’s browser starts to receive a response. During this time, many things happen. MediaWiki parses the wiki-markup into HTML, which can involve page macros, sub-queries, templates, and other parser extensions. These inputs must be saved to a database. There may also be some cascading updates, such as the page’s membership in a category. And last but not least, there is the network latency between user’s device and our data centres.",
+							{
+								"a": [
+									{
+										"href": "https://commons.wikimedia.org/w/index.php?title=File:Wikimedia_Foundation_Quarterly_Report,_FY_2014-15_Q3_(January-March).pdf&page=3",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "quarterly report"
+									},
+									{
+										"href": "https://commons.wikimedia.org/w/index.php?title=File:Wikimedia_Foundation_Quarterly_Report,_FY_2014-15_Q4_(April-June).pdf&page=3",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "report"
+									},
+									{
+										"href": "https://commons.wikimedia.org/w/index.php?title=File:Wikimedia_Foundation_Quarterly_Report,_FY_2015-16_Q1_(July-September).pdf&page=3",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "report"
+									}
+								]
+							},
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/xzmcd2m6kfhqarahqmaj/PHID-FILE-6nnof7qhci64wqnltzy4/savetiming_2s-1_6s-1s_from_May_to_June.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_12",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/xzmcd2m6kfhqarahqmaj/PHID-FILE-6nnof7qhci64wqnltzy4/savetiming_2s-1_6s-1s_from_May_to_June.png",
+											"height": "278",
+											"alt": "Line graph of the median save timing metric, over 2015. Showing a drop from two seconds to one and a half in May, and another drop in June, gradually going further down to one second."
+										}
+									}
+								}
+							},
+							{
+								"a": [
+									{
+										"href": "https://github.com/wikimedia/mediawiki/graphs/contributors?from=2015-01-01&to=2016-01-01&type=c",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "to MediaWiki core"
+									},
+									{
+										"href": "https://gerrit.wikimedia.org/r/#/q/owner:%22Aaron+Schulz+%253Caschulz%2540wikimedia.org%253E%22+branch:master+before:2016-01-02+after:2014-12-30+projects:mediawiki",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "to extensions"
+									}
+								]
+							},
+							"Many of these changes involved deferring work to happen post-send. That is, after the server sends the HTTP response to the user and closes the main database transaction. Examples of tasks that now happen post-send are: cascading updates, emitting “recent changes” objects to the database and to pub-sub feeds, and doing automatic user rights promotions for the editing user based on their current age and total edit count.",
+							"Aaron also implemented the “async write” feature in the multi-backend object cache interface. MediaWiki uses this for storing the parser cache HTML in both Memcached (tier 1) and MySQL (tier 2). The second write now happens post-send.",
+							"By re-ordering these tasks to occur post-send, the server can send a response back to the user sooner.",
+							"A major category of changes were improvements to database queries. For example, reducing lock contention in SQL, refactoring code in a way that reduces the amount of work done between two write queries in the same transaction, splitting large queries into smaller ones, and avoiding use of database master connections whenever possible.",
+							"These optimisations reduced chances of queries being stalled, and allow them to complete more quickly.",
+							"The aforementioned work on WANObjectCache also helped a lot. Whenever we converted a feature to use this interface, we reduced the amount of blocking cache computation that happened mid-request. WANObjectCache also performs probabilistic preemptive refreshes of near-expiring values, which can prevent cache stampedes.",
+							{
+								"a": {
+									"href": "https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/AbuseFilter/+/211951/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "disabled"
+								}
+							},
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-right phabricator-remarkup-embed-float-right",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/pysti4uli7xcvlcxp27s/PHID-FILE-j2vyfqsirr3i2mhqngsw/savetiming_1_1s-1_0s_September_stretch.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_13",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/md23w2zfu4bkiwqw4sbs/PHID-FILE-o5j5cuk4d5q5h7g27dgc/preview-savetiming_1_1s-1_0s_September_stretch.png",
+											"width": "220",
+											"height": "70.559921414538"
+										}
+									}
+								}
+							},
+							{
+								"a": {
+									"href": "https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "LBYL race conditions"
+								}
+							},
+							"Sajax was a library for invoking a subroutine on the server, and receiving its return value as JSON from client-side JavaScript. In March 2006, it was adopted in MediaWiki to power the autocomplete feature of the search input field.",
+							{
+								"a": {
+									"href": "https://www.mail-archive.com/wikitech-l@lists.wikimedia.org/msg63136.html",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "deprecated Sajax"
+								}
+							},
+							{
+								"a": [
+									{
+										"href": "https://phabricator.wikimedia.org/T55120#1502017",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "decided"
+									},
+									{
+										"href": "https://www.mail-archive.com/wikitech-l@lists.wikimedia.org/msg80733.html",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "high time"
+									},
+									{
+										"href": "https://gerrit.wikimedia.org/r/#/c/mediawiki/core/+/228768/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "finish"
+									},
+									{
+										"href": "https://www.mail-archive.com/wikitech-l@lists.wikimedia.org/msg82007.html",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Goodbye"
+									}
+								]
+							},
+							{
+								"a": {
+									"href": "https://blog.wikimedia.org/2015/06/12/securing-wikimedia-sites-with-https/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "on the Wikimedia blog"
+								}
+							},
+							"— Timo Tijhof"
+						],
+						"hr": [
+							{
+								"class": "remarkup-hr"
+							},
+							{
+								"class": "remarkup-hr"
+							},
+							{
+								"class": "remarkup-hr"
+							},
+							{
+								"class": "remarkup-hr"
+							},
+							{
+								"class": "remarkup-hr"
+							},
+							{
+								"class": "remarkup-hr"
+							}
+						],
+						"h4": [
+							{
+								"class": "remarkup-header",
+								"$t": "Deferring tasks to post-send"
+							},
+							{
+								"class": "remarkup-header",
+								"em": "with"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Avoid synchronous cache re-computations"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Profiling can be expensive"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "And more"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "So long, Sajax!"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Further reading"
+							}
+						]
+					}
+				}
+			},
+			{
 				"title": "Machine learning: how to undersample the wrong way",
 				"link": {
 					"href": "/phame/live/7/post/123/machine_learning_how_to_undersample_the_wrong_way/"
@@ -436,7 +1230,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/o2wt32xdvip2omdva2pn/PHID-FILE-d6gjnnuwpmwhq7u7tivx/Sans_titre.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_3",
+										"data-meta": "0_14",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/fq4bnxkssnxhjauoqfdy/PHID-FILE-6jsaqxbsex5dlircqpfg/preview-Sans_titre.png",
 											"width": "220",
@@ -1015,7 +1809,7 @@
 									"href": "https://phabricator.wikimedia.org/T196242",
 									"class": "phui-tag-view phui-tag-type-object ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_19",
+									"data-meta": "0_30",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-object",
 										"$t": "T196242"
@@ -1037,7 +1831,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_4",
+										"data-meta": "0_15",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 											"width": "600"
@@ -1053,7 +1847,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_5",
+										"data-meta": "0_16",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 											"width": "600"
@@ -1102,7 +1896,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_6",
+										"data-meta": "0_17",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 											"width": "600"
@@ -1120,7 +1914,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_7",
+										"data-meta": "0_18",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 											"width": "600"
@@ -1135,7 +1929,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_8",
+										"data-meta": "0_19",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 											"width": "600"
@@ -1151,7 +1945,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_9",
+										"data-meta": "0_20",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 											"width": "600"
@@ -1167,7 +1961,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_10",
+										"data-meta": "0_21",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 											"width": "600"
@@ -1185,7 +1979,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_11",
+										"data-meta": "0_22",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 											"width": "600"
@@ -1201,7 +1995,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_12",
+										"data-meta": "0_23",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 											"width": "600"
@@ -1215,7 +2009,7 @@
 										"href": "https://phabricator.wikimedia.org/T203543",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_20",
+										"data-meta": "0_31",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-object",
 											"$t": "T203543"
@@ -1237,7 +2031,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_13",
+										"data-meta": "0_24",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 											"width": "600"
@@ -1254,7 +2048,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_14",
+											"data-meta": "0_25",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 												"width": "600"
@@ -1267,7 +2061,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_15",
+											"data-meta": "0_26",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 												"width": "600"
@@ -1287,7 +2081,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_16",
+											"data-meta": "0_27",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 												"width": "600"
@@ -1300,7 +2094,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_17",
+											"data-meta": "0_28",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 												"width": "600"
@@ -1318,7 +2112,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_18",
+										"data-meta": "0_29",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 											"width": "600"
@@ -1360,29 +2154,13 @@
 					"name": "Peter (Peter Hedenskog)"
 				},
 				"published": "2018-09-21T07:49:33+00:00",
-				"updated": "2018-09-21T07:52:42+00:00",
+				"updated": "2019-02-14T00:25:52+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
 						"xmlns": "http://www.w3.org/1999/xhtml",
 						"p": [
-							{
-								"a": {
-									"href": "/tag/performance-team/",
-									"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
-									"data-sigil": "hovercard",
-									"data-meta": "0_27",
-									"span": {
-										"class": "phui-tag-core ",
-										"span": {
-											"class": "visual-only phui-icon-view phui-font-fa fa-users",
-											"data-meta": "0_26",
-											"aria-hidden": "true"
-										},
-										"$t": "Performance-Team"
-									}
-								}
-							},
+							"One of the Performance Team responsibilities at Wikimedia is to keep track of Wikipedias performance. Why is performance important for us? In our case it is easy: We have so many users and if we have a performance regression, we are really affecting people's lives. Maybe you remember our hiring tweet from a couple of years ago?",
 							{
 								"div": {
 									"class": "phabricator-remarkup-embed-layout-center",
@@ -1390,7 +2168,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_21",
+										"data-meta": "0_32",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 											"width": "400"
@@ -1432,7 +2210,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_22",
+										"data-meta": "0_33",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 											"width": "400"
@@ -1456,7 +2234,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_23",
+										"data-meta": "0_34",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 											"width": "400"
@@ -1502,7 +2280,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_24",
+										"data-meta": "0_35",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 											"width": "400"
@@ -1520,7 +2298,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_25",
+										"data-meta": "0_36",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 											"width": "400"
@@ -2014,7 +2792,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_28",
+										"data-meta": "0_37",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 											"height": "100",
@@ -2069,7 +2847,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_31",
+										"data-meta": "0_40",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 											"height": "512",
@@ -2097,7 +2875,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_32",
+											"data-meta": "0_41",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 												"height": "463",
@@ -2111,7 +2889,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_33",
+											"data-meta": "0_42",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 												"height": "90",
@@ -2134,7 +2912,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_34",
+										"data-meta": "0_43",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 											"height": "159",
@@ -2310,7 +3088,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_29",
+														"data-meta": "0_38",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 															"height": "154",
@@ -2326,7 +3104,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_30",
+														"data-meta": "0_39",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 															"height": "156",
@@ -2380,7 +3158,7 @@
 										"href": "https://phabricator.wikimedia.org/p/bd808/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_36",
+										"data-meta": "0_45",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@bd808"
@@ -2395,7 +3173,7 @@
 										"href": "https://phabricator.wikimedia.org/p/fgiunchedi/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_35",
+										"data-meta": "0_44",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@fgiunchedi"
@@ -2823,7 +3601,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_37",
+										"data-meta": "0_46",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 											"height": "573",
@@ -2843,7 +3621,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_38",
+										"data-meta": "0_47",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 											"height": "576",
@@ -2860,7 +3638,7 @@
 									"href": "https://phabricator.wikimedia.org/p/aaron/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_39",
+									"data-meta": "0_48",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@aaron"
@@ -3016,7 +3794,7 @@
 										"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_52",
+										"data-meta": "0_61",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@Jdlrobson"
@@ -3043,7 +3821,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_40",
+										"data-meta": "0_49",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 											"height": "463",
@@ -3079,7 +3857,7 @@
 									"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_51",
+									"data-meta": "0_60",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@Jdlrobson"
@@ -3092,12 +3870,12 @@
 										"href": "/tag/performance-team/",
 										"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_50",
+										"data-meta": "0_59",
 										"span": {
 											"class": "phui-tag-core ",
 											"span": {
 												"class": "visual-only phui-icon-view phui-font-fa fa-users",
-												"data-meta": "0_49",
+												"data-meta": "0_58",
 												"aria-hidden": "true"
 											},
 											"$t": "Performance-Team"
@@ -3107,7 +3885,7 @@
 										"href": "/T166373",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_45",
+										"data-meta": "0_54",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -3147,7 +3925,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_41",
+										"data-meta": "0_50",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 											"height": "265",
@@ -3166,7 +3944,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_42",
+										"data-meta": "0_51",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 											"height": "471",
@@ -3192,7 +3970,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_43",
+										"data-meta": "0_52",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 											"height": "354",
@@ -3216,7 +3994,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_44",
+										"data-meta": "0_53",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 											"height": "354",
@@ -3241,7 +4019,7 @@
 										"href": "/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_47",
+										"data-meta": "0_56",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -3260,7 +4038,7 @@
 										"href": "https://phabricator.wikimedia.org/p/phuedx/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_48",
+										"data-meta": "0_57",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@phuedx"
@@ -3279,7 +4057,7 @@
 										"href": "https://phabricator.wikimedia.org/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_46",
+										"data-meta": "0_55",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
