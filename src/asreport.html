@@ -26,7 +26,7 @@ th {
 	Performance metrics are collected using the 
 	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigation_timing_API">Navigation Timing API</a>. A <a href="https://github.com/wikimedia/mediawiki-extensions-NavigationTiming/blob/40f56745bd766769329844f8a03c84b5f4f0b8e4/modules/ext.navigationTiming.js#L255-L274">CPU benchmark</a> is run on a separate thread to assess the overall performance of the device. Using this
 	information, we only keep the user performance metrics for a range of devices. We then compile
-	performance metrics medians for that device performance range for each <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">autonomous system</a>, based on the visitors' IP addresses.<br><br>Only autonomous systems for which we have sufficient data are retained. We separate mobile and fixed networks based on data collected with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API">Network Information API</a>. Reports are per country, as internet services tend to be sold to consumers on a national basis, and networks in the same country face the same infrastructural challenges. Finally, only countries where we have sufficient data are reported (only a portion of visitors are measured).
+	performance metrics medians for that device performance range for each <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">autonomous system</a>, based on the visitors' IP addresses.<br><br>Only autonomous systems for which we have sufficient data are retained. We separate mobile and desktop experiences, as they have significantly different median page weights. As such, scores aren't comparable between mobile and desktop for a given country. Just as they are not comparable between countries either, due to different CPU benchmark score slices being selected for each. Reports are per country, as internet services tend to be sold to consumers on a national basis, and networks in the same country face the same infrastructural challenges. Finally, only countries where we have sufficient data are reported (only a portion of visitors are measured).
 	<h2>Results</h2>
 	Report generated on {{ site.AS_REPORT_TIME | date: '%Y-%m-%d' }}. Data available in <a href="https://analytics.wikimedia.org/datasets/performance/autonomoussystems/">TSV format</a>.<br>
 	<br>
@@ -48,7 +48,7 @@ th {
 		{% endif %}
 		{% if row['Type'] != last_type %}
 		{% assign last_type = row['Type'] %}
-			{{ row['Type'] }} networks<br>
+			{{ row['Type'] }}<br>
 			<table>
 				<tr><th id="firstcol">Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
 		{% endif %}
