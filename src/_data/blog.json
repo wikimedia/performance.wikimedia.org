@@ -8,9 +8,57 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2019-03-01T03:29:34+00:00",
+		"updated": "2019-03-27T11:07:06+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
+			{
+				"title": "Autonomous Systems performance report",
+				"link": {
+					"href": "/phame/live/7/post/154/autonomous_systems_performance_report/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/154/",
+				"author": {
+					"name": "Gilles (Gilles Dubuc)"
+				},
+				"published": "2019-03-27T11:07:06+00:00",
+				"updated": "2019-03-27T11:07:06+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							{
+								"a": [
+									{
+										"href": "https://performance.wikimedia.org/asreport/",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "our first report"
+									},
+									{
+										"href": "https://en.wikipedia.org/wiki/Autonomous_system_(Internet)",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Autonomous Systems"
+									}
+								]
+							},
+							{
+								"a": {
+									"href": "https://performance.wikimedia.org/asreport/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "This report"
+								}
+							},
+							"In order to make a fair assessment of the autonomous systems' performance, real user metrics collected from web browsers are normalised, in order to avoid differences such as average device power for a given network's users potentially skewing the results. For example, an ISP with more expensive data plans might have users with more expensive, better performing devices on average. This is way we compare data points only for similar effective device CPU power between providers. We also separate the mobile and desktop experiences, because they serve different content, with a notable difference in the median page weight, which directly impacts performance metrics. We wouldn't want the mobile/desktop mix of a given provider to influence the results.",
+							"If you look at the report, you might wonder why some autonomous systems' underlying mobile networks show up under \"desktop\" and some wired internet providers appear under \"mobile\". The explanation is that the internet providers either sell home internet devices that are effectively mobile network modems, resulting in people using their desktop computers (and as a result, the desktop websites) over a mobile network. Or the providers have mobile device users automatically connect to the same provider's WiFi routers when users are in reach of one.",
+							"One caveat about this report is that in countries that are physically large, like the United States, the country-wide aggregation in no way reflects important regional differences there might be for a given network. The main reason why we can't look at smaller regions is that we have simply no way of knowing where mobile users are connecting from, short of collecting geolocation data. Since we care deeply about our user's privacy and our their experience, it doesn't feel appropriate at this time to ask users for their precise location in order to generate this type of finer-grained data. Such a scheme would also suffer from self-selection bias. There's already a lot of work to be done with the data aggregated at the national level!",
+							"We hope that this public report will help network operators understand their customers' real performance characteristics when it comes to browsing one of the web's largest websites. We are welcoming of peering requests networks might want to propose, should they seek to improve their connectivity to our datacenters."
+						]
+					}
+				}
+			},
 			{
 				"title": "Debugging production with X-Wikimedia-Debug",
 				"link": {
