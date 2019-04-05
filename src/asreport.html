@@ -4,16 +4,7 @@ layout: default
 ---
 
 <style>
-
-table {
-	border: 1px solid black;
-	width: 100%;
-}
-th {
-	text-align: left;
-	color: var(--wmui-color-base20);
-}
-#firstcol {
+.perf-asreport-table th:first-child {
 	width: 40%;
 }
 </style>
@@ -49,8 +40,8 @@ th {
 		{% if row['Type'] != last_type %}
 		{% assign last_type = row['Type'] %}
 			{{ row['Type'] }}<br>
-			<table>
-				<tr><th id="firstcol">Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+			<table class="table table-condensed table-hover perf-asreport-table">
+				<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
 		{% endif %}
 		<tr><td>{{ row['ASO'] }}</td><td>{{ row['TTFB'] }}</td><td>{{ row['PLT'] }}</td><td>{{ row['Sample size'] }}</td></tr>
 	{% endfor %}
