@@ -23,7 +23,7 @@ th {
 
 	This report is generated using data collected directly from visitors of Wikimedia websites, as reported by their web browsers.<br><br>
 	<h2>Methodology</h2>
-	Performance metrics are collected using the 
+	Performance metrics are collected using the
 	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigation_timing_API">Navigation Timing API</a>. A <a href="https://github.com/wikimedia/mediawiki-extensions-NavigationTiming/blob/40f56745bd766769329844f8a03c84b5f4f0b8e4/modules/ext.navigationTiming.js#L255-L274">CPU benchmark</a> is run on a separate thread to assess the overall performance of the device. Using this
 	information, we only keep the user performance metrics for a range of devices. We then compile
 	performance metrics medians for that device performance range for each <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">autonomous system</a>, based on the visitors' IP addresses.<br><br>Only autonomous systems for which we have sufficient data are retained. We separate mobile and desktop experiences, as they have significantly different median page weights. As such, scores aren't comparable between mobile and desktop for a given country. Just as they are not comparable between countries either, due to different CPU benchmark score slices being selected for each. Reports are per country, as internet services tend to be sold to consumers on a national basis, and networks in the same country face the same infrastructural challenges. Finally, only countries where we have sufficient data are reported (only a portion of visitors are measured).

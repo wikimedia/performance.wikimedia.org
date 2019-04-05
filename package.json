@@ -5,7 +5,7 @@
     "blog": "curl -s https://phabricator.wikimedia.org/phame/blog/feed/7/ -o src/_data/blog.xml && xml2json src/_data/blog.xml src/_data/blog.json && rm src/_data/blog.xml",
     "asreport": "curl -R -s https://analytics.wikimedia.org/datasets/performance/autonomoussystems/latest.tsv -o src/_data/asreport.tsv",
     "preuncss": "bundle exec jekyll build",
-    "uncss": "uncss public_html/index.html public_html/php-profiling/index.html --media '(min-width: 1000px)' --ignore '/\\.popover/' --ignoreSheet public_html/lib/bootstrap-3.3.5/css/bootstrap.uncss.css --stylesheets lib/bootstrap-3.3.5/css/bootstrap.min.css --htmlroot public_html > src/lib/bootstrap-3.3.5/css/bootstrap.uncss.css",
+    "uncss": "uncss public_html/index.html public_html/php-profiling/index.html public_html/asreport/index.html --media '(min-width: 1000px)' --ignore '/\\.popover/' --ignoreSheet public_html/lib/bootstrap-3.3.5/css/bootstrap.uncss.css --stylesheets lib/bootstrap-3.3.5/css/bootstrap.min.css --htmlroot public_html > src/lib/bootstrap-3.3.5/css/bootstrap.uncss.css",
     "generate": "npm run uncss && npm run blog && npm run asreport && COAL_WEB_SERVER=/coal bundle exec jekyll build",
     "jekyll": "npm run generate && bundle exec jekyll serve",
     "verify": "test -z '$(git status --porcelain public_html/)'"
