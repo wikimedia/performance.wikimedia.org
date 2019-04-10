@@ -8,7 +8,7 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2019-04-10T08:24:30+00:00",
+		"updated": "2019-04-10T09:08:13+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
 			{
@@ -21,7 +21,7 @@
 					"name": "Peter (Peter Hedenskog)"
 				},
 				"published": "2019-04-10T08:24:30+00:00",
-				"updated": "2019-04-10T08:24:30+00:00",
+				"updated": "2019-04-10T09:08:13+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
@@ -150,7 +150,7 @@
 							},
 							"This is passed to Browsertime, which runs it after the page has loaded. Visual Elements are enabled, which analyses the video and gives us a timing corresponding to when the largest image within the viewport is displayed (which for most articles, is the thumbnail-high image).",
 							"This was run on two different connectivity types and 11 times in a row. Then we keep the median for both metrics and we get the following:",
-							"The video recording performed by browsertime is done at 30 frames per second. Which means each frame lasts 1000/30 = 33.333ms. This indicates that the differences seen between Element Timing and the video analytics are within one frame. Element Timing might very well be the more accurate one, since it's not constrained by the video recording's 60fps cadence.",
+							"The video recording performed by browsertime is done at 30 frames per second. Which means each frame lasts 1000/30 = 33.333ms. This indicates that the differences seen between Element Timing and the video analytics are within one frame. Element Timing might very well be the more accurate one, since it's not constrained by the video recording's 30fps cadence.",
 							{
 								"a": {
 									"href": "https://phabricator.wikimedia.org/T219231",
