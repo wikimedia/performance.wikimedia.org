@@ -8,7 +8,7 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2019-04-10T09:08:13+00:00",
+		"updated": "2019-04-10T12:21:50+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
 			{
@@ -21,7 +21,7 @@
 					"name": "Peter (Peter Hedenskog)"
 				},
 				"published": "2019-04-10T08:24:30+00:00",
-				"updated": "2019-04-10T09:08:13+00:00",
+				"updated": "2019-04-10T12:21:50+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
@@ -185,11 +185,164 @@
 						"div": [
 							{
 								"class": "remarkup-code-block",
-								"data-code-lang": "text",
+								"data-code-lang": "js",
 								"data-sigil": "remarkup-code-block",
 								"pre": {
 									"class": "remarkup-code",
-									"$t": "(function() {\n    const elements = performance.getEntriesByType('element');\n    for (let element of elements) {\n        if (element.name === 'thumbnail-high') {\n            return element.startTime;\n        }\n    }\n})();"
+									"span": [
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "kd",
+											"$t": "function"
+										},
+										{
+											"class": "p",
+											"$t": "()"
+										},
+										{
+											"class": "p",
+											"$t": "{"
+										},
+										{
+											"class": "kr",
+											"$t": "const"
+										},
+										{
+											"class": "nx",
+											"$t": "elements"
+										},
+										{
+											"class": "o",
+											"$t": "="
+										},
+										{
+											"class": "nx",
+											"$t": "performance"
+										},
+										{
+											"class": "p",
+											"$t": "."
+										},
+										{
+											"class": "nx",
+											"$t": "getEntriesByType"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "s1",
+											"$t": "'element'"
+										},
+										{
+											"class": "p",
+											"$t": ");"
+										},
+										{
+											"class": "k",
+											"$t": "for"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "kd",
+											"$t": "let"
+										},
+										{
+											"class": "nx",
+											"$t": "element"
+										},
+										{
+											"class": "nx",
+											"$t": "of"
+										},
+										{
+											"class": "nx",
+											"$t": "elements"
+										},
+										{
+											"class": "p",
+											"$t": ")"
+										},
+										{
+											"class": "p",
+											"$t": "{"
+										},
+										{
+											"class": "k",
+											"$t": "if"
+										},
+										{
+											"class": "p",
+											"$t": "("
+										},
+										{
+											"class": "nx",
+											"$t": "element"
+										},
+										{
+											"class": "p",
+											"$t": "."
+										},
+										{
+											"class": "nx",
+											"$t": "name"
+										},
+										{
+											"class": "o",
+											"$t": "==="
+										},
+										{
+											"class": "s1",
+											"$t": "'thumbnail-high'"
+										},
+										{
+											"class": "p",
+											"$t": ")"
+										},
+										{
+											"class": "p",
+											"$t": "{"
+										},
+										{
+											"class": "k",
+											"$t": "return"
+										},
+										{
+											"class": "nx",
+											"$t": "element"
+										},
+										{
+											"class": "p",
+											"$t": "."
+										},
+										{
+											"class": "nx",
+											"$t": "startTime"
+										},
+										{
+											"class": "p",
+											"$t": ";"
+										},
+										{
+											"class": "p",
+											"$t": "}"
+										},
+										{
+											"class": "p",
+											"$t": "}"
+										},
+										{
+											"class": "p",
+											"$t": "})();"
+										}
+									]
 								}
 							},
 							{
