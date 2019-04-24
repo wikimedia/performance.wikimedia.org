@@ -8,7 +8,7 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2019-04-13T23:19:54+00:00",
+		"updated": "2019-04-24T11:45:53+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
 			{
@@ -21,7 +21,7 @@
 					"name": "Peter (Peter Hedenskog)"
 				},
 				"published": "2019-04-10T08:24:30+00:00",
-				"updated": "2019-04-13T23:19:54+00:00",
+				"updated": "2019-04-24T11:45:53+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
