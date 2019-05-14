@@ -3614,6 +3614,9 @@
 										"data-meta": "0_50",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
+											"span": {
+												"class": "phui-tag-dot phui-tag-color-orange"
+											},
 											"$t": "@bd808"
 										}
 									}
