@@ -1,129 +1,225 @@
 Country	Country code	Type	ASO	TTFB	PLT	CPU	Transfer size	Sample size
-Russian Federation	RU	Mobile	SkyNet Ltd.	122	517	383	19888	1951
-Russian Federation	RU	Mobile	Perspectiva Ltd.	123	527	383	19612	2602
-Russian Federation	RU	Mobile	OJS Moscow city telephone network	147	530	381	19779	8292
-Russian Federation	RU	Mobile	Net By Net Holding LLC	160	575	383	19673	2877
-Russian Federation	RU	Mobile	PVimpelCom	165	591	382	19499	14087
-Russian Federation	RU	Mobile	OJSC Comcor	169	535	380	19870	2429
-Russian Federation	RU	Mobile	JSC ER-Telecom Holding	187	626	383	19714	17768
-Russian Federation	RU	Mobile	Closed Joint Stock Company TransTeleCom	221	738	382	19710	4350
-Russian Federation	RU	Mobile	Rostelecom	231	731	383	19716	54200
-Russian Federation	RU	Mobile	OJSC Ufanet	233	673	384	19628	3459
-Russian Federation	RU	Mobile	Ojsc oao Tattelecom	241	776	384	19813	3080
-Russian Federation	RU	Mobile	Intersvyaz-2 JSC	241	684	384	19380	1880
-Russian Federation	RU	Mobile	PJSC Bashinformsvyaz	269	868	386	19172	1788
-Russian Federation	RU	Mobile	Novotelecom Ltd	316	704	383	19295	1154
-Russian Federation	RU	Mobile	Sibirskie Seti Ltd.	326	752	383	19457	1083
-Russian Federation	RU	Mobile	MTS PJSC	336	819	383	19677	57324
-Russian Federation	RU	Mobile	PJSC MegaFon	351	857	383	19642	38135
-Russian Federation	RU	Mobile	Public Joint Stock Company Vimpel-Communications	357	903	385	19640	24674
-Russian Federation	RU	Mobile	T2 Mobile LLC	362	931	386	19633	29707
-Russian Federation	RU	Desktop	SkyNet Ltd.	115	760	383	27734	1953
-Russian Federation	RU	Desktop	Perspectiva Ltd.	120	735	384	27063	2598
-Russian Federation	RU	Desktop	Net By Net Holding LLC	153	802	384	28077	2868
-Russian Federation	RU	Desktop	OJS Moscow city telephone network	155	757	382	27268	8274
-Russian Federation	RU	Desktop	PVimpelCom	158	812	383	27739	14079
-Russian Federation	RU	Desktop	OJSC Comcor	169	710	381	27321	2426
-Russian Federation	RU	Desktop	JSC ER-Telecom Holding	178	880	384	27991	17780
-Russian Federation	RU	Desktop	Ojsc oao Tattelecom	211	1037	384	28108	3079
-Russian Federation	RU	Desktop	Closed Joint Stock Company TransTeleCom	216	1069	383	26499	4350
-Russian Federation	RU	Desktop	OJSC Ufanet	221	959	385	27677	3453
-Russian Federation	RU	Desktop	MTS PJSC	225	1024	384	27805	57449
-Russian Federation	RU	Desktop	Intersvyaz-2 JSC	226	945	385	27695	1868
-Russian Federation	RU	Desktop	Rostelecom	232	1002	384	28088	54166
-Russian Federation	RU	Desktop	PJSC Bashinformsvyaz	265	1249	387	28013	1780
-Russian Federation	RU	Desktop	Novotelecom Ltd	307	906	383	28174	1152
-Russian Federation	RU	Desktop	PJSC MegaFon	312	1237	384	27421	38210
-Russian Federation	RU	Desktop	Sibirskie Seti Ltd.	313	1021	384	28574	1080
-Russian Federation	RU	Desktop	T2 Mobile LLC	361	1514	387	27437	29851
-Russian Federation	RU	Desktop	Public Joint Stock Company Vimpel-Communications	376	1491	385	27338	24749
-France	FR	Mobile	Free SAS	141	611	277	19074	5999
-France	FR	Mobile	Orange	168	573	278	19751	13528
-France	FR	Mobile	Bouygues Telecom SA	178	576	280	19294	6309
-France	FR	Mobile	SFR SA	179	573	278	19105	8276
-France	FR	Mobile	Free Mobile SAS	236	651	279	19025	2918
-France	FR	Desktop	SFR SA	139	837	249	22483	9996
-France	FR	Desktop	Orange	141	805	249	22417	16646
-France	FR	Desktop	Bouygues Telecom SA	145	860	251	22805	7676
-France	FR	Desktop	Free SAS	149	884	249	22458	7309
-France	FR	Desktop	Free Mobile SAS	238	987	253	21824	3358
-Germany	DE	Mobile	1&1 Versatel Deutschland GmbH	93	445	254	17632	1813
-Germany	DE	Mobile	Liberty Global B.V.	107	429	254	17608	2276
-Germany	DE	Mobile	Deutsche Telekom AG	115	487	255	17693	12112
-Germany	DE	Mobile	Unitymedia BW GmbH	125	447	255	18398	1357
-Germany	DE	Mobile	Vodafone Kabel Deutschland GmbH	128	452	254	17527	3648
-Germany	DE	Mobile	Vodafone GmbH	149	547	255	17757	5254
-Germany	DE	Mobile	Telefonica Germany	178	564	255	17816	5538
-Germany	DE	Desktop	1&1 Versatel Deutschland GmbH	80	512	296	20008	1277
-Germany	DE	Desktop	Liberty Global B.V.	91	532	297	19960	1588
-Germany	DE	Desktop	Deutsche Telekom AG	93	547	298	19391	9104
-Germany	DE	Desktop	Vodafone GmbH	105	632	297	19394	3894
-Germany	DE	Desktop	Vodafone Kabel Deutschland GmbH	108	554	297	19704	2590
-Germany	DE	Desktop	Telefonica Germany	112	638	296	20208	3972
-Japan	JP	Mobile	K-Opticom Corporation	255	500	204	19244	1304
-Japan	JP	Mobile	NTT Communications Corporation	263	530	200	19428	5691
-Japan	JP	Mobile	So-net Entertainment Corporation	266	531	202	19569	1455
-Japan	JP	Mobile	BIGLOBE Inc.	270	537	198	19480	1316
-Japan	JP	Mobile	Jupiter Telecommunication Co. Ltd	309	588	202	19411	1519
-Japan	JP	Mobile	KDDI CORPORATION	334	618	200	19390	9239
-Japan	JP	Mobile	Softbank BB Corp.	364	607	202	18850	6045
-Japan	JP	Mobile	NTT DOCOMO, INC.	380	654	198	19519	10008
-Japan	JP	Desktop	NTT Communications Corporation	254	770	249	24391	3550
-Japan	JP	Desktop	KDDI CORPORATION	267	792	249	24676	5703
-Japan	JP	Desktop	Softbank BB Corp.	297	868	247	25103	3864
-Japan	JP	Desktop	NTT DOCOMO, INC.	389	1010	243	22444	5366
-United States	US	Mobile	Comcast Cable Communications, LLC	97	317	259	20901	11473
-United States	US	Mobile	Charter Communications Inc	107	320	261	20946	6602
-United States	US	Mobile	MCI Communications Services, Inc. d/b/a Verizon Business	118	333	259	21025	3370
-United States	US	Mobile	Charter Communications	131	394	259	21464	2484
-United States	US	Mobile	Cox Communications Inc.	140	423	260	21275	2287
-United States	US	Mobile	CenturyLink Communications, LLC	153	468	260	20995	1853
-United States	US	Mobile	AT&T Services, Inc.	154	428	259	21135	5274
-United States	US	Mobile	Charter Communications, Inc	158	414	261	21149	1010
-United States	US	Mobile	T-Mobile USA, Inc.	213	590	268	20126	5272
-United States	US	Mobile	Cellco Partnership DBA Verizon Wireless	236	534	265	20477	5599
-United States	US	Mobile	Sprint Personal Communications Systems	258	643	273	21644	1698
-United States	US	Mobile	AT&T Mobility LLC	259	622	262	21906	3411
-United States	US	Desktop	Cablevision Systems Corp.	80	588	245	25443	1957
-United States	US	Desktop	Frontier Communications of America, Inc.	94	667	244	25124	1106
-United States	US	Desktop	Comcast Cable Communications, LLC	97	585	246	25430	12920
-United States	US	Desktop	Charter Communications Inc	103	599	246	25294	7393
-United States	US	Desktop	MCI Communications Services, Inc. d/b/a Verizon Business	121	593	246	25373	3823
-United States	US	Desktop	AT&T Services, Inc.	126	680	246	25286	5937
-United States	US	Desktop	Charter Communications	132	648	245	25579	2786
-United States	US	Desktop	Cox Communications Inc.	133	650	245	25379	2603
-United States	US	Desktop	CenturyLink Communications, LLC	141	706	246	25295	2073
-United States	US	Desktop	Charter Communications, Inc	165	652	245	25520	1167
-United States	US	Desktop	Sprint Personal Communications Systems	250	945	245	24558	1752
-United States	US	Desktop	Cellco Partnership DBA Verizon Wireless	272	939	244	24578	6150
-United States	US	Desktop	T-Mobile USA, Inc.	280	1236	246	22192	5890
-United States	US	Desktop	AT&T Mobility LLC	291	941	243	24807	4066
-United Kingdom	GB	Mobile	British Telecommunications PLC	77	369	251	22363	4900
-United Kingdom	GB	Mobile	Virgin Media Limited	90	358	250	22167	4866
-United Kingdom	GB	Mobile	TalkTalk	94	465	253	21405	2308
-United Kingdom	GB	Mobile	Sky UK Limited	96	380	249	22638	3596
-United Kingdom	GB	Mobile	EE Limited	144	432	250	22403	1832
-United Kingdom	GB	Mobile	Vodafone Limited	157	439	253	21670	1155
-United Kingdom	GB	Mobile	Telefonica O2 UK	194	502	249	21918	1022
-United Kingdom	GB	Desktop	British Telecommunications PLC	80	611	245	24489	5192
-United Kingdom	GB	Desktop	Vodafone Limited	87	632	247	24374	1208
-United Kingdom	GB	Desktop	EE Limited	93	712	244	23933	1926
-United Kingdom	GB	Desktop	Virgin Media Limited	93	603	245	25348	5117
-United Kingdom	GB	Desktop	Sky UK Limited	94	703	244	24839	3844
-United Kingdom	GB	Desktop	TalkTalk	97	732	247	24284	2423
-United Kingdom	GB	Desktop	Telefonica O2 UK	172	729	244	22500	1086
-United Kingdom	GB	Desktop	Three	221	885	245	23257	1047
-India	IN	Mobile	Bharti Airtel Ltd. AS for GPRS Service	348	918	365	16561	7870
-India	IN	Mobile	National Internet Backbone	419	1069	369	17023	1399
-India	IN	Mobile	Reliance Jio Infocomm Limited	551	1410	364	16302	21538
-India	IN	Mobile	Vodafone India Ltd.	581	1255	365	16796	3357
-India	IN	Mobile	Idea Cellular Limited	712	1516	367	15887	2831
-India	IN	Desktop	Atria Convergence Technologies Pvt. Ltd. Broadband Internet Service Provider INDIA	151	731	88	24042	1515
-India	IN	Desktop	Hathway IP Over Cable Internet	226	930	93	23534	1096
-India	IN	Desktop	Bharti Airtel Ltd., Telemedia Services	245	929	88	24387	2989
-India	IN	Desktop	BHARTI Airtel Ltd.	265	934	75	23800	1079
-India	IN	Desktop	TATA Communications formerly VSNL is Leading ISP	266	878	73	23418	1039
-India	IN	Desktop	National Internet Backbone	344	1234	92	23223	2630
-India	IN	Desktop	Bharti Airtel Ltd. AS for GPRS Service	408	1464	94	22992	3436
-India	IN	Desktop	Reliance Jio Infocomm Limited	617	1770	103	23050	4659
-India	IN	Desktop	Vodafone India Ltd.	722	2006	88	22706	1532
+Brazil	BR	Mobile	CLARO S.A.	487	997	385	15131	5150
+Brazil	BR	Mobile	Telemar Norte Leste S.A.	528	1246	389	15016	1856
+Brazil	BR	Mobile	Tim Celular S.A.	563	1199	387	15330	1642
+Brazil	BR	Mobile	TELEFÔNICA BRASIL S.A	569	1174	386	15307	5053
+Brazil	BR	Mobile	Brasil Telecom S/A - Filial Distrito Federal	630	1355	387	15024	1039
+Brazil	BR	Mobile	Claro S/A	643	1252	387	15111	1426
+Brazil	BR	Desktop	Tim Celular S.A.	418	1201	374	20228	1690
+Brazil	BR	Desktop	CLARO S.A.	462	1159	373	19720	5455
+Brazil	BR	Desktop	Telemar Norte Leste S.A.	477	1394	375	19621	1860
+Brazil	BR	Desktop	TELEFÔNICA BRASIL S.A	484	1295	374	19824	5248
+Brazil	BR	Desktop	Brasil Telecom S/A - Filial Distrito Federal	556	1376	373	19016	1070
+Brazil	BR	Desktop	Claro S/A	637	1706	374	19255	1452
+Russian Federation	RU	Mobile	SkyNet Ltd.	126	515	373	19380	1970
+Russian Federation	RU	Mobile	Perspectiva Ltd.	127	520	373	19322	2615
+Russian Federation	RU	Mobile	OJS Moscow city telephone network	149	521	373	19218	8423
+Russian Federation	RU	Mobile	Net By Net Holding LLC	161	570	373	19388	2938
+Russian Federation	RU	Mobile	OJSC Comcor	168	522	373	19123	2480
+Russian Federation	RU	Mobile	PVimpelCom	171	603	374	19460	14356
+Russian Federation	RU	Mobile	JSC ER-Telecom Holding	186	628	374	19488	18486
+Russian Federation	RU	Mobile	Closed Joint Stock Company TransTeleCom	226	756	374	19632	4834
+Russian Federation	RU	Mobile	Rostelecom	229	736	374	19481	56924
+Russian Federation	RU	Mobile	OJSC Ufanet	231	674	375	19335	3699
+Russian Federation	RU	Mobile	Intersvyaz-2 JSC	236	669	374	19668	2119
+Russian Federation	RU	Mobile	Ojsc oao Tattelecom	248	796	376	19679	3435
+Russian Federation	RU	Mobile	PJSC Bashinformsvyaz	272	876	377	19602	1923
+Russian Federation	RU	Mobile	Novotelecom Ltd	288	676	374	19242	1305
+Russian Federation	RU	Mobile	Sibirskie Seti Ltd.	316	751	374	19179	1122
+Russian Federation	RU	Mobile	MTS PJSC	332	824	375	19650	63582
+Russian Federation	RU	Mobile	PJSC MegaFon	349	861	375	19603	43772
+Russian Federation	RU	Mobile	Public Joint Stock Company Vimpel-Communications	351	909	376	19641	27397
+Russian Federation	RU	Mobile	T2 Mobile LLC	357	931	378	19728	34585
+Russian Federation	RU	Mobile	Ekaterinburg-2000 LLC	380	1077	378	19450	1065
+Russian Federation	RU	Desktop	SkyNet Ltd.	122	742	376	25499	1962
+Russian Federation	RU	Desktop	Perspectiva Ltd.	123	701	375	26361	2599
+Russian Federation	RU	Desktop	Net By Net Holding LLC	159	767	375	27169	2922
+Russian Federation	RU	Desktop	OJS Moscow city telephone network	160	733	376	26055	8380
+Russian Federation	RU	Desktop	PVimpelCom	166	787	376	26737	14274
+Russian Federation	RU	Desktop	OJSC Comcor	177	696	376	25838	2447
+Russian Federation	RU	Desktop	JSC ER-Telecom Holding	185	860	377	27274	18389
+Russian Federation	RU	Desktop	Intersvyaz-2 JSC	221	927	376	26914	2090
+Russian Federation	RU	Desktop	OJSC Ufanet	222	911	377	27012	3690
+Russian Federation	RU	Desktop	Ojsc oao Tattelecom	226	1041	378	27278	3431
+Russian Federation	RU	Desktop	Closed Joint Stock Company TransTeleCom	226	1050	377	25898	4847
+Russian Federation	RU	Desktop	MTS PJSC	241	1014	377	27216	63990
+Russian Federation	RU	Desktop	Rostelecom	243	987	376	27523	56957
+Russian Federation	RU	Desktop	JSC Zap-Sib TransTeleCom, Novosibirsk	268	976	377	27947	1000
+Russian Federation	RU	Desktop	PJSC Bashinformsvyaz	280	1257	379	28024	1914
+Russian Federation	RU	Desktop	Novotelecom Ltd	283	888	377	27988	1309
+Russian Federation	RU	Desktop	Sibirskie Seti Ltd.	306	999	377	27672	1134
+Russian Federation	RU	Desktop	PJSC MegaFon	330	1196	377	26032	44143
+Russian Federation	RU	Desktop	Ekaterinburg-2000 LLC	351	1429	379	26385	1074
+Russian Federation	RU	Desktop	T2 Mobile LLC	367	1476	380	26874	35048
+Russian Federation	RU	Desktop	Public Joint Stock Company Vimpel-Communications	389	1441	379	26716	27716
+Canada	CA	Mobile	Bell Canada	106	359	203	18241	5222
+Canada	CA	Mobile	Videotron Telecom Ltee	139	423	204	16866	2748
+Canada	CA	Mobile	Rogers Communications Canada Inc.	155	395	200	18524	4565
+Canada	CA	Mobile	TELUS Communications Inc.	181	438	201	18576	2967
+Canada	CA	Mobile	Shaw Communications Inc.	184	444	201	19042	2668
+Canada	CA	Desktop	Bell Canada	130	634	238	20834	3585
+Canada	CA	Desktop	Videotron Telecom Ltee	148	641	241	20663	1953
+Canada	CA	Desktop	Rogers Communications Canada Inc.	157	599	239	20811	3003
+Canada	CA	Desktop	TELUS Communications Inc.	162	667	240	21334	2013
+Canada	CA	Desktop	Shaw Communications Inc.	195	636	240	21129	1774
+United Kingdom	GB	Mobile	British Telecommunications PLC	83	386	257	17861	7184
+United Kingdom	GB	Mobile	Virgin Media Limited	98	360	257	18219	5479
+United Kingdom	GB	Mobile	TalkTalk	101	475	259	17625	3186
+United Kingdom	GB	Mobile	Sky UK Limited	102	384	256	18166	4479
+United Kingdom	GB	Mobile	EE Limited	154	454	256	18012	2236
+United Kingdom	GB	Mobile	Vodafone Limited	208	491	259	17900	1385
+United Kingdom	GB	Mobile	Telefonica O2 UK	209	541	253	17879	1277
+United Kingdom	GB	Mobile	Three	228	545	257	18285	1365
+United Kingdom	GB	Desktop	Sky UK Limited	119	737	246	20918	5102
+United Kingdom	GB	Desktop	Virgin Media Limited	121	615	247	21571	6170
+United Kingdom	GB	Desktop	EE Limited	125	779	246	20876	2523
+United Kingdom	GB	Desktop	Vodafone Limited	125	723	247	21270	1517
+United Kingdom	GB	Desktop	British Telecommunications PLC	126	652	247	20201	7963
+United Kingdom	GB	Desktop	TalkTalk	135	793	248	20736	3522
+United Kingdom	GB	Desktop	Telefonica O2 UK	257	917	247	21502	1406
+United Kingdom	GB	Desktop	Three	319	1024	247	19496	1524
+United States	US	Mobile	Cablevision Systems Corp.	100	301	260	18003	2084
+United States	US	Mobile	Comcast Cable Communications, LLC	103	320	259	18127	15061
+United States	US	Mobile	MCI Communications Services, Inc. d/b/a Verizon Business	112	311	260	17968	4345
+United States	US	Mobile	Charter Communications Inc	117	337	260	18054	8590
+United States	US	Mobile	Charter Communications	143	414	259	17923	3414
+United States	US	Mobile	Cox Communications Inc.	157	427	260	18235	3168
+United States	US	Mobile	AT&T Services, Inc.	162	436	260	18007	7011
+United States	US	Mobile	CenturyLink Communications, LLC	169	497	259	17877	2568
+United States	US	Mobile	T-Mobile USA, Inc.	218	612	264	18015	6501
+United States	US	Mobile	Cellco Partnership DBA Verizon Wireless	237	539	261	18306	7180
+United States	US	Mobile	Sprint Personal Communications Systems	266	662	272	18533	1970
+United States	US	Mobile	AT&T Mobility LLC	268	636	258	18401	4215
+United States	US	Desktop	Cablevision Systems Corp.	98	568	249	21656	2278
+United States	US	Desktop	Comcast Cable Communications, LLC	131	585	247	21039	16695
+United States	US	Desktop	Charter Communications Inc	136	604	247	21118	9588
+United States	US	Desktop	MCI Communications Services, Inc. d/b/a Verizon Business	139	586	248	21096	4812
+United States	US	Desktop	Frontier Communications of America, Inc.	142	668	246	20767	1436
+United States	US	Desktop	Charter Communications	167	647	246	21054	3753
+United States	US	Desktop	AT&T Services, Inc.	175	694	247	21035	7675
+United States	US	Desktop	Cox Communications Inc.	192	657	247	20817	3472
+United States	US	Desktop	Charter Communications, Inc	201	690	247	20742	1453
+United States	US	Desktop	CenturyLink Communications, LLC	205	729	246	20165	2888
+United States	US	Desktop	T-Mobile USA, Inc.	297	1246	247	20224	7283
+United States	US	Desktop	Cellco Partnership DBA Verizon Wireless	316	964	245	20940	7682
+United States	US	Desktop	AT&T Mobility LLC	323	955	244	20183	4899
+United States	US	Desktop	Sprint Personal Communications Systems	326	1065	251	19733	2033
+Spain	ES	Mobile	Centre de Telecomuncaciones i Tecnologies de la Informacias de la Generalitat de Catalunya	151	648	269	12429	29547
+Spain	ES	Mobile	Telecable de Asturias,SA	176	635	268	14997	3090
+Spain	ES	Mobile	Xtra Telecom S.A.	199	619	268	13216	36595
+Spain	ES	Mobile	Vodafone Ono, S.A.	202	603	269	14434	21981
+Spain	ES	Mobile	Fundacio Privada per a la Xarxa Lliure, Oberta i Neutral, guifi.net	203	669	271	12179	3445
+Spain	ES	Mobile	Alta Tecnologia en Comunicacions, S.L	208	616	273	12287	3265
+Spain	ES	Mobile	Entidad Publica Empresarial Red.es	209	567	273	13992	3867
+Spain	ES	Mobile	Euskaltel S.A.	213	687	269	14352	9656
+Spain	ES	Mobile	Adamo Telecom Iberia S.A.	222	593	268	12389	4960
+Spain	ES	Mobile	Procono S.A.	230	660	276	13578	2001
+Spain	ES	Mobile	Vodafone Spain	237	650	273	13123	123525
+Spain	ES	Mobile	R Cable y Telecomunicaciones Galicia, S.A.	243	704	268	14996	6447
+Spain	ES	Mobile	Consorci de Serveis Universitaris de Catalunya	244	543	270	11684	2102
+Spain	ES	Mobile	Telefonica De Espana	255	670	273	12878	293980
+Spain	ES	Mobile	Orange Espagne SA	260	684	272	13044	188161
+Spain	ES	Mobile	ServiHosting Networks S.L.	266	744	268	13064	6869
+Spain	ES	Mobile	Apfutura Internacional Soluciones Sl	266	705	271	12128	1654
+Spain	ES	Mobile	Telefonica Moviles Espana, S.A.	318	749	265	13204	2003
+Spain	ES	Mobile	Digi Spain Telecom S.l.u.	329	860	273	14054	2326
+Spain	ES	Mobile	XFERA Moviles S.A.	342	769	269	13157	31536
+Spain	ES	Desktop	Telecable de Asturias,SA	154	706	250	18072	3593
+Spain	ES	Desktop	Euskaltel S.A.	155	739	256	18375	10580
+Spain	ES	Desktop	Centre de Telecomuncaciones i Tecnologies de la Informacias de la Generalitat de Catalunya	162	1089	258	18761	33285
+Spain	ES	Desktop	Xarxes de Telecomunicacions Alternatives SL	162	861	255	17564	1188
+Spain	ES	Desktop	Alta Tecnologia en Comunicacions, S.L	163	925	258	17253	3392
+Spain	ES	Desktop	Digi Spain Telecom S.l.u.	180	1000	259	18201	2355
+Spain	ES	Desktop	Vodafone Spain	181	812	255	17401	136828
+Spain	ES	Desktop	Fundacio Privada per a la Xarxa Lliure, Oberta i Neutral, guifi.net	183	954	257	17552	3771
+Spain	ES	Desktop	Adamo Telecom Iberia S.A.	189	791	255	17341	5743
+Spain	ES	Desktop	R Cable y Telecomunicaciones Galicia, S.A.	198	761	253	18663	7303
+Spain	ES	Desktop	Procono S.A.	198	870	256	18257	2223
+Spain	ES	Desktop	Entidad Publica Empresarial Red.es	199	753	248	17575	4904
+Spain	ES	Desktop	Vodafone Ono, S.A.	201	773	253	17434	25043
+Spain	ES	Desktop	Xtra Telecom S.A.	206	871	255	17470	41631
+Spain	ES	Desktop	Govern de les Illes Balears	210	1319	255	18147	1154
+Spain	ES	Desktop	Consorci de Serveis Universitaris de Catalunya	214	615	249	16114	2536
+Spain	ES	Desktop	Telefonica De Espana	218	849	253	17490	330737
+Spain	ES	Desktop	Orange Espagne SA	220	858	255	17357	207169
+Spain	ES	Desktop	ServiHosting Networks S.L.	240	904	254	17301	7587
+Spain	ES	Desktop	Telefonica Moviles Espana, S.A.	295	810	258	15839	2291
+Spain	ES	Desktop	Apfutura Internacional Soluciones Sl	313	925	252	17150	1816
+Spain	ES	Desktop	XFERA Moviles S.A.	359	1137	257	16939	34579
+France	FR	Mobile	Free SAS	152	635	268	16963	7340
+France	FR	Mobile	Orange	177	598	273	17172	16583
+France	FR	Mobile	SFR SA	185	585	271	17204	9531
+France	FR	Mobile	Bouygues Telecom SA	188	592	270	17245	7351
+France	FR	Mobile	Free Mobile SAS	251	675	271	17380	3618
+France	FR	Desktop	Renater	117	630	136	20558	2897
+France	FR	Desktop	Bouygues Telecom SA	247	870	153	20402	13853
+France	FR	Desktop	Free SAS	252	903	147	20203	16371
+France	FR	Desktop	SFR SA	255	847	148	20598	21498
+France	FR	Desktop	Orange	259	839	147	20436	39799
+France	FR	Desktop	Societe Francaise du Radiotelephone S.A.	285	1045	157	20793	1244
+France	FR	Desktop	Free Mobile SAS	310	979	153	20535	4845
+Germany	DE	Mobile	1&1 Versatel Deutschland GmbH	101	452	249	15394	2551
+Germany	DE	Mobile	Liberty Global B.V.	118	444	248	15449	5266
+Germany	DE	Mobile	Deutsche Telekom AG	123	511	249	15284	18868
+Germany	DE	Mobile	Vodafone Kabel Deutschland GmbH	130	460	249	15462	5534
+Germany	DE	Mobile	Vodafone GmbH	159	573	249	15676	7500
+Germany	DE	Mobile	Telefonica Germany	192	584	249	15945	7807
+Germany	DE	Desktop	1&1 Versatel Deutschland GmbH	171	532	347	18821	1480
+Germany	DE	Desktop	Liberty Global B.V.	200	552	347	18976	2784
+Germany	DE	Desktop	Vodafone GmbH	263	683	348	18231	4297
+Germany	DE	Desktop	Vodafone Kabel Deutschland GmbH	265	554	345	18947	2870
+Germany	DE	Desktop	Telefonica Germany	269	666	350	18870	4327
+Germany	DE	Desktop	Deutsche Telekom AG	281	554	346	17667	11192
+Japan	JP	Mobile	OPTAGE Inc.	265	500	212	17700	1556
+Japan	JP	Mobile	NTT Communications Corporation	274	529	199	18214	6741
+Japan	JP	Mobile	So-net Entertainment Corporation	279	526	202	18553	1638
+Japan	JP	Mobile	BIGLOBE Inc.	279	528	200	18178	1632
+Japan	JP	Mobile	Jupiter Telecommunication Co. Ltd	322	596	201	18123	1656
+Japan	JP	Mobile	Jupiter Telecommunications Co., Ltd.	336	603	204	18414	1155
+Japan	JP	Mobile	KDDI CORPORATION	353	628	202	18284	11066
+Japan	JP	Mobile	Internet Initiative Japan Inc.	359	695	221	17531	1066
+Japan	JP	Mobile	Softbank BB Corp.	360	593	204	18131	7376
+Japan	JP	Mobile	NTT DOCOMO, INC.	385	652	197	18250	11395
+Japan	JP	Desktop	OPTAGE Inc.	248	733	253	22420	1158
+Japan	JP	Desktop	NTT Communications Corporation	282	780	257	22617	4199
+Japan	JP	Desktop	So-net Entertainment Corporation	292	747	253	21794	1032
+Japan	JP	Desktop	KDDI CORPORATION	319	827	254	22376	7009
+Japan	JP	Desktop	Softbank BB Corp.	350	887	249	21970	4713
+Japan	JP	Desktop	Jupiter Telecommunication Co. Ltd	364	836	254	21424	1067
+Japan	JP	Desktop	NTT DOCOMO, INC.	505	1010	252	20396	5903
+Poland	PL	Mobile	Liberty Global B.V.	160	499	338	13794	1202
+Poland	PL	Mobile	Orange Polska Spolka Akcyjna	216	653	341	13619	3503
+Poland	PL	Mobile	Play	241	704	344	14060	2632
+Poland	PL	Mobile	Polkomtel Sp. z o.o.	246	733	346	13395	1815
+Poland	PL	Mobile	T-Mobile Polska S.A.	246	672	348	14053	1634
+Poland	PL	Desktop	Liberty Global B.V.	179	625	385	18601	1122
+Poland	PL	Desktop	Orange Polska Spolka Akcyjna	216	722	389	17629	3669
+Poland	PL	Desktop	Play	268	945	386	18278	2765
+Poland	PL	Desktop	Polkomtel Sp. z o.o.	275	931	385	16981	1980
+Poland	PL	Desktop	T-Mobile Polska S.A.	309	953	382	18133	1620
+Italy	IT	Mobile	Fastweb	175	550	302	15556	3617
+Italy	IT	Mobile	Telecom Italia	186	569	307	15689	10413
+Italy	IT	Mobile	Vodafone Italia S.p.A.	197	575	306	15905	6120
+Italy	IT	Mobile	Wind Tre S.p.A.	235	684	307	15909	7368
+Italy	IT	Mobile	Free Mobile SAS	306	731	304	15747	1369
+Italy	IT	Desktop	Fastweb	206	701	317	19296	3645
+Italy	IT	Desktop	Vodafone Italia S.p.A.	230	769	320	18934	6336
+Italy	IT	Desktop	Telecom Italia	238	729	324	19105	10718
+Italy	IT	Desktop	Wind Tre S.p.A.	246	875	321	18902	7741
+Italy	IT	Desktop	Free Mobile SAS	408	1298	317	19764	1421
+India	IN	Mobile	Bharti Airtel Ltd. AS for GPRS Service	360	967	358	16733	9027
+India	IN	Mobile	National Internet Backbone	428	1124	363	16805	1678
+India	IN	Mobile	Reliance Jio Infocomm Limited	576	1520	356	16596	27766
+India	IN	Mobile	Vodafone India Ltd.	606	1339	358	16910	3918
+India	IN	Mobile	Idea Cellular Limited	717	1592	360	16541	3195
+India	IN	Desktop	Atria Convergence Technologies Pvt. Ltd. Broadband Internet Service Provider INDIA	176	774	82	21127	1903
+India	IN	Desktop	Atria Convergence Technologies pvt ltd	216	916	84	21274	1170
+India	IN	Desktop	Hathway IP Over Cable Internet	262	967	84	21425	1268
+India	IN	Desktop	Bharti Airtel Ltd., Telemedia Services	280	981	82	21124	3662
+India	IN	Desktop	TATA Communications formerly VSNL is Leading ISP	293	918	74	21302	1344
+India	IN	Desktop	BHARTI Airtel Ltd.	316	1090	73	23958	1481
+India	IN	Desktop	National Internet Backbone	394	1290	85	20522	2956
+India	IN	Desktop	Bharti Airtel Ltd. AS for GPRS Service	471	1581	82	20406	3782
+India	IN	Desktop	NKN Core Network	583	1354	84	21374	1034
+India	IN	Desktop	Reliance Jio Infocomm Limited	725	1804	95	20559	5522
+India	IN	Desktop	Vodafone India Ltd.	821	2105	79	20387	1976
