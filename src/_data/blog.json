@@ -8,9 +8,252 @@
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2019-06-07T19:47:01+00:00",
+		"updated": "2019-06-13T14:12:40+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
+			{
+				"title": "Performance perception: the effect of late-loading banners",
+				"link": {
+					"href": "/phame/live/7/post/165/performance_perception_the_effect_of_late-loading_banners/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/165/",
+				"author": {
+					"name": "Gilles (Gilles Dubuc)"
+				},
+				"published": "2019-06-13T14:12:40+00:00",
+				"updated": "2019-06-13T14:12:40+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							"Unlike most websites, Wikipedia and its sister projects are ad-free. This is actually one of the reasons why our performance is so good. We don't have to deal with slow and invasive third-parties.",
+							"However, while we don't have ads, we do display announcement and fundraising banners frequently at the top of wikis. Here's an example:",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-left",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/h7rltcibzloqaefilauv/PHID-FILE-ybtpbiyemdiopfnlbubp/foo.gif",
+										"class": "phabricator-remarkup-embed-image-full",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_0",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/h7rltcibzloqaefilauv/PHID-FILE-ybtpbiyemdiopfnlbubp/foo.gif",
+											"height": "260",
+											"width": "1126"
+										}
+									}
+								}
+							},
+							{
+								"a": {
+									"href": "https://phabricator.wikimedia.org/phame/post/view/161/performance_perception_how_satisfied_are_wikipedia_users/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "our performance perception micro survey"
+								}
+							},
+							"We can look at the distribution (Y axis) of positive and negative survey answers based on when the banner was injected into the DOM, in milliseconds (X axis).",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-left",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/sthim7y5wh3qyc7xphks/PHID-FILE-dlgpcagzm3kyynjnindb/chart_%282%29.png",
+										"class": "phabricator-remarkup-embed-image-full",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_1",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/sthim7y5wh3qyc7xphks/PHID-FILE-dlgpcagzm3kyynjnindb/chart_%282%29.png",
+											"height": "425",
+											"width": "688"
+										}
+									}
+								}
+							},
+							"We see the obvious pattern that positive answers to the micro-survey question (did this page load fast enough?) are more likely if the banner appeared quickly. However, by looking at the data globally like this, we can't separate the banner's slowness from the page's. After all, if your internet connection and device are slow, both the page itself and the banner will be slow, and users might be responding based on the page, ignoring the banner. This distribution might be near identical to the same being done for page load time, regardless of a banner being present or not.",
+							"A simple way to look at this problem is to check the ratio of micro-survey responses for pageviews where a banner was present vs pageviews where there was no banner. Banner campaigns tend to run for specific periods, targeting certain geographies, meaning that a lot of visits don't have a banner displayed at all. Both samples sizes should be enough to draw conclusions.",
+							{
+								"em": "For the banner case, we didn't collect whether the banner was in the user's viewport (i.e. was it seen?)."
+							},
+							"What is going on? It would seem that users are slightly more or equally satisfied of the page performance when a banner is injected. It would suggest that our late-loading banners aren't affecting page performance perception. This sounds too good to be true. We're probably looking at data too globally, including all outliers. One of our team's best practices when findings that are to good to be true appear is to keep digging to try to disprove it. Let's zoom in on more specific data.",
+							{
+								"strong": "loadEventEnd is under a second"
+							},
+							"We can see that the effect on user performance satisfaction starts being quite dramatic as soon as the banner is really late compared to the speed of the main page load.",
+							{
+								"strong": "loadEventEnd is between 5 and 10 seconds"
+							},
+							"While there is a loss of satisfaction, it's not as dramatic as for fast pages. This makes sense, as users experiencing slow page loads probably have a higher tolerance to slowness in general.",
+							"We've established that even for a really slow pageload, the impact of a slow late-loading banner is already visible at 2-5 seconds. If it happens within 500ms after loadEventEnd, the impact isn't that big (less than 1% satisfaction drop). Let's look at the timespan after loadEventEnd in more detail for fast pageloads (< 1s loadEventEnd) in order to find out where things start to really take a turn for the worse.",
+							"Here's the user page performance satisfaction ratio, based on how long after loadEventEnd the banner was injected into the DOM:",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-left",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/xhud2m7k5exdisty6smr/PHID-FILE-2gpmhvlgbv2oq24hv7s5/chart_%281%29.png",
+										"class": "phabricator-remarkup-embed-image-full",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_2",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/xhud2m7k5exdisty6smr/PHID-FILE-2gpmhvlgbv2oq24hv7s5/chart_%281%29.png",
+											"height": "423",
+											"width": "684"
+										}
+									}
+								}
+							},
+							"The reason why the issues caused by late-loading banners when looking at data globally is probably because most of the time banners load fast. But when they happen after loadEventEnd, users start to be quite unforgiving, with the performance satisfaction ratio dropping rapidly. For users with an otherwise fast experience, we can't afford for banners to be injected more than 500ms after loadEvendEnd if we want to maintain a 90% satisfaction ratio.",
+							"Of course, we would like to change our architecture so that banners are rendered server-side, which would get rid of the issue entirely,. But in the meantime loadEventEnd + 500ms seems like a good performance budget we should aim for if we want to mitigate the user impact of our current architectural limitations."
+						],
+						"h2": [
+							{
+								"class": "remarkup-header",
+								"$t": "Perception distribution"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Banner vs no banner"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Slow vs fast banners"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Slicing it further"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Conclusion"
+							}
+						],
+						"div": [
+							{
+								"class": "remarkup-table-wrap",
+								"table": {
+									"class": "remarkup-table",
+									"tr": [
+										{
+											"td": [
+												{
+													"strong": "Corpus"
+												},
+												{
+													"strong": "User satisfaction ratio"
+												},
+												{
+													"strong": "Sample size"
+												}
+											]
+										},
+										{
+											"td": [
+												"No banner or answered before banner",
+												"86.64%",
+												"1,111,542"
+											]
+										},
+										{
+											"td": [
+												"Banner and answered after banner",
+												"87.8%",
+												"311,332"
+											]
+										},
+										{}
+									]
+								}
+							},
+							{
+								"class": "remarkup-table-wrap",
+								"table": {
+									"class": "remarkup-table",
+									"tr": [
+										{
+											"td": [
+												{
+													"strong": "Corpus"
+												},
+												{
+													"strong": "User satisfaction ratio"
+												},
+												{
+													"strong": "Sample size"
+												}
+											]
+										},
+										{
+											"td": [
+												"Banner injected into DOM before loadEventEnd",
+												"92.66%",
+												"4,761"
+											]
+										},
+										{
+											"td": [
+												"Banner injected into DOM less than 500ms after loadEventEnd",
+												"92.03%",
+												"67,588"
+											]
+										},
+										{
+											"td": [
+												"Banner injected into DOM between 2 and 5 seconds after loadEventEnd",
+												"85.33%",
+												"859"
+											]
+										},
+										{}
+									]
+								}
+							},
+							{
+								"class": "remarkup-table-wrap",
+								"table": {
+									"class": "remarkup-table",
+									"tr": [
+										{
+											"td": [
+												{
+													"strong": "Corpus"
+												},
+												{
+													"strong": "User satisfaction ratio"
+												},
+												{
+													"strong": "Sample size"
+												}
+											]
+										},
+										{
+											"td": [
+												"Banner injected into DOM before loadEventEnd",
+												"79.13%",
+												"3019"
+											]
+										},
+										{
+											"td": [
+												"Banner injected into DOM less than 500ms after loadEventEnd",
+												"78.45%",
+												"2488"
+											]
+										},
+										{
+											"td": [
+												"Banner injected into DOM between 2 and 5 seconds after loadEventEnd",
+												"76.17%",
+												"2480"
+											]
+										},
+										{}
+									]
+								}
+							}
+						]
+					}
+				}
+			},
 			{
 				"title": "Performance perception: how satisfied are Wikipedia users?",
 				"link": {
@@ -43,7 +286,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5grwxhtohaoc5v4jpgll/PHID-FILE-2e4d2pvggo7ujfqaelm5/Capture_d_e%CC%81cran_2018-04-30_10.09.02.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_0",
+										"data-meta": "0_3",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5grwxhtohaoc5v4jpgll/PHID-FILE-2e4d2pvggo7ujfqaelm5/Capture_d_e%CC%81cran_2018-04-30_10.09.02.png",
 											"height": "478",
@@ -60,7 +303,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/krenxmalrgkvstwz2ut4/PHID-FILE-76j4csitzmafhou7s5ey/Capture_d_e%CC%81cran_2019-05-29_19.00.21.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_1",
+										"data-meta": "0_4",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/krenxmalrgkvstwz2ut4/PHID-FILE-76j4csitzmafhou7s5ey/Capture_d_e%CC%81cran_2019-05-29_19.00.21.png",
 											"height": "286",
@@ -90,7 +333,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/zlilpbemv5hwiprroesz/PHID-FILE-h67czkdrprudvhtn22lt/Map-Hispanophone_World.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_3",
+										"data-meta": "0_6",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/zlilpbemv5hwiprroesz/PHID-FILE-h67czkdrprudvhtn22lt/Map-Hispanophone_World.png",
 											"height": "628",
@@ -118,7 +361,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/rt4m234s7qlaibvwrp4j/PHID-FILE-57fa25fd5b474nnidabs/Wikilove2.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_4",
+										"data-meta": "0_7",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/4zcgdgs5vxmug4asq7ib/PHID-FILE-yc5bxg6zewhgqc7ytzff/preview-Wikilove2.png",
 											"width": "220",
@@ -222,7 +465,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/xfdc63jooffy27ddedl4/PHID-FILE-e26jtvv637iic4bwnvay/1280px-Editing_Wikipedia_at_Prima_Vista_writing_marathon.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_2",
+														"data-meta": "0_5",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/xfdc63jooffy27ddedl4/PHID-FILE-e26jtvv637iic4bwnvay/1280px-Editing_Wikipedia_at_Prima_Vista_writing_marathon.jpg",
 															"height": "851",
@@ -328,7 +571,7 @@
 										"href": "https://phabricator.wikimedia.org/T115600",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_7",
+										"data-meta": "0_10",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -359,7 +602,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/h7q4uupe2qbeypcgvwtj/PHID-FILE-dkdnyjeaskt7jvb22vc5/wpt-chrome.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_5",
+										"data-meta": "0_8",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/h7q4uupe2qbeypcgvwtj/PHID-FILE-dkdnyjeaskt7jvb22vc5/wpt-chrome.png",
 											"width": "600"
@@ -374,7 +617,7 @@
 										"href": "https://phabricator.wikimedia.org/p/Gilles/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_9",
+										"data-meta": "0_12",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@Gilles"
@@ -416,7 +659,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/wyijfr5okp6xbtc76bsv/PHID-FILE-iu5wohvndppjuxa2ywr5/thumbnail-image.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_6",
+										"data-meta": "0_9",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/wyijfr5okp6xbtc76bsv/PHID-FILE-iu5wohvndppjuxa2ywr5/thumbnail-image.jpg",
 											"width": "600"
@@ -435,7 +678,7 @@
 									"href": "https://phabricator.wikimedia.org/T219231",
 									"class": "phui-tag-view phui-tag-type-object ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_8",
+									"data-meta": "0_11",
 									"span": {
 										"class": "phui-tag-core-closed",
 										"span": {
@@ -781,7 +1024,7 @@
 										"href": "https://phabricator.wikimedia.org/p/SBisson/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_12",
+										"data-meta": "0_15",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@SBisson"
@@ -841,7 +1084,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/eg4kieypr7tyyjag36fc/PHID-FILE-m3p7wqwuuf4vemmdxx3u/profile-log.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_10",
+										"data-meta": "0_13",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/eg4kieypr7tyyjag36fc/PHID-FILE-m3p7wqwuuf4vemmdxx3u/profile-log.png",
 											"height": "174"
@@ -857,7 +1100,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/hnrrgafhjfewmrlk4wms/PHID-FILE-c4vgueq2eh5dnhl4edpy/func-list.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_11",
+										"data-meta": "0_14",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/hnrrgafhjfewmrlk4wms/PHID-FILE-c4vgueq2eh5dnhl4edpy/func-list.png",
 											"height": "200"
@@ -944,7 +1187,7 @@
 											"href": "https://phabricator.wikimedia.org/p/Rxy/",
 											"class": "phui-tag-view phui-tag-type-person ",
 											"data-sigil": "hovercard",
-											"data-meta": "0_15",
+											"data-meta": "0_18",
 											"span": {
 												"class": "phui-tag-core phui-tag-color-person",
 												"$t": "@Rxy"
@@ -954,7 +1197,7 @@
 											"href": "https://phabricator.wikimedia.org/p/Krinkle/",
 											"class": "phui-tag-view phui-tag-type-person ",
 											"data-sigil": "hovercard",
-											"data-meta": "0_14",
+											"data-meta": "0_17",
 											"span": {
 												"class": "phui-tag-core phui-tag-color-person",
 												"$t": "@Krinkle"
@@ -964,7 +1207,7 @@
 											"href": "https://phabricator.wikimedia.org/p/Etonkovidova/",
 											"class": "phui-tag-view phui-tag-type-person ",
 											"data-sigil": "hovercard",
-											"data-meta": "0_13",
+											"data-meta": "0_16",
 											"span": {
 												"class": "phui-tag-core phui-tag-color-person",
 												"$t": "@Etonkovidova"
@@ -1320,7 +1563,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/xcdaaw7hhktmg6snovig/PHID-FILE-44alr6dd3ujcprc44p7w/640px-Jakob_Nielsen_1.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_16",
+														"data-meta": "0_19",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/xcdaaw7hhktmg6snovig/PHID-FILE-44alr6dd3ujcprc44p7w/640px-Jakob_Nielsen_1.jpg",
 															"height": "480",
@@ -1352,7 +1595,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/vgr2frve4n6o6s7cz2ya/PHID-FILE-kgk4c2fbfq6zomyl73yo/402px-Zan_Zig_performing_with_rabbit_and_roses%2C_magician_poster%2C_1899.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_17",
+														"data-meta": "0_20",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/vgr2frve4n6o6s7cz2ya/PHID-FILE-kgk4c2fbfq6zomyl73yo/402px-Zan_Zig_performing_with_rabbit_and_roses%2C_magician_poster%2C_1899.jpg",
 															"height": "600",
@@ -1384,7 +1627,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/lzs3s6vcro7phkgtaci4/PHID-FILE-ls4nwkge4hfjsdfl6dk2/Student_in_Class_%283618969705%29.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_18",
+														"data-meta": "0_21",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/lzs3s6vcro7phkgtaci4/PHID-FILE-ls4nwkge4hfjsdfl6dk2/Student_in_Class_%283618969705%29.jpg",
 															"height": "417",
@@ -1615,7 +1858,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/aubuhmyuf36jr5feucds/PHID-FILE-3grypqxwgck7qxhia5fx/firstpaint_graphite.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_19",
+										"data-meta": "0_22",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/aubuhmyuf36jr5feucds/PHID-FILE-3grypqxwgck7qxhia5fx/firstpaint_graphite.png",
 											"height": "180"
@@ -1659,7 +1902,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/m6hllri46kc7s52hh4t2/PHID-FILE-by3iiutxbxn3k3jca522/firstpaint_coalweb.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_20",
+										"data-meta": "0_23",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/m6hllri46kc7s52hh4t2/PHID-FILE-by3iiutxbxn3k3jca522/firstpaint_coalweb.png",
 											"height": "211",
@@ -1700,7 +1943,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/x4afkxbbf27r3xrtwt6a/PHID-FILE-nsod5j3be2d2hupk3esu/webpagetest.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_21",
+										"data-meta": "0_24",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/x4afkxbbf27r3xrtwt6a/PHID-FILE-nsod5j3be2d2hupk3esu/webpagetest.png",
 											"height": "269"
@@ -1755,7 +1998,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xzmcd2m6kfhqarahqmaj/PHID-FILE-6nnof7qhci64wqnltzy4/savetiming_2s-1_6s-1s_from_May_to_June.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_22",
+										"data-meta": "0_25",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xzmcd2m6kfhqarahqmaj/PHID-FILE-6nnof7qhci64wqnltzy4/savetiming_2s-1_6s-1s_from_May_to_June.png",
 											"height": "278",
@@ -1801,7 +2044,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/pysti4uli7xcvlcxp27s/PHID-FILE-j2vyfqsirr3i2mhqngsw/savetiming_1_1s-1_0s_September_stretch.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_23",
+										"data-meta": "0_26",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/md23w2zfu4bkiwqw4sbs/PHID-FILE-o5j5cuk4d5q5h7g27dgc/preview-savetiming_1_1s-1_0s_September_stretch.png",
 											"width": "220",
@@ -1963,7 +2206,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/o2wt32xdvip2omdva2pn/PHID-FILE-d6gjnnuwpmwhq7u7tivx/Sans_titre.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_24",
+										"data-meta": "0_27",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/fq4bnxkssnxhjauoqfdy/PHID-FILE-6jsaqxbsex5dlircqpfg/preview-Sans_titre.png",
 											"width": "220",
@@ -2542,7 +2785,7 @@
 									"href": "https://phabricator.wikimedia.org/T196242",
 									"class": "phui-tag-view phui-tag-type-object ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_40",
+									"data-meta": "0_43",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-object",
 										"$t": "T196242"
@@ -2564,7 +2807,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_25",
+										"data-meta": "0_28",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 											"width": "600"
@@ -2580,7 +2823,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_26",
+										"data-meta": "0_29",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 											"width": "600"
@@ -2629,7 +2872,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_27",
+										"data-meta": "0_30",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 											"width": "600"
@@ -2647,7 +2890,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_28",
+										"data-meta": "0_31",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 											"width": "600"
@@ -2662,7 +2905,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_29",
+										"data-meta": "0_32",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 											"width": "600"
@@ -2678,7 +2921,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_30",
+										"data-meta": "0_33",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 											"width": "600"
@@ -2694,7 +2937,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_31",
+										"data-meta": "0_34",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 											"width": "600"
@@ -2712,7 +2955,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_32",
+										"data-meta": "0_35",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 											"width": "600"
@@ -2728,7 +2971,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_33",
+										"data-meta": "0_36",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 											"width": "600"
@@ -2742,7 +2985,7 @@
 										"href": "https://phabricator.wikimedia.org/T203543",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_41",
+										"data-meta": "0_44",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -2767,7 +3010,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_34",
+										"data-meta": "0_37",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 											"width": "600"
@@ -2784,7 +3027,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_35",
+											"data-meta": "0_38",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 												"width": "600"
@@ -2797,7 +3040,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_36",
+											"data-meta": "0_39",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 												"width": "600"
@@ -2817,7 +3060,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_37",
+											"data-meta": "0_40",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 												"width": "600"
@@ -2830,7 +3073,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_38",
+											"data-meta": "0_41",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 												"width": "600"
@@ -2848,7 +3091,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_39",
+										"data-meta": "0_42",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 											"width": "600"
@@ -2904,7 +3147,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_42",
+										"data-meta": "0_45",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 											"width": "400"
@@ -2946,7 +3189,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_43",
+										"data-meta": "0_46",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 											"width": "400"
@@ -2970,7 +3213,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_44",
+										"data-meta": "0_47",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 											"width": "400"
@@ -3016,7 +3259,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_45",
+										"data-meta": "0_48",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 											"width": "400"
@@ -3034,7 +3277,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_46",
+										"data-meta": "0_49",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 											"width": "400"
@@ -3528,7 +3771,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_47",
+										"data-meta": "0_50",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 											"height": "100",
@@ -3583,7 +3826,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_50",
+										"data-meta": "0_53",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 											"height": "512",
@@ -3611,7 +3854,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_51",
+											"data-meta": "0_54",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 												"height": "463",
@@ -3625,7 +3868,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_52",
+											"data-meta": "0_55",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 												"height": "90",
@@ -3648,7 +3891,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_53",
+										"data-meta": "0_56",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 											"height": "159",
@@ -3824,7 +4067,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_48",
+														"data-meta": "0_51",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 															"height": "154",
@@ -3840,7 +4083,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_49",
+														"data-meta": "0_52",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 															"height": "156",
@@ -3894,7 +4137,7 @@
 										"href": "https://phabricator.wikimedia.org/p/bd808/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_55",
+										"data-meta": "0_58",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"span": {
@@ -3912,7 +4155,7 @@
 										"href": "https://phabricator.wikimedia.org/p/fgiunchedi/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_54",
+										"data-meta": "0_57",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@fgiunchedi"
@@ -4340,7 +4583,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_56",
+										"data-meta": "0_59",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 											"height": "573",
@@ -4360,7 +4603,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_57",
+										"data-meta": "0_60",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 											"height": "576",
@@ -4377,7 +4620,7 @@
 									"href": "https://phabricator.wikimedia.org/p/aaron/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_58",
+									"data-meta": "0_61",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@aaron"
@@ -4533,7 +4776,7 @@
 										"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_71",
+										"data-meta": "0_74",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"span": {
@@ -4563,7 +4806,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_59",
+										"data-meta": "0_62",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 											"height": "463",
@@ -4599,7 +4842,7 @@
 									"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_70",
+									"data-meta": "0_73",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"span": {
@@ -4615,12 +4858,12 @@
 										"href": "/tag/performance-team/",
 										"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_69",
+										"data-meta": "0_72",
 										"span": {
 											"class": "phui-tag-core ",
 											"span": {
 												"class": "visual-only phui-icon-view phui-font-fa fa-users",
-												"data-meta": "0_68",
+												"data-meta": "0_71",
 												"aria-hidden": "true"
 											},
 											"$t": "Performance-Team"
@@ -4630,7 +4873,7 @@
 										"href": "/T166373",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_64",
+										"data-meta": "0_67",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -4670,7 +4913,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_60",
+										"data-meta": "0_63",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 											"height": "265",
@@ -4689,7 +4932,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_61",
+										"data-meta": "0_64",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 											"height": "471",
@@ -4715,7 +4958,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_62",
+										"data-meta": "0_65",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 											"height": "354",
@@ -4739,7 +4982,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_63",
+										"data-meta": "0_66",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 											"height": "354",
@@ -4764,7 +5007,7 @@
 										"href": "/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_66",
+										"data-meta": "0_69",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -4783,7 +5026,7 @@
 										"href": "https://phabricator.wikimedia.org/p/phuedx/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_67",
+										"data-meta": "0_70",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@phuedx"
@@ -4802,7 +5045,7 @@
 										"href": "https://phabricator.wikimedia.org/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_65",
+										"data-meta": "0_68",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
