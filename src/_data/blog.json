@@ -1,16 +1,334 @@
 {
 	"feed": {
 		"xmlns": "http://www.w3.org/2005/Atom",
-		"title": "The speed of thought",
+		"title": "The Speed of Thought",
 		"id": "https://phabricator.wikimedia.org/phame/blog/feed/7/",
 		"link": {
 			"rel": "self",
 			"type": "application/atom+xml",
 			"href": "https://phabricator.wikimedia.org/phame/blog/feed/7/"
 		},
-		"updated": "2019-06-19T15:17:49+00:00",
+		"updated": "2019-09-21T06:20:07+00:00",
 		"subtitle": "As the Wikimedia Foundation’s Performance Team, we want to create value for readers and editors by making it possible to retrieve and render content at the speed of thought, from anywhere in the world, on the broadest range of devices and connection profiles.",
 		"entry": [
+			{
+				"title": "Wikipedia's JavaScript initialisation on a budget",
+				"link": {
+					"href": "/phame/live/7/post/175/wikipedia_s_javascript_initialisation_on_a_budget/"
+				},
+				"id": "https://phabricator.wikimedia.org/phame/post/view/175/",
+				"author": {
+					"name": "Krinkle (Timo Tijhof)"
+				},
+				"published": "2019-09-18T22:46:41+00:00",
+				"updated": "2019-09-21T06:20:07+00:00",
+				"content": {
+					"type": "xhtml",
+					"div": {
+						"xmlns": "http://www.w3.org/1999/xhtml",
+						"p": [
+							"This week saw the conclusion of a project that I've been shepherding on and off since September of last year. The goal was for the initialisation of our asynchronous JavaScript pipeline (at the time, 36 kilobytes in size) to fit within a budget of 28 KB – the size of two 14 KB bursts of Internet packets.",
+							"In total, the year-long effort is saving 4.3 Terabytes a day of data bandwidth for our users' page views.",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/t64rdovzxdi7lzxxxkh3/PHID-FILE-lwaqoruegcizfxzsza5m/wmchart.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_0",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/t64rdovzxdi7lzxxxkh3/PHID-FILE-lwaqoruegcizfxzsza5m/wmchart.png",
+											"height": "381"
+										}
+									}
+								}
+							},
+							"The above graph shows the transfer size over time. Sizes are after compression (i.e. the net bandwidth cost as perceived from a browser).",
+							{
+								"a": {
+									"href": "https://www.mediawiki.org/wiki/ResourceLoader/Architecture",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "ResourceLoader"
+								}
+							},
+							"This registry contains the metadata for all front-end features deployed on Wikipedia. It enumerates their name, currently deployed version, and their dependency relationships to other such bundles of loadable code.",
+							{
+								"a": [
+									{
+										"href": "https://phabricator.wikimedia.org/T202154",
+										"class": "phui-tag-view phui-tag-type-object ",
+										"data-sigil": "hovercard",
+										"data-meta": "0_3",
+										"span": {
+											"class": "phui-tag-core-closed",
+											"span": {
+												"class": "phui-tag-core phui-tag-color-object",
+												"$t": "T202154"
+											}
+										}
+									},
+									{
+										"href": "https://www.mediawiki.org/wiki/Compatibility#Browsers",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Grade A"
+									},
+									{
+										"href": "https://www.mediawiki.org/wiki/Wikimedia_Performance_Team/Page_load_performance",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "document about Page load performance"
+									}
+								]
+							},
+							"Next was collaborating with the engineering teams here at Wikimedia Foundation and at Wikimedia Deutschland, to identify features that were using more modules than is necessary. For example, by bundling together parts of the same feature that are generally always downloaded together. Thus leading to fewer entry points to have metadata for in the ResourceLoader registry.",
+							"Some highlights:",
+							{
+								"a": {
+									"href": "https://phabricator.wikimedia.org/T203696",
+									"class": "phui-tag-view phui-tag-type-object ",
+									"data-sigil": "hovercard",
+									"data-meta": "0_4",
+									"span": {
+										"class": "phui-tag-core-closed",
+										"span": {
+											"class": "phui-tag-core phui-tag-color-object",
+											"$t": "T203696"
+										}
+									}
+								},
+								"strong": "removed over 200 modules"
+							},
+							"The bar chart above shows small improvements throughout the year, all moving us closer to the goal. Two major drops stand out in particular. One is around two-thirds of the way, in the first week of August. This is when the aforementioned Wikidata improvement was deployed. The second drop is toward the end of the chart and happened this week – more about that below.",
+							"This week's improvement was achieved by two holistic changes that organised the data in a smarter way overall.",
+							{
+								"a": [
+									{
+										"href": "https://www.mediawiki.org/wiki/Extension:EventLogging",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "EventLogging"
+									},
+									{
+										"href": "https://www.mediawiki.org/wiki/ResourceLoader/Package_modules",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Package files"
+									}
+								]
+							},
+							{
+								"a": [
+									{
+										"href": "https://phabricator.wikimedia.org/T229245",
+										"class": "phui-tag-view phui-tag-type-object ",
+										"data-sigil": "hovercard",
+										"data-meta": "0_5",
+										"span": {
+											"class": "phui-tag-core-closed",
+											"span": {
+												"class": "phui-tag-core phui-tag-color-object",
+												"$t": "T229245"
+											}
+										}
+									},
+									{
+										"href": "https://en.wikipedia.org/wiki/Birthday_problem",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Birthday mathematics problem"
+									},
+									{
+										"href": "https://github.com/wikimedia/mediawiki/commit/9f516f1d3b6ab6a4f1bb7e385c93e4d9bccb46d7#diff-57e85f8b8063990fa5b0e2d2f0d25f8e",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "the code comments"
+									}
+								]
+							},
+							"Below is a close-up for the last few days (this is from synthetic monitoring, plotting the raw/uncompressed size):",
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-center",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/roxbunjvadg5paakhayk/PHID-FILE-75m4l6c7okba4astrjnk/grafana-wmf22.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_1",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/roxbunjvadg5paakhayk/PHID-FILE-75m4l6c7okba4astrjnk/grafana-wmf22.png",
+											"height": "237"
+										}
+									}
+								}
+							},
+							{
+								"a": {
+									"href": "https://grafana.wikimedia.org/d/BvWJlaDWk/startup-manifest-size?orgId=1&from=1568439360000&to=1568680200000",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "Startup manifest size dashboard"
+								},
+								"span": {
+									"class": "visual-only phui-icon-view phui-font-fa fa-arrow-circle-down green",
+									"data-meta": "0_6",
+									"aria-hidden": "true"
+								},
+								"strong": "2.8KB"
+							},
+							{
+								"span": {
+									"class": "visual-only phui-icon-view phui-font-fa fa-arrow-circle-down green",
+									"data-meta": "0_7",
+									"aria-hidden": "true"
+								},
+								"strong": "9 KB"
+							},
+							{
+								"a": {
+									"href": "https://stats.wikimedia.org/v2/#/all-projects/reading/total-page-views/normal|bar|2-year|agent~user|monthly",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "User pageview stats"
+								}
+							},
+							{
+								"div": {
+									"class": "phabricator-remarkup-embed-layout-right phabricator-remarkup-embed-float-right",
+									"a": {
+										"href": "https://phab.wmfusercontent.org/file/data/kln5kmacx5ea26d2gpen/PHID-FILE-sz3amx35jppvpc4lvopq/grafana-wmf22-pie.png",
+										"class": "phabricator-remarkup-embed-image",
+										"data-sigil": "lightboxable",
+										"data-meta": "0_2",
+										"img": {
+											"src": "https://phab.wmfusercontent.org/file/data/kln5kmacx5ea26d2gpen/PHID-FILE-sz3amx35jppvpc4lvopq/grafana-wmf22-pie.png",
+											"height": "153"
+										}
+									}
+								}
+							},
+							{
+								"a": {
+									"href": "https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/",
+									"class": "remarkup-link",
+									"rel": "noreferrer",
+									"$t": "bursts of Internet packets"
+								}
+							},
+							{
+								"a": [
+									{
+										"href": "https://docs.google.com/document/d/1SESOADAH9phJTeLo4lqipAjYUMaLpGsQTAUqdgyZb4U/edit",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "spreadsheet"
+									},
+									{
+										"href": "https://grafana.wikimedia.org/d/BvWJlaDWk/startup-manifest-size",
+										"class": "remarkup-link",
+										"rel": "noreferrer",
+										"$t": "Grafana dashboard"
+									}
+								]
+							},
+							"We still have many more opportunities on that dashboard to improve bundling of our features, and (for Performance Team) to make it even easier to implement such bundling. I hope these on-going improvements will come in handy whilst we work on finding room in our performance budget for upcoming features.",
+							"– Timo Tijhof",
+							{
+								"em": "Further reading:"
+							}
+						],
+						"hr": [
+							{
+								"class": "remarkup-hr"
+							},
+							{
+								"class": "remarkup-hr"
+							},
+							{
+								"class": "remarkup-hr"
+							},
+							{
+								"class": "remarkup-hr"
+							}
+						],
+						"h5": [
+							{
+								"class": "remarkup-header",
+								"$t": "How we did it"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Fewer modules"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "Less metadata"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "What's next"
+							}
+						],
+						"ul": [
+							{
+								"class": "remarkup-list",
+								"li": [
+									{
+										"class": "remarkup-list-item",
+										"$t": "WMF Editing team: The WikiEditor extension now has 11 fewer modules. Another 31 modules were removed in UploadWizard. Thanks Ed Sanders, Bartosz Dziewoński, and James Forrester."
+									},
+									{
+										"class": "remarkup-list-item",
+										"$t": "WMF Language team: Combined 24 modules of the ContentTranslation software. Thanks Santhosh Thottingal."
+									},
+									{
+										"class": "remarkup-list-item",
+										"$t": "WMF Reading Web: Combined 25 modules in MobileFrontend. Thanks Stephen Niedzielski, and Jon Robson."
+									},
+									{
+										"class": "remarkup-list-item",
+										"$t": "WMDE Community Wishlist Team: Removed 20 modules from the RevisionSlider and TwoColConflict features. Thanks Amir Sarabadani."
+									}
+								]
+							},
+							{
+								"class": "remarkup-list",
+								"li": [
+									{
+										"class": "remarkup-list-item",
+										"a": {
+											"href": "https://performance.wikimedia.org/",
+											"class": "remarkup-link",
+											"rel": "noreferrer",
+											"$t": "Metrics & Perf reports"
+										}
+									},
+									{
+										"class": "remarkup-list-item",
+										"a": {
+											"href": "https://www.mediawiki.org/wiki/ResourceLoader/Architecture",
+											"class": "remarkup-link",
+											"rel": "noreferrer",
+											"$t": "ResourceLoader Architecture"
+										}
+									},
+									{
+										"class": "remarkup-list-item",
+										"a": {
+											"href": "https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/",
+											"class": "remarkup-link",
+											"rel": "noreferrer",
+											"$t": "The 14KB Initial Window"
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			},
 			{
 				"title": "Tracking down slow event handlers with Event Timing",
 				"link": {
@@ -21,7 +339,7 @@
 					"name": "Gilles (Gilles Dubuc)"
 				},
 				"published": "2019-06-19T15:17:49+00:00",
-				"updated": "2019-06-19T15:17:49+00:00",
+				"updated": "2019-06-20T17:57:51+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
@@ -68,7 +386,7 @@
 										"href": "/T226023",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_0",
+										"data-meta": "0_8",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-object",
 											"$t": "T226023: Media Viewer detach/shutdown can be expensive"
@@ -78,20 +396,23 @@
 										"href": "/T226025",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_1",
+										"data-meta": "0_9",
 										"span": {
-											"class": "phui-tag-core phui-tag-color-object",
-											"$t": "T226025: Expensive viewport size access in lazy loaded references"
+											"class": "phui-tag-core-closed",
+											"span": {
+												"class": "phui-tag-core phui-tag-color-object",
+												"$t": "T226025: Expensive viewport size access in Reference Drawers"
+											}
 										}
 									},
 									{
 										"href": "/T225946",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_2",
+										"data-meta": "0_10",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-object",
-											"$t": "T225946: Mobile Frontend lazy-loading images performance issues"
+											"$t": "T225946: [SPIKE 8hrs] Determine Appropriate Action for Mobile Frontend lazy-loading images performance issues"
 										}
 									}
 								],
@@ -532,7 +853,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/v2ltezjennyw5ewt4g2c/PHID-FILE-jjzmc37rcos3fixkqbtr/800px-Barack_Obama_through_a_magnifying_glass.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_3",
+										"data-meta": "0_11",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/v2ltezjennyw5ewt4g2c/PHID-FILE-jjzmc37rcos3fixkqbtr/800px-Barack_Obama_through_a_magnifying_glass.jpg",
 											"height": "533",
@@ -792,7 +1113,7 @@
 					"name": "Gilles (Gilles Dubuc)"
 				},
 				"published": "2019-06-13T14:12:40+00:00",
-				"updated": "2019-06-13T14:12:40+00:00",
+				"updated": "2019-09-21T01:42:51+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
@@ -807,7 +1128,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/h7rltcibzloqaefilauv/PHID-FILE-ybtpbiyemdiopfnlbubp/foo.gif",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_4",
+										"data-meta": "0_12",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/h7rltcibzloqaefilauv/PHID-FILE-ybtpbiyemdiopfnlbubp/foo.gif",
 											"height": "260",
@@ -832,7 +1153,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/sthim7y5wh3qyc7xphks/PHID-FILE-dlgpcagzm3kyynjnindb/chart_%282%29.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_5",
+										"data-meta": "0_13",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/sthim7y5wh3qyc7xphks/PHID-FILE-dlgpcagzm3kyynjnindb/chart_%282%29.png",
 											"height": "425",
@@ -864,7 +1185,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xhud2m7k5exdisty6smr/PHID-FILE-2gpmhvlgbv2oq24hv7s5/chart_%281%29.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_6",
+										"data-meta": "0_14",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xhud2m7k5exdisty6smr/PHID-FILE-2gpmhvlgbv2oq24hv7s5/chart_%281%29.png",
 											"height": "423",
@@ -1057,7 +1378,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5grwxhtohaoc5v4jpgll/PHID-FILE-2e4d2pvggo7ujfqaelm5/Capture_d_e%CC%81cran_2018-04-30_10.09.02.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_7",
+										"data-meta": "0_15",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5grwxhtohaoc5v4jpgll/PHID-FILE-2e4d2pvggo7ujfqaelm5/Capture_d_e%CC%81cran_2018-04-30_10.09.02.png",
 											"height": "478",
@@ -1074,7 +1395,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/krenxmalrgkvstwz2ut4/PHID-FILE-76j4csitzmafhou7s5ey/Capture_d_e%CC%81cran_2019-05-29_19.00.21.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_8",
+										"data-meta": "0_16",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/krenxmalrgkvstwz2ut4/PHID-FILE-76j4csitzmafhou7s5ey/Capture_d_e%CC%81cran_2019-05-29_19.00.21.png",
 											"height": "286",
@@ -1104,7 +1425,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/zlilpbemv5hwiprroesz/PHID-FILE-h67czkdrprudvhtn22lt/Map-Hispanophone_World.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_10",
+										"data-meta": "0_18",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/zlilpbemv5hwiprroesz/PHID-FILE-h67czkdrprudvhtn22lt/Map-Hispanophone_World.png",
 											"height": "628",
@@ -1132,7 +1453,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/rt4m234s7qlaibvwrp4j/PHID-FILE-57fa25fd5b474nnidabs/Wikilove2.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_11",
+										"data-meta": "0_19",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/4zcgdgs5vxmug4asq7ib/PHID-FILE-yc5bxg6zewhgqc7ytzff/preview-Wikilove2.png",
 											"width": "220",
@@ -1236,7 +1557,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/xfdc63jooffy27ddedl4/PHID-FILE-e26jtvv637iic4bwnvay/1280px-Editing_Wikipedia_at_Prima_Vista_writing_marathon.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_9",
+														"data-meta": "0_17",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/xfdc63jooffy27ddedl4/PHID-FILE-e26jtvv637iic4bwnvay/1280px-Editing_Wikipedia_at_Prima_Vista_writing_marathon.jpg",
 															"height": "851",
@@ -1342,7 +1663,7 @@
 										"href": "https://phabricator.wikimedia.org/T115600",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_14",
+										"data-meta": "0_22",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -1373,7 +1694,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/h7q4uupe2qbeypcgvwtj/PHID-FILE-dkdnyjeaskt7jvb22vc5/wpt-chrome.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_12",
+										"data-meta": "0_20",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/h7q4uupe2qbeypcgvwtj/PHID-FILE-dkdnyjeaskt7jvb22vc5/wpt-chrome.png",
 											"width": "600"
@@ -1388,7 +1709,7 @@
 										"href": "https://phabricator.wikimedia.org/p/Gilles/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_16",
+										"data-meta": "0_24",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@Gilles"
@@ -1430,7 +1751,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/wyijfr5okp6xbtc76bsv/PHID-FILE-iu5wohvndppjuxa2ywr5/thumbnail-image.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_13",
+										"data-meta": "0_21",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/wyijfr5okp6xbtc76bsv/PHID-FILE-iu5wohvndppjuxa2ywr5/thumbnail-image.jpg",
 											"width": "600"
@@ -1449,7 +1770,7 @@
 									"href": "https://phabricator.wikimedia.org/T219231",
 									"class": "phui-tag-view phui-tag-type-object ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_15",
+									"data-meta": "0_23",
 									"span": {
 										"class": "phui-tag-core-closed",
 										"span": {
@@ -1795,7 +2116,7 @@
 										"href": "https://phabricator.wikimedia.org/p/SBisson/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_19",
+										"data-meta": "0_30",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@SBisson"
@@ -1855,7 +2176,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/eg4kieypr7tyyjag36fc/PHID-FILE-m3p7wqwuuf4vemmdxx3u/profile-log.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_17",
+										"data-meta": "0_25",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/eg4kieypr7tyyjag36fc/PHID-FILE-m3p7wqwuuf4vemmdxx3u/profile-log.png",
 											"height": "174"
@@ -1871,7 +2192,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/hnrrgafhjfewmrlk4wms/PHID-FILE-c4vgueq2eh5dnhl4edpy/func-list.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_18",
+										"data-meta": "0_26",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/hnrrgafhjfewmrlk4wms/PHID-FILE-c4vgueq2eh5dnhl4edpy/func-list.png",
 											"height": "200"
@@ -1958,7 +2279,7 @@
 											"href": "https://phabricator.wikimedia.org/p/Rxy/",
 											"class": "phui-tag-view phui-tag-type-person ",
 											"data-sigil": "hovercard",
-											"data-meta": "0_22",
+											"data-meta": "0_27",
 											"span": {
 												"class": "phui-tag-core phui-tag-color-person",
 												"$t": "@Rxy"
@@ -1968,7 +2289,7 @@
 											"href": "https://phabricator.wikimedia.org/p/Krinkle/",
 											"class": "phui-tag-view phui-tag-type-person ",
 											"data-sigil": "hovercard",
-											"data-meta": "0_21",
+											"data-meta": "0_28",
 											"span": {
 												"class": "phui-tag-core phui-tag-color-person",
 												"$t": "@Krinkle"
@@ -1978,7 +2299,7 @@
 											"href": "https://phabricator.wikimedia.org/p/Etonkovidova/",
 											"class": "phui-tag-view phui-tag-type-person ",
 											"data-sigil": "hovercard",
-											"data-meta": "0_20",
+											"data-meta": "0_29",
 											"span": {
 												"class": "phui-tag-core phui-tag-color-person",
 												"$t": "@Etonkovidova"
@@ -2334,7 +2655,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/xcdaaw7hhktmg6snovig/PHID-FILE-44alr6dd3ujcprc44p7w/640px-Jakob_Nielsen_1.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_23",
+														"data-meta": "0_31",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/xcdaaw7hhktmg6snovig/PHID-FILE-44alr6dd3ujcprc44p7w/640px-Jakob_Nielsen_1.jpg",
 															"height": "480",
@@ -2366,7 +2687,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/vgr2frve4n6o6s7cz2ya/PHID-FILE-kgk4c2fbfq6zomyl73yo/402px-Zan_Zig_performing_with_rabbit_and_roses%2C_magician_poster%2C_1899.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_24",
+														"data-meta": "0_32",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/vgr2frve4n6o6s7cz2ya/PHID-FILE-kgk4c2fbfq6zomyl73yo/402px-Zan_Zig_performing_with_rabbit_and_roses%2C_magician_poster%2C_1899.jpg",
 															"height": "600",
@@ -2398,7 +2719,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/lzs3s6vcro7phkgtaci4/PHID-FILE-ls4nwkge4hfjsdfl6dk2/Student_in_Class_%283618969705%29.jpg",
 														"class": "phabricator-remarkup-embed-image-full",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_25",
+														"data-meta": "0_33",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/lzs3s6vcro7phkgtaci4/PHID-FILE-ls4nwkge4hfjsdfl6dk2/Student_in_Class_%283618969705%29.jpg",
 															"height": "417",
@@ -2568,7 +2889,7 @@
 					"name": "Krinkle (Timo Tijhof)"
 				},
 				"published": "2019-02-14T16:05:00+00:00",
-				"updated": "2019-02-21T14:43:50+00:00",
+				"updated": "2019-09-04T19:51:58+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
@@ -2593,6 +2914,10 @@
 							{
 								"class": "remarkup-header",
 								"$t": "Save timing reduced by 50%"
+							},
+							{
+								"class": "remarkup-header",
+								"$t": "So long, Sajax!"
 							}
 						],
 						"p": [
@@ -2629,7 +2954,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/aubuhmyuf36jr5feucds/PHID-FILE-3grypqxwgck7qxhia5fx/firstpaint_graphite.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_26",
+										"data-meta": "0_34",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/aubuhmyuf36jr5feucds/PHID-FILE-3grypqxwgck7qxhia5fx/firstpaint_graphite.png",
 											"height": "180"
@@ -2673,7 +2998,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/m6hllri46kc7s52hh4t2/PHID-FILE-by3iiutxbxn3k3jca522/firstpaint_coalweb.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_27",
+										"data-meta": "0_35",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/m6hllri46kc7s52hh4t2/PHID-FILE-by3iiutxbxn3k3jca522/firstpaint_coalweb.png",
 											"height": "211",
@@ -2714,7 +3039,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/x4afkxbbf27r3xrtwt6a/PHID-FILE-nsod5j3be2d2hupk3esu/webpagetest.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_28",
+										"data-meta": "0_36",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/x4afkxbbf27r3xrtwt6a/PHID-FILE-nsod5j3be2d2hupk3esu/webpagetest.png",
 											"height": "269"
@@ -2769,7 +3094,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xzmcd2m6kfhqarahqmaj/PHID-FILE-6nnof7qhci64wqnltzy4/savetiming_2s-1_6s-1s_from_May_to_June.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_29",
+										"data-meta": "0_37",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xzmcd2m6kfhqarahqmaj/PHID-FILE-6nnof7qhci64wqnltzy4/savetiming_2s-1_6s-1s_from_May_to_June.png",
 											"height": "278",
@@ -2815,7 +3140,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/pysti4uli7xcvlcxp27s/PHID-FILE-j2vyfqsirr3i2mhqngsw/savetiming_1_1s-1_0s_September_stretch.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_30",
+										"data-meta": "0_38",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/md23w2zfu4bkiwqw4sbs/PHID-FILE-o5j5cuk4d5q5h7g27dgc/preview-savetiming_1_1s-1_0s_September_stretch.png",
 											"width": "220",
@@ -2922,10 +3247,6 @@
 							},
 							{
 								"class": "remarkup-header",
-								"$t": "So long, Sajax!"
-							},
-							{
-								"class": "remarkup-header",
 								"$t": "Further reading"
 							}
 						]
@@ -2977,7 +3298,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/o2wt32xdvip2omdva2pn/PHID-FILE-d6gjnnuwpmwhq7u7tivx/Sans_titre.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_31",
+										"data-meta": "0_39",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/fq4bnxkssnxhjauoqfdy/PHID-FILE-6jsaqxbsex5dlircqpfg/preview-Sans_titre.png",
 											"width": "220",
@@ -3556,7 +3877,7 @@
 									"href": "https://phabricator.wikimedia.org/T196242",
 									"class": "phui-tag-view phui-tag-type-object ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_47",
+									"data-meta": "0_55",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-object",
 										"$t": "T196242"
@@ -3578,7 +3899,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_32",
+										"data-meta": "0_40",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/v22h2kkeskdwuodpvqpn/PHID-FILE-vsca4xvj6voxftkio33p/aa.png",
 											"width": "600"
@@ -3594,7 +3915,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_33",
+										"data-meta": "0_41",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/p3dfuapz4bx6tknv6viv/PHID-FILE-3ypsos646xt7v23lfflk/bb.png",
 											"width": "600"
@@ -3643,7 +3964,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_34",
+										"data-meta": "0_42",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/vpg4fi7z57ehbithxi4i/PHID-FILE-h4hv5ulz24kmke3k4xr7/Screen_Shot_2018-09-28_at_11.00.02_AM.png",
 											"width": "600"
@@ -3661,7 +3982,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_35",
+										"data-meta": "0_43",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/pyphrmdqxr5ivv33dxpx/PHID-FILE-zkidc5mkrpcsntict7ve/chrome67-66.png",
 											"width": "600"
@@ -3676,7 +3997,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_36",
+										"data-meta": "0_44",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5wohmlj3qs7dgbuhfzls/PHID-FILE-bvdps7ttb2p7mwvdhiqh/chrome66-67.png",
 											"width": "600"
@@ -3692,7 +4013,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_37",
+										"data-meta": "0_45",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kgc7umszyldhv3rzsd5a/PHID-FILE-ytktl6g6cmd5ozhrhk7q/Screen_Shot_2018-09-28_at_11.06.04_AM.png",
 											"width": "600"
@@ -3708,7 +4029,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_38",
+										"data-meta": "0_46",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2jyrusaium6letlk4wkc/PHID-FILE-m7ek2kebfjg5aqem5vg3/hepp222.png",
 											"width": "600"
@@ -3726,7 +4047,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_39",
+										"data-meta": "0_47",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/4w7hptoocsaj4bjz3vy3/PHID-FILE-feqdcqmm3b3yydan652o/Screen_Shot_2018-10-01_at_6.42.33_PM.png",
 											"width": "600"
@@ -3742,7 +4063,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_40",
+										"data-meta": "0_48",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ym4lua2opon42qonx3ue/PHID-FILE-dpypjlbzxihylvgcyc4o/backandforth.png",
 											"width": "600"
@@ -3756,7 +4077,7 @@
 										"href": "https://phabricator.wikimedia.org/T203543",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_48",
+										"data-meta": "0_56",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -3781,7 +4102,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_41",
+										"data-meta": "0_49",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/w6r623ijwwssmon6bpey/PHID-FILE-57elcrfjstnfkddot5ws/Screen_Shot_2018-09-28_at_11.43.06_AM.png",
 											"width": "600"
@@ -3798,7 +4119,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_42",
+											"data-meta": "0_50",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/revq7b66zd5xiszjae66/PHID-FILE-aw5dx5hfk2mlyl4tap2g/Screen_Shot_2018-10-01_at_8.13.01_PM.png",
 												"width": "600"
@@ -3811,7 +4132,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_43",
+											"data-meta": "0_51",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4gehtuj6dfjnj7q47qxe/PHID-FILE-2jju7fkjvjqq5gkuhbte/Screen_Shot_2018-10-01_at_8.12.11_PM.png",
 												"width": "600"
@@ -3831,7 +4152,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_44",
+											"data-meta": "0_52",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/42l6i4ztha6oo2kbilh4/PHID-FILE-puzfohix6oven42eck33/Screen_Shot_2018-09-28_at_11.44.58_AM.png",
 												"width": "600"
@@ -3844,7 +4165,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_45",
+											"data-meta": "0_53",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/fdnkkxu2fla3w6r2hv7m/PHID-FILE-py6sqyu2bbf7yq6nfott/Screen_Shot_2018-09-28_at_11.44.44_AM.png",
 												"width": "600"
@@ -3862,7 +4183,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_46",
+										"data-meta": "0_54",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/og7rbu4u4ei7hqpu3inc/PHID-FILE-lwgijr2js5wqixpfhdt6/Screen_Shot_2018-09-28_at_12.36.56_PM.png",
 											"width": "600"
@@ -3918,7 +4239,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_49",
+										"data-meta": "0_57",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xauocneqxaspxkejesjx/PHID-FILE-ownzgk6z2brwj6mirxtb/wikipedia.PNG",
 											"width": "400"
@@ -3960,7 +4281,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_50",
+										"data-meta": "0_58",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/kclcvmoslc3qxfeinz4l/PHID-FILE-g2fz3dsyisn32eld6rmh/obama-desktop.jpg",
 											"width": "400"
@@ -3984,7 +4305,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_51",
+										"data-meta": "0_59",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/5tqxopt7tvqtvweu7ptj/PHID-FILE-kx5wd3w72u4ol35kony7/obama-mobile.jpg",
 											"width": "400"
@@ -4030,7 +4351,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_52",
+										"data-meta": "0_60",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/zron5fgy275omwp7rif3/PHID-FILE-lzdljllmxdfsjinpfyec/jump-in-rendering.png",
 											"width": "400"
@@ -4048,7 +4369,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_53",
+										"data-meta": "0_61",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2mawkp46awx3evqib4gg/PHID-FILE-gnzhbe4mtgh57tktztbn/waterfall.jpg",
 											"width": "400"
@@ -4521,7 +4842,7 @@
 					"name": "Krinkle (Timo Tijhof)"
 				},
 				"published": "2018-01-09T18:25:45+00:00",
-				"updated": "2018-01-12T19:11:46+00:00",
+				"updated": "2019-09-11T00:04:48+00:00",
 				"content": {
 					"type": "xhtml",
 					"div": {
@@ -4542,7 +4863,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_54",
+										"data-meta": "0_62",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/siw3g2fygkjxysmeu4gv/PHID-FILE-icv5lj6kc2pldcbl23hz/figure-1-percentiles.png",
 											"height": "100",
@@ -4597,7 +4918,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_57",
+										"data-meta": "0_65",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/porgzz4pytpmrn3xexh6/PHID-FILE-2miv6vsothoyeluj4qg6/figure-2.png",
 											"height": "512",
@@ -4625,7 +4946,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_58",
+											"data-meta": "0_66",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/4iofmmgk2rmufsk4fwfk/PHID-FILE-5qjog7zsjygzk7csj3tk/figure-3-buckets.png",
 												"height": "463",
@@ -4639,7 +4960,7 @@
 											"href": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 											"class": "phabricator-remarkup-embed-image",
 											"data-sigil": "lightboxable",
-											"data-meta": "0_59",
+											"data-meta": "0_67",
 											"img": {
 												"src": "https://phab.wmfusercontent.org/file/data/czeyvgnensjxvwgrj5pq/PHID-FILE-pz4dhhb6wn67qqb67jsa/figure-4-buckets-summary.png",
 												"height": "90",
@@ -4662,7 +4983,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 										"class": "phabricator-remarkup-embed-image",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_60",
+										"data-meta": "0_68",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/2tpgogf2g34qggfx6rag/PHID-FILE-7scdbt4qdznn4noohg5q/blog-image-platform-percent.png",
 											"height": "159",
@@ -4671,8 +4992,7 @@
 									}
 								}
 							},
-							"Global changes like this have a big impact on our measurements. This is the kind of change that drives us to rethink how we measure performance, and (more importantly) what we monitor.",
-							"In the next post we’ll discuss how we aggregate this data, and which metrics we monitor on our dashboards."
+							"Global changes like this have a big impact on our measurements. This is the kind of change that drives us to rethink how we measure performance, and (more importantly) what we monitor."
 						],
 						"h3": [
 							{
@@ -4838,7 +5158,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_55",
+														"data-meta": "0_63",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/oilmhyhrdbtjqehaze2q/PHID-FILE-3lxaj6g7pshsh2yvd4ug/blog-image-01.png",
 															"height": "154",
@@ -4854,7 +5174,7 @@
 														"href": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 														"class": "phabricator-remarkup-embed-image",
 														"data-sigil": "lightboxable",
-														"data-meta": "0_56",
+														"data-meta": "0_64",
 														"img": {
 															"src": "https://phab.wmfusercontent.org/file/data/cimqlkthg53uq4c7e7yw/PHID-FILE-qv67annefhzfalj46cn5/blog-image-02.png",
 															"height": "156",
@@ -4908,7 +5228,7 @@
 										"href": "https://phabricator.wikimedia.org/p/bd808/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_62",
+										"data-meta": "0_69",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@bd808"
@@ -4923,7 +5243,7 @@
 										"href": "https://phabricator.wikimedia.org/p/fgiunchedi/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_61",
+										"data-meta": "0_70",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@fgiunchedi"
@@ -5351,7 +5671,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_63",
+										"data-meta": "0_71",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/xcsqjnaiujgegagkowna/PHID-FILE-7p54mtjy4bmf5vid2cfv/Capture_d_e%CC%81cran_2017-06-08_11.13.49.png",
 											"height": "573",
@@ -5371,7 +5691,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_64",
+										"data-meta": "0_72",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/ihjmbhik5oddayd2rliy/PHID-FILE-c5d2yobmaymeebks2osu/Capture_d_e%CC%81cran_2017-06-08_11.13.38.png",
 											"height": "576",
@@ -5388,7 +5708,7 @@
 									"href": "https://phabricator.wikimedia.org/p/aaron/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_65",
+									"data-meta": "0_73",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
 										"$t": "@aaron"
@@ -5544,12 +5864,9 @@
 										"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_78",
+										"data-meta": "0_82",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
-											"span": {
-												"class": "phui-tag-dot phui-tag-color-orange"
-											},
 											"$t": "@Jdlrobson"
 										}
 									},
@@ -5574,7 +5891,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_66",
+										"data-meta": "0_74",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/25msxmscf7gy3exjf7ef/PHID-FILE-ivbh5b67gslggechbyip/Capture_d_e%CC%81cran_2017-05-26_11.37.35.png",
 											"height": "463",
@@ -5610,12 +5927,9 @@
 									"href": "https://phabricator.wikimedia.org/p/Jdlrobson/",
 									"class": "phui-tag-view phui-tag-type-person ",
 									"data-sigil": "hovercard",
-									"data-meta": "0_77",
+									"data-meta": "0_83",
 									"span": {
 										"class": "phui-tag-core phui-tag-color-person",
-										"span": {
-											"class": "phui-tag-dot phui-tag-color-orange"
-										},
 										"$t": "@Jdlrobson"
 									}
 								}
@@ -5626,12 +5940,12 @@
 										"href": "/tag/performance-team/",
 										"class": "phui-tag-view phui-tag-type-shade phui-tag-violet phui-tag-shade phui-tag-icon-view ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_76",
+										"data-meta": "0_85",
 										"span": {
 											"class": "phui-tag-core ",
 											"span": {
 												"class": "visual-only phui-icon-view phui-font-fa fa-users",
-												"data-meta": "0_75",
+												"data-meta": "0_84",
 												"aria-hidden": "true"
 											},
 											"$t": "Performance-Team"
@@ -5641,7 +5955,7 @@
 										"href": "/T166373",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_71",
+										"data-meta": "0_79",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -5681,7 +5995,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_67",
+										"data-meta": "0_75",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/qf4fjawhex4ssrlivua7/PHID-FILE-q6zq6olrl24jkk7p6ic2/Capture_d_e%CC%81cran_2017-05-30_13.47.38.png",
 											"height": "265",
@@ -5700,7 +6014,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_68",
+										"data-meta": "0_76",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/3ql634biebe3rkurc73y/PHID-FILE-a3yg6eucbu7cx23ex3z5/Capture_d_e%CC%81cran_2017-05-30_13.49.07.png",
 											"height": "471",
@@ -5726,7 +6040,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_69",
+										"data-meta": "0_77",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/httblcplhajjtarkhduq/PHID-FILE-mnp6ibsfr5o3suemcz5q/1_screen_thumb_%284%29.jpg",
 											"height": "354",
@@ -5750,7 +6064,7 @@
 										"href": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 										"class": "phabricator-remarkup-embed-image-full",
 										"data-sigil": "lightboxable",
-										"data-meta": "0_70",
+										"data-meta": "0_78",
 										"img": {
 											"src": "https://phab.wmfusercontent.org/file/data/haqnkjqmhwrod4o5fkxo/PHID-FILE-4odgcokiwawj4nfd3i2o/1_screen_thumb_%285%29.jpg",
 											"height": "354",
@@ -5775,7 +6089,7 @@
 										"href": "/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_73",
+										"data-meta": "0_81",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
@@ -5794,7 +6108,7 @@
 										"href": "https://phabricator.wikimedia.org/p/phuedx/",
 										"class": "phui-tag-view phui-tag-type-person ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_74",
+										"data-meta": "0_86",
 										"span": {
 											"class": "phui-tag-core phui-tag-color-person",
 											"$t": "@phuedx"
@@ -5813,7 +6127,7 @@
 										"href": "https://phabricator.wikimedia.org/T150325",
 										"class": "phui-tag-view phui-tag-type-object ",
 										"data-sigil": "hovercard",
-										"data-meta": "0_72",
+										"data-meta": "0_80",
 										"span": {
 											"class": "phui-tag-core-closed",
 											"span": {
