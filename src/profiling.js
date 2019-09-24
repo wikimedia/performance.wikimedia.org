@@ -31,13 +31,13 @@
 		var link;
 
 		link = document.createElement( 'a' );
-		link.href = createUrl( date + '.' + endpoint + '.svgz' );
+		link.href = createUrl( date + '.excimer.' + endpoint + '.svgz' );
 		link.textContent = endpoint;
 		link.title = 'Flame graph for ' + date + ' of ' + label;
 		parent.appendChild( link );
 
 		link = document.createElement( 'a' );
-		link.href = createUrl( date + '.' + endpoint + '.reversed.svgz' );
+		link.href = createUrl( date + '.excimer.' + endpoint + '.reversed.svgz' );
 		link.textContent = 'rev';
 		link.title = 'Reversed flame graph for ' + date + ' of ' + label;
 		parent.appendChild( document.createTextNode( ' (' ) );
