@@ -2,22 +2,18 @@
   "private": true,
   "scripts": {
     "test": "eslint .",
-    "blog": "curl -s https://phabricator.wikimedia.org/phame/blog/feed/7/ -o src/_data/blog.xml && xml2json src/_data/blog.xml src/_data/blog.json && rm src/_data/blog.xml",
-    "asreport": "curl -R -s https://analytics.wikimedia.org/datasets/performance/autonomoussystems/latest.tsv -o src/_data/asreport.tsv",
+    "blog": "curl -s https://phabricator.wikimedia.org/phame/blog/feed/7/ -o src/_data/blog.xml && node ./xml2json.js src/_data/blog.xml > src/_data/blog.json && rm src/_data/blog.xml",
+    "asreport": "curl -R -s https://analytics.wikimedia.org/published/datasets/performance/autonomoussystems/latest.tsv -o src/_data/asreport.tsv",
     "preuncss": "bundle exec jekyll build",
     "uncss": "uncss public_html/index.html public_html/php-profiling/index.html public_html/asreport/index.html --media '(min-width: 1000px)' --ignore '/\\.popover/','/svg:not/' --ignoreSheet public_html/lib/bootstrap-3.3.5/css/bootstrap.uncss.css --stylesheets lib/bootstrap-3.3.5/css/bootstrap.min.css --htmlroot public_html > src/lib/bootstrap-3.3.5/css/bootstrap.uncss.css",
     "generate": "npm run uncss && npm run blog && npm run asreport && COAL_WEB_SERVER=/coal bundle exec jekyll build",
     "jekyll": "npm run generate && bundle exec jekyll serve",
     "verify": "test -z '$(git status --porcelain public_html/)'"
   },
-  "pre-commit": [
-    "generate"
-  ],
   "devDependencies": {
     "eslint": "4.19.1",
     "eslint-config-wikimedia": "0.5.0",
-    "pre-commit": "1.2.2",
     "uncss": "0.16.2",
-    "xml2json-cli": "1.1.1"
+    "xml2js": "0.4.23"
   }
 }
