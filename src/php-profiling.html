@@ -1,6 +1,6 @@
 ---
 layout: php-profiling
-title: Flame Graphs for PHP — Wikimedia Performance
+title: Flame Graphs — Wikimedia Performance
 redirect_from:
  - /php-profiling.html
 ---
@@ -9,7 +9,7 @@ redirect_from:
   <h4>Profiling for PHP</h4>
   <hr/>
   <p>
-    HHVM's <a href="https://github.com/facebook/hhvm/wiki/Profiling#xenon">Xenon profiler</a> is used to collect stack traces from CPU usage frames. The aggregated logs are published here, as well as interactive SVGs (generated with <a href="https://github.com/brendangregg/FlameGraph">FlameGraph</a>).
+    The trace logs and flame graphs are powered by <a href="https://github.com/wikimedia/arc-lamp#readme">Arc Lamp</a>. See also <a href="https://www.mediawiki.org/wiki/Excimer">php-excimer</a>, and <a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a>.
   </p>
 </div>
 <div class="container">
@@ -25,7 +25,7 @@ redirect_from:
     <span id=flamegraph-current></span>
   </p>
   <span class=clearfix></span>
-  <h4>Tracing logs</h4>
+  <h4>Trace logs</h4>
   <p>
       <a href="/arclamp/logs/daily/">Browse daily logs</a>
       • <a href="/arclamp/logs/hourly/">Browse hourly logs</a>
