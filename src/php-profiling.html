@@ -6,29 +6,29 @@ redirect_from:
 ---
 
 <div class="container text-center perf-info-box">
-  <h4>Profiling for PHP</h4>
+  <h1>Profiling for PHP</h1>
   <hr/>
   <p>
-    The trace logs and flame graphs are powered by <a href="https://github.com/wikimedia/arc-lamp#readme">Arc Lamp</a>. See also <a href="https://www.mediawiki.org/wiki/Excimer">php-excimer</a>, and <a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a>.
+    The trace logs and flame graphs are powered by <a href="https://github.com/wikimedia/arc-lamp#readme">Arc Lamp</a>.<br>See also <a href="https://www.mediawiki.org/wiki/Excimer">php-excimer</a>, and <a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a>.
   </p>
 </div>
 <div class="container">
-  <h4>Flame graphs</h4>
+  <h2>Flame graphs</h2>
   <div class="pull-left media-left">
-    <img src="{{ site.baseurl }}/lib/flamegraph.png" width="250" height="160" alt="" title="Flame graph">
+    <a href="/arclamp/svgs/daily/" title="Browser daily graphs" id="flamegraph-latest-link" class="thumbnail"><img src="{{ site.baseurl }}/lib/flamegraph.png" width="250" height="160" alt=""></a>
   </div>
   <p>
     <a href="/arclamp/svgs/daily/">Browse daily graphs</a>
     • <a href="/arclamp/svgs/hourly/">Browse hourly graphs</a>
   </p>
   <p>
-    <span id=flamegraph-current></span>
+    <span id="flamegraph-current"></span>
   </p>
-  <span class=clearfix></span>
-  <h4>Trace logs</h4>
+  <span class="clearfix"></span>
+  <h2>Trace logs</h2>
   <p>
       <a href="/arclamp/logs/daily/">Browse daily logs</a>
       • <a href="/arclamp/logs/hourly/">Browse hourly logs</a>
     </p>
 </div>
-<script src={{ site.baseurl }}/profiling.js defer></script>
+<script src="{{ site.baseurl }}/profiling.js" defer></script>

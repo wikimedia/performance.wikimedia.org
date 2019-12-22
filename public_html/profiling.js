@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 ( function () {
-	var span, i, d, isoDate;
+	var span, i, d, isoDate, latestLink;
 
 	// Feature test
 	if ( !Date.prototype.toISOString ) {
@@ -56,13 +56,24 @@
 
 		span.appendChild( document.createElement( 'br' ) );
 		span.appendChild( document.createTextNode( '• ' + isoDate + ': ' ) );
-		appendLinks( span, isoDate, 'all', 'all MediaWiki requests' );
-		span.appendChild( document.createTextNode( ' • ' ) );
+
 		appendLinks( span, isoDate, 'index', 'index.php requests' );
 		span.appendChild( document.createTextNode( ' • ' ) );
 		appendLinks( span, isoDate, 'api', 'api.php requests' );
 		span.appendChild( document.createTextNode( ' • ' ) );
 		appendLinks( span, isoDate, 'load', 'load.php requests' );
+		span.appendChild( document.createTextNode( ' • ' ) );
+		appendLinks( span, isoDate, 'rest', 'rest.php requests' );
+		span.appendChild( document.createTextNode( ' • ' ) );
+		appendLinks( span, isoDate, 'all', 'all MediaWiki requests' );
+
+		if ( i === 1 ) {
+			latestLink = document.getElementById( 'flamegraph-latest-link' );
+			if ( latestLink ) {
+				latestLink.title = 'Latest flame graph for index.php endpoint';
+				latestLink.href = createUrl( isoDate + '.excimer.index.svgz' );
+			}
+		}
 
 		i++;
 	}
