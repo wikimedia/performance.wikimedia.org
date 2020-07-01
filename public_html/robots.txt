@@ -1,3 +1,4 @@
 User-Agent: *
 Disallow: /arclamp/logs/
 Disallow: /arclamp/svgs/
+Disallow: /xhgui
