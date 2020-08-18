@@ -1,1 +1,2 @@
-node_modules
+/src/.jekyll-cache
+/node_modules
