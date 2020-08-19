@@ -1,0 +1,6 @@
+- href: /blog/
+  text: Blog
+- href: /xhgui/
+  text: XHGui
+- href: https://grafana.wikimedia.org/dashboard/db/performance-metrics
+  text: Grafana

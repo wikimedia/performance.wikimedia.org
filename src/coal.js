@@ -22,7 +22,7 @@
 ( function () {
 	'use strict';
 
-	var defaultPeriod = 'day',
+	var defaultHash = '#!/day',
 		importantEvents = {
 			firstPaint: [
 				{ date: new Date( '2016-11-17' ),
@@ -51,13 +51,13 @@
 
 	function drawCharts( period ) {
 		d3.json( WMPERF.coalUrl + '/v1/metrics?period=' + period, function ( data ) {
-			var charts = d3.select( '#metrics' )
+			var charts = d3.select( '#perf-metrics' )
 				.selectAll( 'div' )
 				.data( d3.keys( data.points ) );
 
 			charts.enter()
 				.append( 'div' )
-				.attr( 'class', 'metric' )
+				.attr( 'class', 'perf-metric' )
 				.attr( 'id', identity );
 
 			charts.each( function ( metric ) {
@@ -89,38 +89,39 @@
 		} );
 	}
 
-	function selectTab( tab ) {
-		if ( d3.select( tab ).classed( 'active' ) ) {
-			return;
+	function onHash( hash ) {
+		var period, query, link, others;
+		if ( !/^#!\/./.test( hash ) ) {
+			return false;
 		}
-		d3.select( '.perf-nav li.active' ).classed( 'active', false );
-		tab.className = 'active';
-		drawCharts( tab.id );
+		period = hash.slice( 3 );
+		query = '.wm-site-nav a[href="' + CSS.escape( hash ) + '"]';
+		link = document.querySelector( query );
+		if ( !link || link.classList.contains( 'wm-nav-item-active' ) ) {
+			return false;
+		}
+
+		others = link.closest( 'ul' ).querySelectorAll( 'a.wm-nav-item-active' );
+		[].forEach.call( others, function ( other ) {
+			other.classList.remove( 'wm-nav-item-active' );
+		} );
+		link.classList.add( 'wm-nav-item-active' );
+		drawCharts( period );
+		return true;
 	}
 
-	d3.selectAll( '.perf-nav li' ).on( 'click', function () {
-		selectTab( this );
+	window.addEventListener( 'hashchange', function () {
+		onHash( location.hash );
 	} );
 
 	function init() {
-		var id, navItem;
-		// Handle permalink
-		if ( /^#!\/./.test( location.hash ) ) {
-			id = location.hash.slice( 3 );
-			// In case of default, call drawCharts() directly.
-			// Callling selectTab() would return early without drawing.
-			if ( id !== defaultPeriod ) {
-				navItem = document.getElementById( id );
-				if ( navItem ) {
-					selectTab( navItem );
-					return;
-				}
-			}
+		if ( !onHash( location.hash ) ) {
+			// In case of no (valid) hash, draw the default.
+			onHash( defaultHash );
 		}
-
-		// Default
-		drawCharts( defaultPeriod );
 	}
 
-	init();
+	if ( 'classList' in document.body && 'CSS' in window && CSS.escape ) {
+		init();
+	}
 }() );

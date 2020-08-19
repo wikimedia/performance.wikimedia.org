@@ -1,34 +1,39 @@
 ---
-layout: php-profiling
+layout: default
 title: Flame Graphs — Wikimedia Performance
 redirect_from:
  - /php-profiling.html
 ---
+<style>
+.perf-thumbnail {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px;
+}
+.perf-pull-left {
+  clear: left;
+  float: left;
+  margin-right: 10px;
+}
+</style>
 
-<div class="container text-center perf-info-box">
-  <h1>Profiling for PHP</h1>
-  <hr/>
-  <p>
-    The trace logs and flame graphs are powered by <a href="https://github.com/wikimedia/arc-lamp#readme">Arc Lamp</a>.<br>See also <a href="https://www.mediawiki.org/wiki/Excimer">php-excimer</a>, and <a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a>.
-  </p>
+<h1>Profiling for PHP</h1>
+<p>The trace logs and flame graphs are powered by <a href="https://github.com/wikimedia/arc-lamp#readme">Arc Lamp</a>.<br>See also <a href="https://www.mediawiki.org/wiki/Excimer">php-excimer</a>, and <a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a>.</p>
+<h2>Flame graphs</h2>
+<div class="perf-thumbnail perf-pull-left">
+  <a href="/arclamp/svgs/daily/" title="Browser daily graphs" id="flamegraph-latest-link"><img src="{{ site.baseurl }}/lib/flamegraph.png" width="250" height="160" alt=""></a>
 </div>
-<div class="container">
-  <h2>Flame graphs</h2>
-  <div class="pull-left media-left">
-    <a href="/arclamp/svgs/daily/" title="Browser daily graphs" id="flamegraph-latest-link" class="thumbnail"><img src="{{ site.baseurl }}/lib/flamegraph.png" width="250" height="160" alt=""></a>
-  </div>
-  <p>
-    <a href="/arclamp/svgs/daily/">Browse daily graphs</a>
-    • <a href="/arclamp/svgs/hourly/">Browse hourly graphs</a>
-  </p>
-  <p>
-    <span id="flamegraph-current"></span>
-  </p>
-  <span class="clearfix"></span>
-  <h2>Trace logs</h2>
-  <p>
-      <a href="/arclamp/logs/daily/">Browse daily logs</a>
-      • <a href="/arclamp/logs/hourly/">Browse hourly logs</a>
-    </p>
-</div>
+<p>
+  <a href="/arclamp/svgs/daily/">Browse daily graphs</a>
+  • <a href="/arclamp/svgs/hourly/">Browse hourly graphs</a>
+</p>
+<p>
+  <span id="flamegraph-current"></span>
+</p>
+<span class="clearfix"></span>
+<h2>Trace logs</h2>
+<p>
+    <a href="/arclamp/logs/daily/">Browse daily logs</a>
+    • <a href="/arclamp/logs/hourly/">Browse hourly logs</a>
+</p>
 <script src="{{ site.baseurl }}/profiling.js" defer></script>

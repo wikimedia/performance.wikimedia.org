@@ -1,5 +1,0 @@
- <style>
-{% include_relative lib/bootstrap-3.3.5/css/bootstrap.uncss.css %}
-{% include_relative lib/metrics-graphics-2.11.0/metricsgraphics.css %}
-{% include_relative lib/overrides.css %}
- </style>

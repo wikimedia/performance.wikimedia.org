@@ -8,7 +8,11 @@ plugins:
 
 # Location
 source: src/
-destination: public_html/
+# This is the default for use by `jekyll serve` and other `jekyll`
+# commands used during local development. We set "public_html/"
+# only for the production output. This way there is no chance of
+# accidentally committing the development version.
+destination: src/_site/
 
 # Output
 permalink: pretty

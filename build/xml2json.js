@@ -1,4 +1,3 @@
-/* eslint-env node */
 var fs, xml2js,
 	data, parser;
 
