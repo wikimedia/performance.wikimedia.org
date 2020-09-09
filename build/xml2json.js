@@ -1,25 +1,21 @@
-var fs, xml2js,
-	data, parser;
+const fs = require( 'fs' );
+const xml2js = require( 'xml2js' );
 
-fs = require( 'fs' );
-xml2js = require( 'xml2js' );
-
-data = fs.readFileSync( process.argv[ 2 ], 'utf-8' );
-parser = new xml2js.Parser();
+const data = fs.readFileSync( process.argv[ 2 ], 'utf-8' );
+const parser = new xml2js.Parser();
 parser.parseString( data, function ( err, result ) {
-	var normal;
 	if ( err ) {
 		throw err;
 	}
 
 	// Reduce blog.json to only the relevant subset.
-	// This reduces noise from unrelated changes on Phabricator.
-	normal = {
+	// This reduces noise from unrelated meta data changes.
+	const normal = {
 		feed: {
-			entry: result.feed.entry.map( function ( entry ) {
+			entry: result.rss.channel[ 0 ].item.map( function ( entry ) {
 				return {
-					id: entry.id,
-					title: entry.title
+					link: entry.link[ 0 ],
+					title: entry.title[ 0 ]
 				};
 			} )
 		}

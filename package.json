@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "test": "eslint .",
-    "renew:blog": "curl -s https://phabricator.wikimedia.org/phame/blog/feed/7/ -o src/_data/blog.xml && node build/xml2json.js src/_data/blog.xml > src/_data/blog.json && rm src/_data/blog.xml",
+    "renew:blog": "curl -s https://techblog.wikimedia.org/category/performance/feed/ -o src/_data/blog.xml && node build/xml2json.js src/_data/blog.xml > src/_data/blog.json && rm src/_data/blog.xml",
     "renew:asreport": "curl -R -s https://analytics.wikimedia.org/published/datasets/performance/autonomoussystems/latest.tsv -o src/_data/asreport.tsv",
     "renew": "npm run renew:blog && npm run renew:asreport",
     "less": "node build/less2css.js",

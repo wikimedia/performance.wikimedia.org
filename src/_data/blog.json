@@ -2,196 +2,20 @@
     "feed": {
         "entry": [
             {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/183/"
-                ],
-                "title": [
-                    "WikimediaDebug v2 is here!"
-                ]
+                "link": "https://techblog.wikimedia.org/2020/06/24/how-we-contributed-paint-timing-api-to-webkit/",
+                "title": "How we contributed Paint Timing API to WebKit"
             },
             {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/175/"
-                ],
-                "title": [
-                    "Wikipedia's JavaScript initialisation on a budget"
-                ]
+                "link": "https://techblog.wikimedia.org/2020/05/07/measuring-the-performance-of-wikipedia-visitors-devices/",
+                "title": "Measuring the performance of Wikipedia visitors’ devices"
             },
             {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/168/"
-                ],
-                "title": [
-                    "Tracking down slow event handlers with Event Timing"
-                ]
+                "link": "https://techblog.wikimedia.org/2020/04/27/organizing-and-running-a-developer-room-at-fosdem/",
+                "title": "Organizing and running a developer room at FOSDEM"
             },
             {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/167/"
-                ],
-                "title": [
-                    "Performance perception: correlation to RUM metrics"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/165/"
-                ],
-                "title": [
-                    "Performance perception: the effect of late-loading banners"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/161/"
-                ],
-                "title": [
-                    "Performance perception: how satisfied are Wikipedia users?"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/157/"
-                ],
-                "title": [
-                    "Evaluating Element Timing for Images"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/154/"
-                ],
-                "title": [
-                    "Autonomous Systems performance report"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/143/"
-                ],
-                "title": [
-                    "Debugging production with X-Wikimedia-Debug"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/142/"
-                ],
-                "title": [
-                    "Magic Numbers"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/131/"
-                ],
-                "title": [
-                    "Why performance matters"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/124/"
-                ],
-                "title": [
-                    "Perf Matters at Wikipedia 2015"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/123/"
-                ],
-                "title": [
-                    "Machine learning: how to undersample the wrong way"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/122/"
-                ],
-                "title": [
-                    "Best friends forever"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/117/"
-                ],
-                "title": [
-                    "Performance testing in a controlled lab environment - the metrics"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/109/"
-                ],
-                "title": [
-                    "Mobile web performance: the importance of the device"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/86/"
-                ],
-                "title": [
-                    "Thumbor support for private wikis deployed"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/83/"
-                ],
-                "title": [
-                    "Measuring Wikipedia page load times"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/81/"
-                ],
-                "title": [
-                    "The journey to Thumbor, part 3: development and deployment strategy"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/80/"
-                ],
-                "title": [
-                    "The journey to Thumbor, part 2: thumbnailing architecture"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/55/"
-                ],
-                "title": [
-                    "The journey to Thumbor, part 1: rationale"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/54/"
-                ],
-                "title": [
-                    "Looking back: improvements to edit save time"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/19/"
-                ],
-                "title": [
-                    "Improving time-to-logo performance with preload links"
-                ]
-            },
-            {
-                "id": [
-                    "https://phabricator.wikimedia.org/phame/post/view/15/"
-                ],
-                "title": [
-                    "Investigating a performance improvement"
-                ]
+                "link": "https://techblog.wikimedia.org/2017/06/02/investigating-a-performance-improvement/",
+                "title": "Investigating a performance improvement"
             }
         ]
     }
