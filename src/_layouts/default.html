@@ -13,9 +13,9 @@ WMPERF = {
 };
 </script>
 <style>
-{% include_relative lib/main.css %}
-{% if page.url == '/' -%}
-{% include_relative lib/metrics-graphics-2.11.0/metricsgraphics.css %}
+{% include_relative lib/main.css -%}
+{% if page.url == '/' %}
+{% include_relative lib/metrics-graphics-2.11.0/metricsgraphics.css -%}
 {%- endif %}
 </style>
 <link rel="shortcut icon" href="{{ site.baseurl }}/favicon.ico">
