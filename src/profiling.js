@@ -31,13 +31,13 @@
 		var link;
 
 		link = document.createElement( 'a' );
-		link.href = createUrl( date + '.excimer.' + endpoint + '.svgz' );
+		link.href = createUrl( date + '.excimer-wall.' + endpoint + '.svgz' );
 		link.textContent = endpoint;
 		link.title = 'Flame graph for ' + date + ' of ' + label;
 		parent.appendChild( link );
 
 		link = document.createElement( 'a' );
-		link.href = createUrl( date + '.excimer.' + endpoint + '.reversed.svgz' );
+		link.href = createUrl( date + '.excimer-wall.' + endpoint + '.reversed.svgz' );
 		link.textContent = 'rev';
 		link.title = 'Reversed flame graph for ' + date + ' of ' + label;
 		parent.appendChild( document.createTextNode( ' (' ) );
@@ -71,7 +71,7 @@
 			latestLink = document.getElementById( 'flamegraph-latest-link' );
 			if ( latestLink ) {
 				latestLink.title = 'Latest flame graph for index.php endpoint';
-				latestLink.href = createUrl( isoDate + '.excimer.index.svgz' );
+				latestLink.href = createUrl( isoDate + '.excimer-wall.index.svgz' );
 			}
 		}
 
