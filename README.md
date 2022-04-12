@@ -15,12 +15,12 @@
 
 * Start a Jekyll server for local development at at <http://127.0.0.1:4000/> (automatically watches for changes and updates in real-time):
   ```
-  COAL_WEB_SERVER=https://performance.wikimedia.org/coal bundle exec jekyll serve
+  bundle exec jekyll serve
   ```
-  Options:
-  * `COAL_WEB_SERVER`: Set this environment to the address of a `coal-web` server.
+  Environment variables:
+  * `COAL_WEB_SERVER`: (Optional) Override the address of a `coal-web` server.
     For example, set `COAL_WEB_SERVER=http://127.0.0.1:5000` for the address that
-    Flask would use if you run coal-web locally. Or point it to the production version.
+    Flask would use if you run coal-web locally. Defaults to the production version.
 
 * Let Jekyll build the site to `public_html/` for deployment, to then stage and commit with Git:
   ```

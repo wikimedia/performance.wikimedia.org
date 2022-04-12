@@ -8,7 +8,9 @@ module Jekyll
         # and Beta Cluster naturally use their respective local Coal instances.
         site.config['COAL_WEB_SERVER'] = '/coal'
       else
-        site.config['COAL_WEB_SERVER'] = ENV['COAL_WEB_SERVER'] || '/coal'
+        # During development, default to the production one to ease testing
+        # But allow overriding to something local on a different port.
+        site.config['COAL_WEB_SERVER'] = ENV['COAL_WEB_SERVER'] || 'https://performance.wikimedia.org/coal'
       end
     end
   end
