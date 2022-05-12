@@ -2,5 +2,5 @@
   text: Blog
 - href: /xhgui/
   text: XHGui
-- href: https://grafana.wikimedia.org/dashboard/db/performance-metrics
+- href: https://grafana.wikimedia.org/d/000000050/performance-metrics
   text: Grafana
