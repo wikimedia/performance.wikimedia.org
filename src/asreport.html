@@ -38,19 +38,19 @@ wmui_subnav:
 </p>
 {% assign last_country = false %}
 {% assign last_type = false %}
-{%- for row in site.data.asreport %}
-	{% if row['Type'] != last_type %}
-		{% if last_type != false %}
+{% for row in site.data.asreport -%}
+	{%- if row['Type'] != last_type -%}
+		{%- if last_type != false %}
 			</table>
 			<br>
 		{%- endif -%}
 	{%- endif -%}
 	{%- if row['Country'] != last_country -%}
-		{%- assign last_country = row['Country'] -%}
+		{%- assign last_country = row['Country'] %}
 		<h3 id="{{ row['Country'] | slugify }}">{{ row['Country'] }}</h3>
 	{%- endif -%}
-	{% if row['Type'] != last_type %}
-	{% assign last_type = row['Type'] -%}
+	{%- if row['Type'] != last_type -%}
+	{%- assign last_type = row['Type'] %}
 		{{ row['Type'] }}<br>
 		<table class="wm-table perf-asreport-table">
 			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
