@@ -446,7 +446,7 @@ tspan.mg-points-mono {
 }
 </style>
 <blockquote><p>
-  We monitor the performance of <a href="https://www.wikipedia.org/">Wikipedia</a> continuously. These graphs are sampled measurements from 1 in 1000 requests. If you want to dig deeper into our metrics, you should check out our <a href="https://grafana.wikimedia.org/d/000000050/performance-metrics">Grafana graphs</a>.
+  We monitor the performance of <a href="https://www.wikipedia.org/">Wikipedia</a> continuously. These graphs are moving medians of measurements from 1 in 1000 sampled requests. If you want to dig deeper into our metrics, check out our <a href="https://grafana.wikimedia.org/d/000000050/performance-metrics">Grafana graphs</a>.
 </p>
 <p>
   <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">– Wikimedia Performance Team</a>
@@ -458,15 +458,15 @@ tspan.mg-points-mono {
 <script src="/coal.js" defer></script>
 <div id="perf-metrics" class="perf-metrics">
     <div class="perf-metric" id="domInteractive"></div>
-    <p class="perf-metric-desc"><b>domInteractive:</b> When the browser has parsed the main HTML document.</p>
+    <p class="perf-metric-desc"><b>domInteractive:</b> The browser has parsed the main HTML document.</p>
     <div class="perf-metric" id="firstPaint"></div>
-    <p class="perf-metric-desc"><b>firstPaint:</b> The moment something is first painted on the screen (currently only collected in Chrome and IE/Edge).</p>
+    <p class="perf-metric-desc"><b>firstPaint:</b> When something is first painted on-screen.</p>
     <div class="perf-metric" id="loadEventEnd"></div>
-    <p class="perf-metric-desc"><b>loadEventEnd:</b> When the load event fired in the browser and the current document is complete.</p>
+    <p class="perf-metric-desc"><b>loadEventEnd:</b> The load event fired in the browser and the document is complete.</p>
     <div class="perf-metric" id="responseStart"></div>
-    <p class="perf-metric-desc"><b>responseStart:</b> The time it takes for the client to receive a response from the server (TTFB).</p>
+    <p class="perf-metric-desc"><b>responseStart:</b> Time to first byte on the client from the server.</p>
     <div class="perf-metric" id="saveTiming"></div>
-    <p class="perf-metric-desc"><b>saveTiming:</b> The time it takes to submit and save an edit on an article.</p>
+    <p class="perf-metric-desc"><b>saveTiming:</b> Time to submit and save an edit on an article.</p>
 </div>
 
 </article>
@@ -484,9 +484,9 @@ tspan.mg-points-mono {
   <div>
     <h3>Latest blog posts</h3>
     <ul>
+      <li><a href="https://techblog.wikimedia.org/2022/11/21/web-perf-hero-valentin-gutierrez/">Web Perf Hero: Valentín Gutierrez</a></li>
+      <li><a href="https://techblog.wikimedia.org/2022/11/04/http-2-performance-revisited/">HTTP/2 performance revisited</a></li>
       <li><a href="https://techblog.wikimedia.org/2021/03/03/profiling-php-in-production-at-scale/">Profiling PHP in production at scale</a></li>
-      <li><a href="https://techblog.wikimedia.org/2020/11/23/web-performance-case-study-wikipedia-page-previews/">Web performance case study: Wikipedia page previews</a></li>
-      <li><a href="https://techblog.wikimedia.org/2020/06/24/how-we-contributed-paint-timing-api-to-webkit/">How we contributed Paint Timing API to WebKit</a></li>
     </ul>
   </div>
 </footer>
