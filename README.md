@@ -17,10 +17,6 @@
   ```
   bundle exec jekyll serve
   ```
-  Environment variables:
-  * `COAL_WEB_SERVER`: (Optional) Override the address of a `coal-web` server.
-    For example, set `COAL_WEB_SERVER=http://127.0.0.1:5000` for the address that
-    Flask would use if you run coal-web locally. Defaults to the production version.
 
 * Let Jekyll build the site to `public_html/` for deployment, to then stage and commit with Git:
   ```

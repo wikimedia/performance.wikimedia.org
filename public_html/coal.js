@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* global d3, MG, WMPERF */
+/* global d3, MG */
 ( function () {
 	'use strict';
 
@@ -50,7 +50,8 @@
 	}
 
 	function drawCharts( period ) {
-		d3.json( WMPERF.coalUrl + '/v1/metrics?period=' + period, function ( data ) {
+		// Specify full URL to use it even during local development
+		d3.json( 'https://performance.wikimedia.org/coal/v1/metrics?period=' + period, function ( data ) {
 			var charts = d3.select( '#perf-metrics' )
 				.selectAll( 'div' )
 				.data( d3.keys( data.points ) );
