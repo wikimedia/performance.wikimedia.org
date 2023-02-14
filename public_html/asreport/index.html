@@ -3,24 +3,46 @@
 <meta charset=utf-8>
 <title>Wikimedia Autonomous Systems performance report</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-/*! performance.wikimedia.org | Based on <https://design.wikimedia.org/style-guide/> */html{background-color:#eaecf0;font-family:sans-serif;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Lato','Helvetica','Arial',sans-serif;line-height:1.6;font-size:10px;color:#222}body{margin:0;font-size:1.6rem}h1{font-size:3.2rem;font-family:'Linux Libertine','Georgia','Times',serif;font-weight:400}h2{font-size:2.4rem;padding-bottom:2px;border-bottom:3px solid #eaecf0}blockquote{padding-left:1rem;border-left:3px solid #eaecf0}hr{margin:3.2rem 0;border:3px solid #eaecf0}p{line-height:1.5}a{color:#36c;text-decoration:none}a:hover{text-decoration:underline;text-underline-position:under}.wm-container{margin:0 auto;max-width:1200px;padding:0 1rem;box-sizing:border-box}@media (min-width:320px){.wm-container{padding:0 2rem}.wm-site-nav{margin:0 -2rem}}@media (min-width:720px){.wm-container{padding:0 3.2rem}}header .wm-container{display:flex;flex-flow:row wrap;justify-content:space-between}header a[role="banner"]{line-height:4.9rem;font-weight:bold;color:inherit}header a[role="banner"] em{font-weight:normal;font-style:normal}.wm-header-caption{line-height:4.9rem}@media (max-width:768px){.wm-header-caption{display:none}}main{background:#fff;box-shadow:0 1px 4px 0 rgba(0,0,0,0.25);padding:3.2rem 0 6rem 0}ul{margin:1rem;padding:0}ul ul{margin:0 0 0 1em}footer{padding:2.4rem 0;font-size:1.3rem}footer nav ul{margin:1em 0}footer nav ul li{list-style:none;display:inline-block;padding:0 .8rem 0 0}footer nav li a{font-weight:bold}@media (min-width:414px){footer nav li:after{content:"\2022";color:#72777d;padding:0 0 0 .8rem}footer nav li:last-child:after{content:""}}.wm-nav li{display:block;flex:0 1 345px;margin:0 1rem .1rem 0;box-sizing:border-box}.wm-nav a{display:block;padding:1rem 2.4rem;border-radius:2px;color:#202122}.wm-nav li ul{margin-top:1.2rem;margin-left:2.4rem;margin-bottom:1em;font-size:1.4rem;color:#54595d}.wm-nav li ul a{border-left:1px solid #eaecf0}.wm-nav a:hover{background-color:#f8f9fa}.wm-nav .wm-nav-item-active,.wm-nav .wm-nav-item-active:hover{background-color:#eaf3ff;color:#36c;border-radius:2px;font-weight:600;cursor:default}.wm-nav li ul .wm-nav-item-active,.wm-nav li ul .wm-nav-item-active:hover{background-color:#f8f9fa;color:#000;border-left-color:#000}@media (max-width:720px){main{padding-top:1rem}.wm-site-nav{box-shadow:0 2px 2px 0 rgba(0,0,0,0.25)}.wm-site-nav ul{margin:0}.wm-site-nav li{margin-right:0}}@media (min-width:720px){.wm-site-nav{float:left;width:25.6rem;position:relative;z-index:1}article{float:left;box-sizing:border-box;width:100%;margin-left:-25.6rem;padding-left:27.6rem}main h1:first-of-type{margin-top:0}main:after{content:" ";display:table;clear:both}}.wm-table{border-spacing:0;border-collapse:collapse}.wm-table th,.wm-table td{padding:2px 5px;vertical-align:top;border-top:1px solid #c8ccd1}.wm-table th{text-align:left}.wm-table tr:hover{background-color:#f8f9fa}.perf-footer-cols{display:flex;flex-flow:row wrap;justify-content:space-between}
-</style>
+<link rel="stylesheet" href="/lib/wikimedia-ui-base-0.16.0.css">
+<link rel="stylesheet" href="/lib/main.css">
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="alternate" type="application/atom+xml" href="https://phabricator.wikimedia.org/phame/blog/feed/7/" title="Wikimedia Performance Team">
 
 <header><div class="wm-container">
  <a role="banner" href="/" title="Navigate to the home page"><em>Wikimedia</em> Performance</a>
- <span class="wm-header-caption"><a href="/blog/">Blog</a> &bull; <a href="/xhgui/">XHGui</a> &bull; <a href="https://grafana.wikimedia.org/d/000000050/performance-metrics">Grafana</a></span>
+ <span class="wm-header-caption">
+  <a href="/blog/">Blog</a>
+  &bull; <a href="/xhgui/">XHGui</a>
+  &bull; <a href="https://grafana.wikimedia.org/d/000000050/performance-metrics">Grafana</a>
+  </span>
 </div></header>
 <main role="main"><div class="wm-container">
-  <nav class="wm-site-nav"><ul class="wm-nav"><li>
-      <a href="/">Metrics</a></li><li>
-      <a href="/php-profiling/">Flame Graphs</a></li><li>
-      <a class="wm-nav-item-active" href="/asreport/">Autonomous Systems</a><ul><li><a href="#methodology">Methodology</a></li><li><a href="#results">Results</a></li><li><a href="#united-states">United States</a></li><li><a href="#germany">Germany</a></li><li><a href="#japan">Japan</a></li><li><a href="#united-kingdom">United Kingdom</a></li><li><a href="#france">France</a></li><li><a href="#russian-federation">Russian Federation</a></li><li><a href="#india">India</a></li><li><a href="#italy">Italy</a></li><li><a href="#canada">Canada</a></li><li><a href="#brazil">Brazil</a></li><li><a href="#spain">Spain</a></li><li><a href="#poland">Poland</a></li></ul></li>
-  </ul></nav>
+  <nav class="wm-site-nav"><ul class="wm-nav">
+      <li><a  href="/">Metrics</a>
+        </li>
+      <li><a  href="/php-profiling">Flame Graphs</a>
+        </li>
+      <li><a class="wm-nav-item-active" href="/asreport">Autonomous Systems</a>
+        <ul>
+          <li><a href="#methodology">Methodology</a></li>
+      <li><a href="#results">Results</a></li>
+           <li><a href="#united-states">United States</a></li>
+          <li><a href="#germany">Germany</a></li>
+          <li><a href="#japan">Japan</a></li>
+          <li><a href="#united-kingdom">United Kingdom</a></li>
+          <li><a href="#france">France</a></li>
+          <li><a href="#russian-federation">Russian Federation</a></li>
+          <li><a href="#india">India</a></li>
+          <li><a href="#italy">Italy</a></li>
+          <li><a href="#canada">Canada</a></li>
+          <li><a href="#brazil">Brazil</a></li>
+          <li><a href="#spain">Spain</a></li>
+          <li><a href="#poland">Poland</a></li>
+         </ul>
+        </li>
+    </ul></nav>
 <article>
-  <style>
+<style>
 .perf-asreport-table th:first-child {
 	width: 40%;
 }
@@ -43,507 +65,429 @@
 
 <h2 id="results">Results</h2>
 
-<p>Report generated on 2022-06-01. Data available in <a href="https://analytics.wikimedia.org/datasets/performance/autonomoussystems/">TSV format</a>.</p>
+<p>Report generated on 2023-02-01. Data available in <a href="https://analytics.wikimedia.org/datasets/performance/autonomoussystems/">TSV format</a>.</p>
 <p>
 <i>TTFB stands for "Time to first byte", defined as responseStart - connectStart.</i><br>
 <i>PLT stands for "Page load time", defined as loadEventStart - responseStart.</i>
 </p>
-
-
-
 		<h3 id="united-states">United States</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>UUNET</td><td>65</td><td>217</td><td>13862</td></tr>
-	<tr><td>RCN-AS</td><td>101</td><td>255</td><td>1082</td></tr>
-	<tr><td>TWC-12271-NYC</td><td>110</td><td>257</td><td>2571</td></tr>
-	<tr><td>TWC-11426-CAROLINAS</td><td>143</td><td>304</td><td>2890</td></tr>
-	<tr><td>ASN-CXA-ALL-CCI-22773-RDC</td><td>155</td><td>308</td><td>8287</td></tr>
-	<tr><td>COMCAST-7922</td><td>156</td><td>305</td><td>42982</td></tr>
-	<tr><td>TWC-10796-MIDWEST</td><td>162</td><td>346</td><td>6533</td></tr>
-	<tr><td>TWC-11351-NORTHEAST</td><td>167</td><td>373</td><td>2926</td></tr>
-	<tr><td>SUDDENLINK-COMMUNICATIONS</td><td>171</td><td>340</td><td>1749</td></tr>
-	<tr><td>BHN-33363</td><td>175</td><td>348</td><td>4147</td></tr>
-	<tr><td>TWC-11427-TEXAS</td><td>188</td><td>303</td><td>3622</td></tr>
-	<tr><td>FRONTIER-FRTR</td><td>188</td><td>355</td><td>2870</td></tr>
-	<tr><td>CABLE-NET-1</td><td>215</td><td>395</td><td>4648</td></tr>
-	<tr><td>CHARTER-20115</td><td>222</td><td>370</td><td>8707</td></tr>
-	<tr><td>ATT-INTERNET4</td><td>236</td><td>382</td><td>21476</td></tr>
-	<tr><td>CENTURYLINK-US-LEGACY-QWEST</td><td>262</td><td>480</td><td>5525</td></tr>
-	<tr><td>GOOGLE-CLOUD-PLATFORM</td><td>263</td><td>654</td><td>1119</td></tr>
-	<tr><td>TWC-20001-PACWEST</td><td>275</td><td>383</td><td>5485</td></tr>
-	<tr><td>CELLCO-PART</td><td>294</td><td>505</td><td>11814</td></tr>
-	<tr><td>T-MOBILE-AS21928</td><td>309</td><td>524</td><td>19666</td></tr>
-	<tr><td>ATT-MOBILITY-LLC-AS20057</td><td>328</td><td>642</td><td>4934</td></tr>
-	<tr><td>IBOSS-8-ASN</td><td>636</td><td>1002</td><td>2028</td></tr>
-	<tr><td>Datacamp Limited</td><td>647</td><td>988</td><td>1736</td></tr>
-	<tr><td>UK-2 Limited</td><td>651</td><td>852</td><td>1169</td></tr>
-	<tr><td>M247 Ltd</td><td>666</td><td>1162</td><td>2287</td></tr>
-	<tr><td>HURRICANE</td><td>721</td><td>1027</td><td>1505</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>UUNET</td><td>53</td><td>204</td><td>19384</td></tr>
+					<tr><td>GOOGLE-FIBER</td><td>75</td><td>233</td><td>1412</td></tr>
+					<tr><td>SUDDENLINK-COMMUNICATIONS</td><td>104</td><td>307</td><td>2391</td></tr>
+					<tr><td>TWC-11426-CAROLINAS</td><td>107</td><td>324</td><td>3653</td></tr>
+					<tr><td>TWC-11427-TEXAS</td><td>110</td><td>292</td><td>4383</td></tr>
+					<tr><td>ASN-CXA-ALL-CCI-22773-RDC</td><td>116</td><td>305</td><td>10216</td></tr>
+					<tr><td>COMCAST-7922</td><td>117</td><td>307</td><td>55461</td></tr>
+					<tr><td>TWC-10796-MIDWEST</td><td>117</td><td>345</td><td>6480</td></tr>
+					<tr><td>FRONTIER-FRTR</td><td>119</td><td>332</td><td>3897</td></tr>
+					<tr><td>TWC-11351-NORTHEAST</td><td>120</td><td>338</td><td>4004</td></tr>
+					<tr><td>WINDSTREAM</td><td>124</td><td>389</td><td>1592</td></tr>
+					<tr><td>CHARTER-20115</td><td>126</td><td>340</td><td>11536</td></tr>
+					<tr><td>BHN-33363</td><td>142</td><td>371</td><td>6228</td></tr>
+					<tr><td>GOOGLE-CLOUD-PLATFORM</td><td>142</td><td>773</td><td>1503</td></tr>
+					<tr><td>CABLE-NET-1</td><td>144</td><td>377</td><td>6583</td></tr>
+					<tr><td>ATT-INTERNET4</td><td>164</td><td>378</td><td>27192</td></tr>
+					<tr><td>CELLCO</td><td>172</td><td>393</td><td>1343</td></tr>
+					<tr><td>TWC-20001-PACWEST</td><td>192</td><td>379</td><td>6739</td></tr>
+					<tr><td>CELLCO-PART</td><td>226</td><td>490</td><td>15441</td></tr>
+					<tr><td>T-MOBILE-AS21928</td><td>227</td><td>498</td><td>21772</td></tr>
+					<tr><td>ATT-MOBILITY-LLC-AS20057</td><td>271</td><td>662</td><td>4715</td></tr>
+					<tr><td>Datacamp Limited</td><td>342</td><td>601</td><td>1201</td></tr>
+					<tr><td>IBOSS-8-ASN</td><td>427</td><td>874</td><td>1164</td></tr>
+					<tr><td>AMAZON-02</td><td>464</td><td>884</td><td>1668</td></tr>
+					<tr><td>M247 Europe SRL</td><td>529</td><td>1051</td><td>1050</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>UUNET</td><td>191</td><td>427</td><td>10630</td></tr>
-	<tr><td>TWC-12271-NYC</td><td>202</td><td>453</td><td>1992</td></tr>
-	<tr><td>TWC-11426-CAROLINAS</td><td>206</td><td>513</td><td>2349</td></tr>
-	<tr><td>TWC-11351-NORTHEAST</td><td>228</td><td>513</td><td>2327</td></tr>
-	<tr><td>WINDSTREAM</td><td>239</td><td>614</td><td>1095</td></tr>
-	<tr><td>COMCAST-7922</td><td>247</td><td>505</td><td>34486</td></tr>
-	<tr><td>BHN-33363</td><td>253</td><td>541</td><td>3348</td></tr>
-	<tr><td>TWC-10796-MIDWEST</td><td>254</td><td>547</td><td>6091</td></tr>
-	<tr><td>CABLE-NET-1</td><td>263</td><td>579</td><td>3742</td></tr>
-	<tr><td>FRONTIER-FRTR</td><td>266</td><td>551</td><td>2283</td></tr>
-	<tr><td>ATT-INTERNET4</td><td>272</td><td>566</td><td>17874</td></tr>
-	<tr><td>ASN-CXA-ALL-CCI-22773-RDC</td><td>282</td><td>521</td><td>6708</td></tr>
-	<tr><td>CHARTER-20115</td><td>284</td><td>542</td><td>7223</td></tr>
-	<tr><td>TWC-11427-TEXAS</td><td>285</td><td>540</td><td>3026</td></tr>
-	<tr><td>SUDDENLINK-COMMUNICATIONS</td><td>287</td><td>548</td><td>1358</td></tr>
-	<tr><td>MEDIACOM-ENTERPRISE-BUSINESS</td><td>306</td><td>554</td><td>1151</td></tr>
-	<tr><td>TWC-20001-PACWEST</td><td>316</td><td>621</td><td>4339</td></tr>
-	<tr><td>CENTURYLINK-US-LEGACY-QWEST</td><td>318</td><td>686</td><td>4610</td></tr>
-	<tr><td>CELLCO-PART</td><td>341</td><td>804</td><td>9348</td></tr>
-	<tr><td>ATT-MOBILITY-LLC-AS20057</td><td>368</td><td>946</td><td>3908</td></tr>
-	<tr><td>T-MOBILE-AS21928</td><td>384</td><td>764</td><td>18790</td></tr>
-	<tr><td>IBOSS-8-ASN</td><td>414</td><td>1369</td><td>1792</td></tr>
-	<tr><td>Datacamp Limited</td><td>463</td><td>922</td><td>1498</td></tr>
-	<tr><td>HURRICANE</td><td>557</td><td>1248</td><td>1161</td></tr>
-	<tr><td>M247 Ltd</td><td>577</td><td>1383</td><td>1488</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>TWC-12271-NYC</td><td>127</td><td>437</td><td>1552</td></tr>
+					<tr><td>UUNET</td><td>131</td><td>402</td><td>10338</td></tr>
+					<tr><td>TWC-11426-CAROLINAS</td><td>151</td><td>500</td><td>2196</td></tr>
+					<tr><td>TWC-10796-MIDWEST</td><td>160</td><td>503</td><td>4022</td></tr>
+					<tr><td>RCN-AS</td><td>166</td><td>474</td><td>1487</td></tr>
+					<tr><td>TWC-11427-TEXAS</td><td>169</td><td>503</td><td>2627</td></tr>
+					<tr><td>WINDSTREAM</td><td>177</td><td>584</td><td>1058</td></tr>
+					<tr><td>SUDDENLINK-COMMUNICATIONS</td><td>179</td><td>523</td><td>1287</td></tr>
+					<tr><td>ASN-CXA-ALL-CCI-22773-RDC</td><td>183</td><td>503</td><td>5975</td></tr>
+					<tr><td>COMCAST-7922</td><td>183</td><td>487</td><td>31038</td></tr>
+					<tr><td>TWC-11351-NORTHEAST</td><td>185</td><td>518</td><td>2899</td></tr>
+					<tr><td>ATT-INTERNET4</td><td>192</td><td>542</td><td>16377</td></tr>
+					<tr><td>CHARTER-20115</td><td>196</td><td>505</td><td>6889</td></tr>
+					<tr><td>CABLE-NET-1</td><td>205</td><td>585</td><td>3529</td></tr>
+					<tr><td>FRONTIER-FRTR</td><td>206</td><td>536</td><td>2269</td></tr>
+					<tr><td>BHN-33363</td><td>212</td><td>545</td><td>3172</td></tr>
+					<tr><td>MEDIACOM-ENTERPRISE-BUSINESS</td><td>243</td><td>610</td><td>2836</td></tr>
+					<tr><td>CENTURYLINK-US-LEGACY-QWEST</td><td>246</td><td>685</td><td>4009</td></tr>
+					<tr><td>TWC-20001-PACWEST</td><td>257</td><td>604</td><td>3708</td></tr>
+					<tr><td>T-MOBILE-AS21928</td><td>290</td><td>698</td><td>17363</td></tr>
+					<tr><td>CELLCO-PART</td><td>294</td><td>726</td><td>9433</td></tr>
+					<tr><td>ATT-MOBILITY-LLC-AS20057</td><td>346</td><td>1072</td><td>2538</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="germany">Germany</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Deutsche Glasfaser Wholesale GmbH</td><td>105</td><td>384</td><td>1413</td></tr>
-	<tr><td>NetCologne Gesellschaft fur Telekommunikation mbH</td><td>113</td><td>365</td><td>1345</td></tr>
-	<tr><td>1&amp;1 Versatel Deutschland GmbH</td><td>145</td><td>407</td><td>6569</td></tr>
-	<tr><td>EWE-Tel GmbH</td><td>148</td><td>453</td><td>1754</td></tr>
-	<tr><td>Tele Columbus AG</td><td>166</td><td>418</td><td>1369</td></tr>
-	<tr><td>Deutsche Telekom AG</td><td>189</td><td>464</td><td>51761</td></tr>
-	<tr><td>Vodafone GmbH</td><td>199</td><td>463</td><td>39445</td></tr>
-	<tr><td>Verein zur Foerderung eines Deutschen Forschungsnetzes e.V.</td><td>213</td><td>434</td><td>1224</td></tr>
-	<tr><td>M-net Telekommunikations GmbH</td><td>227</td><td>440</td><td>1576</td></tr>
-	<tr><td>Telefonica Germany</td><td>283</td><td>550</td><td>18370</td></tr>
-	<tr><td>Hetzner Online GmbH</td><td>542</td><td>1218</td><td>3376</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>EWE-Tel GmbH</td><td>100</td><td>469</td><td>2195</td></tr>
+					<tr><td>1&amp;1 Versatel Deutschland GmbH</td><td>113</td><td>435</td><td>9486</td></tr>
+					<tr><td>Deutsche Telekom AG</td><td>117</td><td>470</td><td>62414</td></tr>
+					<tr><td>Vodafone GmbH</td><td>140</td><td>468</td><td>42664</td></tr>
+					<tr><td>Verein zur Foerderung eines Deutschen Forschungsnetzes e.V.</td><td>146</td><td>427</td><td>1403</td></tr>
+					<tr><td>Telefonica Germany</td><td>196</td><td>557</td><td>16602</td></tr>
+					<tr><td>Hetzner Online GmbH</td><td>602</td><td>1267</td><td>1161</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>EWE-Tel GmbH</td><td>373</td><td>481</td><td>1377</td></tr>
-	<tr><td>NetCologne Gesellschaft fur Telekommunikation mbH</td><td>382</td><td>496</td><td>1081</td></tr>
-	<tr><td>1&amp;1 Versatel Deutschland GmbH</td><td>389</td><td>491</td><td>5193</td></tr>
-	<tr><td>Hetzner Online GmbH</td><td>391</td><td>811</td><td>2943</td></tr>
-	<tr><td>Deutsche Telekom AG</td><td>402</td><td>508</td><td>41902</td></tr>
-	<tr><td>Tele Columbus AG</td><td>405</td><td>560</td><td>1035</td></tr>
-	<tr><td>Vodafone GmbH</td><td>409</td><td>532</td><td>31335</td></tr>
-	<tr><td>M-net Telekommunikations GmbH</td><td>409</td><td>535</td><td>1253</td></tr>
-	<tr><td>Telefonica Germany</td><td>445</td><td>567</td><td>15643</td></tr>
-	<tr><td>Deutsche Glasfaser Wholesale GmbH</td><td>449</td><td>527</td><td>1035</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>EWE-Tel GmbH</td><td>216</td><td>472</td><td>1481</td></tr>
+					<tr><td>Deutsche Telekom AG</td><td>274</td><td>497</td><td>43598</td></tr>
+					<tr><td>M-net Telekommunikations GmbH</td><td>283</td><td>483</td><td>1037</td></tr>
+					<tr><td>Vodafone GmbH</td><td>309</td><td>507</td><td>30716</td></tr>
+					<tr><td>NetCologne Gesellschaft fur Telekommunikation mbH</td><td>312</td><td>485</td><td>1165</td></tr>
+					<tr><td>Tele Columbus AG</td><td>319</td><td>578</td><td>1224</td></tr>
+					<tr><td>1&amp;1 Versatel Deutschland GmbH</td><td>329</td><td>482</td><td>6201</td></tr>
+					<tr><td>Deutsche Glasfaser Wholesale GmbH</td><td>349</td><td>516</td><td>1402</td></tr>
+					<tr><td>Telefonica Germany</td><td>382</td><td>616</td><td>12189</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="japan">Japan</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>OPTAGE Inc.</td><td>297</td><td>542</td><td>2567</td></tr>
-	<tr><td>Chubu Telecommunications Company, Inc.</td><td>313</td><td>542</td><td>1173</td></tr>
-	<tr><td>Asahi Net</td><td>314</td><td>530</td><td>1310</td></tr>
-	<tr><td>Sony Network Communications Inc.</td><td>322</td><td>555</td><td>2892</td></tr>
-	<tr><td>NTT Communications Corporation</td><td>322</td><td>557</td><td>11762</td></tr>
-	<tr><td>ARTERIA Networks Corporation</td><td>327</td><td>576</td><td>2526</td></tr>
-	<tr><td>BIGLOBE Inc.</td><td>335</td><td>567</td><td>2414</td></tr>
-	<tr><td>Softbank BB Corp.</td><td>355</td><td>586</td><td>13622</td></tr>
-	<tr><td>JCOM Co., Ltd.</td><td>360</td><td>593</td><td>5004</td></tr>
-	<tr><td>KDDI CORPORATION</td><td>376</td><td>634</td><td>15493</td></tr>
-	<tr><td>Internet Initiative Japan Inc.</td><td>431</td><td>689</td><td>1083</td></tr>
-	<tr><td>Rakuten Mobile Network, Inc.</td><td>465</td><td>719</td><td>1653</td></tr>
-	<tr><td>NTT DOCOMO, INC.</td><td>509</td><td>729</td><td>8041</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>OPTAGE Inc.</td><td>287</td><td>576</td><td>3277</td></tr>
+					<tr><td>Asahi Net</td><td>313</td><td>593</td><td>1689</td></tr>
+					<tr><td>INTERNET MULTIFEED CO.</td><td>314</td><td>596</td><td>1001</td></tr>
+					<tr><td>TOKAI Communications Corporation</td><td>320</td><td>621</td><td>1248</td></tr>
+					<tr><td>Chubu Telecommunications Company, Inc.</td><td>323</td><td>610</td><td>1715</td></tr>
+					<tr><td>BIGLOBE Inc.</td><td>325</td><td>610</td><td>3362</td></tr>
+					<tr><td>ARTERIA Networks Corporation</td><td>334</td><td>615</td><td>3108</td></tr>
+					<tr><td>NTT Communications Corporation</td><td>339</td><td>628</td><td>14468</td></tr>
+					<tr><td>Softbank BB Corp.</td><td>343</td><td>631</td><td>15959</td></tr>
+					<tr><td>JCOM Co., Ltd.</td><td>353</td><td>631</td><td>6291</td></tr>
+					<tr><td>Sony Network Communications Inc.</td><td>354</td><td>633</td><td>3312</td></tr>
+					<tr><td>KDDI CORPORATION</td><td>365</td><td>662</td><td>19630</td></tr>
+					<tr><td>Rakuten Mobile Network, Inc.</td><td>459</td><td>758</td><td>1457</td></tr>
+					<tr><td>Internet Initiative Japan Inc.</td><td>464</td><td>780</td><td>1372</td></tr>
+					<tr><td>NTT DOCOMO, INC.</td><td>509</td><td>784</td><td>10060</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>NTT Communications Corporation</td><td>444</td><td>786</td><td>16333</td></tr>
-	<tr><td>Sony Network Communications Inc.</td><td>445</td><td>787</td><td>3917</td></tr>
-	<tr><td>Chubu Telecommunications Company, Inc.</td><td>457</td><td>839</td><td>1604</td></tr>
-	<tr><td>ARTERIA Networks Corporation</td><td>469</td><td>810</td><td>3394</td></tr>
-	<tr><td>TOKAI Communications Corporation</td><td>471</td><td>863</td><td>1355</td></tr>
-	<tr><td>Asahi Net</td><td>473</td><td>779</td><td>1817</td></tr>
-	<tr><td>BIGLOBE Inc.</td><td>475</td><td>792</td><td>3431</td></tr>
-	<tr><td>OPTAGE Inc.</td><td>477</td><td>812</td><td>3310</td></tr>
-	<tr><td>JCOM Co., Ltd.</td><td>512</td><td>875</td><td>6832</td></tr>
-	<tr><td>KDDI CORPORATION</td><td>537</td><td>853</td><td>21634</td></tr>
-	<tr><td>Softbank BB Corp.</td><td>611</td><td>892</td><td>17807</td></tr>
-	<tr><td>Rakuten Mobile Network, Inc.</td><td>613</td><td>1075</td><td>1570</td></tr>
-	<tr><td>Internet Initiative Japan Inc.</td><td>655</td><td>905</td><td>1393</td></tr>
-	<tr><td>NTT DOCOMO, INC.</td><td>677</td><td>1078</td><td>10666</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>OPTAGE Inc.</td><td>381</td><td>803</td><td>3776</td></tr>
+					<tr><td>BIGLOBE Inc.</td><td>411</td><td>801</td><td>3926</td></tr>
+					<tr><td>NTT Communications Corporation</td><td>412</td><td>821</td><td>16993</td></tr>
+					<tr><td>Sony Network Communications Inc.</td><td>421</td><td>829</td><td>3914</td></tr>
+					<tr><td>ARTERIA Networks Corporation</td><td>422</td><td>838</td><td>3695</td></tr>
+					<tr><td>TOKAI Communications Corporation</td><td>429</td><td>876</td><td>1427</td></tr>
+					<tr><td>INTERNET MULTIFEED CO.</td><td>443</td><td>853</td><td>1212</td></tr>
+					<tr><td>KDDI CORPORATION</td><td>457</td><td>852</td><td>22957</td></tr>
+					<tr><td>JCOM Co., Ltd.</td><td>466</td><td>922</td><td>7373</td></tr>
+					<tr><td>Asahi Net</td><td>474</td><td>854</td><td>1942</td></tr>
+					<tr><td>Softbank BB Corp.</td><td>475</td><td>863</td><td>18345</td></tr>
+					<tr><td>Chubu Telecommunications Company, Inc.</td><td>475</td><td>895</td><td>2048</td></tr>
+					<tr><td>Rakuten Mobile Network, Inc.</td><td>542</td><td>1127</td><td>1527</td></tr>
+					<tr><td>Internet Initiative Japan Inc.</td><td>573</td><td>905</td><td>1866</td></tr>
+					<tr><td>NTT DOCOMO, INC.</td><td>616</td><td>1110</td><td>11011</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="united-kingdom">United Kingdom</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>British Telecommunications PLC</td><td>103</td><td>339</td><td>16745</td></tr>
-	<tr><td>Jisc Services Limited</td><td>107</td><td>282</td><td>1520</td></tr>
-	<tr><td>Sky UK Limited</td><td>111</td><td>328</td><td>10183</td></tr>
-	<tr><td>TalkTalk</td><td>122</td><td>383</td><td>6477</td></tr>
-	<tr><td>Virgin Media Limited</td><td>130</td><td>338</td><td>13717</td></tr>
-	<tr><td>Vodafone Limited</td><td>228</td><td>449</td><td>4203</td></tr>
-	<tr><td>EE Limited</td><td>229</td><td>449</td><td>4264</td></tr>
-	<tr><td>Telefonica O2 UK</td><td>279</td><td>542</td><td>2869</td></tr>
-	<tr><td>Three</td><td>340</td><td>563</td><td>2566</td></tr>
-	<tr><td>M247 Ltd</td><td>477</td><td>803</td><td>1093</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Jisc Services Limited</td><td>77</td><td>287</td><td>1652</td></tr>
+					<tr><td>TalkTalk</td><td>80</td><td>359</td><td>7771</td></tr>
+					<tr><td>Sky UK Limited</td><td>80</td><td>300</td><td>12667</td></tr>
+					<tr><td>British Telecommunications PLC</td><td>81</td><td>322</td><td>22934</td></tr>
+					<tr><td>Virgin Media Limited</td><td>96</td><td>324</td><td>16634</td></tr>
+					<tr><td>EE Limited</td><td>129</td><td>394</td><td>3511</td></tr>
+					<tr><td>Vodafone Limited</td><td>137</td><td>394</td><td>4987</td></tr>
+					<tr><td>Telefonica O2 UK</td><td>209</td><td>499</td><td>3053</td></tr>
+					<tr><td>Three</td><td>224</td><td>506</td><td>2546</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Jisc Services Limited</td><td>297</td><td>550</td><td>1847</td></tr>
-	<tr><td>Sky UK Limited</td><td>317</td><td>615</td><td>11008</td></tr>
-	<tr><td>Virgin Media Limited</td><td>333</td><td>578</td><td>15184</td></tr>
-	<tr><td>British Telecommunications PLC</td><td>334</td><td>594</td><td>18448</td></tr>
-	<tr><td>TalkTalk</td><td>337</td><td>652</td><td>7062</td></tr>
-	<tr><td>EE Limited</td><td>376</td><td>692</td><td>4621</td></tr>
-	<tr><td>Telefonica O2 UK</td><td>395</td><td>871</td><td>3002</td></tr>
-	<tr><td>Vodafone Limited</td><td>397</td><td>614</td><td>4599</td></tr>
-	<tr><td>M247 Ltd</td><td>430</td><td>845</td><td>1120</td></tr>
-	<tr><td>Three</td><td>432</td><td>855</td><td>2721</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Jisc Services Limited</td><td>140</td><td>519</td><td>1182</td></tr>
+					<tr><td>Sky UK Limited</td><td>150</td><td>561</td><td>10784</td></tr>
+					<tr><td>Virgin Media Limited</td><td>168</td><td>543</td><td>13728</td></tr>
+					<tr><td>British Telecommunications PLC</td><td>206</td><td>567</td><td>18728</td></tr>
+					<tr><td>EE Limited</td><td>210</td><td>642</td><td>2994</td></tr>
+					<tr><td>TalkTalk</td><td>222</td><td>601</td><td>6621</td></tr>
+					<tr><td>Vodafone Limited</td><td>244</td><td>590</td><td>4132</td></tr>
+					<tr><td>Telefonica O2 UK</td><td>315</td><td>831</td><td>2765</td></tr>
+					<tr><td>Three</td><td>322</td><td>810</td><td>2198</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="france">France</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Free SAS</td><td>223</td><td>481</td><td>15740</td></tr>
-	<tr><td>Orange</td><td>245</td><td>492</td><td>38749</td></tr>
-	<tr><td>Bouygues Telecom SA</td><td>254</td><td>490</td><td>13567</td></tr>
-	<tr><td>SFR SA</td><td>310</td><td>536</td><td>21176</td></tr>
-	<tr><td>Renater</td><td>373</td><td>506</td><td>1511</td></tr>
-	<tr><td>Free Mobile SAS</td><td>404</td><td>638</td><td>7123</td></tr>
-	<tr><td>Online S.a.s.</td><td>704</td><td>1083</td><td>1211</td></tr>
-	<tr><td>OVH SAS</td><td>744</td><td>1142</td><td>3613</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Free SAS</td><td>125</td><td>441</td><td>19446</td></tr>
+					<tr><td>Orange</td><td>155</td><td>460</td><td>40751</td></tr>
+					<tr><td>Bouygues Telecom SA</td><td>165</td><td>459</td><td>15880</td></tr>
+					<tr><td>Societe Francaise Du Radiotelephone - SFR SA</td><td>172</td><td>484</td><td>22883</td></tr>
+					<tr><td>Renater</td><td>186</td><td>481</td><td>2344</td></tr>
+					<tr><td>Free Mobile SAS</td><td>283</td><td>615</td><td>6778</td></tr>
+					<tr><td>Online S.a.s.</td><td>537</td><td>1139</td><td>1191</td></tr>
+					<tr><td>OVH SAS</td><td>691</td><td>1482</td><td>1108</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Online S.a.s.</td><td>7</td><td>477</td><td>1336</td></tr>
-	<tr><td>Renater</td><td>354</td><td>620</td><td>1878</td></tr>
-	<tr><td>Orange</td><td>394</td><td>430</td><td>47140</td></tr>
-	<tr><td>Linkt SAS</td><td>420</td><td>733</td><td>1194</td></tr>
-	<tr><td>Bouygues Telecom SA</td><td>431</td><td>742</td><td>15008</td></tr>
-	<tr><td>Free SAS</td><td>440</td><td>746</td><td>17552</td></tr>
-	<tr><td>SFR SA</td><td>448</td><td>788</td><td>23364</td></tr>
-	<tr><td>OVH SAS</td><td>509</td><td>1037</td><td>3867</td></tr>
-	<tr><td>Free Mobile SAS</td><td>550</td><td>958</td><td>7647</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Renater</td><td>239</td><td>581</td><td>2465</td></tr>
+					<tr><td>Bouygues Telecom SA</td><td>314</td><td>667</td><td>16242</td></tr>
+					<tr><td>Orange</td><td>315</td><td>668</td><td>41803</td></tr>
+					<tr><td>Societe Francaise Du Radiotelephone - SFR SA</td><td>331</td><td>694</td><td>23425</td></tr>
+					<tr><td>Free SAS</td><td>333</td><td>687</td><td>19846</td></tr>
+					<tr><td>Online S.a.s.</td><td>402</td><td>952</td><td>1216</td></tr>
+					<tr><td>OVH SAS</td><td>404</td><td>916</td><td>1126</td></tr>
+					<tr><td>Free Mobile SAS</td><td>451</td><td>948</td><td>6874</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="russian-federation">Russian Federation</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Lovitel LLC</td><td>152</td><td>342</td><td>1765</td></tr>
-	<tr><td>SkyNet Ltd.</td><td>153</td><td>408</td><td>7542</td></tr>
-	<tr><td>Nevalink, LLC</td><td>154</td><td>411</td><td>1807</td></tr>
-	<tr><td>OBIT Ltd.</td><td>160</td><td>396</td><td>1338</td></tr>
-	<tr><td>Altagen JSC</td><td>168</td><td>412</td><td>1032</td></tr>
-	<tr><td>TIS Dialog LLC</td><td>178</td><td>467</td><td>2104</td></tr>
-	<tr><td>Iskratelecom CJSC</td><td>178</td><td>427</td><td>2875</td></tr>
-	<tr><td>LLC SETEL</td><td>180</td><td>394</td><td>1317</td></tr>
-	<tr><td>P.a.k.t LLC</td><td>183</td><td>419</td><td>1174</td></tr>
-	<tr><td>Flex Ltd.</td><td>187</td><td>513</td><td>1523</td></tr>
-	<tr><td>PJSC Moscow city telephone network</td><td>193</td><td>430</td><td>33539</td></tr>
-	<tr><td>Central Telegraph Public Joint-stock Company</td><td>194</td><td>464</td><td>1146</td></tr>
-	<tr><td>CityLink Ltd</td><td>197</td><td>517</td><td>1630</td></tr>
-	<tr><td>Global Network Management Inc</td><td>200</td><td>494</td><td>1275</td></tr>
-	<tr><td>OJSC Comcor</td><td>211</td><td>469</td><td>5618</td></tr>
-	<tr><td>Net By Net Holding LLC</td><td>215</td><td>505</td><td>9362</td></tr>
-	<tr><td>JSC ER-Telecom Holding</td><td>216</td><td>511</td><td>58044</td></tr>
-	<tr><td>Ic-voronezh</td><td>221</td><td>518</td><td>2339</td></tr>
-	<tr><td>Jsc Kvant-telekom</td><td>241</td><td>539</td><td>1814</td></tr>
-	<tr><td>Rostelecom</td><td>271</td><td>592</td><td>168970</td></tr>
-	<tr><td>Pjsc tattelecom</td><td>280</td><td>630</td><td>7867</td></tr>
-	<tr><td>JSC Ufanet</td><td>286</td><td>581</td><td>12824</td></tr>
-	<tr><td>LLC KomTehCentr</td><td>293</td><td>535</td><td>2082</td></tr>
-	<tr><td>Intersvyaz-2 JSC</td><td>300</td><td>603</td><td>6681</td></tr>
-	<tr><td>Joint Stock Company TransTeleCom</td><td>300</td><td>653</td><td>10417</td></tr>
-	<tr><td>Joint stock company For</td><td>301</td><td>653</td><td>1450</td></tr>
-	<tr><td>PJSC Bashinformsvyaz</td><td>315</td><td>687</td><td>3790</td></tr>
-	<tr><td>Metroset</td><td>323</td><td>581</td><td>1209</td></tr>
-	<tr><td>Limited Liability Company TTK-Svyaz</td><td>333</td><td>682</td><td>6082</td></tr>
-	<tr><td>JSC Elektrosvyaz</td><td>334</td><td>665</td><td>1357</td></tr>
-	<tr><td>CJSC Vainah Telecom</td><td>338</td><td>621</td><td>1090</td></tr>
-	<tr><td>CLOUDFLARENET</td><td>343</td><td>570</td><td>6209</td></tr>
-	<tr><td>Novotelecom Ltd</td><td>354</td><td>593</td><td>3604</td></tr>
-	<tr><td>Omskie kabelnye seti Ltd.</td><td>356</td><td>629</td><td>1406</td></tr>
-	<tr><td>PVimpelCom</td><td>357</td><td>693</td><td>133467</td></tr>
-	<tr><td>E-Light-Telecom Ltd.</td><td>363</td><td>649</td><td>1948</td></tr>
-	<tr><td>Sibirskie Seti Ltd.</td><td>374</td><td>667</td><td>3019</td></tr>
-	<tr><td>MTS PJSC</td><td>374</td><td>717</td><td>170409</td></tr>
-	<tr><td>Orion Telecom LLC</td><td>381</td><td>645</td><td>1644</td></tr>
-	<tr><td>T2 Mobile LLC</td><td>394</td><td>781</td><td>111206</td></tr>
-	<tr><td>Tinkoff Bank JSC</td><td>399</td><td>735</td><td>1779</td></tr>
-	<tr><td>PJSC MegaFon</td><td>407</td><td>753</td><td>136599</td></tr>
-	<tr><td>Ekaterinburg-2000 LLC</td><td>451</td><td>869</td><td>2728</td></tr>
-	<tr><td>Natalia Sergeevna Filicheva</td><td>584</td><td>915</td><td>1298</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>SkyNet Ltd.</td><td>93</td><td>454</td><td>3419</td></tr>
+					<tr><td>PJSC Moscow city telephone network</td><td>98</td><td>482</td><td>11357</td></tr>
+					<tr><td>JSC ER-Telecom Holding</td><td>101</td><td>500</td><td>18405</td></tr>
+					<tr><td>Rostelecom</td><td>183</td><td>659</td><td>57658</td></tr>
+					<tr><td>Intersvyaz-2 JSC</td><td>184</td><td>675</td><td>2300</td></tr>
+					<tr><td>JSC Ufanet</td><td>187</td><td>615</td><td>4371</td></tr>
+					<tr><td>Pjsc tattelecom</td><td>187</td><td>658</td><td>2571</td></tr>
+					<tr><td>Joint Stock Company TransTeleCom</td><td>202</td><td>703</td><td>3379</td></tr>
+					<tr><td>Limited Liability Company TTK-Svyaz</td><td>205</td><td>722</td><td>1841</td></tr>
+					<tr><td>PVimpelCom</td><td>206</td><td>734</td><td>38066</td></tr>
+					<tr><td>MTS PJSC</td><td>245</td><td>774</td><td>52331</td></tr>
+					<tr><td>T2 Mobile LLC</td><td>247</td><td>861</td><td>31822</td></tr>
+					<tr><td>PJSC MegaFon</td><td>269</td><td>811</td><td>42311</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>SkyNet Ltd.</td><td>170</td><td>589</td><td>6622</td></tr>
-	<tr><td>Lovitel LLC</td><td>181</td><td>508</td><td>1466</td></tr>
-	<tr><td>OBIT Ltd.</td><td>197</td><td>602</td><td>1138</td></tr>
-	<tr><td>P.a.k.t LLC</td><td>197</td><td>619</td><td>1001</td></tr>
-	<tr><td>LLC SETEL</td><td>213</td><td>559</td><td>1154</td></tr>
-	<tr><td>TIS Dialog LLC</td><td>214</td><td>682</td><td>1818</td></tr>
-	<tr><td>Central Telegraph Public Joint-stock Company</td><td>221</td><td>668</td><td>1012</td></tr>
-	<tr><td>Iskratelecom CJSC</td><td>228</td><td>573</td><td>2520</td></tr>
-	<tr><td>Flex Ltd.</td><td>235</td><td>648</td><td>1347</td></tr>
-	<tr><td>Ic-voronezh</td><td>235</td><td>701</td><td>2112</td></tr>
-	<tr><td>PJSC Moscow city telephone network</td><td>242</td><td>614</td><td>29403</td></tr>
-	<tr><td>Global Network Management Inc</td><td>269</td><td>605</td><td>1100</td></tr>
-	<tr><td>CityLink Ltd</td><td>273</td><td>629</td><td>1457</td></tr>
-	<tr><td>OJSC Comcor</td><td>275</td><td>618</td><td>4947</td></tr>
-	<tr><td>Jsc Kvant-telekom</td><td>275</td><td>761</td><td>1621</td></tr>
-	<tr><td>JSC ER-Telecom Holding</td><td>279</td><td>683</td><td>52218</td></tr>
-	<tr><td>Net By Net Holding LLC</td><td>293</td><td>687</td><td>8351</td></tr>
-	<tr><td>JSC Ufanet</td><td>296</td><td>744</td><td>11699</td></tr>
-	<tr><td>Pjsc tattelecom</td><td>304</td><td>833</td><td>7258</td></tr>
-	<tr><td>Joint stock company For</td><td>318</td><td>928</td><td>1367</td></tr>
-	<tr><td>Intersvyaz-2 JSC</td><td>319</td><td>761</td><td>6197</td></tr>
-	<tr><td>CLOUDFLARENET</td><td>320</td><td>734</td><td>5351</td></tr>
-	<tr><td>LLC KomTehCentr</td><td>324</td><td>686</td><td>1851</td></tr>
-	<tr><td>PVimpelCom</td><td>327</td><td>761</td><td>125619</td></tr>
-	<tr><td>PJSC Bashinformsvyaz</td><td>329</td><td>892</td><td>3639</td></tr>
-	<tr><td>Rostelecom</td><td>335</td><td>778</td><td>154993</td></tr>
-	<tr><td>Joint Stock Company TransTeleCom</td><td>337</td><td>803</td><td>9568</td></tr>
-	<tr><td>Omskie kabelnye seti Ltd.</td><td>349</td><td>790</td><td>1323</td></tr>
-	<tr><td>JSC Elektrosvyaz</td><td>351</td><td>926</td><td>1326</td></tr>
-	<tr><td>Metroset</td><td>355</td><td>683</td><td>1049</td></tr>
-	<tr><td>Novotelecom Ltd</td><td>364</td><td>777</td><td>3180</td></tr>
-	<tr><td>MTS PJSC</td><td>381</td><td>906</td><td>160062</td></tr>
-	<tr><td>Sibirskie Seti Ltd.</td><td>382</td><td>837</td><td>2765</td></tr>
-	<tr><td>Limited Liability Company TTK-Svyaz</td><td>388</td><td>842</td><td>5530</td></tr>
-	<tr><td>E-Light-Telecom Ltd.</td><td>392</td><td>836</td><td>1747</td></tr>
-	<tr><td>Nevalink, LLC</td><td>395</td><td>1120</td><td>1365</td></tr>
-	<tr><td>Orion Telecom LLC</td><td>418</td><td>814</td><td>1525</td></tr>
-	<tr><td>PJSC MegaFon</td><td>463</td><td>1149</td><td>127783</td></tr>
-	<tr><td>Ekaterinburg-2000 LLC</td><td>469</td><td>1195</td><td>2739</td></tr>
-	<tr><td>T2 Mobile LLC</td><td>471</td><td>1194</td><td>108611</td></tr>
-	<tr><td>Tinkoff Bank JSC</td><td>478</td><td>1026</td><td>1629</td></tr>
-	<tr><td>Natalia Sergeevna Filicheva</td><td>612</td><td>1184</td><td>1199</td></tr>
-	<tr><td>Octopusnet LTD</td><td>620</td><td>1200</td><td>1122</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>PJSC Moscow city telephone network</td><td>224</td><td>650</td><td>10575</td></tr>
+					<tr><td>JSC Comcor</td><td>256</td><td>679</td><td>1605</td></tr>
+					<tr><td>JSC ER-Telecom Holding</td><td>262</td><td>718</td><td>17275</td></tr>
+					<tr><td>JSC Ufanet</td><td>262</td><td>732</td><td>4163</td></tr>
+					<tr><td>Limited Liability Company TTK-Svyaz</td><td>285</td><td>902</td><td>1713</td></tr>
+					<tr><td>SkyNet Ltd.</td><td>285</td><td>750</td><td>3122</td></tr>
+					<tr><td>PJSC Bashinformsvyaz</td><td>287</td><td>833</td><td>1234</td></tr>
+					<tr><td>Intersvyaz-2 JSC</td><td>290</td><td>791</td><td>2172</td></tr>
+					<tr><td>Rostelecom</td><td>305</td><td>803</td><td>54542</td></tr>
+					<tr><td>Joint Stock Company TransTeleCom</td><td>306</td><td>857</td><td>3195</td></tr>
+					<tr><td>Pjsc tattelecom</td><td>310</td><td>579</td><td>2446</td></tr>
+					<tr><td>PVimpelCom</td><td>315</td><td>799</td><td>36028</td></tr>
+					<tr><td>MTS PJSC</td><td>349</td><td>917</td><td>49312</td></tr>
+					<tr><td>Novotelecom Ltd</td><td>368</td><td>847</td><td>1267</td></tr>
+					<tr><td>Sibirskie Seti Ltd.</td><td>370</td><td>829</td><td>1031</td></tr>
+					<tr><td>PJSC MegaFon</td><td>392</td><td>1137</td><td>39966</td></tr>
+					<tr><td>T2 Mobile LLC</td><td>433</td><td>1270</td><td>30649</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="india">India</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Atria Convergence Technologies Pvt. Ltd. Broadband Internet Service Provider INDIA</td><td>186</td><td>473</td><td>1021</td></tr>
-	<tr><td>Bharti Airtel Ltd., Telemedia Services</td><td>286</td><td>598</td><td>3859</td></tr>
-	<tr><td>Bharti Airtel Ltd. AS for GPRS Service</td><td>456</td><td>968</td><td>23181</td></tr>
-	<tr><td>Reliance Jio Infocomm Limited</td><td>470</td><td>977</td><td>44820</td></tr>
-	<tr><td>Vodafone India Ltd.</td><td>503</td><td>964</td><td>5681</td></tr>
-	<tr><td>National Internet Backbone</td><td>572</td><td>966</td><td>3014</td></tr>
-	<tr><td>Idea Cellular Limited</td><td>615</td><td>1150</td><td>3021</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Atria Convergence Technologies Pvt. Ltd. Broadband Internet Service Provider INDIA</td><td>174</td><td>476</td><td>1252</td></tr>
+					<tr><td>Hathway IP Over Cable Internet</td><td>223</td><td>558</td><td>1068</td></tr>
+					<tr><td>Bharti Airtel Ltd., Telemedia Services</td><td>267</td><td>601</td><td>5293</td></tr>
+					<tr><td>Bharti Airtel Ltd. AS for GPRS Service</td><td>456</td><td>977</td><td>25024</td></tr>
+					<tr><td>Reliance Jio Infocomm Limited</td><td>461</td><td>979</td><td>49443</td></tr>
+					<tr><td>National Internet Backbone</td><td>489</td><td>915</td><td>3456</td></tr>
+					<tr><td>Vodafone India Ltd.</td><td>521</td><td>1041</td><td>5821</td></tr>
+					<tr><td>Idea Cellular Limited</td><td>594</td><td>1126</td><td>3810</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Atria Convergence Technologies Pvt. Ltd. Broadband Internet Service Provider INDIA</td><td>434</td><td>814</td><td>3915</td></tr>
-	<tr><td>Bharti Airtel Ltd., Telemedia Services</td><td>501</td><td>961</td><td>11889</td></tr>
-	<tr><td>Excitel Broadband Private Limited</td><td>525</td><td>1062</td><td>1229</td></tr>
-	<tr><td>BHARTI Airtel Ltd.</td><td>545</td><td>982</td><td>1323</td></tr>
-	<tr><td>Atria Convergence Technologies pvt ltd</td><td>616</td><td>979</td><td>2607</td></tr>
-	<tr><td>National Internet Backbone</td><td>649</td><td>1248</td><td>4610</td></tr>
-	<tr><td>Vodafone India Ltd.</td><td>705</td><td>1520</td><td>2750</td></tr>
-	<tr><td>Reliance Jio Infocomm Limited</td><td>709</td><td>1376</td><td>22785</td></tr>
-	<tr><td>Alliance Broadband Services Pvt. Ltd.</td><td>736</td><td>1233</td><td>1129</td></tr>
-	<tr><td>Bharti Airtel Ltd. AS for GPRS Service</td><td>740</td><td>1601</td><td>11412</td></tr>
-	<tr><td>Hathway IP Over Cable Internet</td><td>914</td><td>1621</td><td>2110</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Atria Convergence Technologies Pvt. Ltd. Broadband Internet Service Provider INDIA</td><td>394</td><td>851</td><td>4114</td></tr>
+					<tr><td>Atria Convergence Technologies pvt ltd</td><td>447</td><td>1000</td><td>2712</td></tr>
+					<tr><td>Hathway IP Over Cable Internet</td><td>449</td><td>954</td><td>2379</td></tr>
+					<tr><td>Bharti Airtel Ltd., Telemedia Services</td><td>473</td><td>992</td><td>14663</td></tr>
+					<tr><td>Excitel Broadband Private Limited</td><td>487</td><td>1111</td><td>1567</td></tr>
+					<tr><td>Gujarat Telelink Pvt Ltd</td><td>493</td><td>1110</td><td>1016</td></tr>
+					<tr><td>RailTel Corporation of India Ltd</td><td>510</td><td>1069</td><td>1089</td></tr>
+					<tr><td>National Internet Backbone</td><td>604</td><td>1242</td><td>5801</td></tr>
+					<tr><td>Reliance Jio Infocomm Limited</td><td>605</td><td>1260</td><td>36617</td></tr>
+					<tr><td>Alliance Broadband Services Pvt. Ltd.</td><td>617</td><td>1206</td><td>1406</td></tr>
+					<tr><td>Bharti Airtel Ltd. AS for GPRS Service</td><td>712</td><td>1592</td><td>17529</td></tr>
+					<tr><td>Idea Cellular Limited</td><td>755</td><td>1620</td><td>1790</td></tr>
+					<tr><td>Vodafone India Ltd.</td><td>772</td><td>1718</td><td>3829</td></tr>
+					<tr><td>ZSCALER-INC</td><td>800</td><td>1565</td><td>1061</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="italy">Italy</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Fastweb</td><td>251</td><td>503</td><td>6964</td></tr>
-	<tr><td>EOLO S.p.A.</td><td>254</td><td>522</td><td>1005</td></tr>
-	<tr><td>Telecom Italia</td><td>272</td><td>522</td><td>18607</td></tr>
-	<tr><td>Vodafone Italia S.p.A.</td><td>281</td><td>534</td><td>12187</td></tr>
-	<tr><td>Tiscali SpA</td><td>306</td><td>563</td><td>1293</td></tr>
-	<tr><td>Wind Tre S.p.A.</td><td>322</td><td>588</td><td>13129</td></tr>
-	<tr><td>Online S.a.s.</td><td>392</td><td>692</td><td>4615</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Sky Italia srl</td><td>120</td><td>397</td><td>1378</td></tr>
+					<tr><td>Fastweb</td><td>141</td><td>480</td><td>8745</td></tr>
+					<tr><td>EOLO S.p.A.</td><td>146</td><td>499</td><td>1349</td></tr>
+					<tr><td>Telecom Italia</td><td>163</td><td>505</td><td>22858</td></tr>
+					<tr><td>Vodafone Italia S.p.A.</td><td>188</td><td>517</td><td>14386</td></tr>
+					<tr><td>Wind Tre S.p.A.</td><td>191</td><td>560</td><td>15225</td></tr>
+					<tr><td>Tiscali SpA</td><td>199</td><td>586</td><td>1845</td></tr>
+					<tr><td>Online S.a.s.</td><td>302</td><td>671</td><td>6107</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Fastweb</td><td>388</td><td>633</td><td>8915</td></tr>
-	<tr><td>Vodafone Italia S.p.A.</td><td>399</td><td>695</td><td>14720</td></tr>
-	<tr><td>Telecom Italia</td><td>406</td><td>692</td><td>23359</td></tr>
-	<tr><td>EOLO S.p.A.</td><td>413</td><td>784</td><td>1299</td></tr>
-	<tr><td>Tiscali SpA</td><td>423</td><td>681</td><td>1557</td></tr>
-	<tr><td>Wind Tre S.p.A.</td><td>435</td><td>768</td><td>15524</td></tr>
-	<tr><td>Online S.a.s.</td><td>500</td><td>928</td><td>5335</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>EOLO S.p.A.</td><td>300</td><td>663</td><td>1482</td></tr>
+					<tr><td>Fastweb</td><td>302</td><td>597</td><td>9522</td></tr>
+					<tr><td>Telecom Italia</td><td>325</td><td>629</td><td>24608</td></tr>
+					<tr><td>Vodafone Italia S.p.A.</td><td>326</td><td>660</td><td>15392</td></tr>
+					<tr><td>Sky Italia srl</td><td>338</td><td>628</td><td>1503</td></tr>
+					<tr><td>Wind Tre S.p.A.</td><td>346</td><td>713</td><td>16153</td></tr>
+					<tr><td>Tiscali SpA</td><td>356</td><td>720</td><td>1948</td></tr>
+					<tr><td>Online S.a.s.</td><td>410</td><td>801</td><td>6409</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="canada">Canada</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>BACOM</td><td>160</td><td>346</td><td>9942</td></tr>
-	<tr><td>ROGERS-COMMUNICATIONS</td><td>191</td><td>358</td><td>9314</td></tr>
-	<tr><td>CANET-ASN-4</td><td>207</td><td>419</td><td>1179</td></tr>
-	<tr><td>TEKSAVVY</td><td>225</td><td>415</td><td>1347</td></tr>
-	<tr><td>VIDEOTRON</td><td>256</td><td>457</td><td>5667</td></tr>
-	<tr><td>SHAW</td><td>300</td><td>437</td><td>5340</td></tr>
-	<tr><td>TELUS Communications</td><td>308</td><td>431</td><td>6480</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>BACOM</td><td>107</td><td>324</td><td>17004</td></tr>
+					<tr><td>ROGERS-COMMUNICATIONS</td><td>143</td><td>356</td><td>13158</td></tr>
+					<tr><td>EASTLINK-HSI</td><td>147</td><td>382</td><td>1273</td></tr>
+					<tr><td>TEKSAVVY</td><td>164</td><td>409</td><td>1717</td></tr>
+					<tr><td>VIDEOTRON</td><td>166</td><td>409</td><td>7324</td></tr>
+					<tr><td>SHAW</td><td>228</td><td>436</td><td>7995</td></tr>
+					<tr><td>TELUS Communications</td><td>234</td><td>433</td><td>9467</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>BACOM</td><td>218</td><td>532</td><td>6226</td></tr>
-	<tr><td>ROGERS-COMMUNICATIONS</td><td>222</td><td>526</td><td>6200</td></tr>
-	<tr><td>VIDEOTRON</td><td>269</td><td>599</td><td>3487</td></tr>
-	<tr><td>TELUS Communications</td><td>338</td><td>635</td><td>4154</td></tr>
-	<tr><td>SHAW</td><td>341</td><td>650</td><td>3389</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>BACOM</td><td>154</td><td>481</td><td>6260</td></tr>
+					<tr><td>ROGERS-COMMUNICATIONS</td><td>175</td><td>514</td><td>5393</td></tr>
+					<tr><td>VIDEOTRON</td><td>184</td><td>554</td><td>3045</td></tr>
+					<tr><td>SHAW</td><td>260</td><td>642</td><td>3104</td></tr>
+					<tr><td>TELUS Communications</td><td>270</td><td>651</td><td>3473</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="brazil">Brazil</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>CLARO S.A.</td><td>526</td><td>999</td><td>5631</td></tr>
-	<tr><td>TELEFONICA BRASIL S.A</td><td>560</td><td>1078</td><td>4395</td></tr>
-	<tr><td>TIM SA</td><td>561</td><td>1117</td><td>1386</td></tr>
-	<tr><td>Claro SA</td><td>654</td><td>1290</td><td>1211</td></tr>
-	<tr><td>Telemar Norte Leste S.A.</td><td>848</td><td>1808</td><td>1439</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>V tal</td><td>452</td><td>1091</td><td>1959</td></tr>
+					<tr><td>Claro NXT Telecomunicacoes Ltda</td><td>473</td><td>1059</td><td>5854</td></tr>
+					<tr><td>TELEFONICA BRASIL S.A</td><td>515</td><td>1151</td><td>4420</td></tr>
+					<tr><td>TIM SA</td><td>521</td><td>1198</td><td>1513</td></tr>
+					<tr><td>Claro SA</td><td>598</td><td>1319</td><td>1317</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>TIM SA</td><td>465</td><td>1062</td><td>1428</td></tr>
-	<tr><td>CLARO S.A.</td><td>485</td><td>1100</td><td>5920</td></tr>
-	<tr><td>TELEFONICA BRASIL S.A</td><td>512</td><td>1122</td><td>4551</td></tr>
-	<tr><td>Claro SA</td><td>712</td><td>1590</td><td>1255</td></tr>
-	<tr><td>Telemar Norte Leste S.A.</td><td>731</td><td>1943</td><td>1453</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>V tal</td><td>395</td><td>927</td><td>1784</td></tr>
+					<tr><td>TIM SA</td><td>414</td><td>1174</td><td>1313</td></tr>
+					<tr><td>Claro NXT Telecomunicacoes Ltda</td><td>449</td><td>1094</td><td>4881</td></tr>
+					<tr><td>TELEFONICA BRASIL S.A</td><td>478</td><td>1128</td><td>3862</td></tr>
+					<tr><td>Claro SA</td><td>611</td><td>1123</td><td>1107</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="spain">Spain</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Centre de Telecomunicacions i Tecnologies de la Informacio de la Generalitat de Catalunya</td><td>309</td><td>841</td><td>97448</td></tr>
-	<tr><td>Triple A Fibra S.L.</td><td>327</td><td>526</td><td>1077</td></tr>
-	<tr><td>R Cable y Telecable Telecomunicaciones, S.A.U.</td><td>337</td><td>599</td><td>11281</td></tr>
-	<tr><td>Procono S.A.</td><td>341</td><td>626</td><td>3092</td></tr>
-	<tr><td>Avatel Telecom, SA</td><td>367</td><td>662</td><td>3868</td></tr>
-	<tr><td>Iguana Comunicacions, S.L.</td><td>394</td><td>613</td><td>2623</td></tr>
-	<tr><td>Digi Spain Telecom S.l.u.</td><td>397</td><td>645</td><td>29536</td></tr>
-	<tr><td>Adamo Telecom Iberia S.A.</td><td>402</td><td>570</td><td>13198</td></tr>
-	<tr><td>Vodafone Ono, S.A.</td><td>411</td><td>658</td><td>55283</td></tr>
-	<tr><td>Apfutura Telecom Sl</td><td>416</td><td>644</td><td>1837</td></tr>
-	<tr><td>Euskaltel S.A.</td><td>418</td><td>668</td><td>25049</td></tr>
-	<tr><td>Xtra Telecom S.A.</td><td>424</td><td>649</td><td>171786</td></tr>
-	<tr><td>GurbTec Telecom SL</td><td>424</td><td>632</td><td>8546</td></tr>
-	<tr><td>Entidad Publica Empresarial Red.es</td><td>429</td><td>609</td><td>6369</td></tr>
-	<tr><td>Telefonica De Espana</td><td>437</td><td>665</td><td>417309</td></tr>
-	<tr><td>Alta Tecnologia en Comunicacions, S.L</td><td>437</td><td>628</td><td>8019</td></tr>
-	<tr><td>Orange Espagne SA</td><td>438</td><td>676</td><td>247603</td></tr>
-	<tr><td>Soluciones Corporativas IP, SL</td><td>447</td><td>679</td><td>1831</td></tr>
-	<tr><td>e-Phos Digital, SLU</td><td>453</td><td>676</td><td>2166</td></tr>
-	<tr><td>Vodafone Spain</td><td>469</td><td>725</td><td>140484</td></tr>
-	<tr><td>Consorci de Serveis Universitaris de Catalunya</td><td>470</td><td>546</td><td>5237</td></tr>
-	<tr><td>ServiHosting Networks S.L.</td><td>474</td><td>764</td><td>15029</td></tr>
-	<tr><td>Corporacio Megatel S.L.</td><td>483</td><td>754</td><td>1120</td></tr>
-	<tr><td>M247 Ltd</td><td>519</td><td>788</td><td>1085</td></tr>
-	<tr><td>Lycatel Distribution Uk Limited</td><td>695</td><td>1310</td><td>1164</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Centre de Telecomunicacions i Tecnologies de la Informacio de la Generalitat de Catalunya</td><td>183</td><td>688</td><td>119184</td></tr>
+					<tr><td>Adamo Telecom Iberia S.A.</td><td>209</td><td>559</td><td>15278</td></tr>
+					<tr><td>Apfutura Telecom Sl</td><td>211</td><td>587</td><td>1724</td></tr>
+					<tr><td>FIBRACAT Telecom, S.L.U.</td><td>217</td><td>523</td><td>7297</td></tr>
+					<tr><td>Xarxes de Telecomunicacions Alternatives SL</td><td>232</td><td>623</td><td>3529</td></tr>
+					<tr><td>GurbTec Telecom SL</td><td>247</td><td>601</td><td>12436</td></tr>
+					<tr><td>R Cable y Telecable Telecomunicaciones, S.A.U.</td><td>251</td><td>582</td><td>3422</td></tr>
+					<tr><td>Telecomunicacions Garrotxa, Sl</td><td>274</td><td>629</td><td>2155</td></tr>
+					<tr><td>Euskaltel S.A.</td><td>277</td><td>600</td><td>15903</td></tr>
+					<tr><td>Xtra Telecom S.A.</td><td>280</td><td>630</td><td>161362</td></tr>
+					<tr><td>Digi Spain Telecom S.l.u.</td><td>281</td><td>620</td><td>25171</td></tr>
+					<tr><td>Vodafone Ono, S.A.</td><td>300</td><td>639</td><td>39788</td></tr>
+					<tr><td>Telefonica De Espana S.a.u.</td><td>300</td><td>635</td><td>357535</td></tr>
+					<tr><td>Procono S.A.</td><td>303</td><td>677</td><td>1625</td></tr>
+					<tr><td>Avatel Telecom, SA</td><td>304</td><td>664</td><td>5388</td></tr>
+					<tr><td>Orange Espagne SA</td><td>307</td><td>650</td><td>194753</td></tr>
+					<tr><td>Vodafone Spain</td><td>325</td><td>664</td><td>107159</td></tr>
+					<tr><td>Aire Networks Del Mediterraneo Sl Unipersonal</td><td>328</td><td>717</td><td>14274</td></tr>
+					<tr><td>Consorci de Serveis Universitaris de Catalunya</td><td>331</td><td>527</td><td>4162</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Centre de Telecomunicacions i Tecnologies de la Informacio de la Generalitat de Catalunya</td><td>190</td><td>782</td><td>375713</td></tr>
-	<tr><td>Govern de les Illes Balears</td><td>243</td><td>838</td><td>28704</td></tr>
-	<tr><td>Iguana Comunicacions, S.L.</td><td>302</td><td>699</td><td>6749</td></tr>
-	<tr><td>Operadors Quilometre Zero S.L.</td><td>318</td><td>837</td><td>3214</td></tr>
-	<tr><td>Avatel Telecom, SA</td><td>319</td><td>720</td><td>4537</td></tr>
-	<tr><td>Alta Tecnologia en Comunicacions, S.L</td><td>325</td><td>838</td><td>12970</td></tr>
-	<tr><td>e-Phos Digital, SLU</td><td>332</td><td>739</td><td>4505</td></tr>
-	<tr><td>Adamo Telecom Iberia S.A.</td><td>334</td><td>693</td><td>26808</td></tr>
-	<tr><td>Sociedad Andaluza para el Desarrollo de las Telecomunicaciones S.A.</td><td>337</td><td>720</td><td>1132</td></tr>
-	<tr><td>Lleida Wifi Networks Sl</td><td>342</td><td>672</td><td>1011</td></tr>
-	<tr><td>E-ports Ample De Banda I Internet S.l.</td><td>347</td><td>685</td><td>4358</td></tr>
-	<tr><td>GurbTec Telecom SL</td><td>348</td><td>708</td><td>17140</td></tr>
-	<tr><td>Triple A Fibra S.L.</td><td>348</td><td>652</td><td>1251</td></tr>
-	<tr><td>Digi Spain Telecom S.l.u.</td><td>348</td><td>703</td><td>38913</td></tr>
-	<tr><td>Least Cost Routing Telecom S.l. Unipersonal.</td><td>348</td><td>849</td><td>1079</td></tr>
-	<tr><td>Xarxes de Telecomunicacions Alternatives SL</td><td>349</td><td>793</td><td>6823</td></tr>
-	<tr><td>R Cable y Telecable Telecomunicaciones, S.A.U.</td><td>352</td><td>660</td><td>12637</td></tr>
-	<tr><td>Euskaltel S.A.</td><td>354</td><td>660</td><td>31614</td></tr>
-	<tr><td>Alcort Ingenieria Y Asesoria S.l.</td><td>356</td><td>787</td><td>1403</td></tr>
-	<tr><td>ServiHosting Networks S.L.</td><td>359</td><td>747</td><td>18940</td></tr>
-	<tr><td>Procono S.A.</td><td>364</td><td>688</td><td>3509</td></tr>
-	<tr><td>COLT Technology Services Group Limited</td><td>365</td><td>656</td><td>1814</td></tr>
-	<tr><td>Xtra Telecom S.A.</td><td>367</td><td>638</td><td>241550</td></tr>
-	<tr><td>Vozelia Telecom SL</td><td>368</td><td>892</td><td>1767</td></tr>
-	<tr><td>Centre Integral de Telecomunicacions i Tecnologies de Catalunya S.L</td><td>369</td><td>602</td><td>1191</td></tr>
-	<tr><td>Entidad Publica Empresarial Red.es</td><td>370</td><td>640</td><td>14431</td></tr>
-	<tr><td>Prophase Electronics, S.l.</td><td>370</td><td>738</td><td>1200</td></tr>
-	<tr><td>Telecomunicacions Garrotxa, Sl</td><td>377</td><td>729</td><td>2932</td></tr>
-	<tr><td>Telefonica De Espana</td><td>379</td><td>742</td><td>685211</td></tr>
-	<tr><td>XFERA Moviles S.A.</td><td>382</td><td>940</td><td>1292</td></tr>
-	<tr><td>Fundacio Privada per a la Xarxa Lliure, Oberta i Neutral, guifi.net</td><td>383</td><td>784</td><td>1856</td></tr>
-	<tr><td>Orange Espagne SA</td><td>386</td><td>734</td><td>357657</td></tr>
-	<tr><td>Vodafone Spain</td><td>387</td><td>765</td><td>206084</td></tr>
-	<tr><td>Soluciones Corporativas IP, SL</td><td>389</td><td>802</td><td>3235</td></tr>
-	<tr><td>Consorci de Serveis Universitaris de Catalunya</td><td>391</td><td>619</td><td>16807</td></tr>
-	<tr><td>Corporacio Megatel S.L.</td><td>394</td><td>781</td><td>1699</td></tr>
-	<tr><td>Girona Fibra SL</td><td>398</td><td>968</td><td>1364</td></tr>
-	<tr><td>Vodafone Ono, S.A.</td><td>400</td><td>735</td><td>86846</td></tr>
-	<tr><td>Citelia s.a.</td><td>421</td><td>1051</td><td>1132</td></tr>
-	<tr><td>M247 Ltd</td><td>429</td><td>917</td><td>2416</td></tr>
-	<tr><td>Apfutura Telecom Sl</td><td>440</td><td>731</td><td>3975</td></tr>
-	<tr><td>Zscaler Switzerland GmbH</td><td>473</td><td>832</td><td>1267</td></tr>
-	<tr><td>Octel Telecom &amp; Tech S.l</td><td>473</td><td>210</td><td>1851</td></tr>
-	<tr><td>Lycatel Distribution Uk Limited</td><td>642</td><td>1417</td><td>1213</td></tr>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Iguana Comunicacions, S.L.</td><td>121</td><td>669</td><td>4853</td></tr>
+					<tr><td>Operadors Quilometre Zero S.L.</td><td>142</td><td>648</td><td>2389</td></tr>
+					<tr><td>Govern de les Illes Balears</td><td>153</td><td>700</td><td>25261</td></tr>
+					<tr><td>Centre de Telecomunicacions i Tecnologies de la Informacio de la Generalitat de Catalunya</td><td>156</td><td>645</td><td>284705</td></tr>
+					<tr><td>Citelia s.a.</td><td>165</td><td>668</td><td>1164</td></tr>
+					<tr><td>Adamo Telecom Iberia S.A.</td><td>184</td><td>608</td><td>23286</td></tr>
+					<tr><td>Apfutura Telecom Sl</td><td>191</td><td>591</td><td>2283</td></tr>
+					<tr><td>Soluciones Corporativas IP, SL</td><td>194</td><td>604</td><td>3650</td></tr>
+					<tr><td>FIBRACAT Telecom, S.L.U.</td><td>198</td><td>633</td><td>9962</td></tr>
+					<tr><td>Fundacio Privada per a la Xarxa Lliure, Oberta i Neutral, guifi.net</td><td>198</td><td>678</td><td>1449</td></tr>
+					<tr><td>Aire Networks Del Mediterraneo Sl Unipersonal</td><td>202</td><td>665</td><td>15425</td></tr>
+					<tr><td>GurbTec Telecom SL</td><td>204</td><td>611</td><td>17851</td></tr>
+					<tr><td>Estabanell Impulsa S.A</td><td>205</td><td>709</td><td>3759</td></tr>
+					<tr><td>Telecomunicacions Garrotxa, Sl</td><td>208</td><td>601</td><td>3162</td></tr>
+					<tr><td>E-ports Ample De Banda I Internet S.l.</td><td>212</td><td>586</td><td>4721</td></tr>
+					<tr><td>COLT Technology Services Group Limited</td><td>214</td><td>509</td><td>1272</td></tr>
+					<tr><td>Xarxes de Telecomunicacions Alternatives SL</td><td>230</td><td>693</td><td>4654</td></tr>
+					<tr><td>Digi Spain Telecom S.l.u.</td><td>234</td><td>629</td><td>30549</td></tr>
+					<tr><td>Prophase Electronics, S.l.</td><td>239</td><td>625</td><td>1115</td></tr>
+					<tr><td>Alcort Ingenieria Y Asesoria S.l.</td><td>240</td><td>673</td><td>1052</td></tr>
+					<tr><td>SEWAN SAS</td><td>242</td><td>719</td><td>1483</td></tr>
+					<tr><td>Avatel Telecom, SA</td><td>262</td><td>650</td><td>5700</td></tr>
+					<tr><td>Xtra Telecom S.A.</td><td>265</td><td>565</td><td>197920</td></tr>
+					<tr><td>Orange Espagne SA</td><td>268</td><td>633</td><td>246749</td></tr>
+					<tr><td>Telefonica De Espana S.a.u.</td><td>278</td><td>642</td><td>496449</td></tr>
+					<tr><td>Consorci de Serveis Universitaris de Catalunya</td><td>281</td><td>500</td><td>9624</td></tr>
+					<tr><td>Vodafone Spain</td><td>284</td><td>649</td><td>141537</td></tr>
+					<tr><td>Euskaltel S.A.</td><td>292</td><td>565</td><td>21435</td></tr>
+					<tr><td>Entidad Publica Empresarial Red.es</td><td>293</td><td>539</td><td>4179</td></tr>
+					<tr><td>Corporacio Megatel S.L.</td><td>297</td><td>646</td><td>1077</td></tr>
+					<tr><td>Vodafone Ono, S.A.</td><td>308</td><td>651</td><td>55087</td></tr>
+					<tr><td>Procono S.A.</td><td>313</td><td>749</td><td>1622</td></tr>
+					<tr><td>M247 Europe SRL</td><td>320</td><td>709</td><td>1482</td></tr>
+					<tr><td>R Cable y Telecable Telecomunicaciones, S.A.U.</td><td>323</td><td>644</td><td>3915</td></tr>
+					<tr><td>Soluciones de conectividad S.L.</td><td>336</td><td>498</td><td>1054</td></tr>
+					<tr><td>Ago Telecom S.l</td><td>400</td><td>368</td><td>3899</td></tr>
 			</table>
-			<br>
+	<br>
 		<h3 id="poland">Poland</h3>
 		Mobile<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Liberty Global B.V.</td><td>196</td><td>433</td><td>4843</td></tr>
-	<tr><td>Vectra S.A.</td><td>203</td><td>467</td><td>1907</td></tr>
-	<tr><td>Netia SA</td><td>222</td><td>484</td><td>1833</td></tr>
-	<tr><td>Orange Polska Spolka Akcyjna</td><td>292</td><td>566</td><td>11082</td></tr>
-	<tr><td>Play</td><td>336</td><td>643</td><td>6995</td></tr>
-	<tr><td>T-Mobile Polska S.A.</td><td>349</td><td>634</td><td>4883</td></tr>
-	<tr><td>Polkomtel Sp. z o.o.</td><td>362</td><td>685</td><td>4526</td></tr>
-	<tr><td>Online S.a.s.</td><td>491</td><td>937</td><td>1528</td></tr>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Liberty Global B.V.</td><td>168</td><td>487</td><td>4887</td></tr>
+					<tr><td>Vectra S.A.</td><td>174</td><td>532</td><td>2138</td></tr>
+					<tr><td>Orange Polska Spolka Akcyjna</td><td>219</td><td>597</td><td>12479</td></tr>
+					<tr><td>Netia SA</td><td>221</td><td>588</td><td>2185</td></tr>
+					<tr><td>Play</td><td>256</td><td>675</td><td>5889</td></tr>
+					<tr><td>T-Mobile Polska S.A.</td><td>277</td><td>683</td><td>5049</td></tr>
+					<tr><td>Polkomtel Sp. z o.o.</td><td>291</td><td>729</td><td>4958</td></tr>
 			</table>
-			<br>
-		Desktop<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	<tr><td>Vectra S.A.</td><td>359</td><td>638</td><td>1697</td></tr>
-	<tr><td>Netia SA</td><td>391</td><td>622</td><td>1574</td></tr>
-	<tr><td>Online S.a.s.</td><td>401</td><td>925</td><td>1376</td></tr>
-	<tr><td>Orange Polska Spolka Akcyjna</td><td>411</td><td>667</td><td>9990</td></tr>
-	<tr><td>Play</td><td>420</td><td>872</td><td>6567</td></tr>
-	<tr><td>T-Mobile Polska S.A.</td><td>426</td><td>774</td><td>4563</td></tr>
-	<tr><td>Polkomtel Sp. z o.o.</td><td>442</td><td>903</td><td>4242</td></tr>
-	<tr><td>Liberty Global B.V.</td><td>511</td><td>777</td><td>3945</td></tr>
-</table>
+	<br>
+				Desktop<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+		<tr><td>Vectra S.A.</td><td>244</td><td>628</td><td>1537</td></tr>
+					<tr><td>Liberty Global B.V.</td><td>296</td><td>598</td><td>3552</td></tr>
+					<tr><td>Orange Polska Spolka Akcyjna</td><td>308</td><td>647</td><td>9643</td></tr>
+					<tr><td>Netia SA</td><td>312</td><td>669</td><td>1605</td></tr>
+					<tr><td>Play</td><td>354</td><td>884</td><td>4809</td></tr>
+					<tr><td>Polkomtel Sp. z o.o.</td><td>357</td><td>993</td><td>4073</td></tr>
+					<tr><td>T-Mobile Polska S.A.</td><td>371</td><td>709</td><td>4030</td></tr>
+	</table>
+
 
 </article>
 </div></main>
@@ -551,18 +495,18 @@
 <footer role="contentinfo"><div class="wm-container perf-footer-cols">
   <div>
     <p>
-      <a href="/blog/">Blog</a> &bull;
-      <a href="/xhgui/">XHGui</a> &bull;
-      <a href="https://grafana.wikimedia.org/d/000000050/performance-metrics">Grafana</a>
-    </p>
+          <a href="/blog/">Blog</a>
+          &bull; <a href="/xhgui/">XHGui</a>
+          &bull; <a href="https://grafana.wikimedia.org/d/000000050/performance-metrics">Grafana</a>
+        </p>
     <p>Made with <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">♥ by Wikimedia Performance Team</a> at <a href="https://www.wikimedia.org">Wikimedia Foundation</a>.</p>
   </div>
   <div>
     <h3>Latest blog posts</h3>
     <ul>
+      <li><a href="https://techblog.wikimedia.org/2022/12/08/perf-matters-at-wikipedia-2016/">Perf Matters at Wikipedia in 2016</a></li>
       <li><a href="https://techblog.wikimedia.org/2022/11/21/web-perf-hero-valentin-gutierrez/">Web Perf Hero: Valentín Gutierrez</a></li>
       <li><a href="https://techblog.wikimedia.org/2022/11/04/http-2-performance-revisited/">HTTP/2 performance revisited</a></li>
-      <li><a href="https://techblog.wikimedia.org/2021/03/03/profiling-php-in-production-at-scale/">Profiling PHP in production at scale</a></li>
     </ul>
   </div>
 </footer>

@@ -1,5 +1,4 @@
 ---
-layout: default
 title: Wikimedia Autonomous Systems performance report
 wmui_subnav:
 - href: "#methodology"
@@ -8,6 +7,9 @@ wmui_subnav:
   text: Results
 ---
 
+@extends('_layouts.main')
+
+@section('content')
 <style>
 .perf-asreport-table th:first-child {
 	width: 40%;
@@ -31,30 +33,33 @@ wmui_subnav:
 
 <h2 id="results">Results</h2>
 
-<p>Report generated on {{ site.AS_REPORT_TIME | date: '%Y-%m-%d' }}. Data available in <a href="https://analytics.wikimedia.org/datasets/performance/autonomoussystems/">TSV format</a>.</p>
+<p>Report generated on {{ gmdate( 'Y-m-d', $page->asreportMtime ) }}. Data available in <a href="https://analytics.wikimedia.org/datasets/performance/autonomoussystems/">TSV format</a>.</p>
 <p>
 <i>TTFB stands for "Time to first byte", defined as responseStart - connectStart.</i><br>
 <i>PLT stands for "Page load time", defined as loadEventStart - responseStart.</i>
 </p>
-{% assign last_country = false %}
-{% assign last_type = false %}
-{% for row in site.data.asreport -%}
-	{%- if row['Type'] != last_type -%}
-		{%- if last_type != false %}
-			</table>
-			<br>
-		{%- endif -%}
-	{%- endif -%}
-	{%- if row['Country'] != last_country -%}
-		{%- assign last_country = row['Country'] %}
-		<h3 id="{{ row['Country'] | slugify }}">{{ row['Country'] }}</h3>
-	{%- endif -%}
-	{%- if row['Type'] != last_type -%}
-	{%- assign last_type = row['Type'] %}
-		{{ row['Type'] }}<br>
-		<table class="wm-table perf-asreport-table">
-			<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
-	{%- endif %}
-	<tr><td>{{ row['ASO'] | escape }}</td><td>{{ row['TTFB'] }}</td><td>{{ row['PLT'] }}</td><td>{{ row['Sample size'] }}</td></tr>
-{%- endfor %}
+@php
+	$lastType = false;
+	$lastCountry = false;
+@endphp
+@foreach ($page->asreport as $row)
+	@if ($lastType !== false && $row['Type'] !== $lastType)
+	</table>
+	<br>
+	@endif
+	@if ($row['Country'] !== $lastCountry)<h3 id="@slugify( $row['Country'] )">{{ $row['Country'] }}</h3>
+@endif
+	@if ($row['Type'] !== $lastType)
+	{{ $row['Type'] }}<br>
+	<table class="wm-table perf-asreport-table">
+	<tr><th>Autonomous System Organization</th><th>Median TTFB</th><th>Median PLT</th><th>Sample size</th></tr>
+	@endif
+	<tr><td>{{ $row['ASO'] }}</td><td>{{ $row['TTFB'] }}</td><td>{{ $row['PLT'] }}</td><td>{{ $row['Sample size'] }}</td></tr>
+	@php
+		$lastType = $row['Type'];
+		$lastCountry = $row['Country'];
+	@endphp
+@endforeach
 </table>
+
+@endsection

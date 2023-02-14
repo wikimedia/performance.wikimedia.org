@@ -1,9 +1,9 @@
 ---
-layout: default
 title: Flame Graphs — Wikimedia Performance
-redirect_from:
- - /php-profiling.html
 ---
+@extends('_layouts.main')
+
+@section('content')
 <style>
 .perf-thumbnail {
   border: 1px solid #ddd;
@@ -21,7 +21,7 @@ redirect_from:
 <p>The trace logs and flame graphs are powered by <a href="https://github.com/wikimedia/arc-lamp#readme">Arc Lamp</a>.<br>See also <a href="https://www.mediawiki.org/wiki/Excimer">php-excimer</a>, and <a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a>.</p>
 <h2>Flame graphs</h2>
 <div class="perf-thumbnail perf-pull-left">
-  <a href="/arclamp/svgs/daily/" title="Browser daily graphs" id="flamegraph-latest-link"><img src="{{ site.baseurl }}/lib/flamegraph.png" width="250" height="160" alt=""></a>
+  <a href="/arclamp/svgs/daily/" title="Browser daily graphs" id="flamegraph-latest-link"><img src="/lib/flamegraph.png" width="250" height="160" alt=""></a>
 </div>
 <p>
   <a href="/arclamp/svgs/daily/">Browse daily graphs</a>
@@ -36,4 +36,5 @@ redirect_from:
     <a href="/arclamp/logs/daily/">Browse daily logs</a>
     • <a href="/arclamp/logs/hourly/">Browse hourly logs</a>
 </p>
-<script src="{{ site.baseurl }}/profiling.js" defer></script>
+<script src="/profiling.js" defer></script>
+@endsection

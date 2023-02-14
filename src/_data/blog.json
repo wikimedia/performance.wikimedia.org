@@ -2,8 +2,12 @@
     "feed": {
         "entry": [
             {
+                "link": "https://techblog.wikimedia.org/2022/12/08/perf-matters-at-wikipedia-2016/",
+                "title": "Perf Matters at Wikipedia in 2016"
+            },
+            {
                 "link": "https://techblog.wikimedia.org/2022/11/21/web-perf-hero-valentin-gutierrez/",
-                "title": "Web Perf Hero: Valentín Gutierrez"
+                "title": "Web Perf Hero: Valent\u00edn Gutierrez"
             },
             {
                 "link": "https://techblog.wikimedia.org/2022/11/04/http-2-performance-revisited/",
@@ -23,7 +27,7 @@
             },
             {
                 "link": "https://techblog.wikimedia.org/2020/05/07/measuring-the-performance-of-wikipedia-visitors-devices/",
-                "title": "Measuring the performance of Wikipedia visitors’ devices"
+                "title": "Measuring the performance of Wikipedia visitors\u2019 devices"
             },
             {
                 "link": "https://techblog.wikimedia.org/2020/04/27/organizing-and-running-a-developer-room-at-fosdem/",
@@ -35,11 +39,7 @@
             },
             {
                 "link": "https://techblog.wikimedia.org/2019/09/19/wikipedias-javascript-initialisation-on-a-budget/",
-                "title": "Wikipedia’s JavaScript initialisation on a budget"
-            },
-            {
-                "link": "https://techblog.wikimedia.org/2019/06/19/tracking-down-slow-event-handlers-with-event-timing/",
-                "title": "Tracking down slow event handlers with Event Timing"
+                "title": "Wikipedia\u2019s JavaScript initialisation on a budget"
             }
         ]
     }

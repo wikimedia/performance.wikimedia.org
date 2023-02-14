@@ -1,0 +1,21 @@
+{
+    "require-dev": {
+        "tightenco/jigsaw": "1.6.0"
+    },
+    "scripts": {
+        "build": [
+            "echo 'y' | jigsaw build production"
+        ],
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "jigsaw serve --port=4000"
+        ],
+        "watch": [
+            "watch jigsaw build"
+        ],
+        "renew": "composer run renew-blog && composer run renew-asreport",
+        "renew-blog": "curl -s https://techblog.wikimedia.org/category/performance/feed/ | php build/rss2json.php > src/_data/blog.json",
+        "renew-asreport": "curl -R -s https://analytics.wikimedia.org/published/datasets/performance/autonomoussystems/latest.tsv -o src/_data/asreport.tsv",
+        "renew-wmui": "curl -s https://unpkg.com/wikimedia-ui-base@0.16.0/wikimedia-ui-base.css -o src/lib/wikimedia-ui-base-0.16.0.css"
+    }
+}

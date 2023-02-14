@@ -1,12 +1,7 @@
-/public_html/lib/main.less
+# Build
+/vendor/
+/composer.lock
 
-# Ruby
-/.bundle
-/vendor
-
-# Jekyll
-/src/.jekyll-cache
-/src/_site
-
-# npm
-/node_modules
+# Jigsaw
+/build_local/
+/cache/

@@ -1,5 +1,4 @@
 ---
-layout: default
 title: Metrics — Wikimedia Performance
 wmui_subnav:
 - href: "#!/hour"
@@ -13,6 +12,10 @@ wmui_subnav:
 - href: "#!/year"
   text: Past Year
 ---
+
+@extends('_layouts.main')
+
+@section('content')
 <style>
 .perf-metrics {
   margin-top: 40px;
@@ -39,9 +42,9 @@ wmui_subnav:
 </p>
 </blockquote>
 <h2>Metrics</h2>
-<script src="{{ site.baseurl }}/lib/d3-4.7.4/d3.min.js" defer></script>
-<script src="{{ site.baseurl }}/lib/metrics-graphics-2.11.0/metricsgraphics.min.js" defer></script>
-<script src="{{ site.baseurl }}/coal.js" defer></script>
+<script src="/lib/d3-4.7.4/d3.min.js" defer></script>
+<script src="/lib/metrics-graphics-2.11.0/metricsgraphics.min.js" defer></script>
+<script src="/coal.js" defer></script>
 <div id="perf-metrics" class="perf-metrics">
     <div class="perf-metric" id="domInteractive"></div>
     <p class="perf-metric-desc"><b>domInteractive:</b> The browser has parsed the main HTML document.</p>
@@ -54,3 +57,4 @@ wmui_subnav:
     <div class="perf-metric" id="saveTiming"></div>
     <p class="perf-metric-desc"><b>saveTiming:</b> Time to submit and save an edit on an article.</p>
 </div>
+@endsection
