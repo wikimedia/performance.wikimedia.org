@@ -16,66 +16,88 @@
  * limitations under the License.
  */
 ( function () {
-	var span, i, d, isoDate, latestLink;
-
-	// Feature test
-	if ( !Date.prototype.toISOString ) {
+	if ( !window.CLIENTJS ) {
 		return;
 	}
 
 	function createUrl( file ) {
-		return '/arclamp/svgs/daily/' + file;
+		return 'https://performance.wikimedia.org/arclamp/svgs/daily/' + file;
 	}
 
-	function appendLinks( parent, date, endpoint, label ) {
-		var link;
+	const form = document.querySelector( '.perf-flamegraph-nav' );
+	const dateField = form.elements.date;
+	const dateOtherField = form.elements.dateOther;
+	const dateOtherBlock = dateOtherField.closest( '.wm-fieldset-block' );
+	const sourceField = form.elements.source;
+	const entrypointField = form.elements.entrypoint;
+	const formatField = form.elements.format;
+	const openButton = form.querySelector( '.perf-flamegraph-open' );
+	const openLink = document.querySelector( '#perf-flamegraph-link' );
+	const openImage = document.querySelector( '#perf-flamegraph-image' );
 
-		link = document.createElement( 'a' );
-		link.href = createUrl( date + '.excimer-wall.' + endpoint + '.svgz' );
-		link.textContent = endpoint;
-		link.title = 'Flame graph for ' + date + ' of ' + label;
-		parent.appendChild( link );
-
-		link = document.createElement( 'a' );
-		link.href = createUrl( date + '.excimer-wall.' + endpoint + '.reversed.svgz' );
-		link.textContent = 'rev';
-		link.title = 'Reversed flame graph for ' + date + ' of ' + label;
-		parent.appendChild( document.createTextNode( ' (' ) );
-		parent.appendChild( link );
-		parent.appendChild( document.createTextNode( ')' ) );
-	}
-
-	span = document.getElementById( 'flamegraph-current' );
-	span.textContent = 'Recent flame graphs by endpoint: ';
-
-	i = 1;
-	while ( i <= 5 ) {
-		d = new Date();
+	// Populate date menu
+	const RECENT_DAYS = 8;
+	const descriptions = {
+		'0': ' (incomplete)',
+		'1': ' (yesterday)'
+	};
+	for ( let i = 0; i <= RECENT_DAYS; i++ ) {
+		const d = new Date();
 		d.setDate( d.getDate() - i );
-		isoDate = d.toISOString().split( 'T' )[ 0 ];
+		const isoDate = d.toISOString().split( 'T' )[ 0 ];
 
-		span.appendChild( document.createElement( 'br' ) );
-		span.appendChild( document.createTextNode( '• ' + isoDate + ': ' ) );
-
-		appendLinks( span, isoDate, 'index', 'index.php requests' );
-		span.appendChild( document.createTextNode( ' • ' ) );
-		appendLinks( span, isoDate, 'api', 'api.php requests' );
-		span.appendChild( document.createTextNode( ' • ' ) );
-		appendLinks( span, isoDate, 'load', 'load.php requests' );
-		span.appendChild( document.createTextNode( ' • ' ) );
-		appendLinks( span, isoDate, 'rest', 'rest.php requests' );
-		span.appendChild( document.createTextNode( ' • ' ) );
-		appendLinks( span, isoDate, 'all', 'all MediaWiki requests' );
-
-		if ( i === 1 ) {
-			latestLink = document.getElementById( 'flamegraph-latest-link' );
-			if ( latestLink ) {
-				latestLink.title = 'Latest flame graph for index.php endpoint';
-				latestLink.href = createUrl( isoDate + '.excimer-wall.index.svgz' );
-			}
+		let option = dateField.options[i];
+		if ( !option ) {
+			option = document.createElement( 'option' );
+			dateField.append( option );
 		}
-
-		i++;
+		option.value = isoDate;
+		option.textContent = isoDate
+			+ ' '
+			+ d.toLocaleDateString( 'en-US', { weekday: 'short', timeZone: 'UTC' } )
+			+ (descriptions[i] || '');
 	}
+
+	const otherOption = document.createElement( 'option' );
+	otherOption.value = 'other';
+	otherOption.textContent = 'Other';
+	dateField.append( otherOption );
+
+	dateOtherField.max = ( new Date() ).toISOString().split( 'T' )[ 0 ];
+	dateOtherField.value = dateField.value;
+
+	function formatFilename() {
+		return ( dateOtherField.disabled ? dateField.value : dateOtherField.value ) +
+			'.' + sourceField.value +
+			'.' + entrypointField.value +
+			( formatField.value === 'reversed' ? '.reversed' : '' ) +
+			'.svgz';
+	}
+
+	function renderLink() {
+		const filename = formatFilename();
+		openImage.href = openLink.href = createUrl( filename );
+		openImage.title = openLink.title = 'Open flame graph';
+		openLink.textContent = filename;
+	}
+
+	form.addEventListener( 'change', function () {
+		dateOtherField.disabled = ( dateField.value !== 'other' );
+		dateOtherBlock.hidden = ( dateField.value !== 'other' );
+		if ( dateField.value === 'other' ) {
+			dateOtherField.focus();
+		}
+		renderLink();
+	} );
+	renderLink();
+
+	form.addEventListener( 'submit', function ( e ) {
+		location.href = openLink.href;
+		e.preventDefault();
+	} );
+	openButton.addEventListener( 'click', function () {
+		location.href = openLink.href;
+	} );
+	openButton.disabled = false;
 
 }() );

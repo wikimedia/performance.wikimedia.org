@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="client-nojs">
 <meta charset=utf-8>
 <title>Flame Graphs — Wikimedia Performance</title>
+<script>CLIENTJS = 'CSS' in window && 'classList' in document.documentElement; if (CLIENTJS) document.documentElement.className = 'client-js';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/lib/wikimedia-ui-base-0.16.0.css">
 <link rel="stylesheet" href="/lib/main.css">
@@ -28,37 +29,94 @@
     </ul></nav>
 <article>
 <style>
-.perf-thumbnail {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 4px;
+.perf-figure-right {
+  clear: right;
+  float: right;
+  text-align: right;
+  margin: 0 0 10px 10px;
 }
-.perf-pull-left {
-  clear: left;
-  float: left;
-  margin-right: 10px;
+.perf-flamegraph-nav fieldset > label {
+  display: block;
+}
+.perf-flamegraph-nav fieldset > label,
+.perf-flamegraph-nav fieldset > .wm-fieldset-row {
+  clear: both;
+  display: grid;
+  grid-gap: 4px;
+  grid-template-columns: 10rem max-content;
+  align-items: baseline;
+}
+}
+.perf-flamegraph-open {
+  margin-left: 10rem;
+}
+.client-nojs .perf-flamegraph-nav {
+  display: none;
 }
 </style>
 
-<h1>Profiling for PHP</h1>
+<h1>PHP Profiling for MediaWiki</h1>
 <p>The trace logs and flame graphs are powered by <a href="https://github.com/wikimedia/arc-lamp#readme">Arc Lamp</a>.<br>See also <a href="https://www.mediawiki.org/wiki/Excimer">php-excimer</a>, and <a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a>.</p>
+
 <h2>Flame graphs</h2>
-<div class="perf-thumbnail perf-pull-left">
-  <a href="/arclamp/svgs/daily/" title="Browser daily graphs" id="flamegraph-latest-link"><img src="/lib/flamegraph.png" width="250" height="160" alt=""></a>
-</div>
-<p>
-  <a href="/arclamp/svgs/daily/">Browse daily graphs</a>
-  • <a href="/arclamp/svgs/hourly/">Browse hourly graphs</a>
-</p>
-<p>
-  <span id="flamegraph-current"></span>
-</p>
-<span class="clearfix"></span>
-<h2>Trace logs</h2>
-<p>
-    <a href="/arclamp/logs/daily/">Browse daily logs</a>
-    • <a href="/arclamp/logs/hourly/">Browse hourly logs</a>
-</p>
+<figure class="perf-figure-right" style="width: 250px">
+  <a href="/arclamp/svgs/daily/" title="Browse flame graphs" id="perf-flamegraph-image"><img src="/lib/flamegraph.png" width="250" height="160" alt=""></a>
+  <figcaption><a href="/arclamp/svgs/daily/" id="perf-flamegraph-link"></a></figcaption>
+</figure>
+<form class="perf-flamegraph-nav" method="post">
+  <fieldset>
+    <legend>Select a flame graph</legend>
+    <div class="wm-fieldset-row">
+      <label for="perf-flamegraph-form--date">Date: </label>
+      <select name="date" id="perf-flamegraph-form--date">
+        <option>Today (incomplete)</option>
+        <option selected>Yesterday</option>
+      </select>
+      <span><!-- indent --></span>
+      <span class="wm-fieldset-block" hidden>
+        <small>Any date since March 2021 is available.</small><br>
+        <label>Other date: <input disabled type="date" name="dateOther" min="2021-03-01"></label>
+      </span>
+    </div>
+    <label>
+      <span>Source: </span><select name="source">
+        <option>excimer</option>
+        <option selected>excimer-wall</option>
+        <option>excimer-k8s</option>
+        <option>excimer-k8s-wall</option>
+      </select>
+    </label>
+    <label>
+      <span>Entry point: </span><select name="entrypoint">
+        <option value="index" selected>/w/index.php</option>
+        <option value="all.fn-EditAction">/w/index.php (focus: EditAction)</option>
+        <option value="api">/w/api.php</option>
+        <option value="load">/w/load.php</option>
+        <option value="rest">/w/rest.php</option>
+        <option value="RunSingleJob">/rpc/RunSingleJob.php</option>
+        <option value="all">all</option>
+        <option value="all.fn-PreSend">all (focus: PreSend)</option>
+        <option value="all.fn-PostSend">all (focus: PostSend)</option>
+      </select>
+    </label>
+    <label>
+      <span>Format: </span><select name="format">
+        <option selected>default</option>
+        <option>reversed</option>
+      </select>
+    </label>
+    <div class="wm-fieldset-group">
+      <input type="submit" value="Open" class="wm-btn wm-btn--progressive perf-flamegraph-open" disabled>
+    </div>
+  </fieldset>
+</form>
+<h2>File browser</h2>
+<ul>
+  <li><a href="/arclamp/svgs/daily/">Browse flame graphs (daily)</a></li>
+  <li><a href="/arclamp/svgs/hourly/">Browse flame graphs (hourly)</a></li>
+  <li><a href="/arclamp/logs/daily/">Browse trace logs (daily)</a></li>
+  <li><a href="/arclamp/logs/hourly/">Browse trace logs (hourly)</a></li>
+</ul>
 <script src="/profiling.js" defer></script>
 
 </article>
