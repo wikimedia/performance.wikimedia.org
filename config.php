@@ -42,7 +42,7 @@ return [
     'sitenav' => [
         [
             'href' => '/',
-            'text' => 'Metrics',
+            'text' => 'Dashboards',
         ],
         [
             'href' => '/php-profiling',
@@ -54,6 +54,10 @@ return [
         ],
     ],
     'extnav' => [
+        [
+            'href' => 'https://wikitech.wikimedia.org/wiki/Performance/',
+            'text' => 'Documentation',
+        ],
         [
             'href' => '/blog/',
             'text' => 'Blog',

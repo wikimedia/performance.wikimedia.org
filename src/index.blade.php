@@ -1,16 +1,18 @@
 ---
 title: Metrics — Wikimedia Performance
 wmui_subnav:
-- href: "#!/hour"
-  text: Past Hour
-- href: "#!/day"
-  text: Past Day
-- href: "#!/week"
-  text: Past Week
-- href: "#!/month"
-  text: Past Month
-- href: "#!/year"
-  text: Past Year
+- href: "https://grafana.wikimedia.org/d/pKbpxs54Xa/google-web-vitals"
+  text: Google Web Vitals
+- href: "https://grafana.wikimedia.org/d/pKbpxs54A/navigation-timing-drill-down"
+  text: Navigation Timing metrics
+- href: "https://grafana.wikimedia.org/d/IvAfnmLMk/page-drilldown"
+  text: Synthetic tests drilldown
+- href: "https://grafana.wikimedia.org/d/cFMjrb7nz/cpu-benchmark"
+  text: CPU benchmark
+- href: "https://grafana.wikimedia.org/d/t_bhsNGMk/chrome-user-experience-report"
+  text: Chrome user experience report
+- href: "https://grafana.wikimedia.org/dashboards/f/0TCEegQiz/performance-team"
+  text: All performance dashboards
 ---
 
 @extends('_layouts.main')
@@ -35,26 +37,39 @@ wmui_subnav:
 }
 </style>
 <blockquote><p>
-  We monitor the performance of <a href="https://www.wikipedia.org/">Wikipedia</a> continuously. These graphs are moving medians of measurements from 1 in 1000 sampled requests. If you want to dig deeper into our metrics, check out our <a href="https://grafana.wikimedia.org/d/000000050/performance-metrics">Grafana graphs</a>.
+  We monitor the performance of <a href="https://www.wikipedia.org/">Wikipedia</a> using <a href="https://wikitech.wikimedia.org/wiki/Performance/Real_user_monitoring">real user monitoring</a> and <a href="https://wikitech.wikimedia.org/wiki/Performance/Synthetic_testing">synthetic testing</a>.  These graphs shows some of the metrics we collect. If you want to dig deeper into our metrics, check out our <a href="https://grafana.wikimedia.org/dashboards/f/0TCEegQiz/performance-team">Grafana graphs</a>.
 </p>
 <p>
   <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">– Wikimedia Performance Team</a>
 </p>
 </blockquote>
-<h2>Metrics</h2>
-<script src="/lib/d3-4.7.4/d3.min.js" defer></script>
-<script src="/lib/metrics-graphics-2.11.0/metricsgraphics.min.js" defer></script>
-<script src="/coal.js" defer></script>
+<h2>Dashboards</h2>
 <div id="perf-metrics" class="perf-metrics">
-    <div class="perf-metric" id="domInteractive"></div>
-    <p class="perf-metric-desc"><b>domInteractive:</b> The browser has parsed the main HTML document.</p>
-    <div class="perf-metric" id="firstPaint"></div>
-    <p class="perf-metric-desc"><b>firstPaint:</b> When something is first painted on-screen.</p>
-    <div class="perf-metric" id="loadEventEnd"></div>
-    <p class="perf-metric-desc"><b>loadEventEnd:</b> The load event fired in the browser and the document is complete.</p>
-    <div class="perf-metric" id="responseStart"></div>
-    <p class="perf-metric-desc"><b>responseStart:</b> Time to first byte on the client from the server.</p>
-    <div class="perf-metric" id="saveTiming"></div>
-    <p class="perf-metric-desc"><b>saveTiming:</b> Time to submit and save an edit on an article.</p>
+<p class="perf-metric-graph">
+The <a href="https://grafana.wikimedia.org/d/pKbpxs54Xa/google-web-vitals
+">Google Web Vitals dashboard</a> show us user experience metrics collected by us and categorized by Google thresholds. Here you can see how many of our users that gets a good, need improvement or poor user experience per country/continent. In this example we look at time to first byte and first contentful paint for users in India. 
+  <iframe src="https://grafana.wikimedia.org/d-solo/pKbpxs54Xa/google-web-vitals?forceLogin=&orgId=1&var-geo_country=India&var-geo_continent=All&var-mw_skin=All&var-mw_context=anonymous_mainspace_view&from=1680690291057&to=1681295091058&panelId=81" width="100%" height="300" frameborder="0"></iframe>
+</p>
+<p class="perf-metric-graph">
+<iframe src="https://grafana.wikimedia.org/d-solo/pKbpxs54Xa/google-web-vitals?forceLogin=&orgId=1&var-geo_country=India&var-geo_continent=All&var-mw_skin=All&var-mw_context=anonymous_mainspace_view&from=1680690333891&to=1681295133891&panelId=63" width="100%" height="300" frameborder="0"></iframe>
+</p>
+
+<p class="perf-metric-graph">
+  The <a href="https://grafana.wikimedia.org/d/pKbpxs54A/navigation-timing-drill-down">Navigation Timing drill down dashboard</a> lets you inspect some of our most important metrics. Below you can see how many of our users have a largest contentful paint faster than 2 seconds and compare it to what it looked one week back.
+  <iframe src="https://grafana.wikimedia.org/d-solo/pKbpxs54A/navigation-timing-drill-down?orgId=1&var-metric=painttiming_largestcontentfulpaint&var-geo_country=All&var-geo_continent=All&var-ua_family=All&var-mw_skin=All&var-mw_group=All&var-mw_context=anonymous_mainspace_view&var-percentile=0.75&from=1680690803782&to=1681295603782&panelId=50" width="100%" height="300" frameborder="0"></iframe>
+</p>
+
+<p class="perf-metric-graph">
+  The <a href="https://grafana.wikimedia.org/d/IvAfnmLMk/page-drilldown">synthetic tests drilldown dashboard</a> show all the metrics we collect from our synthetic tests (desktop and Android phones). Together with the real user measurements this is our performance defence against performance regressions. Below you can see the time it takes to render the Barack Obama page on an Moto G5 phone using Chrome.
+  <iframe src="https://grafana.wikimedia.org/d-solo/IvAfnmLMk/page-drilldown?orgId=1&var-base=sitespeed_io&var-path=android&var-testtype=firstView&var-group=en_m_wikipedia_org&var-page=_wiki_Barack_Obama&var-browser=chrome&var-connectivity=4g&var-function=median&var-s3path=https%3A%2F%2Fsynthetic-tests-result-wikimedia.s3.amazonaws.com&from=1681123075455&to=1681295875455&panelId=302" width="100%" height="300" frameborder="0"></iframe>
+</p>
+
+<p class="perf-metric-graph">
+    The <a href="https://grafana.wikimedia.org/d/cFMjrb7nz/cpu-benchmark">CPU benchmark dashboard</a> shine a light on what kind of devices the users of Wikpedia use. Here we look at the device speed for mobile phones in India compared to a couple of benchmark phones.
+    <iframe src="https://grafana.wikimedia.org/d-solo/cFMjrb7nz/cpu-benchmark?orgId=1&from=1680691374189&to=1681296174189&panelId=15" width="100%" height="500" frameborder="0"></iframe>
+</p>
+<p class="perf-metric-desc">
+  We have <a href="https://grafana.wikimedia.org/dashboards/f/0TCEegQiz/performance-team">many more dahsboards</a> that helps us track the performance of Wikipedia in Grafana.
+</p>
 </div>
 @endsection

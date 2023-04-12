@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/lib/wikimedia-ui-base-0.16.0.css">
 <link rel="stylesheet" href="/lib/main.css">
-@if ($page->getUrl() === '/')
-<link rel="stylesheet" href="/lib/metrics-graphics-2.11.0/metricsgraphics.css">
-@endif
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="alternate" type="application/atom+xml" href="https://phabricator.wikimedia.org/phame/blog/feed/7/" title="Wikimedia Performance Team">
 
