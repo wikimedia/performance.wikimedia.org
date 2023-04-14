@@ -44,10 +44,7 @@ title: Flame Graphs — Wikimedia Performance
     <legend>Select a flame graph</legend>
     <div class="wm-fieldset-row">
       <label for="perf-flamegraph-form--date">Date: </label>
-      <select name="date" id="perf-flamegraph-form--date">
-        <option>Today (incomplete)</option>
-        <option selected>Yesterday</option>
-      </select>
+      <select name="date" id="perf-flamegraph-form--date"></select>
       <span><!-- indent --></span>
       <span class="wm-fieldset-block" hidden>
         <small>Any date since March 2021 is available.</small><br>

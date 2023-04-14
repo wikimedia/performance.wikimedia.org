@@ -37,25 +37,24 @@
 
 	// Populate date menu
 	const RECENT_DAYS = 8;
-	const descriptions = {
-		'0': ' (incomplete)',
-		'1': ' (yesterday)'
+	const options = {
+		'0': { suffix: ' (incomplete)' },
+		'1': { suffix: ' (yesterday)', selected: true }
 	};
 	for ( let i = 0; i <= RECENT_DAYS; i++ ) {
 		const d = new Date();
 		d.setDate( d.getDate() - i );
 		const isoDate = d.toISOString().split( 'T' )[ 0 ];
 
-		let option = dateField.options[i];
-		if ( !option ) {
-			option = document.createElement( 'option' );
-			dateField.append( option );
-		}
+		let option = document.createElement( 'option' );
+		option.selected = (options[i]?.suffix || false);
 		option.value = isoDate;
 		option.textContent = isoDate
 			+ ' '
 			+ d.toLocaleDateString( 'en-US', { weekday: 'short', timeZone: 'UTC' } )
-			+ (descriptions[i] || '');
+			+ (options[i]?.suffix || '');
+
+		dateField.append(option);
 	}
 
 	const otherOption = document.createElement( 'option' );
