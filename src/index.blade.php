@@ -47,7 +47,7 @@ wmui_subnav:
 <div id="perf-metrics" class="perf-metrics">
 <p class="perf-metric-graph">
 The <a href="https://grafana.wikimedia.org/d/pKbpxs54Xa/google-web-vitals
-">Google Web Vitals dashboard</a> show us user experience metrics collected by us and categorized by Google thresholds. Here you can see how many of our users that gets a good, need improvement or poor user experience per country/continent. In this example we look at time to first byte and first contentful paint for users in India. 
+">Google Web Vitals dashboard</a> show us user experience metrics collected by us and categorized by Google thresholds. Here you can see how many of our users that gets a good, need improvement or poor user experience per country/continent. In this example we look at time to first byte and first contentful paint for users in India.
   <iframe src="https://grafana.wikimedia.org/d-solo/pKbpxs54Xa/google-web-vitals?forceLogin=&orgId=1&var-geo_country=India&var-geo_continent=All&var-mw_skin=All&var-mw_context=anonymous_mainspace_view&from=1680690291057&to=1681295091058&panelId=81" width="100%" height="300" frameborder="0"></iframe>
 </p>
 <p class="perf-metric-graph">
@@ -69,7 +69,7 @@ The <a href="https://grafana.wikimedia.org/d/pKbpxs54Xa/google-web-vitals
     <iframe src="https://grafana.wikimedia.org/d-solo/cFMjrb7nz/cpu-benchmark?orgId=1&from=1680691374189&to=1681296174189&panelId=15" width="100%" height="500" frameborder="0"></iframe>
 </p>
 <p class="perf-metric-desc">
-  We have <a href="https://grafana.wikimedia.org/dashboards/f/0TCEegQiz/performance-team">many more dahsboards</a> that helps us track the performance of Wikipedia in Grafana.
+  We have <a href="https://grafana.wikimedia.org/dashboards/f/0TCEegQiz/performance-team">many more dashboards</a> that helps us track the performance of Wikipedia in Grafana.
 </p>
 </div>
 @endsection
