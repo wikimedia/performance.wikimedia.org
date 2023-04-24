@@ -32,7 +32,7 @@ title: Flame Graphs — Wikimedia Performance
 </style>
 
 <h1>PHP Profiling for MediaWiki</h1>
-<p>The trace logs and flame graphs are powered by <a href="https://github.com/wikimedia/arc-lamp#readme">Arc Lamp</a>.<br>See also <a href="https://www.mediawiki.org/wiki/Excimer">php-excimer</a>, and <a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a>.</p>
+<p>The trace logs and flame graphs are powered by <a href="https://wikitech.wikimedia.org/wiki/Performance/Runbook/Arc_Lamp_service">Arc Lamp</a>.<br>See also <a href="https://www.mediawiki.org/wiki/Excimer">php-excimer</a>, and <a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a>.</p>
 
 <h2>Flame graphs</h2>
 <figure class="perf-figure-right" style="width: 250px">
