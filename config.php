@@ -1,6 +1,7 @@
 <?php
 
 const ASREPORT_FILE = __DIR__ . '/src/_data/asreport.tsv';
+const ASREPORT_DATE_FILE = __DIR__ . '/src/_data/asreport_date.txt';
 const BLOG_FILE = __DIR__ . '/src/_data/blog.json';
 
 function getAsreportData( string $tsvFile ): array {
@@ -20,7 +21,7 @@ function getAsreportData( string $tsvFile ): array {
     $asreportCountries = array_values( array_unique( $asreportCountries ) );
     return [
         'asreport' => $asreportData,
-        'asreportMtime' => filemtime( $tsvFile ),
+        'asreportDate' => trim( file_get_contents( ASREPORT_DATE_FILE ) ),
         'asreportCountries' => $asreportCountries,
     ];
 }

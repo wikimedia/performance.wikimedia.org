@@ -33,7 +33,7 @@ wmui_subnav:
 
 <h2 id="results">Results</h2>
 
-<p>Report generated on {{ gmdate( 'Y-m-d', $page->asreportMtime ) }}. Data available in <a href="https://analytics.wikimedia.org/datasets/performance/autonomoussystems/">TSV format</a>.</p>
+<p>Report generated on {{ $page->asreportDate }}. Data available in <a href="https://analytics.wikimedia.org/datasets/performance/autonomoussystems/">TSV format</a>.</p>
 <p>
 <i>TTFB stands for "Time to first byte", defined as responseStart - connectStart.</i><br>
 <i>PLT stands for "Page load time", defined as loadEventStart - responseStart.</i>
