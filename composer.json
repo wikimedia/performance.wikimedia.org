@@ -10,6 +10,10 @@
             "Composer\\Config::disableProcessTimeout",
             "jigsaw serve --port=4000"
         ],
+        "serve-excimer": [
+            "Composer\\Config::disableProcessTimeout",
+            "EXCIMER_CONFIG_PATH=../vendor-excimer/config/config.dev.json php -S 0.0.0.0:4000 -t excimer/"
+        ],
         "watch": [
             "Composer\\Config::disableProcessTimeout",
             "watch jigsaw build"

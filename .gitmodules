@@ -1,0 +1,3 @@
+[submodule "vendor-excimer"]
+	path = vendor-excimer
+	url = https://gerrit.wikimedia.org/r/performance/excimer-ui-server
