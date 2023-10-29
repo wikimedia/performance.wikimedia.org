@@ -26,6 +26,6 @@
         "renew-deps": "COMPOSER=composer-production.json composer update",
         "renew-blog": "curl -s https://techblog.wikimedia.org/category/performance/feed/ | php build/rss2json.php > src/_data/blog.json",
         "renew-asreport": "curl -R -s https://analytics.wikimedia.org/published/datasets/performance/autonomoussystems/latest.tsv -o src/_data/asreport.tsv && date --date='@'$(stat --format='%Y' src/_data/asreport.tsv) --utc '+%Y-%m-%d' > src/_data/asreport_date.txt",
-        "renew-wmui": "curl -s https://unpkg.com/wikimedia-ui-base@0.16.0/wikimedia-ui-base.css -o src/lib/wikimedia-ui-base-0.16.0.css"
+        "copy-codex": "curl -s https://unpkg.com/@wikimedia/codex-design-tokens@1.0.0/theme-wikimedia-ui.css -o src/lib/codex-design-tokens/theme-wikimedia-ui-1.0.0.css"
     }
 }

@@ -2,15 +2,18 @@
 
 :root {
   --wmperf-desktop-wide: 1200px;
+  --wmperf-background-color-neutral: #eaecf0;
+  --wmperf-background-color-neutral-subtle: #f8f9fa;
+  --wmperf-border-color-soft: #eaecf0;
 }
 
 html {
-  background-color: var( --wmui-color-base80 );
+  background-color: var( --wmperf-background-color-neutral );
   font-family: sans-serif; /* Basic support without css-variables */
   font-family: var( --font-family-system-sans );
-  line-height: var( --line-height-base );
+  line-height: var( --line-height-medium );
   font-size: 10px;
-  color: #222;
+  color: var( --color-base );
 }
 
 body {
@@ -27,17 +30,17 @@ h1 {
 h2 {
   font-size: 2.4rem;
   padding-bottom: 2px;
-  border-bottom: 3px solid var( --wmui-color-base80 );
+  border-bottom: 3px solid var( --wmperf-border-color-soft );
 }
 
 blockquote {
   padding-left: 1rem;
-  border-left:  3px solid var( --wmui-color-base80 );
+  border-left: 3px solid var( --wmperf-border-color-soft );
 }
 
 hr {
   margin: 3.2rem 0;
-  border: 3px solid var( --wmui-color-base80 );
+  border: 3px solid var( --wmperf-border-color-soft );
 }
 
 p {
@@ -45,7 +48,7 @@ p {
 }
 
 a {
-  color: var( --wmui-color-accent50 );
+  color: var( --color-progressive );
   text-decoration: none;
 }
 a:hover {
@@ -83,11 +86,11 @@ header .wm-container {
 
 header a[role="banner"] {
   line-height: 4.9rem;
-  font-weight: bold;
+  font-weight: var( --font-weight-bold );
   color: inherit;
 }
 header a[role="banner"] em {
-  font-weight: normal;
+  font-weight: var( --font-weight-normal );
   font-style: normal;
 }
 
@@ -101,7 +104,7 @@ header a[role="banner"] em {
 }
 
 main {
-  background: var( --wmui-color-base100 );
+  background: var( --background-color-base );
   box-shadow: 0 1px 4px 0 rgba( 0, 0 ,0, 0.25 );
   padding: 3.2rem 0 6rem 0;
 }
@@ -121,7 +124,7 @@ figcaption {
 
 fieldset {
   margin: 0 0 10px 0;
-  border: 1px solid var( --border-color-divider );
+  border: var( --border-base );
   border-radius: var( --border-radius-base );
   padding: 12px 16px 16px;
 }
@@ -131,7 +134,7 @@ fieldset {
 legend {
   float: left;
   width: 100%;
-  font-weight: bold;
+  font-weight: var( --font-weight-bold );
   margin-bottom: 10px;
 }
 
@@ -148,12 +151,12 @@ footer nav ul li {
   padding: 0 0.8rem 0 0;
 }
 footer nav li a {
-  font-weight: bold;
+  font-weight: var( --font-weight-bold );
 }
 @media ( min-width: 414px ) {
   footer nav li:after {
     content: "\2022";
-    color: var( --wmui-color-base30 );
+    color: var( --color-subtle );
     padding: 0 0 0 0.8rem;
   }
   footer nav li:last-child:after {
@@ -170,35 +173,35 @@ footer nav li a {
 .wm-nav a {
   display: block;
   padding: 1rem 2.4rem;
-  border-radius: 2px;
-  color: var( --wmui-color-base10 );
+  border-radius: var( --border-radius-base );
+  color: var( --color-base );
 }
 .wm-nav li ul {
   margin-top: 1.2rem;
   margin-left: 2.4rem;
   margin-bottom: 1em;
   font-size: 1.4rem;
-  color: var( --wmui-color-base20 );
+  color: var( --color-subtle );
 }
 .wm-nav li ul a {
-  border-left: 1px solid var( --wmui-color-base80 );
+  border-left: 1px solid var( --wmperf-border-color-soft );
 }
 .wm-nav a:hover {
-  background-color: var( --wmui-color-base90 );
+  background-color: var( --background-color-interactive-subtle );
 }
 .wm-nav .wm-nav-item-active,
 .wm-nav .wm-nav-item-active:hover {
-  background-color: var( --wmui-color-accent90 );
-  color: var( --wmui-color-accent50 );
+  background-color: var( --background-color-progressive-subtle );
+  color: var( --color-progressive );
   border-radius: var( --border-radius-base );
   font-weight: var( --font-weight-semi-bold );
   cursor: default;
 }
 .wm-nav li ul .wm-nav-item-active,
 .wm-nav li ul .wm-nav-item-active:hover {
-  background-color: var( --wmui-color-base90 );
+  background-color: var( --background-color-interactive-subtle );
   color: var( --color-base--active );
-  border-left-color: var( --wmui-color-base0 );
+  border-left-color: #000;
 }
 
 @media (max-width: 720px) {
@@ -207,7 +210,7 @@ footer nav li a {
     padding-top: 1rem;
   }
   .wm-site-nav {
-    box-shadow: var( --box-shadow-menu );
+    box-shadow: var( --box-shadow-drop-medium );
   }
   .wm-site-nav ul {
     margin: 0;
@@ -250,45 +253,45 @@ footer nav li a {
 .wm-table td {
   padding: 2px 5px;
   vertical-align: top;
-  border-top: 1px solid var( --wmui-color-base70 );
+  border-top: var( --border-subtle );
 }
 .wm-table th {
   text-align: left;
 }
 .wm-table tr:hover {
-  background-color: var( --wmui-color-base90 );
+  background-color: var( --background-color-interactive-subtle );
 }
 
 .wm-btn {
   display: inline-block;
   padding: 5px 12px;
-  background-color: var( --background-color-framed );
+  background-color: var( --background-color-interactive-subtle );
   border-radius: var( --border-radius-base );
   border: var( --border-base );
   color: var( --color-base );
-  font-weight: bold;
+  font-weight: var( --font-weight-bold );
   font-size: 1.4rem;
   cursor: pointer;
 }
 .wm-btn:hover {
-  background-color: var( --background-color-framed--hover );
-  border-color: var( --border-color-base--hover );
+  background-color: var( --background-color-base );
+  border-color: var( --border-color-base );
   color: var( --color-base--hover );
 }
 .wm-btn--progressive {
-  background-color: var( --color-primary );
-  border-color: var( --color-primary );
-  color: var( --wmui-color-base100 );
+  background-color: var( --background-color-progressive );
+  border-color: var( --border-color-progressive );
+  color: var( --color-inverted );
 }
 .wm-btn--progressive:hover {
-  background-color: var( --color-primary--hover);
-  border-color: var( --color-primary--hover );
-  color: var( --wmui-color-base100 );
+  background-color: var( --background-color-progressive--hover );
+  border-color: var( --border-color-progressive--hover );
+  color: var( --color-inverted );
 }
 .wm-btn--progressive:active {
-  background-color: var( --color-primary--active);
-  border-color: var( --color-primary--active );
-  color: var( --wmui-color-base100 );
+  background-color: var( --background-color-progressive--active);
+  border-color: var( --border-color-progressive--active );
+  color: var( --color-inverted );
 }
 
 .perf-footer-cols {
