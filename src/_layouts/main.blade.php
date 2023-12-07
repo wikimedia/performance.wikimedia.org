@@ -20,8 +20,8 @@
 <main role="main"><div class="wm-container">
   <nav class="wm-site-nav"><ul class="wm-nav">
   @foreach ($page->sitenav as $item)
-    <li><a {!! $page->getUrl() === $item['href'] ? 'class="wm-nav-item-active"' : '' !!} href="{{ $item['href'] }}">{{ $item['text'] }}</a>
-    @if ($page->getUrl() === $item['href'] && $page->wmui_subnav ?? false )
+    <li><a {!! slashit($page->getUrl()) === $item['href'] ? 'class="wm-nav-item-active"' : '' !!} href="{{ $item['href'] }}">{{ $item['text'] }}</a>
+    @if (slashit($page->getUrl()) === $item['href'] && $page->wmui_subnav ?? false )
     <ul>
     @foreach ($page->wmui_subnav as $sub)
       <li><a href="{{ $sub->href }}">{{ $sub->text }}</a></li>
