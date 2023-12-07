@@ -10,7 +10,7 @@
 <link rel="alternate" type="application/atom+xml" href="https://phabricator.wikimedia.org/phame/blog/feed/7/" title="Wikimedia Performance Team">
 
 <header><div class="wm-container">
- <a role="banner" href="/" title="Navigate to the home page"><em>Wikimedia</em> Performance</a>
+ <a role="banner" href="/" title="Navigate to the home page">Wikimedia Performance</a>
  <span class="wm-header-caption">
 @foreach ($page->extnav as $i => $item)
   {!! $i > 0 ? '&bull; ' : '' !!}<a href="{{ $item['href'] }}">{{ $item['text'] }}</a>
@@ -47,7 +47,7 @@
       {!! $i > 0 ? '&bull; ' : '' !!}<a href="{{ $item['href'] }}">{{ $item['text'] }}</a>
     @endforeach
     </p>
-    <p>Made with <a href="https://www.mediawiki.org/wiki/Wikimedia_Performance_Team">♥ by Wikimedia Performance Team</a> at <a href="https://www.wikimedia.org">Wikimedia Foundation</a>.</p>
+    <p>Made with <a href="https://wikitech.wikimedia.org/wiki/Performance">♥ by Wikimedia Performance</a> at <a href="https://www.wikimedia.org">Wikimedia Foundation</a>.</p>
   </div>
   <div>
     <h3>Latest blog posts</h3>

@@ -1,7 +1,7 @@
 /*! performance.wikimedia.org | Based on <https://design.wikimedia.org/style-guide/> */
 
 :root {
-  --wmperf-desktop-wide: 1200px;
+  --wmperf-desktop-wide: 1140px;
   --wmperf-background-color-neutral: #eaecf0;
   --wmperf-background-color-neutral-subtle: #f8f9fa;
   --wmperf-border-color-soft: #eaecf0;
@@ -21,6 +21,11 @@ body {
   font-size: 1.6rem;
 }
 
+h1, h2, h3, h4 {
+  margin: 3.2rem 0 0.8rem 0;
+  line-height: 1.25;
+}
+
 h1 {
   font-size: 3.2rem;
   font-family: var( --font-family-serif );
@@ -29,8 +34,9 @@ h1 {
 
 h2 {
   font-size: 2.4rem;
-  padding-bottom: 2px;
   border-bottom: 3px solid var( --wmperf-border-color-soft );
+  padding-bottom: 2px;
+  font-weight: var( --font-weight-semi-bold );
 }
 
 blockquote {
@@ -47,11 +53,17 @@ p {
   line-height: 1.5;
 }
 
+h1 + p,
+h2 + p {
+  margin: 0.8rem 0 0 0;
+}
+
 a {
   color: var( --color-progressive );
   text-decoration: none;
 }
-a:hover {
+a:hover,
+.wm-card-desc:hover::after {
   text-decoration: underline;
   text-underline-position: under;
 }
@@ -76,6 +88,9 @@ a:hover {
   .wm-container {
     padding: 0 3.2rem;
   }
+  .wm-site-nav {
+    margin: 0;
+  }
 }
 
 header .wm-container {
@@ -85,17 +100,22 @@ header .wm-container {
 }
 
 header a[role="banner"] {
-  line-height: 4.9rem;
-  font-weight: var( --font-weight-bold );
+  line-height: 6.4rem;
+  font-size: 1.3rem;
+  font-weight: var( --font-weight-semi-bold );
+  letter-spacing: 1px;
+  text-transform: uppercase;
   color: inherit;
+  padding-left: 32px;
+  background: url(./wmf-logo.svg) 0 50% / 24px no-repeat;
 }
 header a[role="banner"] em {
   font-weight: var( --font-weight-normal );
-  font-style: normal;
 }
 
 .wm-header-caption {
-  line-height: 4.9rem;
+  line-height: 6.4rem;
+  font-size: 1.4rem;
 }
 @media ( max-width: 768px ) {
   .wm-header-caption {
@@ -106,7 +126,7 @@ header a[role="banner"] em {
 main {
   background: var( --background-color-base );
   box-shadow: 0 1px 4px 0 rgba( 0, 0 ,0, 0.25 );
-  padding: 3.2rem 0 6rem 0;
+  padding: 4.8rem 0 6rem 0;
 }
 
 ul {
@@ -142,33 +162,18 @@ footer {
   padding: 2.4rem 0;
   font-size: 1.3rem;
 }
-footer nav ul {
-  margin: 1em 0;
-}
-footer nav ul li {
-  list-style: none;
-  display: inline-block;
-  padding: 0 0.8rem 0 0;
-}
-footer nav li a {
-  font-weight: var( --font-weight-bold );
-}
-@media ( min-width: 414px ) {
-  footer nav li:after {
-    content: "\2022";
-    color: var( --color-subtle );
-    padding: 0 0 0 0.8rem;
-  }
-  footer nav li:last-child:after {
-    content: "";
-  }
-}
 
 .wm-nav li {
   display: block;
   flex: 0 1 345px;
   margin: 0 1rem 0.1rem 0;
   box-sizing: border-box;
+}
+.wm-site-nav ul {
+  margin: 0;
+}
+.wm-site-nav li {
+  margin-right: 0;
 }
 .wm-nav a {
   display: block;
@@ -185,6 +190,7 @@ footer nav li a {
 }
 .wm-nav li ul a {
   border-left: 1px solid var( --wmperf-border-color-soft );
+  color: var( --color-subtle );
 }
 .wm-nav a:hover {
   background-color: var( --background-color-interactive-subtle );
@@ -212,12 +218,6 @@ footer nav li a {
   .wm-site-nav {
     box-shadow: var( --box-shadow-drop-medium );
   }
-  .wm-site-nav ul {
-    margin: 0;
-  }
-  .wm-site-nav li {
-    margin-right: 0;
-  }
 }
 
 @media (min-width: 720px) {
@@ -233,7 +233,7 @@ footer nav li a {
     box-sizing: border-box;
     width:  100%;
     margin-left: -25.6rem;
-    padding-left: 27.6rem;
+    padding-left: 28.8rem;
   }
   main h1:first-of-type {
     margin-top: 0;
@@ -292,6 +292,50 @@ footer nav li a {
   background-color: var( --background-color-progressive--active);
   border-color: var( --border-color-progressive--active );
   color: var( --color-inverted );
+}
+
+.wm-cards {
+  margin: 2.4rem 0 0;
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2.4rem;
+}
+
+.wm-cards > li {
+  flex-basis: 24rem;
+  padding-bottom: 3.2rem;
+  position: relative;
+}
+
+.wm-cards > li > a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.wm-cards h3 {
+  margin-top: 0;
+  font-family: var( --font-family-serif );
+  font-weight: var( --font-weight-normal );
+  font-size: 2.4rem;
+}
+
+.wm-card-desc {
+  color: var( --color-base );
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.wm-card-desc::after {
+  position: absolute;
+  bottom: 0;
+
+  display: block;
+  content: "Read more";
+  color: var( --color-progressive );
 }
 
 .perf-footer-cols {

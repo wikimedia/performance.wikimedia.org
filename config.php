@@ -43,20 +43,20 @@ return [
     'sitenav' => [
         [
             'href' => '/',
-            'text' => 'Dashboards',
+            'text' => 'Home',
         ],
         [
-            'href' => '/php-profiling',
+            'href' => '/php-profiling/',
             'text' => 'Flame Graphs',
         ],
         [
-            'href' => '/asreport',
+            'href' => '/asreport/',
             'text' => 'Autonomous Systems',
         ],
     ],
     'extnav' => [
         [
-            'href' => 'https://wikitech.wikimedia.org/wiki/Performance/',
+            'href' => 'https://wikitech.wikimedia.org/wiki/Performance',
             'text' => 'Documentation',
         ],
         [
@@ -64,11 +64,7 @@ return [
             'text' => 'Blog',
         ],
         [
-            'href' => '/xhgui/',
-            'text' => 'XHGui',
-        ],
-        [
-            'href' => 'https://grafana.wikimedia.org/d/000000050/performance-metrics',
+            'href' => 'https://grafana.wikimedia.org/dashboards/?tag=performance',
             'text' => 'Grafana'
         ],
     ],
