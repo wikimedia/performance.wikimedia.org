@@ -55,6 +55,7 @@
       <li><a href="{{ $page->blog->feed->entry[0]->link }}">{{ $page->blog->feed->entry[0]->title }}</a></li>
       <li><a href="{{ $page->blog->feed->entry[1]->link }}">{{ $page->blog->feed->entry[1]->title }}</a></li>
       <li><a href="{{ $page->blog->feed->entry[2]->link }}">{{ $page->blog->feed->entry[2]->title }}</a></li>
+      <li><a href="{{ $page->blog->feed->entry[3]->link }}">{{ $page->blog->feed->entry[3]->title }}</a></li>
     </ul>
   </div>
 </footer>

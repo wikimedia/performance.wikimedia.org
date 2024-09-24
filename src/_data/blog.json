@@ -2,6 +2,30 @@
     "feed": {
         "entry": [
             {
+                "link": "https://techblog.wikimedia.org/2024/01/16/web-perf-hero-mate-szabo/",
+                "title": "Web Perf Hero: M\u00e1t\u00e9 Szab\u00f3"
+            },
+            {
+                "link": "https://techblog.wikimedia.org/2023/06/08/flame-graphs-arrive-in-wikimediadebug/",
+                "title": "Flame graphs arrive in WikimediaDebug"
+            },
+            {
+                "link": "https://techblog.wikimedia.org/2023/05/08/around-the-world-how-wikipedia-became-a-multi-datacenter-deployment/",
+                "title": "Around the world: How Wikipedia became a multi-datacenter deployment"
+            },
+            {
+                "link": "https://techblog.wikimedia.org/2022/12/19/perf-matters-at-wikipedia-in-2019/",
+                "title": "Perf Matters at Wikipedia in 2019"
+            },
+            {
+                "link": "https://techblog.wikimedia.org/2022/12/16/perf-matters-at-wikipedia-2018/",
+                "title": "Perf Matters at Wikipedia in 2018"
+            },
+            {
+                "link": "https://techblog.wikimedia.org/2022/12/15/perf-matters-at-wikipedia-in-2017/",
+                "title": "Perf Matters at Wikipedia in 2017"
+            },
+            {
                 "link": "https://techblog.wikimedia.org/2022/12/08/perf-matters-at-wikipedia-2016/",
                 "title": "Perf Matters at Wikipedia in 2016"
             },
@@ -16,30 +40,6 @@
             {
                 "link": "https://techblog.wikimedia.org/2021/03/03/profiling-php-in-production-at-scale/",
                 "title": "Profiling PHP in production at scale"
-            },
-            {
-                "link": "https://techblog.wikimedia.org/2020/11/23/web-performance-case-study-wikipedia-page-previews/",
-                "title": "Web performance case study: Wikipedia page previews"
-            },
-            {
-                "link": "https://techblog.wikimedia.org/2020/06/24/how-we-contributed-paint-timing-api-to-webkit/",
-                "title": "How we contributed Paint Timing API to WebKit"
-            },
-            {
-                "link": "https://techblog.wikimedia.org/2020/05/07/measuring-the-performance-of-wikipedia-visitors-devices/",
-                "title": "Measuring the performance of Wikipedia visitors\u2019 devices"
-            },
-            {
-                "link": "https://techblog.wikimedia.org/2020/04/27/organizing-and-running-a-developer-room-at-fosdem/",
-                "title": "Organizing and running a developer room at FOSDEM"
-            },
-            {
-                "link": "https://techblog.wikimedia.org/2019/12/16/wikimediadebug-v2-is-here/",
-                "title": "WikimediaDebug v2 is here!"
-            },
-            {
-                "link": "https://techblog.wikimedia.org/2019/09/19/wikipedias-javascript-initialisation-on-a-budget/",
-                "title": "Wikipedia\u2019s JavaScript initialisation on a budget"
             }
         ]
     }
