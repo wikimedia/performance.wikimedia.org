@@ -14,6 +14,10 @@
                 "title": "Around the world: How Wikipedia became a multi-datacenter deployment"
             },
             {
+                "link": "https://techblog.wikimedia.org/2022/12/20/perf-matters-at-wikipedia-in-2020/",
+                "title": "Perf Matters at Wikipedia in 2020"
+            },
+            {
                 "link": "https://techblog.wikimedia.org/2022/12/19/perf-matters-at-wikipedia-in-2019/",
                 "title": "Perf Matters at Wikipedia in 2019"
             },
@@ -36,10 +40,6 @@
             {
                 "link": "https://techblog.wikimedia.org/2022/11/04/http-2-performance-revisited/",
                 "title": "HTTP/2 performance revisited"
-            },
-            {
-                "link": "https://techblog.wikimedia.org/2021/03/03/profiling-php-in-production-at-scale/",
-                "title": "Profiling PHP in production at scale"
             }
         ]
     }

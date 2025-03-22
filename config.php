@@ -19,9 +19,13 @@ function getAsreportData( string $tsvFile ): array {
         $asreportCountries[] = $row['Country'];
     }
     $asreportCountries = array_values( array_unique( $asreportCountries ) );
+
+    // E.g. Report for March 2019 (2019-03) is published on 2019-04-01
+    $asreportDate = trim( file_get_contents( ASREPORT_DATE_FILE ) );
+    $asreportPeriod = gmdate( 'F Y', strtotime( $asreportDate . ' - 27 days' ) );
     return [
         'asreport' => $asreportData,
-        'asreportDate' => trim( file_get_contents( ASREPORT_DATE_FILE ) ),
+        'asreportDate' => $asreportPeriod,
         'asreportCountries' => $asreportCountries,
     ];
 }
