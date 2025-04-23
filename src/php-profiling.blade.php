@@ -55,8 +55,8 @@ title: Flame Graphs — Wikimedia Performance
       <span>Source: </span><select name="source">
         <option>excimer</option>
         <option selected>excimer-wall</option>
-        <option>excimer-k8s</option>
-        <option>excimer-k8s-wall</option>
+        <option value="excimer-k8s">excimer-k8s (Oct 2022 - Apr 2025)</option>
+        <option value="excimer-k8s-wall">excimer-k8s-wall (Oct 2022 - Apr 2025)</option>
       </select>
     </label>
     <label>
