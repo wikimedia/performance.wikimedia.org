@@ -6,7 +6,7 @@ const BLOG_FILE = __DIR__ . '/src/_data/blog.json';
 
 function getAsreportData( string $tsvFile ): array {
     $asreportTsv = array_map(
-        fn ( $line ) => str_getcsv( $line, "\t" ),
+        fn ( $line ) => str_getcsv( $line, "\t", '"', '\\' ),
         file( $tsvFile )
     );
     $header = array_shift( $asreportTsv );
